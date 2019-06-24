@@ -1,0 +1,12 @@
+Controllers\MenuView.class
+Controllers\Giris\LoginController.class
+Controllers\Controller.class
+Models\UserDetails.class
+Controllers\Giris\ForgetPasswordController.class
+Controllers\IndexGaleria.class
+Controllers\HibernateUtil.class
+Models\Terms.class
+Models\Classes.class
+Models\Users.class
+Models\Courses.class
+Models\Logs.class
