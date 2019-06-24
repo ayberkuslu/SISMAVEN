@@ -5,13 +5,14 @@ package Controllers.Admin;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import Controllers.Controller;
-import Controllers.Controller;
-import Controllers.Controller;
+import Controllers.*;
+import Models.UserDetails;
 import Models.Users;
 import java.util.Date;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -21,8 +22,8 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class KullaniciEkleController extends Controller{
 // user
-    private String tckno;
-    private String name;
+    private String tckno ;
+    private String name ;
     private String surname;
     private String password;
     private String email;
@@ -31,10 +32,10 @@ public class KullaniciEkleController extends Controller{
     
    //userDetail
     
-    private String phone;
+    private String phone ;
     private String adress;
     private Date birthday;
-    private String gender;
+    private String gender = "MALE";
     private Double currentGpa;
     private String graduate;
     private String master;
@@ -101,13 +102,6 @@ public class KullaniciEkleController extends Controller{
         this.type = type;
     }
 
-//    public Integer getDetailId() {
-//        return detailId;
-//    }
-//
-//    public void setDetailId(Integer detailId) {
-//        this.detailId = detailId;
-//    }
 
     public String getPhone() {
         return phone;
@@ -215,9 +209,53 @@ public class KullaniciEkleController extends Controller{
     
     public void insertNewUser(){ // DENENMEDI , TODO DENE
         
-        int parse = Integer.parseInt(type);
+                FacesContext context = FacesContext.getCurrentInstance();
         
-        Users user = new Users(null, tckno, name, surname, password, email, true, parse);
+        int parse = 0;
+try{
+           parse = Integer.parseInt(type);
+
+}catch(NumberFormatException e){
+            context.addMessage(null, new FacesMessage(e.toString()+"\n Can be wrong TYPE."));
+}
+
+
+        Users user = new Users();
+        
+        user.setTckno(tckno);
+        user.setName(name);
+        user.setSurname(surname);
+        user.setPassword(sha256(password));
+        user.setEmail(email);
+        user.setStatus(true);
+        user.setType(parse);
+        
+       UserDetails userDetail = new UserDetails();
+       
+       if(gender.toLowerCase().charAt(0) == 'm' ) gender = "MALE";
+       else gender= "FEMALE";
+       
+       userDetail.setPhone(phone);
+       userDetail.setAdress(adress);
+        userDetail.setBirthday(birthday);
+        userDetail.setGender(gender.toUpperCase());
+       userDetail.setGraduate(graduate);
+       userDetail.setMaster(master);
+       userDetail.setEmergencyPhone(emergencyPhone);
+       userDetail.setSecretQuestion(secretQuestion);
+       userDetail.setSecretAnswer(sha256(secretAnswer));
+       userDetail.setRegisterDate(new Date());
+       userDetail.setUserId(user);
+       
+       try{
+        insertObject(user);
+        insertObject(userDetail);
+       }catch(Exception e){
+                             context.addMessage(null, new FacesMessage("Kullanici Ekleme BASARİSİZ."));
+
+       }
+                  context.addMessage(null, new FacesMessage("Kullanici Eklendi."));
+  
         
     }
 

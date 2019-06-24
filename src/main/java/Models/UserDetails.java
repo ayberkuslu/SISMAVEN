@@ -103,6 +103,22 @@ public class UserDetails implements Serializable {
         this.registerDate = registerDate;
     }
 
+    public UserDetails(String phone, String adress, Date birthday, String gender, String graduate, String master, String emergencyPhone, String secretQuestion, String secretAnswer, Date registerDate, Users userId) {
+        this.phone = phone;
+        this.adress = adress;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.graduate = graduate;
+        this.master = master;
+        this.emergencyPhone = emergencyPhone;
+        this.secretQuestion = secretQuestion;
+        this.secretAnswer = secretAnswer;
+        this.registerDate = registerDate;
+        this.userId = userId;
+    }
+    
+    
+
     public Integer getDetailId() {
         return detailId;
     }

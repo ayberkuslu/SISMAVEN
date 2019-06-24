@@ -10,13 +10,17 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -112,11 +116,17 @@ public void init(){
              
             setSession(HibernateUtil.getSessionFactory().openSession());
             getSession().beginTransaction(); 
-            UserDetails temp = (UserDetails) getSession().get(UserDetails.class, userId);
+                
+List abc = getSession().createCriteria(UserDetails.class).add(Restrictions.eq("userId.userId", userId)).list();
+getSession().getTransaction().commit();
+    if(abc.size() != 1) return null;
+    
+      UserDetails temp = (UserDetails)  abc.get(0);
+        
             getSession().close();
             return temp;
 
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             System.out.println(e);
 
         }

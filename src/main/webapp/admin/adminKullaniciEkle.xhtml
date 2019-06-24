@@ -38,22 +38,22 @@ and open the template in the editor.
                             <p:panelGrid columns="2" columnClasses="firstColumn,secondColumn" >
 
                                 <p:outputLabel for="tckno" value="Kullanici TCKNO       :"  />
-                                <p:inputText id="tckno" value="#{Admin.kullaniciEkleController.tckno}" title="Kullanici TCKNO" placeholder="Kullanici TCKNO" required="true" />
+                                <p:inputText id="tckno" value="#{kullaniciEkleController.tckno}" title="Kullanici TCKNO" placeholder="Kullanici TCKNO" required="true" />
 
                                 <p:outputLabel for="name" value="Kullanici Adi          :"  />
-                                <p:inputText id="name" value="#{Admin.kullaniciEkleController.name}" title="Kullanici Adi" placeholder="Kullanici Adi" required="true" />
+                                <p:inputText id="name" value="#{kullaniciEkleController.name}" title="Kullanici Adi" placeholder="Kullanici Adi" required="true" />
 
                                 <p:outputLabel for="surname" value="Kullanici Soyadi    :"  />
-                                <p:inputText id="surname" value="#{Admin.kullaniciEkleController.surname}" title="Kullanici soyadi" placeholder="Kullanici soyadi" required="true" />
+                                <p:inputText id="surname" value="#{kullaniciEkleController.surname}" title="Kullanici soyadi" placeholder="Kullanici soyadi" required="true" />
 
                                 <p:outputLabel for="password" value="Kullanici sifre    :"  />
-                                <p:password id="password" value="#{Admin.kullaniciEkleController.password}" title="Kullanici sifre" placeholder="Kullanici Sifre" required="true" />
+                                <p:password id="password" value="#{kullaniciEkleController.password}" title="Kullanici sifre" placeholder="Kullanici Sifre" required="true" />
 
                                 <p:outputLabel for="email" value="Kullanici email       :" />
-                                <p:inputText id="email" value="#{Admin.kullaniciEkleController.email}" title="Kullanici email" placeholder="Kullanici Email" required="true" />
+                                <p:inputText id="email" value="#{kullaniciEkleController.email}" title="Kullanici email" placeholder="Kullanici Email" required="true" />
 
                                 <p:outputLabel for="type" value="Kullanici tipi      :" tabindex="3" />
-                                <p:selectOneMenu id="type" value="#{Admin.kullaniciEkleController.type}" >
+                                <p:selectOneMenu id="type" value="#{kullaniciEkleController.type}" >
                                     <f:selectItem itemLabel="Select One" itemValue="" />
                                     <f:selectItem itemLabel="ADMIN" itemValue="0" />
                                     <f:selectItem itemLabel="TEACHER" itemValue="1" />
@@ -65,56 +65,55 @@ and open the template in the editor.
                             <p:panelGrid columns="2" columnClasses="firstColumn,secondColumn" >
 
                                 <p:outputLabel for="phone" value="Kullanici Telefon       :"   />
-                                <p:inputText id="phone" value="#{Admin.kullaniciEkleController.phone}" title="Kullanici Telefon" placeholder="(5**)-***-****" required="false" />
+                                <p:inputText id="phone" value="#{kullaniciEkleController.phone}" title="Kullanici Telefon" placeholder="(5**)-***-****" required="false" />
 
                                 <p:outputLabel for="adress" value="Kullanici Adres      :"   />
-                                <p:inputText id="adress" value="#{Admin.kullaniciEkleController.adress}" title="Kullanici Adres" placeholder="Adres" required="false" />
+                                <p:inputText id="adress" value="#{kullaniciEkleController.adress}" title="Kullanici Adres" placeholder="Adres" required="false" />
 
                                 <p:outputLabel for="button" value="Kullanici Dogumgunu      :"   />
-                                <p:datePicker id="button" value="#{Admin.kullaniciEkleController.birthday}" showIcon="true" />
+                                <p:datePicker id="button" value="#{kullaniciEkleController.birthday}" showIcon="true" />
 
                                 <p:outputLabel for="graduate" value="Kullanici Lisans       :"   />
-                                <p:inputText id="graduate" value="#{Admin.kullaniciEkleController.graduate}" title="Kullanici Lisans" placeholder="Lisans" required="false" />
+                                <p:inputText id="graduate" value="#{kullaniciEkleController.graduate}" title="Kullanici Lisans" placeholder="Lisans" required="false" />
 
                                 <p:outputLabel for="master" value="Kullanici Master       :"   />
-                                <p:inputText id="master" value="#{Admin.kullaniciEkleController.master}" title="Kullanici Master" placeholder="Master" required="false" />
+                                <p:inputText id="master" value="#{kullaniciEkleController.master}" title="Kullanici Master" placeholder="Master" required="false" />
 
                                 <p:outputLabel for="acilTelf" value="Kullanici Acil Telefon       :"   /> 
-                                <p:inputText id="acilTelf" value="#{Admin.kullaniciEkleController.emergencyPhone}" title="Kullanici Acil Telefon" placeholder="(5**)-***-****" required="false" />
+                                <p:inputText id="acilTelf" value="#{kullaniciEkleController.emergencyPhone}" title="Kullanici Acil Telefon" placeholder="(5**)-***-****" required="false" />
 
                                 <p:outputLabel for="secretQuestion" value="Kullanici Gizli Soru       :"   /> 
-                                <p:inputText id="secretQuestion" value="#{Admin.kullaniciEkleController.secretQuestion}" title="Kullanici Gizli Soru" placeholder="Gizli Soru" required="true" />
+                                <p:inputText id="secretQuestion" value="#{kullaniciEkleController.secretQuestion}" title="Kullanici Gizli Soru" placeholder="Gizli Soru" required="true" />
 
                                 <p:outputLabel for="secretAnswer" value="Kullanici Gizli Cevap       :"   /> 
-                                <p:inputText id="secretAnswer" value="#{Admin.kullaniciEkleController.secretAnswer}" title="Kullanici Gizli Cevap" placeholder="Gizli Cevap" required="true" />
+                                <p:inputText id="secretAnswer" value="#{kullaniciEkleController.secretAnswer}" title="Kullanici Gizli Cevap" placeholder="Gizli Cevap" required="true" />
 
 
                             </p:panelGrid>
                             <p:separator/>
 
-                            <p:panelGrid columns="1" columnClasses="firstColumn" >
+                            <p:panelGrid columns="1" id="output" columnClasses="firstColumn" >
                                 <p:autoUpdate/>
-                                <p:outputLabel id="phon2" value="#{Admin.kullaniciEkleController.phone}" title="Kullanici Telefon" />
+                                <p:outputLabel id="phon2" value="#{kullaniciEkleController.phone}" title="Kullanici Telefon" />
                                 <br/>
-                                <p:outputLabel id="adress2" value="#{Admin.kullaniciEkleController.adress}"   />
+                                <p:outputLabel id="adress2" value="#{kullaniciEkleController.adress}"   />
                                 <br/>
 
                                 <p:clock />
                                 <br/>
-
-                                <p:outputLabel id="graduate2" value="#{Admin.kullaniciEkleController.graduate}" title="Kullanici Lisans"/>
+                                <p:outputLabel id="graduate2" value="#{kullaniciEkleController.graduate}" title="Kullanici Lisans"/>
                                 <br/>
 
-                                <p:outputLabel id="master2" value="#{Admin.kullaniciEkleController.master}"  />
+                                <p:outputLabel id="master2" value="#{kullaniciEkleController.master}"  />
                                 <br/>
 
-                                <p:outputLabel id="acilTelf2" value="#{Admin.kullaniciEkleController.emergencyPhone}" />
+                                <p:outputLabel id="acilTelf2" value="#{kullaniciEkleController.emergencyPhone}" />
                                 <br/>
 
-                                <p:outputLabel id="secretQuestion2" value="#{Admin.kullaniciEkleController.secretQuestion}" />
+                                <p:outputLabel id="secretQuestion2" value="#{kullaniciEkleController.secretQuestion}" />
                                 <br/>
 
-                                <p:outputLabel id="secretAnswer2" value="#{Admin.kullaniciEkleController.secretAnswer}" />
+                                <p:outputLabel id="secretAnswer2" value="#{kullaniciEkleController.secretAnswer}" />
                                 <br/>
 
 
@@ -124,11 +123,11 @@ and open the template in the editor.
                             </p:panelGrid>
 
                         </p:outputPanel>
-                        <p:commandButton value="Kullanici Ekle" update="@none" process="@this"  />
+                        <p:commandButton value="Kullanici Ekle" action="#{kullaniciEkleController.insertNewUser()}"   />
 
                     </div>
                     <div id="message">
-                        <p:messages   />
+                        <p:messages showIcon="true"  />
 
                     </div>
                 </center>

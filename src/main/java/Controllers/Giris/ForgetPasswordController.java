@@ -113,12 +113,12 @@ public class ForgetPasswordController extends Controller {
         UserDetails targetUserDetail = getUserDetailsById(Integer.parseInt(userId));
         Users targetUser = getUserById(Integer.parseInt(userId));
         System.out.println("@@@ HASH@@@");
-        System.out.println(sha256("ankara"));
+        System.out.println(sha256(userAnswer));
         System.out.println("@@@ HASH@@@");
 
         if (targetUserDetail == null
                 || checkUserAnswer(targetUserDetail) == false) {
-            context.addMessage(null, new FacesMessage("Hata!!"));
+            context.addMessage(null, new FacesMessage("Hata2!!"));
 
             return;
         }
