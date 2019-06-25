@@ -5,47 +5,43 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Hosgeldiniz</title>
-    <h:outputStylesheet library="css" name="cssLayout.css" />
-            <h:outputStylesheet name="css/default.css"  />
+        <h:outputStylesheet library="css" name="loginStyle.css" />
 
 
     </h:head>
     <h:body>
-        <h:form>
-            <center>
-            <br/>
-            <br/>
-            <br/>
-            <br/>      
-            <br/>
-            <br/>
-                        <h:outputLabel value="Kullanici Girisi"/>   
+        <h:form class="box">
+            <!--<h1>Login</h1>-->
+            <p:autoUpdate/>
+
+            <div>
+                <!--<i class="fa fa-user icon"></i>-->
+                <p:inputText type="text" id="studentid" value="#{loginController.userId}"  placeholder="USER ID"  />
+
+            </div>
+            <!--<br/>-->
+            <div>
+
+                <!--<i class="fa fa-key icon" ></i>-->
+                <p:password id="password" value="#{loginController.userPassword}" placeholder="Password"   />
+            </div> 
+            <div >
+
+            <p:commandButton  value="Login" action="#{loginController.tryLogin()}" icon="fa fa-lock" styleClass="loginButton" />
+                        
+            
+            </div> 
+                <!--<i class="fa fa-key icon" ></i>-->
 
             <br/>
 
+            <p:link  outcome="forgetPassword" value="Sifremi Unuttum" styleClass="secondaryButton"/> <br/>
 
-            <br/>
-
-
-            <h:messages globalOnly="true" style="color:red;margin:8px;"  />
-            <p:panelGrid columns="2" >
+            <p:link outcome="homePage" value="homePage" styleClass="secondaryButton" />
 
 
-                <h:outputLabel for="studentid" value="Kullanici No : *" />
-                <p:inputText id="studentid" value="#{loginController.userId}"  placeholder="USER ID" />
-                <h:outputLabel for="password" value="Sifre : *" />
-                <p:password id="password" value="#{loginController.userPassword}"   />
+            <h:messages globalOnly="true"  styleClass="message"  />
 
-
-            </p:panelGrid>
-             
-            <p:panelGrid columns="1" id="butons"  >
-                
-                <h:commandButton value="Giris Yap" action="#{loginController.tryLogin()}"/>
-            </p:panelGrid>
-            <h:link outcome="forgetPassword" value="Sifremi Unuttum" /> <br/>
-            <h:link outcome="homePage" value="homePage" />
- </center>
         </h:form>
     </h:body>
 </html>

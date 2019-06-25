@@ -1,0 +1,109 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25 Haz 2019, 09:29:29
+    Author     : hp_user
+*/
+
+body{
+    margin: 0;
+    padding:0;
+    font-family: 'Mali', cursive;
+
+    font-weight: bold;
+    text-decoration: none;
+    background-color:#cceeff;
+    font-weight:bold;
+
+
+}
+
+.box{
+    width: 300px;
+    padding: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 36px;
+
+    transform: translate(-50%,-50%);
+    background: #2c3e50;
+    text-align: center;
+}
+
+.box h1{
+    color:white;
+    text-transform: uppercase;
+    font-weight:500;
+}
+
+.box input[type = "text"], .box input[type = "password"]{
+    border:0;
+    background: none;
+    display : block;
+    margin:20px auto;
+    text-align: center;
+    border: 2px solid #0984e3;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 36px;
+    transition: 0.25s;
+
+
+
+}
+
+.box input[type = "text"]:hover, .box input[type = "password"]:hover{
+    width: 280px;
+    border-color: #2ecc71;   
+}
+
+
+
+.secondaryButton {
+    font-size: 22px;
+    text-decoration: none;
+    color:white;
+
+}
+
+.message{
+    font-size : 18px;
+    /*    background: none;*/
+    color: #e74c3c;
+
+}
+
+
+
+.loginButton{
+    height: 50px;
+width:  120px;
+     border:0;
+    background: none;
+    display : block;
+    margin:20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 36px;
+    transition: 0.25s;
+    cursor: pointer;  
+}
+
+
+.loginButton:hover{
+        background: #2ecc71;
+                width: 220px;
+                    transition: 0.20s;
+                    
+}
+
+

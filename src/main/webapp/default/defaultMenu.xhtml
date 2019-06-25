@@ -12,20 +12,20 @@ and open the template in the editor.
     <h:head>
         <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
         <!--<link href="../resources/css/default.css" rel="stylesheet" type="text/css" />-->  
-        <link href="../resources/css/cssLayout.css" rel="stylesheet" type="text/css" />  
+        <!--<link href="../resources/css/cssLayout.css" rel="stylesheet" type="text/css" />-->  
 
-        <!--<h:outputStylesheet library="css" name="default.css" />-->
-        <h:outputStylesheet name="css/default.css"  />
-    <h:outputStylesheet library="css" name="cssLayout.css" />
+        <h:outputStylesheet library="css" name="menuStyle.css" />
+        <!--<h:outputStylesheet name="css/default.css"  />-->
+    <!--<h:outputStylesheet library="css" name="cssLayout.css" />-->
 
     </h:head>
     <h:body>
-        <h:form>
+        <h:form class="menu" styleClass="menu">
             <p:growl id="messages"/>
 
-            <p:menubar>
-                <p:submenu label="Admin" icon="pi pi-file">
-                    <p:submenu label="Kullanici Islemeri" icon="pi pi-briefcase" >
+            <p:panelMenu  styleClass="menu">
+                <p:submenu id="menuAdmin" label="Admin" icon="pi pi-file"  >
+                    <p:submenu label="Kullanici Islemeri" icon="pi pi-briefcase" parent="" >
                         <p:menuitem value="Kullanici Incele"  />
                         <p:menuitem value="Kullanici Ekle" url="./admin/adminKullaniciEkle.xhtml"  />
                         <p:menuitem value="Kullanici Sil" url="#" />
@@ -77,7 +77,7 @@ and open the template in the editor.
                     <p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search" />
                     <p:commandButton type="button" value="Logout" icon="pi pi-home" actionListener="#{controller.logout()}" />
                 </f:facet>
-            </p:menubar>
+            </p:panelMenu>
         </h:form>
     </h:body>
 </html>
