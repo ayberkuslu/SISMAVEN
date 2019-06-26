@@ -8,7 +8,8 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"> 
     <h:head>
         <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
         <!--<link href="../resources/css/default.css" rel="stylesheet" type="text/css" />-->  
@@ -16,68 +17,99 @@ and open the template in the editor.
 
         <h:outputStylesheet library="css" name="menuStyle.css" />
         <!--<h:outputStylesheet name="css/default.css"  />-->
-    <!--<h:outputStylesheet library="css" name="cssLayout.css" />-->
+        <!--<h:outputStylesheet library="css" name="cssLayout.css" />-->
 
     </h:head>
     <h:body>
-        <h:form class="menu" styleClass="menu">
-            <p:growl id="messages"/>
+        <h:form  >
+            <div class="ui-g">
+                <div class="ui-g-3"> 
+                    <div class="sidenav">
+                        <p:growl id="messages"/>
+                        <p:panelMenu  styleClass="sidenav">
+                            <p:submenu id="menuAdmin" label="Admin" icon="pi pi-file"  styleClass="firstMenu"  >
+                                <p:submenu label="Kullanici Islemeri" icon="pi pi-briefcase" styleClass="secondMenu"  >
+                                    <p:menuitem value="Kullanici Incele" styleClass="menuItem"  />
+                                    <p:menuitem value="Kullanici Ekle" url="./admin/adminKullaniciEkle.xhtml" styleClass="menuItem" />
+                                    <p:menuitem value="Kullanici Sil" url="#" styleClass="menuItem" />
+                                    <p:menuitem value="Kullanici Guncelle" url="#" styleClass="menuItem" />
+                                </p:submenu>
+                                <p:submenu label="Donem Islemleri" icon="pi pi-briefcase" styleClass="secondMenu">
+                                    <p:menuitem value="Ekle/Sil Dönemini Baslat" url="#" styleClass="menuItem"/>   
+                                    <p:menuitem value="Ekle/Sil Dönemini Bitir" url="#" styleClass="menuItem" />                        
+                                    <p:menuitem value="Yeni Donem Baslat" url="#" styleClass="menuItem" />   
+                                    <p:menuitem value="Mevcut Donemi Bitir" url="#" styleClass="menuItem"/>   
+                                    <p:menuitem value="Ekle/Sil Dönemini Baslat" url="#" styleClass="menuItem"  />   
 
-            <p:panelMenu  styleClass="menu">
-                <p:submenu id="menuAdmin" label="Admin" icon="pi pi-file"  >
-                    <p:submenu label="Kullanici Islemeri" icon="pi pi-briefcase" parent="" >
-                        <p:menuitem value="Kullanici Incele"  />
-                        <p:menuitem value="Kullanici Ekle" url="./admin/adminKullaniciEkle.xhtml"  />
-                        <p:menuitem value="Kullanici Sil" url="#" />
-                        <p:menuitem value="Kullanici Guncelle" url="#" />
-                    </p:submenu>
-                    <p:submenu label="Donem Islemleri" icon="pi pi-briefcase">
-                        <p:menuitem value="Ekle/Sil Dönemini Baslat" url="#" />   
-                        <p:menuitem value="Ekle/Sil Dönemini Bitir" url="#" />                        
-                        <p:menuitem value="Yeni Donem Baslat" url="#" />   
-                        <p:menuitem value="Mevcut Donemi Bitir" url="#" />   
-                        <p:menuitem value="Ekle/Sil Dönemini Baslat" url="#" />   
+
+                                </p:submenu>
+
+                                <p:menuitem value="Open" url="#" />
+                                <p:separator />
+                                <p:menuitem value="Quit" url="#" />
+                            </p:submenu>
+
+                            <p:submenu label="Edit" icon="pi pi-pencil" styleClass="firstMenu">
+                                <p:menuitem value="Undo" url="#" icon="pi pi-angle-double-left" />
+                                <p:menuitem value="Redo" url="#" icon="pi pi-angle-double-right" />
+                            </p:submenu>
+
+                            <p:submenu label="Help" icon="pi pi-question" styleClass="firstMenu">
+                                <p:menuitem value="Contents" url="#" />
+                                <p:submenu label="Search" icon="pi pi-search">
+                                    <p:submenu label="Text">
+                                        <p:menuitem value="Workspace" url="#" />
+                                    </p:submenu>
+                                    <p:menuitem value="File" url="#" />
+                                </p:submenu>
+                            </p:submenu>
+
+                            <p:submenu label="Actions" icon="pi pi-cog" styleClass="firstMenu">
+                                <p:submenu label="Ajax" icon="pi pi-refresh">
+                                    <p:menuitem value="Save" action="#{menuView.save}" icon="pi pi-save" update="messages"/>
+                                    <p:menuitem value="Update" action="#{menuView.update}" icon="pi pi-refresh" update="messages"/>
+                                </p:submenu>
+                                <p:submenu label="Non-Ajax" icon="pi pi-clone">
+                                    <p:menuitem value="Delete" action="#{menuView.delete}" icon="pi pi-times" update="messages" ajax="false"/>
+                                </p:submenu>
+                            </p:submenu>
+
+                            <p:menuitem value="Quit" url="http://www.primefaces.org" icon="pi pi-times" />
+
+                            <f:facet name="options">
+                                <p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search" />
+                                <p:commandButton type="button" value="Logout" icon="pi pi-home" actionListener="#{controller.logout()}" />
+                            </f:facet>
+                        </p:panelMenu>
+                    </div>
+                </div>
 
 
-                    </p:submenu>
 
-                    <p:menuitem value="Open" url="#" />
-                    <p:separator />
-                    <p:menuitem value="Quit" url="#" />
-                </p:submenu>
+                <div class="ui-g-9">
 
-                <p:submenu label="Edit" icon="pi pi-pencil">
-                    <p:menuitem value="Undo" url="#" icon="pi pi-angle-double-left" />
-                    <p:menuitem value="Redo" url="#" icon="pi pi-angle-double-right" />
-                </p:submenu>
+                    <div class="topmenu">
+                        <p:menubar>
+                            <f:facet name="options">
+                                <p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search"/>
+                                <p:commandButton type="button" value="Logout" action="#{controller.logout()}" icon="pi pi-home" />
+                            </f:facet>                                   
+                        </p:menubar>                
+                    </div>
+                </div>
+            </div>
 
-                <p:submenu label="Help" icon="pi pi-question">
-                    <p:menuitem value="Contents" url="#" />
-                    <p:submenu label="Search" icon="pi pi-search">
-                        <p:submenu label="Text">
-                            <p:menuitem value="Workspace" url="#" />
-                        </p:submenu>
-                        <p:menuitem value="File" url="#" />
-                    </p:submenu>
-                </p:submenu>
+            <div class="bottom_menu">
 
-                <p:submenu label="Actions" icon="pi pi-cog">
-                    <p:submenu label="Ajax" icon="pi pi-refresh">
-                        <p:menuitem value="Save" action="#{menuView.save}" icon="pi pi-save" update="messages"/>
-                        <p:menuitem value="Update" action="#{menuView.update}" icon="pi pi-refresh" update="messages"/>
-                    </p:submenu>
-                    <p:submenu label="Non-Ajax" icon="pi pi-clone">
-                        <p:menuitem value="Delete" action="#{menuView.delete}" icon="pi pi-times" update="messages" ajax="false"/>
-                    </p:submenu>
-                </p:submenu>
+                <center>
+                    <ui:insert name="footer" >
+                        <ui:include src="./defaultFooter.xhtml"  />
+                    </ui:insert>
+                </center>
 
-                <p:menuitem value="Quit" url="http://www.primefaces.org" icon="pi pi-times" />
 
-                <f:facet name="options">
-                    <p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search" />
-                    <p:commandButton type="button" value="Logout" icon="pi pi-home" actionListener="#{controller.logout()}" />
-                </f:facet>
-            </p:panelMenu>
+            </div>
+
         </h:form>
     </h:body>
 </html>

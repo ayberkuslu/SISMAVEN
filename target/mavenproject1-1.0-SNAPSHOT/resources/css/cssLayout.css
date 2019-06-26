@@ -205,12 +205,12 @@
   background-color: #ffccff;
   border:1px solid #c2dfef;
 }
-.menu {
+.leftMenu {
   list-style:none;
   margin:0;
   padding:0;
 }			
-.menu li {
+.leftMenu li {
   position:relative;
   float:left;
   margin-left:1px;
@@ -219,7 +219,7 @@
   font-size: 9pt;
 
 }
-.menu a {
+.leftMenu a {
   border:1px solid #c2dfef; 
   padding:5px 5px;
   font-family: Verdana;  
@@ -228,7 +228,7 @@
   text-decoration:none;
   display:block;
 }
-.menu a:hover{
+.leftMenu a:hover{
   font-family: Verdana;  
   background-color: #c2dfef;
   text-decoration: none;

@@ -82,6 +82,8 @@ body{
 
 
 .loginButton{
+        content: "\f09c";
+
     height: 50px;
 width:  120px;
      border:0;
@@ -95,15 +97,33 @@ width:  120px;
     color: white;
     border-radius: 36px;
     transition: 0.25s;
-    cursor: pointer;  
+    cursor: pointer; 
+    
 }
 
 
-.loginButton:hover{
+.loginButton:hover {
+    
         background: #2ecc71;
                 width: 220px;
                     transition: 0.20s;
-                    
+                    /*fa-lock:active*/
+                   /*content: "\f09c";*/                   
 }
+
+.fa-lock:before{
+    
+                       content: "\f023";                   
+/*content: "\f09c";*/
+}
+
+.fa-lock:hover{
+                content: "\f023" !important;
+    
+    /*content : none;*/
+}
+
+
+
 
 

@@ -8,63 +8,142 @@ and open the template in the editor.
     Author     : hp_user
 */
 body {
-  background-color: #cceeff;
-  background-repeat: repeat-x;
-
-  /*background: linear-gradient(to bottom, #cceeff 80%, white 100%);*/
-background-size: 200% 100%;
+    background-color: #cceeff;
+    background-repeat: repeat-x;
+    background-size: 100%;
+    background: linear-gradient(to bottom, #cceeff 20%, white 80%);
+    background-size: 200% 100%;
     transition: background-position 1s;
-  font-size: 12px;
-  color: #000000;  
-  margin: 0;
-  font-family: 'B612 Mono', monospace;
+    font-size: 12px;
+    /*color: #000000;*/  
+    margin: 0;
+    font-family: 'Mali', cursive;
+
+    padding:0;
+    font-weight: bold;
+    text-decoration: none;
+    background-color:#cceeff;
+
+
 
 }
 
-/*
-.ui-menubar,.ui-menu-child,.ui-menu {
-    background: #6666ff !important;
-    min-height: 60px !important;
-} 
-.ui-menubar:focus,.ui-menu-child:focus,.ui-menu:focus {
-    background: #2c3e50 !important;
-    min-height: 60px !important;
-}  
-    .ui-panel {
-  padding: 0 !important;
+
+
+/* The sidebar menu */
+.sidenav {
+    /*background: none !important;*/
+    min-height: 85%;  /* Full-height: remove this if you want "auto" height */
+    full-height :  85%;
+    min-width: 25%; /* Set the width of the sidebar */
+    max-width: 25%;
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 0; /* Stay on top */
+    top: 40px; /* Stay at the top */
+    left: 0;
+    overflow-x: hidden !important; /* Disable horizontal scroll */
+    overflow-y: hidden;
+    padding-top: 0px;
 }
-.ui-panel .ui-panel-content {
-  border: 0px none !important;
-  background: none repeat scroll 0% 0% transparent !important;
-  padding: 0.3em !important;
+
+/* The navigation menu links */
+.sidenav a {
+    height: 90%;  
+    /*padding: 6px 8px 6px 16px;*/
+    text-decoration: none;
+    font-size: 14px;
+    text-align: left;
+    border-color: red;
+    border-width: 5px;
+    color: #818181;
+    display: block;
+}
+/*.sidenav b{
+        font-size: 74px;
+
 }*/
 
-.menu{
-        background: #6666ff !important;
-    min-height: 60px ;
-    width: 300px;
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
 }
 
-/*div.menu{
-text-align: center;
+
+.output{
+    /*position:fixed;*/
+    padding-top: 40px;
+
+}
+
+.topmenu{
+    background: none !important;
+    /*margin-left: 25%;*/
+    margin-left: -90px;
+    max-height: 5%;
+    min-height: 5%;
+
+    width: 100%;
+    position: fixed;  /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 0; /* Stay on top */
+    top: 0px;  
+
+
+}
+
+.bottom_menu{
+    margin-left: 25%;
+    margin-top: 90%;
+    min-height: 10%;
+    max-height: 10%;
+    width: 100%;
+}
+
+div.menu{
+
+    margin-left: -90px;
+
+
+
 }
 .menu div.ui-menubar {
-text-align: center;
+/*text-align: center;*/
 }
 .menu .ui-menu-list{
-width:100%;
-display: inline-flex;
+/*width:100%;*/
+/*display: inline-flex;*/
 }
 div.menu>ul.ui-menu-list>li>a{
-width: 100%;
+/*width: 100%;*/
 }
 div.menu>ul.ui-menu-list>li{
-width: 100%;
+/*width: 100%;*/
 }
 .ui-menuitem-text{
-float: none!important;
-}*/
+/*float: none!important;*/
+text-orientation: upright;
+}
+
+.firstMenu{
+
+    text-transform: uppercase;
+    
+}
+
+.firstMenu:active{
+    
+        /*background-color: red;*/
+            font-size: 22px;
+            border-radius: 4px;
+            border-color: red;
 
 
+}
+.secondMenu{
+    text-transform: lowercase;
+}
+
+.menuItem{
+    text-transform: uppercase;
+}
 
 

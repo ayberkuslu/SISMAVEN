@@ -7,13 +7,26 @@ and open the template in the editor.
     Created on : 21 Haz 2019, 09:29:08
     Author     : hp_user
 */
+.body{
+    
+    
+        font-family: 'Mali', cursive;
+
+}
+
+
  .firstColumn {
-       width: 200px;
-       margin-left: 100px;
+       width: 150px;
+       margin-left: 75px;
+       height: 35px;
+       background: none !important;
+/*opacity: 40%;*/
   }
   .secondColumn {
        width: 100px;
               margin-left: 150px;
+                     height: 20px;
+opacity: 40%;
 
   }
   .thirdColumn { 

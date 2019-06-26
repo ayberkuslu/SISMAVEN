@@ -78,7 +78,7 @@ public class LoginController extends Controller {
 
         FacesContext context = FacesContext.getCurrentInstance();
 
-        String truePage = "homePage.xhtml";
+        String truePage = "faces/homePage.xhtml";
 
         String falsePage = "index";
         if (authorized == true) {

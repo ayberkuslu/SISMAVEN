@@ -208,7 +208,7 @@ public class KullaniciEkleController extends Controller{
     }
     
     public void insertNewUser(){ // DENENMEDI , TODO DENE
-        System.out.println("insertNewUser()@@");
+        System.out.println("insertNewUser()");
                 FacesContext context = FacesContext.getCurrentInstance();
         
         int parse = 0;
