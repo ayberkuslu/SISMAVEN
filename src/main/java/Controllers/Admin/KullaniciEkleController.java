@@ -208,7 +208,7 @@ public class KullaniciEkleController extends Controller{
     }
     
     public void insertNewUser(){ // DENENMEDI , TODO DENE
-        
+        System.out.println("insertNewUser()@@");
                 FacesContext context = FacesContext.getCurrentInstance();
         
         int parse = 0;
@@ -216,7 +216,7 @@ try{
            parse = Integer.parseInt(type);
 
 }catch(NumberFormatException e){
-            context.addMessage(null, new FacesMessage(e.toString()+"\n Can be wrong TYPE."));
+            context.addMessage(null, new FacesMessage(e.toString()+"\nCan be wrong TYPE."));
 }
 
 
