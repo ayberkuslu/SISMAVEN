@@ -15,113 +15,96 @@ and open the template in the editor.
         <title> Kullanici Ekle </title>
         <h:outputStylesheet library="css" name="columns.css"/>
         <h:outputStylesheet library="css" name="menuStyle.css" />
+
+
     </h:head>
     <h:body >
-
-        <div id="header" >
-
-            <h:form>
-                <p:autoUpdate />
-                <ui:insert name="header"   >
-                    <div class="ui-g">
-                        <div class="sidenav" >
-                            <ui:include src="../default/defaultMenu.xhtml"   />
-                        </div>
-                        <div class="ui-g-9" style="margin-left: 25%">
-
-
-                            <div class="ui-g" id="content"   >
-                                <div class="ui-g-6" > 
-
-
-                                    <p:outputPanel  id="infos1" styleClass="output"   >
-                                        Kullanici Bilgileri 
-                                        <br/>
-                                        <br/>
-
-                                        <p:panelGrid columns="2" columnClasses="firstColumn,secondColumn"  >
-OUTPUTPANELLERI KALDIR!!! TODO
-                                            <p:outputLabel for="tckno" value="Kullanici TCKN :"  />
-                                            <p:inputText  id="tckno" value="#{kullaniciEkleController.tckno}" title="Kullanici TCKNO" placeholder="Kullanici TCKNO" required="true" />
-
-                                            <p:outputLabel for="name" value="Kullanici Adi :"  />
-                                            <p:inputText id="name" value="#{kullaniciEkleController.name}" title="Kullanici Adi" placeholder="Kullanici Adi" required="true" />
-
-                                            <p:outputLabel for="surname" value="Kullanici Soyadi :"  />
-                                            <p:inputText id="surname" value="#{kullaniciEkleController.surname}" title="Kullanici soyadi" placeholder="Kullanici soyadi" required="true" />
-
-                                            <p:outputLabel for="password" value="Kullanici sifre :"  />
-                                            <p:password id="password" value="#{kullaniciEkleController.password}" title="Kullanici sifre" placeholder="Kullanici Sifre" required="true" />
-
-                                            <p:outputLabel for="email" value="Kullanici email :" />
-                                            <p:inputText id="email" value="#{kullaniciEkleController.email}" title="Kullanici email" placeholder="Kullanici Email" required="true" />
-
-                                            <p:outputLabel for="type" value="Kullanici tipi :" tabindex="3" />
-                                            <p:selectOneMenu id="type" value="#{kullaniciEkleController.type}" >
-                                                <f:selectItem itemLabel="Select One" itemValue="" />
-                                                <f:selectItem itemLabel="ADMIN" itemValue="0" />
-                                                <f:selectItem itemLabel="TEACHER" itemValue="1" />
-                                                <f:selectItem itemLabel="STUDENT" itemValue="2" />
-                                            </p:selectOneMenu>
-                                        </p:panelGrid>
-                                    </p:outputPanel>
-
-                                </div>
-                                <div class="ui-g-6"> 
-                                    <p:outputPanel  id="infos2" styleClass="output"   >
-
-                                        Kullanici Detay Bilgileri
-                                        <br/>
-                                        <br/>
-                                        <p:panelGrid columns="2" columnClasses="firstColumn,secondColumn"  >
-
-                                            <p:outputLabel for="phone" value="Kullanici Telefon       :"   />
-                                            <p:inputText id="phone" value="#{kullaniciEkleController.phone}" title="Kullanici Telefon" placeholder="(5**)-***-****" required="false" />
-
-                                            <p:outputLabel for="adress" value="Kullanici Adres      :"   />
-                                            <p:inputText id="adress" value="#{kullaniciEkleController.adress}" title="Kullanici Adres" placeholder="Adres" required="false" />
-
-                                            <p:outputLabel for="button" value="Kullanici Dogumgunu      :"   />
-                                            <p:datePicker id="button" value="#{kullaniciEkleController.birthday}" placeholder="Tiklayiniz" />
-
-                                            <p:outputLabel for="graduate" value="Kullanici Lisans       :"   />
-                                            <p:inputText id="graduate" value="#{kullaniciEkleController.graduate}" title="Kullanici Lisans" placeholder="Lisans" required="false" />
-
-                                            <p:outputLabel for="master" value="Kullanici Master       :"   />
-                                            <p:inputText id="master" value="#{kullaniciEkleController.master}" title="Kullanici Master" placeholder="Master" required="false" />
-
-                                            <p:outputLabel for="acilTelf" value="Kullanici Acil Telefon       :"   /> 
-                                            <p:inputText id="acilTelf" value="#{kullaniciEkleController.emergencyPhone}" title="Kullanici Acil Telefon" placeholder="(5**)-***-****" required="false" />
-
-                                            <p:outputLabel for="secretQuestion" value="Kullanici Gizli Soru       :"   /> 
-                                            <p:inputText id="secretQuestion" value="#{kullaniciEkleController.secretQuestion}" title="Kullanici Gizli Soru" placeholder="Gizli Soru" required="true" />
-
-                                            <p:outputLabel for="secretAnswer" value="Kullanici Gizli Cevap       :"   /> 
-                                            <p:inputText id="secretAnswer" value="#{kullaniciEkleController.secretAnswer}" title="Kullanici Gizli Cevap" placeholder="Gizli Cevap" required="true" />
-
-                                        </p:panelGrid>
-                                    </p:outputPanel >
-
-                                </div>
-
-
-
-                            </div>
-                            <center>
-                                <p:commandButton value="Kullanici Ekle" action="#{kullaniciEkleController.insertNewUser()}"   />
-                            </center>
-                            <div id="message">
-                                <p:messages showIcon="true"  />
-
-                            </div>
-
-
-                        </div>
+        <h:form>
+            <p:autoUpdate />
+            <div class="ui-g">
+                <div class="ui-g-3" style="background: #136a8a ; background-image: -webkit-linear-gradient(left, #136a8a, #267871); ">
+                    <!--                            SOL UST KOSE-->
+                </div>
+                <div class="ui-g-9"   >
+                    <div styleClass="topmenu" >
+                        <ui:include src="../default/defaultTopBar.xhtml"   />
                     </div>
-                </ui:insert>
-            </h:form>
+                </div>
+            </div>
+            <div class="ui-g"  >
+                <div class="ui-g-3">
+                    <div class="sidenav" >
+                        <ui:include src="../default/defaultMenu.xhtml"   />
+                    </div>
+                </div>
+                <div class="ui-g-9" style="margin-left: 25%">
 
-        </div>
+
+                    <div class="ui-g" id="content"   >
+                        <div class="ui-g-6" > 
+
+
+                            <p:outputPanel  id="infos1" styleClass="output"   >
+                                Kullanici Bilgileri 
+                                <br/>
+                                <br/>
+                                <p:panelGrid columns="2" columnClasses="firstColumn,secondColumn"  >
+                                    <p:inputText  id="tckno" value="#{kullaniciEkleController.tckno}" title="Kullanici TCKN" placeholder="Kullanici TCKN" required="true" />
+                                    <p:inputText id="name" value="#{kullaniciEkleController.name}" title="Kullanici Adi" placeholder="Kullanici Adi" required="true" />
+
+                                    <p:inputText  id="surname" value="#{kullaniciEkleController.surname}" title="Kullanici soyadi" placeholder="Kullanici soyadi" required="true" />
+                                    <p:password id="password" value="#{kullaniciEkleController.password}" title="Kullanici sifre" placeholder="Kullanici Sifre" required="true" />
+
+                                    <p:inputText id="email" value="#{kullaniciEkleController.email}" title="Kullanici email" placeholder="Kullanici Email" required="true" />
+                                    <p:selectOneMenu id="type" value="#{kullaniciEkleController.type}" autoWidth="true" placeholder="Kullanici Tipi">
+                                        <f:selectItem itemLabel="Kullanici Tipi" itemValue="" />
+                                        <f:selectItem itemLabel="ADMIN" itemValue="0" />
+                                        <f:selectItem itemLabel="TEACHER" itemValue="1" />
+                                        <f:selectItem itemLabel="STUDENT" itemValue="2" />
+                                    </p:selectOneMenu>
+                                </p:panelGrid>
+                            </p:outputPanel>
+                        </div>
+                        <div class="ui-g-6"> 
+                            <p:outputPanel  id="infos2" styleClass="output"   >
+                                Kullanici Detay Bilgileri
+                                <br/>
+                                <br/>
+                                <p:panelGrid columns="2" columnClasses="firstColumn,secondColumn"   >
+
+                                <p:inputText id="phone" value="#{kullaniciEkleController.phone}" title="Kullanici Telefon" placeholder="(5**)-***-****" required="false" styleClass="firstColumn"/>
+                                    <p:inputText id="adress" value="#{kullaniciEkleController.adress}" title="Kullanici Adres" placeholder="Adres" required="false" styleClass="firstColumn" />
+                                    <p:datePicker id="button" value="#{kullaniciEkleController.birthday}" placeholder="Dogum Tarihi"  styleClass="firstColumn"/>
+                                    <p:inputText id="graduate" value="#{kullaniciEkleController.graduate}" title="Kullanici Lisans" placeholder="Lisans" required="false" styleClass="firstColumn" />
+                                    <p:inputText id="master" value="#{kullaniciEkleController.master}" title="Yuksek Lisans" placeholder="Yuksek Lisans" required="false" styleClass="firstColumn"/>
+                                    <p:inputText id="acilTelf" value="#{kullaniciEkleController.emergencyPhone}" title="Kullanici Acil Telefon" placeholder="(5**)-***-****" required="false" styleClass="firstColumn"/>
+                                    <p:inputText id="secretQuestion" value="#{kullaniciEkleController.secretQuestion}" title="Kullanici Gizli Soru" placeholder="Gizli Soru" required="true"  styleClass="firstColumn"/>
+                                    <p:inputText id="secretAnswer" value="#{kullaniciEkleController.secretAnswer}" title="Kullanici Gizli Cevap" placeholder="Gizli Cevap" required="true" styleClass="firstColumn"/>
+                                    </p:panelGrid>
+                                
+                            </p:outputPanel >
+
+                        </div>
+
+
+
+                    </div>
+                    <center>
+                        <p:commandButton value="Kullanici Ekle" action="#{kullaniciEkleController.insertNewUser()}"   />
+                    </center>
+                    <div id="message">
+                        <p:messages showIcon="true"  />
+
+                    </div>
+
+
+
+                </div>
+            </div>
+            <!--</ui:insert>-->
+        </h:form>
+
+        <!--</div>-->
 
     </h:body>
 </html>

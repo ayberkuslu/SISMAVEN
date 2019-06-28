@@ -28,6 +28,7 @@ body{
     top: 50%;
     left: 50%;
     border-radius: 36px;
+    font-family: 'Mali', cursive;
 
     transform: translate(-50%,-50%);
     background: #2c3e50;
@@ -53,6 +54,7 @@ body{
     color: white;
     border-radius: 36px;
     transition: 0.25s;
+    font-family: 'Mali', cursive;
 
 
 
@@ -82,7 +84,7 @@ body{
 
 
 .loginButton{
-        content: "\f09c";
+        /*content: "\f09c";*/
 
     height: 50px;
 width:  120px;
@@ -90,7 +92,15 @@ width:  120px;
     background: none;
     display : block;
     margin:20px auto;
-    text-align: center;
+    text-align: center;;
+        /*font-family: 'Mali', cursive;*/
+           font-family: FontAwesome;
+
+        font-size: 16px;
+       
+    padding: 14px 40px;
+    outline: none;
+    color: white;
     border: 2px solid #2ecc71;
     padding: 14px 40px;
     outline: none;
@@ -98,6 +108,8 @@ width:  120px;
     border-radius: 36px;
     transition: 0.25s;
     cursor: pointer; 
+    
+    
     
 }
 
@@ -111,17 +123,7 @@ width:  120px;
                    /*content: "\f09c";*/                   
 }
 
-.fa-lock:before{
-    
-                       content: "\f023";                   
-/*content: "\f09c";*/
-}
 
-.fa-lock:hover{
-                content: "\f023" !important;
-    
-    /*content : none;*/
-}
 
 
 

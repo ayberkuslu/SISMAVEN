@@ -8,29 +8,33 @@ and open the template in the editor.
     Author     : hp_user
 */
 .body{
-    
-    
-        font-family: 'Mali', cursive;
+
+
+    font-family: 'Mali', cursive;
 
 }
 
 
- .firstColumn {
-       width: 150px;
-       margin-left: 75px;
-       height: 35px;
-       background: none !important;
-/*opacity: 40%;*/
-  }
-  .secondColumn {
-       width: 100px;
-              margin-left: 150px;
-                     height: 20px;
-opacity: 40%;
+.firstColumn {
+    width: 200px;
+    height: 30px;
+    padding: 0px !important;
+}
+.secondColumn {
+    width: 100px;
+    height: 30px;
+    padding: 0px !important;
 
-  }
-  .thirdColumn { 
-       width: 300px;
-              margin-left: 40px;
 
-  }
+}
+.thirdColumn { 
+    /*width: 300px;*/
+    /*margin-left: 40px;*/
+
+}
+
+.insertButton{
+
+
+
+}

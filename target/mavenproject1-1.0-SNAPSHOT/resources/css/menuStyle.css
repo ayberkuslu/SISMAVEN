@@ -8,22 +8,18 @@ and open the template in the editor.
     Author     : hp_user
 */
 body {
-    background-color: #cceeff;
-    background-repeat: repeat-x;
+    /*background: #434560 !important;*/
+    /*color:#434560 !;*/    
+    font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    padding: 0;
     background-size: 100%;
-    background: linear-gradient(to bottom, #cceeff 20%, white 80%);
-    background-size: 200% 100%;
+    background: linear-gradient(to bottom, #cceeff 30%, white 100%);
+    /*background-size: 200% 100%;*/
     transition: background-position 1s;
-    font-size: 12px;
-    /*color: #000000;*/  
     margin: 0;
-    font-family: 'Mali', cursive;
-
-    padding:0;
-    font-weight: bold;
     text-decoration: none;
-    background-color:#cceeff;
-
 
 
 }
@@ -32,63 +28,62 @@ body {
 
 /* The sidebar menu */
 .sidenav {
-    /*background: none !important;*/
-    min-height: 85%;  /* Full-height: remove this if you want "auto" height */
-    full-height :  85%;
-    min-width: 25%; /* Set the width of the sidebar */
-    max-width: 25%;
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 0; /* Stay on top */
-    top: 40px; /* Stay at the top */
-    left: 0;
-    overflow-x: hidden !important; /* Disable horizontal scroll */
-    overflow-y: hidden;
-    padding-top: 0px;
+
 }
 
 /* The navigation menu links */
-.sidenav a {
-    height: 90%;  
-    /*padding: 6px 8px 6px 16px;*/
-    text-decoration: none;
-    font-size: 14px;
-    text-align: left;
-    border-color: red;
-    border-width: 5px;
-    color: #818181;
-    display: block;
-}
-/*.sidenav b{
-        font-size: 74px;
+.sidenav a {     
+    /*height: 90%;*/  
+    /*    padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 14px;
+        text-align: left;
+        border-color: red;
+        border-width: 5px;
+        color: #D20005;
+        display: block;*/
 
-}*/
+}
 
 /* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
-    color: #f1f1f1;
-}
+
 
 
 .output{
-    /*position:fixed;*/
     padding-top: 40px;
-
+width: 100px;
 }
 
 .topmenu{
-    background: none !important;
-    /*margin-left: 25%;*/
-    margin-left: -90px;
-    max-height: 5%;
-    min-height: 5%;
-
+    color: #434560 !important
+        border: 0px none ;
     width: 100%;
-    position: fixed;  /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 0; /* Stay on top */
-    top: 0px;  
+    position: fixed;   
+    padding: 0px !important;
+    /*z-index: 0;*/ 
+    /*top: 0px;*/  
 
 
 }
+.ui-menu, .ui-menu .ui-menu-child{
+
+    background: #434560 !important;
+
+
+}
+
+
+
+.ui-corner-all{  /* TOP MENU KOSELER*/
+    -webkit-border-radius: 0px !important; 
+     border-radius: 0px !important; 
+          border: none !important; 
+}
+
+.ui-widget-content{
+    border : none !important;
+}
+
 
 .bottom_menu{
     margin-left: 25%;
@@ -99,42 +94,23 @@ body {
 }
 
 div.menu{
+    /*margin-left: -90px;*/
+    background-color: red;
+}
 
-    margin-left: -90px;
-
-
-
-}
-.menu div.ui-menubar {
-/*text-align: center;*/
-}
-.menu .ui-menu-list{
-/*width:100%;*/
-/*display: inline-flex;*/
-}
-div.menu>ul.ui-menu-list>li>a{
-/*width: 100%;*/
-}
-div.menu>ul.ui-menu-list>li{
-/*width: 100%;*/
-}
-.ui-menuitem-text{
-/*float: none!important;*/
-text-orientation: upright;
-}
 
 .firstMenu{
 
     text-transform: uppercase;
-    
+
 }
 
 .firstMenu:active{
-    
-        /*background-color: red;*/
-            font-size: 22px;
-            border-radius: 4px;
-            border-color: red;
+
+    /*background-color: red;*/
+    /*font-size: 22px;*/
+    /*border-radius: 4px;*/
+    /*border-color: red;*/
 
 
 }
@@ -142,8 +118,143 @@ text-orientation: upright;
     text-transform: lowercase;
 }
 
-.menuItem{
-    text-transform: uppercase;
+
+
+.ui-panelmenu{
+    background: #434560 !important;
+    min-height: 100%;  /* Full-height: remove this if you want "auto" height */
+    max-height :  100%;
+
+    width: 25% !important;
+    /*min-width: 25% !important;  Set the width of the sidebar */
+    /*max-width: 25% !important;*/
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 0; /* Stay on top */
+    /*top: 40px;  Stay at the top */
+    left: 0;
+    /*border-top-right-radius: 32px;*/
+
+    overflow-x: hidden !important; /* Disable horizontal scroll */
+    overflow-y: hidden;
+    /*padding-top: 0px;*/
+}
+
+.ui-panelmenu a{
+    color: #000000;
+
+}
+
+.ui-panelmenu-header{
+    color:#434560;
+    background:  #434560 !important;
+    border: none !important;
+
+}
+.ui-panelmenu .ui-panelmenu-header a{
+    /*display: block;*/
+    background:  #434560 !important;
+    font-size: medium !important;
+    color:white !important;
+    /*border: 1px black solid;  menu ana baslik border */
+    border-left: none !important;
+    border-top: none;
+    border-right: none;
+
+
+}
+.ui-panelmenu .ui-panelmenu-header a:hover{ /* admin yazisi hover */
+    /*border: 2px black none !important;*/
+    background: black !important;
+}
+
+
+ui-panelmenu-header text{
+    /*color: red	!important;*/
+    background-color:   #434560 !important;
+    color:white !important;
+
+
+}
+
+.ui-panelmenu-content{
+    /*color: white !important;*/
+    background: #434560 !important; /*red */
+
+    display: block;
+    padding: 4px 16px;
+
+
+}	
+
+ui-panelmenu-content a{
+    /*height: 160px !important;*/
+
+}
+
+.ui-panelmenu .ui-menu-list{
+
+}
+.ui-panelmenu .ui-menu-list:focus{
+    color:black !important;
+    background: black	 !important;
+
+}
+
+.ui-panelmenu .ui-menu-list a:hover{
+    background: #136a8a !important;    
+}
+
+.ui-panelmenu .ui-menu-list ul{
+    background: #434560 !important;
+    /*border-color:   red !important;*/
+
+}	
+
+.ui-panelmenu .ui-menuitem :enabled{
+    background: #434560 !important;
+    color: black !important;
+}	
+.ui-menuitem-text{
+    color: white !important;
+    font-size: 14px !important;
+    background: none	 !important;
+}	
+
+ui-widget ui-menuitem ui-corner-all ui-menu-parent:active{
+    background: black !important;
+}
+
+
+.ui-g-3 {
+    padding: 0px !important;
+}
+
+.ui-g-9{
+    padding: 0px !important;
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    /*height: 6%;*/
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar a:hover {
+    background: #ddd;
+    color: black;
 }
 
 
