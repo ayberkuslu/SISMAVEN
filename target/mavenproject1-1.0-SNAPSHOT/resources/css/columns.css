@@ -18,12 +18,15 @@ and open the template in the editor.
 .firstColumn {
     width: 200px;
     height: 30px;
-    padding: 0px !important;
+    /*padding: 0px !importantt;*/
+    text-transform: uppercase;
+    background : transparent !important;
 }
 .secondColumn {
     width: 100px;
     height: 30px;
-    padding: 0px !important;
+    padding: 0px !important;;
+
 
 
 }
@@ -34,7 +37,70 @@ and open the template in the editor.
 }
 
 .insertButton{
+    /*margin-right: 10% !important;*/     
+    width: 120px !important;
+    height: 50px;
+    border-width: 0px !important;
+    border-radius: 36px !important;
+    padding: 0.1em 1em !important;
+    text-shadow: 0 0px 0  !important;
+
+    transition: 0.25s;
+    /*    background: #434560 !important;*/
+    background: #136a8a !important;
+    background-image: -webkit-linear-gradient(left, #136a8a, #267871) !important;
+    font-family: 'Mali', cursive !important;
+
+
+}
+
+.insertButton:hover{
+    background-image: -webkit-linear-gradient(left, #267871,#136a8a) !important;
+    transition: 0.25s;
+
+}
+
+.insertButton:focus{
+
+    background-image: -webkit-linear-gradient(right, #267871,#136a8a) !important;
+    transition: 0.25s;
+
+}
+
+.ui-button-text-only .ui-button-text {
+    /* padding: .3em 1em; */
+}
+
+
+.output{
+    padding-top: 40px;
+    width: 100px;
+
+}
+
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield {
+
+    width: 200px;
+    height: 30px;
+    background : transparent !important;    
+}
+
+.p-datepicker{
+    min-width: 0px !important;
+    text-transform: uppercase !important;
+}
 
 
 
+.ui-selectonemenu .ui-selectonemenu-label {
+
+    width: 200px !important;     
+}
+
+.ui-selectonemenu .ui-selectonemenu-trigger {
+
+    height: 40px !important;
+    background: none transparent;
+    border: none;
 }

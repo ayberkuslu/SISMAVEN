@@ -44,45 +44,48 @@ and open the template in the editor.
                         <div class="ui-g-6" > 
 
 
-                            <p:outputPanel  id="infos1" styleClass="output"   >
-                                Kullanici Bilgileri 
-                                <br/>
-                                <br/>
-                                <p:panelGrid columns="2" columnClasses="firstColumn,secondColumn"  >
-                                    <p:inputText  id="tckno" value="#{kullaniciEkleController.tckno}" title="Kullanici TCKN" placeholder="Kullanici TCKN" required="true" />
-                                    <p:inputText id="name" value="#{kullaniciEkleController.name}" title="Kullanici Adi" placeholder="Kullanici Adi" required="true" />
+                            <!--<p:outputPanel  id="infos1" styleClass="output"   >-->
+                            Kullanici Bilgileri 
+                            <br/>
+                            <br/>
+                            <!--<p:panelGrid columns="2" columnClasses="firstColumn,firstColumn" style="padding-top: 40px;"  >-->
+                            <div styleClass="firstColumn">
+                                <p:inputText  id="tckno" value="#{kullaniciEkleController.tckno}" title="Kullanici TCKN" placeholder="Kullanici TCKN" required="true" styleClass="firstColumn" />
+                                <p:inputText id="name" value="#{kullaniciEkleController.name}" title="Kullanici Adi" placeholder="Kullanici Adi" required="true" styleClass="firstColumn"/>
 
-                                    <p:inputText  id="surname" value="#{kullaniciEkleController.surname}" title="Kullanici soyadi" placeholder="Kullanici soyadi" required="true" />
-                                    <p:password id="password" value="#{kullaniciEkleController.password}" title="Kullanici sifre" placeholder="Kullanici Sifre" required="true" />
+                                <p:inputText  id="surname" value="#{kullaniciEkleController.surname}" title="Kullanici soyadi" placeholder="Kullanici soyadi" required="true" styleClass="firstColumn" />
+                                <p:password id="password" value="#{kullaniciEkleController.password}" title="Kullanici sifre" placeholder="Kullanici Sifre" required="true" styleClass="firstColumn" />
 
-                                    <p:inputText id="email" value="#{kullaniciEkleController.email}" title="Kullanici email" placeholder="Kullanici Email" required="true" />
-                                    <p:selectOneMenu id="type" value="#{kullaniciEkleController.type}" autoWidth="true" placeholder="Kullanici Tipi">
-                                        <f:selectItem itemLabel="Kullanici Tipi" itemValue="" />
-                                        <f:selectItem itemLabel="ADMIN" itemValue="0" />
-                                        <f:selectItem itemLabel="TEACHER" itemValue="1" />
-                                        <f:selectItem itemLabel="STUDENT" itemValue="2" />
-                                    </p:selectOneMenu>
-                                </p:panelGrid>
-                            </p:outputPanel>
+                                <p:inputText id="email" value="#{kullaniciEkleController.email}" title="Kullanici email" placeholder="Kullanici Email" required="true" styleClass="firstColumn" />
+                                <p:selectOneMenu id="type" value="#{kullaniciEkleController.type}"   autoWidth="true" placeholder="Kullanici Tipi" styleClass="firstColumn"  >
+                                    <f:selectItem itemLabel="Kullanici Tipi" itemValue="" />
+                                    <f:selectItem itemLabel="ADMIN" itemValue="0" />
+                                    <f:selectItem itemLabel="TEACHER" itemValue="1" />
+                                    <f:selectItem itemLabel="STUDENT" itemValue="2" />
+                                </p:selectOneMenu>
+                            </div>
+                            <!--</p:panelGrid>-->
+                            <!--</p:outputPanel>-->
                         </div>
                         <div class="ui-g-6"> 
-                            <p:outputPanel  id="infos2" styleClass="output"   >
-                                Kullanici Detay Bilgileri
-                                <br/>
-                                <br/>
-                                <p:panelGrid columns="2" columnClasses="firstColumn,secondColumn"   >
-
+                            <!--<p:outputPanel  id="infos2" styleClass="output"   >-->
+                            Kullanici Detay Bilgileri
+                            <br/>
+                            <br/>
+                            <!--<p:panelGrid columns="2" columnClasses="firstColumn,firstColumn" style="padding-top: 40px;"  >-->
+                            <div styleClass="firstColumn" >  
                                 <p:inputText id="phone" value="#{kullaniciEkleController.phone}" title="Kullanici Telefon" placeholder="(5**)-***-****" required="false" styleClass="firstColumn"/>
-                                    <p:inputText id="adress" value="#{kullaniciEkleController.adress}" title="Kullanici Adres" placeholder="Adres" required="false" styleClass="firstColumn" />
-                                    <p:datePicker id="button" value="#{kullaniciEkleController.birthday}" placeholder="Dogum Tarihi"  styleClass="firstColumn"/>
-                                    <p:inputText id="graduate" value="#{kullaniciEkleController.graduate}" title="Kullanici Lisans" placeholder="Lisans" required="false" styleClass="firstColumn" />
-                                    <p:inputText id="master" value="#{kullaniciEkleController.master}" title="Yuksek Lisans" placeholder="Yuksek Lisans" required="false" styleClass="firstColumn"/>
-                                    <p:inputText id="acilTelf" value="#{kullaniciEkleController.emergencyPhone}" title="Kullanici Acil Telefon" placeholder="(5**)-***-****" required="false" styleClass="firstColumn"/>
-                                    <p:inputText id="secretQuestion" value="#{kullaniciEkleController.secretQuestion}" title="Kullanici Gizli Soru" placeholder="Gizli Soru" required="true"  styleClass="firstColumn"/>
-                                    <p:inputText id="secretAnswer" value="#{kullaniciEkleController.secretAnswer}" title="Kullanici Gizli Cevap" placeholder="Gizli Cevap" required="true" styleClass="firstColumn"/>
-                                    </p:panelGrid>
-                                
-                            </p:outputPanel >
+                                <p:inputText id="adress" value="#{kullaniciEkleController.adress}" title="Kullanici Adres" placeholder="Adres" required="false" styleClass="firstColumn" />
+                                <p:datePicker id="button" value="#{kullaniciEkleController.birthday}" placeholder="DOGUM TARIHI"  styleClass="firstColumn"  />
+                                <p:inputText id="graduate" value="#{kullaniciEkleController.graduate}" title="Kullanici Lisans" placeholder="Lisans" required="false" styleClass="firstColumn" />
+                                <p:inputText id="master" value="#{kullaniciEkleController.master}" title="Yuksek Lisans" placeholder="Yuksek Lisans" required="false" styleClass="firstColumn"/>
+                                <p:inputText id="acilTelf" value="#{kullaniciEkleController.emergencyPhone}" title="Kullanici Acil Telefon" placeholder="(5**)-***-****" required="false" styleClass="firstColumn"/>
+                                <p:inputText id="secretQuestion" value="#{kullaniciEkleController.secretQuestion}" title="Kullanici Gizli Soru" placeholder="Gizli Soru" required="true"  styleClass="firstColumn"/>
+                                <p:inputText id="secretAnswer" value="#{kullaniciEkleController.secretAnswer}" title="Kullanici Gizli Cevap" placeholder="Gizli Cevap" required="true" styleClass="firstColumn"/>
+                            </div>
+                            <!--</p:panelGrid>-->
+
+                            <!--</p:outputPanel >-->
 
                         </div>
 
@@ -90,7 +93,7 @@ and open the template in the editor.
 
                     </div>
                     <center>
-                        <p:commandButton value="Kullanici Ekle" action="#{kullaniciEkleController.insertNewUser()}"   />
+                        <p:commandButton value="Kullanici Ekle" action="#{kullaniciEkleController.insertNewUser()}" styleClass="insertButton"  />
                     </center>
                     <div id="message">
                         <p:messages showIcon="true"  />

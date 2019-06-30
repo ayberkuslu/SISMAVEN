@@ -48,35 +48,36 @@ body {
 /* When you mouse over the navigation links, change their color */
 
 
-
-.output{
-    padding-top: 40px;
-width: 100px;
-}
-
 .topmenu{
     color: #434560 !important
         border: 0px none ;
     width: 100%;
     position: fixed;   
     padding: 0px !important;
+/*        -webkit-border-radius: 0px !important; 
+     border-radius: 0px !important; */
     /*z-index: 0;*/ 
     /*top: 0px;*/  
 
 
 }
 .ui-menu, .ui-menu .ui-menu-child{
-
+    -webkit-border-radius: 0px !important    ; 
+     border-radius: 0px !important ; 
     background: #434560 !important;
 
 
 }
+/*topmenu .ui-corner-all{
+        -webkit-border-radius: 0px !important ; 
+     border-radius: 0px !important; 
+}*/
 
 
 
 .ui-corner-all{  /* TOP MENU KOSELER*/
-    -webkit-border-radius: 0px !important; 
-     border-radius: 0px !important; 
+    -webkit-border-radius: 0px  ; 
+     border-radius: 0px ; 
           border: none !important; 
 }
 
@@ -122,6 +123,8 @@ div.menu{
 
 .ui-panelmenu{
     background: #434560 !important;
+            /*background-image: -webkit-linear-gradient(top, #267871,#434560) !important;*/
+
     min-height: 100%;  /* Full-height: remove this if you want "auto" height */
     max-height :  100%;
 
@@ -140,13 +143,13 @@ div.menu{
 }
 
 .ui-panelmenu a{
-    color: #000000;
+    /*color: #000000;*/
 
 }
 
 .ui-panelmenu-header{
     color:#434560;
-    background:  #434560 !important;
+    background:  red !important;
     border: none !important;
 
 }
@@ -164,21 +167,29 @@ div.menu{
 }
 .ui-panelmenu .ui-panelmenu-header a:hover{ /* admin yazisi hover */
     /*border: 2px black none !important;*/
-    background: black !important;
+    /*background: black !important;*/
+                    background-image: -webkit-linear-gradient(right, #267871,#434560) !important;
+                    border: 0px;
+}
+.ui-panelmenu .ui-panelmenu-header a:focus{ /* admin yazisi click */
+    /*background: red !important;*/
+                    background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
+                    border: 0px;
+
 }
 
 
 ui-panelmenu-header text{
     /*color: red	!important;*/
-    background-color:   #434560 !important;
-    color:white !important;
+    /*background-color:   red !important;*/
+    /*color:white !important;*/
 
 
 }
 
 .ui-panelmenu-content{
     /*color: white !important;*/
-    background: #434560 !important; /*red */
+    background: #434560 !important;
 
     display: block;
     padding: 4px 16px;
@@ -191,21 +202,35 @@ ui-panelmenu-content a{
 
 }
 
-.ui-panelmenu .ui-menu-list{
+.ui-panelmenu .ui-menu-list:focus{
+                    /*background-image: -webkit-linear-gradient(left, #267871,#434560) !important;*/
 
+    
 }
 .ui-panelmenu .ui-menu-list:focus{
     color:black !important;
-    background: black	 !important;
+    /*background: black	 !important;*/
+                    /*background-image: -webkit-linear-gradient(right, #267871,#434560) !important;*/
+
 
 }
 
 .ui-panelmenu .ui-menu-list a:hover{
-    background: #136a8a !important;    
+    background: #136a8a !important;  
+                background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
+
 }
 
+.ui-panelmenu .ui-menu-list a:focus{
+        /*background: #136a8a !important;*/  
+
+/*                    background-image: -webkit-linear-gradient(right, #267871,#434560) !important;*/
+
+}
+
+
 .ui-panelmenu .ui-menu-list ul{
-    background: #434560 !important;
+    /*background: x !important;*/
     /*border-color:   red !important;*/
 
 }	
