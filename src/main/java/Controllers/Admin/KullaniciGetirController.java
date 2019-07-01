@@ -37,11 +37,10 @@ public class KullaniciGetirController extends Controller {
         setSession(HibernateUtil.getSessionFactory().openSession());
         getSession().beginTransaction();
 
-        userDetails = getSession().createCriteria(UserDetails.class).add(Restrictions.eq("userId.type", 2)).list();
+        userDetails = getSession().createCriteria(UserDetails.class).add(Restrictions.eq(".type", 2)).list();
         users = getSession().createCriteria(Users.class).list();
         System.out.println("User list size : " + users.size()+"\n detail size : " + userDetails.size());
         getSession().close();
-
     }
 
 }

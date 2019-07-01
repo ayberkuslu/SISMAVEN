@@ -75,8 +75,8 @@ public class LoginController extends Controller {
     }
 
     private void goNextPage() throws IOException {
-
         FacesContext context = FacesContext.getCurrentInstance();
+
 
         String truePage = "faces/homePage.xhtml";
 
