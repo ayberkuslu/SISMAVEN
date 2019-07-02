@@ -22,8 +22,11 @@ and open the template in the editor.
         <h:form>
             <p:autoUpdate />
             <div class="ui-g">
-                <div class="ui-g-3" style="background: #136a8a ; background-image: -webkit-linear-gradient(left, #136a8a, #267871); ">
-                    <!--                            SOL UST KOSE-->
+                <div class="ui-g-3" >
+                    <div class="topLeftBar" >
+                        <ui:include src="../default/defaultTopLeftBar.xhtml"   />
+
+                    </div>                   
                 </div>
                 <div class="ui-g-9"   >
                     <div styleClass="topmenu" >
@@ -74,7 +77,13 @@ and open the template in the editor.
                             <br/>
                             <!--<p:panelGrid columns="2" columnClasses="firstColumn,firstColumn" style="padding-top: 40px;"  >-->
                             <div styleClass="firstColumn" >  
-                                <p:inputText id="phone" value="#{kullaniciEkleController.phone}" title="Kullanici Telefon" placeholder="(5**)-***-****" required="false" styleClass="firstColumn"/>
+                                <p:selectOneRadio id="gender" value="#{kullaniciEkleController.gender}" unselectable="true">
+                                    
+                                    <f:selectItem itemLabel="MALE" itemValue="MALE" />
+                                    <f:selectItem itemLabel="FEMALE" itemValue="FEMALE" />
+                                </p:selectOneRadio>
+                                                                <p:inputText id="phone" value="#{kullaniciEkleController.phone}" title="Kullanici Telefon" placeholder="(5**)-***-****" required="false" styleClass="firstColumn"/>
+
                                 <p:inputText id="adress" value="#{kullaniciEkleController.adress}" title="Kullanici Adres" placeholder="Adres" required="false" styleClass="firstColumn" />
                                 <p:datePicker id="button" value="#{kullaniciEkleController.birthday}" placeholder="DOGUM TARIHI"  styleClass="firstColumn"  />
                                 <p:inputText id="graduate" value="#{kullaniciEkleController.graduate}" title="Kullanici Lisans" placeholder="Lisans" required="false" styleClass="firstColumn" />

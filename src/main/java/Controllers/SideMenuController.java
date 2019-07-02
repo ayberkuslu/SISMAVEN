@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 /**
  *
@@ -18,7 +18,7 @@ import javax.faces.context.FacesContext;
  */
 @Named(value = "sideMenuController")
 @RequestScoped
-public class SideMenuController {
+public class SideMenuController extends Controller{
 
     /**
      * Creates a new instance of SideMenuController
@@ -26,7 +26,7 @@ public class SideMenuController {
     public SideMenuController() {
     }
 
-    public void goInsertUserPage() {
+    public static void goInsertUserPage() {
         FacesContext context = null;
         try {
              context = FacesContext.getCurrentInstance();
@@ -35,6 +35,8 @@ public class SideMenuController {
             context.getExternalContext().redirect(nextPage);
         } catch (IOException ex) {
             System.out.println("goInsertUserPage() try catch fails");
+            
+            System.out.println("EXCEPTION : " + ex.toString());
                     context.addMessage(null, new FacesMessage("ERROR"));
 
             Logger.getLogger(SideMenuController.class.getName()).log(Level.SEVERE, null, ex);

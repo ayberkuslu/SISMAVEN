@@ -11,7 +11,7 @@ body {
     /*background: #434560 !important;*/
     /*color:#434560 !;*/    
     font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
-    font-size: 14px;
+	font-size: 14px;
     -webkit-font-smoothing: antialiased;
     padding: 0;
     background-size: 100%;
@@ -93,17 +93,12 @@ body {
     max-height :  100%;
 
     width: 25% !important;
-    /*min-width: 25% !important;  Set the width of the sidebar */
-    /*max-width: 25% !important;*/
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 0; /* Stay on top */
-    /*top: 40px;  Stay at the top */
     left: 0;
-    /*border-top-right-radius: 32px;*/
 
     overflow-x: hidden !important; /* Disable horizontal scroll */
     overflow-y: hidden;
-    /*padding-top: 0px;*/
 }
 
 .ui-panelmenu a{
@@ -121,6 +116,7 @@ body {
     /*display: block;*/
     background:  #434560 !important;
     font-size: medium !important;
+    	font-weight: bold;
     color:white !important;
     /*border: 1px black solid;  menu ana baslik border */
     border-left: none !important;
@@ -256,6 +252,15 @@ ui-widget ui-menuitem ui-corner-all ui-menu-parent:active{
         background: #136a8a !important;  
                 background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
    
+}
+
+.topLeftBar{
+    background: #136a8a ;
+    background-image: -webkit-linear-gradient(left, #136a8a, #267871);
+    height: 100%;
+    width: 100%;
+    /*height: 51px;*/
+    
 }
 
 

@@ -252,7 +252,7 @@ try{
         insertObject(userDetail);
        }catch(Exception e){
                              context.addMessage(null, new FacesMessage("Kullanici Ekleme BASARİSİZ."));
-
+                              return;      
        }
                   context.addMessage(null, new FacesMessage("Kullanici Eklendi."));
   

@@ -19,7 +19,7 @@ and open the template in the editor.
     width: 200px;
     height: 30px;
     /*padding: 0px !importantt;*/
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     background : transparent !important;
 }
 .secondColumn {
