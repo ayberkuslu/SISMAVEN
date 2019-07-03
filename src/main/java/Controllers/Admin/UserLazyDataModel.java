@@ -5,7 +5,8 @@
  */
 package Controllers.Admin;
 
-import Models.UserDetails;
+//import Models.UserDetails;
+import Models.Users;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -13,32 +14,33 @@ import java.util.List;
 import java.util.Map;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
+
 /**
  *
  * @author hp_user
  */
-public class UserDetailLazyDataModel extends LazyDataModel<UserDetails>  {
+public class UserLazyDataModel extends LazyDataModel<Users>  {
 
 
-    private List<UserDetails> datasource;
+    private List<Users> datasource;
 
-    public UserDetailLazyDataModel(List<UserDetails> datasource) {
+    public UserLazyDataModel(List<Users> datasource) {
         this.datasource = datasource;
     }
     
     @Override
-    public Object getRowKey(UserDetails object) {
-        return object.getUserId().getUserId();
+    public Object getRowKey(Users object) {
+        return object.getUserId();
     }
     
      @Override
-    public UserDetails  getRowData(String rowKey) {
+    public Users  getRowData(String rowKey) {
         try {
  
             @SuppressWarnings("unchecked")
-            List<UserDetails> list = (List<UserDetails>) getWrappedData();
-            for (UserDetails obj : list) {
-                if (obj.getUserId().getUserId().toString().equals(rowKey))
+            List<Users> list = (List<Users>) getWrappedData();
+            for (Users obj : list) {
+                if (obj.getUserId().toString().equals(rowKey))
                     return obj;
             }
  
@@ -52,11 +54,11 @@ public class UserDetailLazyDataModel extends LazyDataModel<UserDetails>  {
     }
     
 @Override
-    public List<UserDetails> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {
-        List<UserDetails> data = new ArrayList<UserDetails>();
+    public List<Users> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {
+        List<Users> data = new ArrayList<Users>();
  
         //filter
-        for(UserDetails userDetail : datasource) {
+        for(Users user : datasource) {
             boolean match = true;
  
             if (filters != null) {
@@ -64,7 +66,7 @@ public class UserDetailLazyDataModel extends LazyDataModel<UserDetails>  {
                     try {
                         String filterProperty = it.next();
                         Object filterValue = filters.get(filterProperty);
-                        String fieldValue = String.valueOf(userDetail.getClass().getField(filterProperty).get(userDetail));
+                        String fieldValue = String.valueOf(user.getClass().getField(filterProperty).get(user));
  
                         if(filterValue == null || fieldValue.startsWith(filterValue.toString())) {
                             match = true;
@@ -80,13 +82,13 @@ public class UserDetailLazyDataModel extends LazyDataModel<UserDetails>  {
             }
  
             if(match) {
-                data.add(userDetail);
+                data.add(user);
             }
         }
  
         //sort
         if(sortField != null) {
-            Collections.sort(data, new LazySorterUserDetails(sortField, sortOrder));
+            Collections.sort(data, new LazySorterUsers(sortField, sortOrder));
         }
  
         //rowCount
@@ -108,3 +110,6 @@ public class UserDetailLazyDataModel extends LazyDataModel<UserDetails>  {
     }
 
 }
+
+    
+

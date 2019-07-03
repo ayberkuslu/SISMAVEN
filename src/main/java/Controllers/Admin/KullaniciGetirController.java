@@ -7,14 +7,12 @@ package Controllers.Admin;
 
 import Controllers.*;
 import Models.*;
-import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import org.hibernate.criterion.Restrictions;
 import org.primefaces.model.LazyDataModel;
 
 /**
@@ -29,6 +27,10 @@ public class KullaniciGetirController extends Controller  {
 
     private LazyDataModel<Users> users;
     private LazyDataModel<UserDetails> userDetails;
+        private LazyDataModel<Users> filteredUsers;
+    private LazyDataModel<UserDetails> filteredUserDetails;
+    
+    
     private Users selectedUser;
     private UserDetails selectedUserDetails;
 
@@ -38,14 +40,25 @@ public class KullaniciGetirController extends Controller  {
     public KullaniciGetirController() {
     }
     
+//    @PostConstruct
+//    public void initial(){
+//        userDetails = new UserDetailLazyDataModel();
+//    }
+    
+    
     @PostConstruct
     public void loadData() {
         setSession(HibernateUtil.getSessionFactory().openSession());
         getSession().beginTransaction();
+//        List<UserDetails> list = getSession().createCriteria(UserDetails.class).createAlias("userId","userId").add(Restrictions.eq("userId.type", Users.TYPE_STUDENT)).list();
+//                userDetails = new UserDetailLazyDataModel(list);
+    List<Users> list = getSession().createCriteria(Users.class).list();
+
+            users = new UserLazyDataModel(list); 
 //        userDetails = new UserDetailLazyDataModel<UserDetails>(getSession().createCriteria(UserDetails.class).createAlias("userId","userId").add(Restrictions.eq("userId.type", Users.TYPE_STUDENT)).list());
 //        userDetails = (LazyDataModel<UserDetails>) getSession().createCriteria(UserDetails.class).createAlias("userId","userId").add(Restrictions.eq("userId.type", 2)).list();
 //        users=(LazyDataModel<Users>) getSession().createCriteria(Users.class).list();
-//        System.out.println("\n detail size : " + userDetails.);
+//        System.out.println("\n detail size : " );
         getSession().close();
             } 
 
@@ -81,6 +94,22 @@ public class KullaniciGetirController extends Controller  {
 
     public void setUserDetails(LazyDataModel<UserDetails> userDetails) {
         this.userDetails = userDetails;
+    }
+
+    public LazyDataModel<Users> getFilteredUsers() {
+        return filteredUsers;
+    }
+
+    public void setFilteredUsers(LazyDataModel<Users> filteredUsers) {
+        this.filteredUsers = filteredUsers;
+    }
+
+    public LazyDataModel<UserDetails> getFilteredUserDetails() {
+        return filteredUserDetails;
+    }
+
+    public void setFilteredUserDetails(LazyDataModel<UserDetails> filteredUserDetails) {
+        this.filteredUserDetails = filteredUserDetails;
     }
     
     

@@ -39,42 +39,46 @@ and open the template in the editor.
                     </div>
                 </div>
                 <div class="ui-g-9" style="margin-left: 25%;margin-top: 5%;">
-                                <p:autoUpdate  />
+                    <p:autoUpdate  />
 
                     <p:growl id="msgs" showDetail="true" />
-
-                    <p:dataTable id="singleDT" lazy="true" var="users" value="#{kullaniciGetirController.users}" selectionMode="single" selection="#{kullaniciGetirController.selectedUser}" rowKey="#{users.userId}" style="width: 90%;margin-left: 2%;" rows="10"
-                 paginator="true"
-                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                 rowsPerPageTemplate="5,10,15"   >
-                        <f:facet name="header">
-                            Single with Row Click
-                        </f:facet>
-                        <p:column headerText="Name">
-                            <h:outputText value="#{users.name}" />
-                        </p:column>
-                        <p:column headerText="Surname">
-                            <h:outputText value="#{users.surname}" />
-                        </p:column>
-                        <p:column headerText="Email">
-                            <h:outputText value="#{users.email}" />
-                        </p:column>
-                        <p:column headerText="tckno">
-                            <h:outputText value="#{users.tckno}" />
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton process="singleDT"  icon="pi pi-search" value="View" update="@form" oncomplete="PF('carDialog').show()" />
-                        </f:facet>
-                    </p:dataTable>
+                    <!--<p:panel id="toggleable" header="Users" toggleable="true" collapsed="false" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">-->
+                        <p:dataTable  id="singleDT" lazy="true" var="users" value="#{kullaniciGetirController.users}" selectionMode="single" selection="#{kullaniciGetirController.selectedUser}" rowKey="#{users.userId}" style="width: 90%;margin-left: 2%;" rows="10"
+                                      paginator="true" filteredValue="#{kullaniciGetirController.filteredUsers}"
+                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                      rowsPerPageTemplate="5,10,15"  stickyHeader="true"  >
+                            <f:facet name="header">
+                                <!--                            Single with Row Click-->
+                            </f:facet>
+                            <p:column headerText="Name" sortBy="#{users.name}" filterBy="#{users.name}"  >
+                                <h:outputText value="#{users.name}" />
+                            </p:column>
+                            <p:column headerText="ID" sortBy="#{users.userId}" filterBy="#{users.userId}" >
+                                <h:outputText value="#{users.userId}" />
+                            </p:column>
+                            <p:column headerText="Surname">
+                                <h:outputText value="#{users.surname}" />
+                            </p:column>
+                            <p:column headerText="Email">
+                                <h:outputText value="#{users.email}" />
+                            </p:column>
+                            <p:column headerText="tckno">
+                                <h:outputText value="#{users.tckno}" />
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton process="singleDT"  icon="pi pi-search" value="View"  oncomplete="PF('carDialog').show()" />
+                            </f:facet>
+                        </p:dataTable>
+                    <!--</p:panel>-->
                     <br/>
-                    
-                    <h:outputText id="selected"  value="#{kullaniciGetirController.selectedUser.name}" />
-                        
-<br/>
+
+                    <h:outputText id="selected"  value="123#{kullaniciGetirController.selectedUser.name}" />
+
+                    <br/>
 
 
 
-<p:commandButton value="Getir" update="selected" action="#{kullaniciGetirController.loadData()}" style="width: 100px; height:60px;background: blue;" />
+                    <p:commandButton value="Getir" update="selected" action="#{kullaniciGetirController.loadData()}" style="width: 100px; height:60px;background: blue;" />
 
 
 

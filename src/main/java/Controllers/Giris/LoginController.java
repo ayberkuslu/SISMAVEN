@@ -53,7 +53,7 @@ public class LoginController extends Controller {
             UserDetails targetUserDetail = (UserDetails) getObject(UserDetails.class, userId);
 //            getSession().close();
 
-            if (targetUser == null) {
+            if (targetUser == null || targetUserDetail == null) {
                 return false;
             }
 

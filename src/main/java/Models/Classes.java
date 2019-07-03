@@ -30,15 +30,15 @@ import javax.persistence.Table;
     @NamedQuery(name = "Classes.findByGrade", query = "SELECT c FROM Classes c WHERE c.grade = :grade")})
 public class Classes implements Serializable {
 
+    @Column(name = "GRADE")
+    private Integer grade;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "CLASSES_ID")
     private Integer classesId;
-    @Basic(optional = false)
-    @Column(name = "GRADE")
-    private int grade;
     @JoinColumn(name = "COURSE_ID", referencedColumnName = "COURSE_ID")
     @ManyToOne(optional = false)
     private Courses courseId;
@@ -66,13 +66,6 @@ public class Classes implements Serializable {
         this.classesId = classesId;
     }
 
-    public int getGrade() {
-        return grade;
-    }
-
-    public void setGrade(int grade) {
-        this.grade = grade;
-    }
 
     public Courses getCourseId() {
         return courseId;
@@ -113,6 +106,14 @@ public class Classes implements Serializable {
     @Override
     public String toString() {
         return "Models.Classes[ classesId=" + classesId + " ]";
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
     }
     
 }

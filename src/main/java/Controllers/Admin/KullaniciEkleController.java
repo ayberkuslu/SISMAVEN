@@ -254,7 +254,7 @@ try{
                              context.addMessage(null, new FacesMessage("Kullanici Ekleme BASARİSİZ."));
                               return;      
        }
-                  context.addMessage(null, new FacesMessage("Kullanici Eklendi."));
+                  context.addMessage(null, new FacesMessage(user.getUserId()+" Numarali Kullanici Eklendi."));
   
         
     }

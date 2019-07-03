@@ -20,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -37,18 +39,22 @@ import javax.persistence.Table;
     @NamedQuery(name = "Courses.findByMaxSize", query = "SELECT c FROM Courses c WHERE c.maxSize = :maxSize")})
 public class Courses implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
+    @Column(name = "COURSE_NAME")
+    private String courseName;
+
+    @JoinColumn(name = "TERM_ID", referencedColumnName = "TERM_ID")
+    @ManyToOne(optional = false)
+    private Terms termId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "COURSE_ID")
     private Integer courseId;
-    @Basic(optional = false)
-    @Column(name = "TERM_ID")
-    private int termId;
-    @Basic(optional = false)
-    @Column(name = "COURSE_NAME")
-    private int courseName;
     @Basic(optional = false)
     @Column(name = "STATUS")
     private int status;
@@ -69,7 +75,7 @@ public class Courses implements Serializable {
         this.courseId = courseId;
     }
 
-    public Courses(Integer courseId, int termId, int courseName, int status) {
+    public Courses(Integer courseId, Terms termId, String courseName, int status) {
         this.courseId = courseId;
         this.termId = termId;
         this.courseName = courseName;
@@ -84,21 +90,8 @@ public class Courses implements Serializable {
         this.courseId = courseId;
     }
 
-    public int getTermId() {
-        return termId;
-    }
 
-    public void setTermId(int termId) {
-        this.termId = termId;
-    }
 
-    public int getCourseName() {
-        return courseName;
-    }
-
-    public void setCourseName(int courseName) {
-        this.courseName = courseName;
-    }
 
     public int getStatus() {
         return status;
@@ -163,6 +156,22 @@ public class Courses implements Serializable {
     @Override
     public String toString() {
         return "Models.Courses[ courseId=" + courseId + " ]";
+    }
+
+    public Terms getTermId() {
+        return termId;
+    }
+
+    public void setTermId(Terms termId) {
+        this.termId = termId;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
     
 }

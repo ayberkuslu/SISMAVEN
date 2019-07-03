@@ -6,8 +6,10 @@
 package Models;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,9 +17,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,6 +37,9 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Terms.findByTermName", query = "SELECT t FROM Terms t WHERE t.termName = :termName"),
     @NamedQuery(name = "Terms.findByStatus", query = "SELECT t FROM Terms t WHERE t.status = :status")})
 public class Terms implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "termId")
+    private Collection<Courses> coursesCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -131,6 +138,15 @@ public class Terms implements Serializable {
     @Override
     public String toString() {
         return "Models.Terms[ termId=" + termId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Courses> getCoursesCollection() {
+        return coursesCollection;
+    }
+
+    public void setCoursesCollection(Collection<Courses> coursesCollection) {
+        this.coursesCollection = coursesCollection;
     }
     
 }
