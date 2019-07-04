@@ -38,7 +38,8 @@ public class UserLazyDataModel extends LazyDataModel<Users>  {
         try {
  
             @SuppressWarnings("unchecked")
-            List<Users> list = (List<Users>) getWrappedData();
+//            List<Users> list = (List<Users>) getWrappedData();
+            List<Users> list = datasource;
             for (Users obj : list) {
                 if (obj.getUserId().toString().equals(rowKey))
                     return obj;

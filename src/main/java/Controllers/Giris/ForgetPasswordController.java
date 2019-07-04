@@ -6,9 +6,11 @@
 package Controllers.Giris;
 
 import Controllers.Controller;
+import Controllers.HibernateUtil;
 import Models.*;
 import java.util.Date;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -32,6 +34,16 @@ public class ForgetPasswordController extends Controller {
      * Creates a new instance of ForgetPasswordController
      */
     public ForgetPasswordController() {
+    }
+    
+    @PreDestroy
+    public void destroy() {
+        getSession().close();
+    }
+
+    @PostConstruct
+    public void init() {
+        setSession(HibernateUtil.getSessionFactory().openSession());
     }
 
     public String getUserId() {
@@ -128,7 +140,7 @@ public class ForgetPasswordController extends Controller {
             return;
         }
 
-        setSession(getHelper().getSessionFactory().openSession());
+//        setSession(HibernateUtil.getSessionFactory().openSession());
         getSession().beginTransaction();
         Users user = (Users) getSession().load(Users.class, Integer.parseInt(userId));
 
@@ -136,7 +148,7 @@ public class ForgetPasswordController extends Controller {
         getSession().update(user);
         getSession().save(new Logs(Logs.USER_RESET_PASSWORD, "password changed", user, new Date()));
         getSession().getTransaction().commit();
-        getSession().close();
+//        getSession().close();
         context.addMessage(null, new FacesMessage("Sifre Basariyla Degistirildi!"));
         System.out.println("PASSWORD CHANGED FOR USER : " + userId + "\n New Password : " + ((Users) getUserById(Integer.parseInt(userId))).getPassword());
         System.out.println("Yeni sifre hashlenmemis : " + userPassword1);

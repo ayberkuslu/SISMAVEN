@@ -5,6 +5,8 @@
  */
 package Controllers;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -18,7 +20,10 @@ public class HibernateUtil {
     
   private static StandardServiceRegistry registry; 
   private static SessionFactory sessionFactory;
+//   private static final ThreadLocal<Session> threadLocal = new ThreadLocal();
 
+  
+  
   public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             // loads configuration and mappings
@@ -41,5 +46,14 @@ public class HibernateUtil {
     public static void setRegistry(StandardServiceRegistry registry) {
         HibernateUtil.registry = registry;
     }
+    
+//     public static void closeSession() throws HibernateException {
+//    Session session = (Session) threadLocal.get();
+//    threadLocal.set(null);
+//
+//    if (session != null) {
+//      session.close();
+//    }
+//  }
 
 }

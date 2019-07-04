@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 
@@ -24,7 +24,7 @@ import javax.faces.context.FacesContext;
  * @author hp_user
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class LoginController extends Controller {
 
     private Integer userId;
@@ -50,16 +50,16 @@ public class LoginController extends Controller {
 //            Users targetUser = (Users) getSession().get(Users.class, userId);
 //            UserDetails targetUserDetail = (UserDetails) getSession().get(UserDetails.class, userId);
             Users targetUser = (Users) getObject(Users.class, userId);
-            UserDetails targetUserDetail = (UserDetails) getObject(UserDetails.class, userId);
+//            UserDetails targetUserDetail = (UserDetails) getObject(UserDetails.class, userId);
 //            getSession().close();
 
-            if (targetUser == null || targetUserDetail == null) {
-                return false;
-            }
+//            if (targetUser == null || targetUserDetail == null) {
+//                return false;
+//            }
 
             if (targetUser.getPassword().equals(sha256(userPassword))) {
                 setCurrentUser(targetUser);
-                setCurrentUserDetail(targetUserDetail);
+//                setCurrentUserDetail(targetUserDetail);
                 insertObject(new Logs(Logs.USER_LOGIN, "succesfully logined", getCurrentUser(), new Date()));
 
                 return true;

@@ -1,4 +1,4 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -36,11 +36,10 @@ import javax.persistence.Table;
     @NamedQuery(name = "Users.findByStatus", query = "SELECT u FROM Users u WHERE u.status = :status"),
     @NamedQuery(name = "Users.findByType", query = "SELECT u FROM Users u WHERE u.type = :type")})
 public class Users implements Serializable {
-    
+
     public static final int TYPE_ADMIN = 0;
     public static final int TYPE_STUDENT = 1;
     public static final int TYPE_TEACHER = 2;
-
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -206,15 +205,22 @@ public class Users implements Serializable {
             return false;
         }
         Users other = (Users) object;
-        if ((this.userId == null && other.userId != null) || (this.userId != null && !this.userId.equals(other.userId))) {
+
+
+        if (this.userId == null && other.userId != null) {
             return false;
+        } else if (this.userId != null && other.userId == null) {
+            return false;
+        } else if (this.userId == null && other.userId == null) {
+            return true;
+        } else {
+            return (this.userId.equals(other.userId));
         }
-        return true;
     }
 
     @Override
     public String toString() {
         return "Models.Users[ userId=" + userId + " ]";
     }
-    
+
 }
