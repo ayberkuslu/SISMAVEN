@@ -5,7 +5,6 @@
  */
 package Controllers.Admin;
 
-import Models.UserDetails;
 import Models.Users;
 import java.util.Comparator;
 import org.primefaces.model.SortOrder;
@@ -16,15 +15,16 @@ import org.primefaces.model.SortOrder;
  */
 public class LazySorterUsers implements Comparator<Users> {
 
-    private String sortField;
+    private final String sortField;
 
-    private SortOrder sortOrder;
+    private final SortOrder sortOrder;
 
     public LazySorterUsers(String sortField, SortOrder sortOrder) {
         this.sortField = sortField;
         this.sortOrder = sortOrder;
     }
 
+    @Override
     public int compare(Users user1, Users user2) {
         try {
 //            Object value1 = Users.class.getField(this.sortField).get(user1);
@@ -36,7 +36,7 @@ public class LazySorterUsers implements Comparator<Users> {
 
             return SortOrder.ASCENDING.equals(sortOrder) ? value : -1 * value;
         } catch (Exception e) {
-            throw new RuntimeException("for User @");
+            throw new RuntimeException("for User compare @");
         }
     }
 }

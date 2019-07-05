@@ -30,8 +30,11 @@ body{
     border-radius: 36px;
     font-family: 'Mali', cursive;
 
+
     transform: translate(-50%,-50%);
     background: #2c3e50;
+-webkit-box-shadow: 13px -9px 7px 5px rgba(0,0,0,0.64); 
+box-shadow: 13px -9px 7px 5px rgba(0,0,0,0.64);
     text-align: center;
 }
 
@@ -84,20 +87,20 @@ body{
 
 
 .loginButton{
-        /*content: "\f09c";*/
+    /*content: "\f09c";*/
 
     height: 50px;
-width:  120px;
-     border:0;
+    width:  120px;
+    border:0;
     background: none;
     display : block;
     margin:20px auto;
     text-align: center;;
-        /*font-family: 'Mali', cursive;*/
-           font-family: FontAwesome;
+    /*font-family: 'Mali', cursive;*/
+    font-family: FontAwesome;
 
-        font-size: 16px;
-       
+    font-size: 16px;
+
     padding: 14px 40px;
     outline: none;
     color: white;
@@ -108,19 +111,19 @@ width:  120px;
     border-radius: 36px;
     transition: 0.25s;
     cursor: pointer; 
-    
-    
-    
+
+
+
 }
 
 
 .loginButton:hover {
-    
-        background: #2ecc71;
-                width: 220px;
-                    transition: 0.20s;
-                    /*fa-lock:active*/
-                   /*content: "\f09c";*/                   
+
+    background: #2ecc71;
+    width: 220px;
+    transition: 0.20s;
+    /*fa-lock:active*/
+    /*content: "\f09c";*/                   
 }
 
 

@@ -19,98 +19,96 @@ import org.primefaces.model.SortOrder;
  *
  * @author hp_user
  */
-public class UserLazyDataModel extends LazyDataModel<Users>  {
-
+public class UserLazyDataModel extends LazyDataModel<Users> {
 
     private List<Users> datasource;
 
     public UserLazyDataModel(List<Users> datasource) {
         this.datasource = datasource;
     }
-    
+
     @Override
     public Object getRowKey(Users object) {
         return object.getUserId();
     }
-    
-     @Override
-    public Users  getRowData(String rowKey) {
-        try {
- 
-            @SuppressWarnings("unchecked")
-//            List<Users> list = (List<Users>) getWrappedData();
-            List<Users> list = datasource;
-            for (Users obj : list) {
-                if (obj.getUserId().toString().equals(rowKey))
-                    return obj;
+
+    @Override
+    public Users getRowData(String rowKey) {
+
+        for (Users obj : datasource) {
+            if (obj.getUserId().equals(rowKey)) {
+                return obj;
             }
- 
-        } catch (Exception e) {
- 
-            System.out.println("getRowData method error" + e.getMessage());
-            e.printStackTrace();
         }
- 
+
         return null;
     }
-    
-@Override
-    public List<Users> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {
-        List<Users> data = new ArrayList<Users>();
- 
+
+    @Override
+    public List<Users> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+        List<Users> data = new ArrayList<>();
+
         //filter
-        for(Users user : datasource) {
+        for (Users user : datasource) {
             boolean match = true;
- 
+
             if (filters != null) {
+                System.out.println("Filters inside");
                 for (Iterator<String> it = filters.keySet().iterator(); it.hasNext();) {
+                    System.out.println("foreach inside");
+
                     try {
                         String filterProperty = it.next();
                         Object filterValue = filters.get(filterProperty);
-                        String fieldValue = String.valueOf(user.getClass().getField(filterProperty).get(user));
- 
-                        if(filterValue == null || fieldValue.startsWith(filterValue.toString())) {
+                        
+                        String fieldValue = String.valueOf(user.getClass().getDeclaredField(filterProperty).get(user));
+
+                        if (filterValue == null || fieldValue.startsWith(filterValue.toString())) {
+                            System.out.println("first if inside");
+
                             match = true;
-                    }
-                    else {
+                        } else {
+                            System.out.println("first else inside");
+
                             match = false;
                             break;
                         }
-                    } catch(Exception e) {
+                    } catch (IllegalAccessException | IllegalArgumentException | NoSuchFieldException | SecurityException e) {
+                        System.out.println("exception throwed\n" + e.toString() );
+
                         match = false;
                     }
                 }
             }
- 
-            if(match) {
+
+            if (match) {
+                System.out.println("data eklendi");
+
                 data.add(user);
             }
         }
- 
+
         //sort
-        if(sortField != null) {
+        if (sortField != null) {
+            System.out.println("sorfield != null");
+
             Collections.sort(data, new LazySorterUsers(sortField, sortOrder));
         }
- 
+
         //rowCount
         int dataSize = data.size();
         this.setRowCount(dataSize);
- 
+
         //paginate
-        if(dataSize > pageSize) {
+        if (dataSize > pageSize) {
             try {
                 return data.subList(first, first + pageSize);
-            }
-            catch(IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 return data.subList(first, first + (dataSize % pageSize));
             }
-        }
-        else {
+        } else {
             return data;
         }
     }
 
 }
-
-    
-

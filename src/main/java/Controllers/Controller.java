@@ -8,7 +8,9 @@ package Controllers;
 import Models.*;
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -29,7 +31,7 @@ import org.hibernate.criterion.Restrictions;
  */
 @ManagedBean
 @SessionScoped
-public class Controller {
+public class Controller implements Serializable{
 
 //    private HibernateUtil helper;
     private Session session;
@@ -49,7 +51,6 @@ public class Controller {
 
     @PostConstruct
     public void init() {
-//        helper = new HibernateUtil();
         session = HibernateUtil.getSessionFactory().openSession();
     }
 
@@ -68,8 +69,6 @@ public class Controller {
     public void setCurrentUserDetail(UserDetails currentUserDetail) {
         this.currentUserDetail = currentUserDetail;
     }
-
-
 
     public Session getSession() {
 
@@ -90,25 +89,21 @@ public class Controller {
 
             } catch (Exception ex) {
                 transaction.rollback();
+                getSession().close();
                 throw ex;
             }
 
         } finally {
-                        getSession().getTransaction().commit();
-//            session.close();
-
+            getSession().getTransaction().commit();
         }
 
 //        return null;
     }
 
     public Object getObject(Class type, Serializable srzbl) {
-//         setSession(HibernateUtil.getSessionFactory().openSession());
         getSession().beginTransaction();
         Object o = getSession().get(type, srzbl);
-                    getSession().getTransaction().commit();
-
-//            getSession().close();
+        getSession().getTransaction().commit();
 
         return o;
     }
@@ -116,26 +111,22 @@ public class Controller {
     public UserDetails getUserDetailsById(int userId) {
         try {
 
-//            setSession(HibernateUtil.getSessionFactory().openSession());
             getSession().beginTransaction();
-
-            List abc = getSession().createCriteria(UserDetails.class).add(Restrictions.eq("userId.userId", userId)).list();
+            List userDetailsList = getSession().createCriteria(UserDetails.class).add(Restrictions.eq("userId.userId", userId)).list();
             getSession().getTransaction().commit();
-            if (abc.size() != 1) {
+            if (userDetailsList.size() != 1) {
                 return null;
             }
 
-            UserDetails temp = (UserDetails) abc.get(0);
-
+            UserDetails temp = (UserDetails) userDetailsList.get(0);
             return temp;
 
         } catch (HibernateException e) {
 
-            System.out.println(e);
+            System.out.println(e + "\nExcepiton while loading UserDetail of " + userId);
+            getSession().getTransaction().rollback();
 
         } finally {
-//            getSession().getTransaction().
-//            getSession().close();
 
         }
 
@@ -147,7 +138,7 @@ public class Controller {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(base.getBytes("UTF-8"));
-            StringBuffer hexString = new StringBuffer();
+            StringBuilder hexString = new StringBuilder();
 
             for (int i = 0; i < hash.length; i++) {
                 String hex = Integer.toHexString(0xff & hash[i]);
@@ -158,17 +149,20 @@ public class Controller {
             }
 
             return hexString.toString();
-        } catch (Exception ex) {
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
             throw new RuntimeException(ex);
         }
     }
 
     public void insertObject(Object o) {
-//            setSession(getHelper().getSessionFactory().openSession());
-        getSession().beginTransaction();
-        getSession().save(o);
-        getSession().getTransaction().commit();
-//            getSession().close();       
+        try {
+            getSession().beginTransaction();
+            getSession().save(o);
+            getSession().getTransaction().commit();
+        } catch (Exception e) {
+            getSession().getTransaction().rollback();
+            System.out.println(e + "\n InsertObjectException while inserting :" + o.toString());
+        }
     }
 
     public void logout() {
@@ -186,7 +180,7 @@ public class Controller {
             System.out.println("logout basarili2");
 
             context.getExternalContext().redirect("loginPage.xhtml");
-            System.out.println("logout basarili");
+            System.out.println("Yonlendirme basarili");
         } catch (IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }

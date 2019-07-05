@@ -158,6 +158,11 @@ public class Users implements Serializable {
     public void setType(int type) {
         this.type = type;
     }
+    
+////    @Override
+//    public Class getClass2(){
+//        return Users.class;
+//    }
 
     public Collection<Courses> getCoursesCollection() {
         return coursesCollection;

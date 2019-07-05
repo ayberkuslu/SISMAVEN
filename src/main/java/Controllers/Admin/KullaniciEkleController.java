@@ -20,19 +20,19 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @RequestScoped
-public class KullaniciEkleController extends Controller{
+public class KullaniciEkleController extends Controller {
 // user
-    private String tckno ;
-    private String name ;
+
+    private String tckno;
+    private String name;
     private String surname;
     private String password;
     private String email;
     private boolean status;
     private String type;
-    
-   //userDetail
-    
-    private String phone ;
+
+    //userDetail
+    private String phone;
     private String adress;
     private Date birthday;
     private String gender = "MALE";
@@ -44,7 +44,6 @@ public class KullaniciEkleController extends Controller{
     private String secretAnswer;
     private Date registerDate;
     private Users userId;
-    
 
     public String getName() {
         return name;
@@ -101,7 +100,6 @@ public class KullaniciEkleController extends Controller{
     public void setType(String type) {
         this.type = type;
     }
-
 
     public String getPhone() {
         return phone;
@@ -198,30 +196,28 @@ public class KullaniciEkleController extends Controller{
     public void setUserId(Users userId) {
         this.userId = userId;
     }
-    
-    
 
     /**
      * Creates a new instance of KullaniciEkleController
      */
     public KullaniciEkleController() {
     }
-    
-    public void insertNewUser(){ // DENENMEDI , TODO DENE
-        System.out.println("insertNewUser()");
-                FacesContext context = FacesContext.getCurrentInstance();
-        
-        int parse = 0;
-try{
-           parse = Integer.parseInt(type);
 
-}catch(NumberFormatException e){
-            context.addMessage(null, new FacesMessage(e.toString()+"\nCan be wrong TYPE."));
-}
+    public void insertNewUser() { // DENENMEDI , TODO DENE
+        System.out.println("insertNewUser()");
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        int parse = 0;
+        try {
+            parse = Integer.parseInt(type);
+
+        } catch (NumberFormatException e) {
+            context.addMessage(null, new FacesMessage(e.toString() + "\nCan be wrong TYPE."));
+        }
 
 //github commit test
         Users user = new Users();
-         
+
         user.setTckno(tckno);
         user.setName(name);
         user.setSurname(surname);
@@ -229,34 +225,37 @@ try{
         user.setEmail(email);
         user.setStatus(true);
         user.setType(parse);
-        
-       UserDetails userDetail = new UserDetails();
-       
-       if(gender.toLowerCase().charAt(0) == 'm' ) gender = "MALE";
-       else gender= "FEMALE";
-       
-       userDetail.setPhone(phone);
-       userDetail.setAdress(adress);
+
+        UserDetails userDetail = new UserDetails();
+
+        if (gender.toLowerCase().charAt(0) == 'm') {
+            gender = "MALE";
+        } else {
+            gender = "FEMALE";
+        }
+
+        userDetail.setPhone(phone);
+        userDetail.setAdress(adress);
         userDetail.setBirthday(birthday);
         userDetail.setGender(gender.toUpperCase());
-       userDetail.setGraduate(graduate);
-       userDetail.setMaster(master);
-       userDetail.setEmergencyPhone(emergencyPhone);
-       userDetail.setSecretQuestion(secretQuestion);
-       userDetail.setSecretAnswer(sha256(secretAnswer));
-       userDetail.setRegisterDate(new Date());
-       userDetail.setUserId(user);
-       
-       try{
-        insertObject(user);
-        insertObject(userDetail);
-       }catch(Exception e){
-                             context.addMessage(null, new FacesMessage("Kullanici Ekleme BASARİSİZ."));
-                              return;      
-       }
-                  context.addMessage(null, new FacesMessage(user.getUserId()+" Numarali Kullanici Eklendi."));
-  
-        
+        userDetail.setGraduate(graduate);
+        userDetail.setMaster(master);
+        userDetail.setEmergencyPhone(emergencyPhone);
+        userDetail.setSecretQuestion(secretQuestion);
+        userDetail.setSecretAnswer(sha256(secretAnswer));
+        userDetail.setRegisterDate(new Date());
+        userDetail.setUserId(user);
+
+        try {
+            insertObject(user);
+            insertObject(userDetail);
+        } catch (Exception e) {
+            context.addMessage(null, new FacesMessage("Kullanici Ekleme BASARİSİZ."));
+            getSession().getTransaction().rollback();
+            return;
+        }
+        context.addMessage(null, new FacesMessage(user.getUserId() + " Numarali Kullanici Eklendi."));
+
     }
 
 }

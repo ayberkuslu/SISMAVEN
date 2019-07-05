@@ -20,7 +20,7 @@ import org.primefaces.model.SortOrder;
 public class UserDetailLazyDataModel extends LazyDataModel<UserDetails>  {
 
 
-    private List<UserDetails> datasource;
+    private final List<UserDetails> datasource;
 
     public UserDetailLazyDataModel(List<UserDetails> datasource) {
         this.datasource = datasource;
@@ -45,7 +45,6 @@ public class UserDetailLazyDataModel extends LazyDataModel<UserDetails>  {
         } catch (Exception e) {
  
             System.out.println("getRowData method error" + e.getMessage());
-            e.printStackTrace();
         }
  
         return null;
@@ -53,7 +52,7 @@ public class UserDetailLazyDataModel extends LazyDataModel<UserDetails>  {
     
 @Override
     public List<UserDetails> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {
-        List<UserDetails> data = new ArrayList<UserDetails>();
+        List<UserDetails> data = new ArrayList<>();
  
         //filter
         for(UserDetails userDetail : datasource) {
@@ -73,7 +72,7 @@ public class UserDetailLazyDataModel extends LazyDataModel<UserDetails>  {
                             match = false;
                             break;
                         }
-                    } catch(Exception e) {
+                    } catch(IllegalAccessException | IllegalArgumentException | NoSuchFieldException | SecurityException e) {
                         match = false;
                     }
                 }

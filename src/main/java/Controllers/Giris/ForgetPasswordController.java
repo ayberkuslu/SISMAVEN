@@ -134,13 +134,11 @@ public class ForgetPasswordController extends Controller {
 
             return;
         }
-
         if (userPassword1.equals(userPassword2) == false) {
             context.addMessage(null, new FacesMessage("Parolalar uyusmuyor!"));
             return;
         }
-
-//        setSession(HibernateUtil.getSessionFactory().openSession());
+        try{
         getSession().beginTransaction();
         Users user = (Users) getSession().load(Users.class, Integer.parseInt(userId));
 
@@ -148,11 +146,20 @@ public class ForgetPasswordController extends Controller {
         getSession().update(user);
         getSession().save(new Logs(Logs.USER_RESET_PASSWORD, "password changed", user, new Date()));
         getSession().getTransaction().commit();
-//        getSession().close();
+        }catch(Exception e){
+                    context.addMessage(null, new FacesMessage("Sifre DEGISTIRILEMEDI!"));
+        getSession().getTransaction().rollback();
+
+            
+        }
         context.addMessage(null, new FacesMessage("Sifre Basariyla Degistirildi!"));
         System.out.println("PASSWORD CHANGED FOR USER : " + userId + "\n New Password : " + ((Users) getUserById(Integer.parseInt(userId))).getPassword());
         System.out.println("Yeni sifre hashlenmemis : " + userPassword1);
 
+    }
+    public boolean isValidUser(){
+        
+        return true;
     }
 
 }

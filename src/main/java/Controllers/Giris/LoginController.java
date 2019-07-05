@@ -9,13 +9,12 @@ import Controllers.Controller;
 import Models.*;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 
@@ -23,8 +22,9 @@ import javax.faces.context.FacesContext;
  *
  * @author hp_user
  */
+@RequestScoped
+//@Named(value = "loginController")
 @ManagedBean
-@SessionScoped
 public class LoginController extends Controller {
 
     private Integer userId;

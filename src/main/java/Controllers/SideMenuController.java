@@ -10,14 +10,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.faces.application.FacesMessage;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 /**
  *
  * @author hp_user
  */
 @Named(value = "sideMenuController")
-@RequestScoped
+@SessionScoped
 public class SideMenuController extends Controller{
 
     /**
