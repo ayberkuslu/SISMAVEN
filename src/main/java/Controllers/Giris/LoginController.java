@@ -13,8 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.inject.Named;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 
@@ -22,8 +21,8 @@ import javax.faces.context.FacesContext;
  *
  * @author hp_user
  */
-@RequestScoped
-//@Named(value = "loginController")
+
+@ViewScoped
 @ManagedBean
 public class LoginController extends Controller {
 

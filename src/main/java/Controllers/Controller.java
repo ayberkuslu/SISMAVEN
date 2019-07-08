@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.context.FacesContext;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -30,7 +30,7 @@ import org.hibernate.criterion.Restrictions;
  * @author hp_user
  */
 @ManagedBean
-@SessionScoped
+@ApplicationScoped
 public class Controller implements Serializable{
 
 //    private HibernateUtil helper;

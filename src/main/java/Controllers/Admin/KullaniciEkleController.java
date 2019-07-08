@@ -11,7 +11,7 @@ import Models.Users;
 import java.util.Date;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -19,8 +19,8 @@ import javax.faces.context.FacesContext;
  * @author hp_user
  */
 @ManagedBean
-@RequestScoped
-public class KullaniciEkleController extends Controller {
+@ViewScoped
+public class KullaniciEkleController extends Controller{
 // user
 
     private String tckno;
@@ -221,7 +221,6 @@ public class KullaniciEkleController extends Controller {
         user.setTckno(tckno);
         user.setName(name);
         user.setSurname(surname);
-        user.setPassword(sha256(password));
         user.setEmail(email);
         user.setStatus(true);
         user.setType(parse);
@@ -242,7 +241,6 @@ public class KullaniciEkleController extends Controller {
         userDetail.setMaster(master);
         userDetail.setEmergencyPhone(emergencyPhone);
         userDetail.setSecretQuestion(secretQuestion);
-        userDetail.setSecretAnswer(sha256(secretAnswer));
         userDetail.setRegisterDate(new Date());
         userDetail.setUserId(user);
 
@@ -251,7 +249,7 @@ public class KullaniciEkleController extends Controller {
             insertObject(userDetail);
         } catch (Exception e) {
             context.addMessage(null, new FacesMessage("Kullanici Ekleme BASARİSİZ."));
-            getSession().getTransaction().rollback();
+           getSession().getTransaction().rollback();
             return;
         }
         context.addMessage(null, new FacesMessage(user.getUserId() + " Numarali Kullanici Eklendi."));

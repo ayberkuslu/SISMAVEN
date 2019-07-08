@@ -17,7 +17,7 @@ and open the template in the editor.
         <h:outputStylesheet library="css" name="menuStyle.css" />
     </h:head>
     <h:body>
-                    <h:form id="form">
+        <h:form id="form">
 
             <div class="ui-g">
                 <div class="ui-g-3" >
@@ -39,39 +39,47 @@ and open the template in the editor.
                         <ui:include src="../default/defaultMenu.xhtml"   />
                     </div>
                 </div>
-                <div class="ui-g-9" style="margin-left: 25%;margin-top: 5%;">
+
+                <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
                     <!--<p:autoUpdate  />-->
 
                     <p:growl id="msgs" showDetail="true" />
-                    <p:panel id="toggleable" header="Users" toggleable="true" collapsed="false" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
-                        <p:dataTable  id="userTable" lazy="true" var="users" value="#{kullaniciGetirController.users}" selectionMode="single" selection="#{kullaniciGetirController.selectedUser}" rowKey="#{users.userId}" style="width: 90%;margin-left: 2%;" rows="10"
-                                      paginator="true" 
-                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                      >
-                            <p:ajax event="rowSelect" listener="#{kullaniciGetirController.onRowSelect}" update=":form:userDetail" oncomplete="PF('userDialog').show()" />
-                            <p:column headerText="Name" sortBy="#{users.name}" filterBy="#{users.name}"  >
-                                <h:outputText value="#{users.name}" />
-                            </p:column>
+                    <p:panel 
+                        id="toggleable" header="Users" toggleable="true" collapsed="false" closable="true" 
+                        toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px"
+                        >
+                        <p:dataTable 
+                            id="userTable" lazy="true" var="users" value="#{kullaniciGetirController.users}"
+                            selectionMode="single" selection="#{kullaniciGetirController.selectedUser}" 
+                            rowKey="#{users.userId}" style="width: 90%;margin-left: 2%;" rows="10"
+                            paginator="true" 
+                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                           >
+                            <p:ajax event="rowSelect" listener="#{kullaniciGetirController.onRowSelect}" update=":form:userDetail"  process="userTable"   />
+                            <!--oncomplete="PF('userDialog').show()"-->
                             <p:column headerText="ID" sortBy="#{users.userId}" filterBy="#{users.userId}" >
                                 <h:outputText value="#{users.userId}" />
                             </p:column>
-                            <p:column headerText="Surname">
+                            <p:column headerText="Name"  filterBy="#{users.name}" filterMatchMode="contains"  >
+                                <h:outputText value="#{users.name}" />
+                            </p:column>
+                            <p:column headerText="Surname"  filterBy="#{users.surname}" filterMatchMode="contains">
                                 <h:outputText value="#{users.surname}" />
                             </p:column>
-                            <p:column headerText="Email">
+                            <p:column headerText="Email"  filterBy="#{users.email}" filterMatchMode="contains">
                                 <h:outputText value="#{users.email}" />
                             </p:column>
-                            <p:column headerText="tckno">
+                            <p:column headerText="tckn" filterBy="#{users.tckno}" filterMatchMode="contains">
                                 <h:outputText value="#{users.tckno}" />
                             </p:column>
-                            <!--<f:facet name="footer">-->
-                                <!--<p:commandButton process="singleDT"  icon="pi pi-search" value="View"  oncomplete="PF('userDialog').show()" />-->
-                            <!--</f:facet>-->
+                            <f:facet name="footer">
+                            <p:commandButton process="userTable" update=":form:userDetail" oncomplete="PF('userDialog').show()" icon="pi pi-search" value="View"   />
+                            </f:facet>
                         </p:dataTable>
                     </p:panel>
                     <br/>
 
-                    <h:outputText id="selected"  value="123#{kullaniciGetirController.selectedUser.name}" />
+                    <h:outputText id="selected"  value="#{kullaniciGetirController.selectedUser.name}"  />
 
                     <br/>
 
@@ -81,11 +89,12 @@ and open the template in the editor.
 
                     <p:dialog header="User Detail" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                         <p:outputPanel id="userDetail" style="text-align:center;">
-                            <p:panelGrid  columns="2" rendered="#{not empty kullaniciGetirController.selectedUser}" columnClasses="label,value">
+                            <p:panelGrid  columns="2" rendered="#{not empty kullaniciGetirController.selectedUser}" columnClasses="label,value" style="height: 400px !important;width: 400px !important; ">
                                 <f:facet name="header">
+                                    
                                     <!--<p:graphicImage name="demo/images/car/#{dtLazyView.selectedCar.brand}-big.gif"/>-->
                                 </f:facet>
-                                 <h:outputText value="Name :" />
+                                <h:outputText value="Name :" />
                                 <h:outputText value="#{kullaniciGetirController.selectedUser.name}" />
 
                                 <h:outputText value="Id:" />
@@ -97,19 +106,22 @@ and open the template in the editor.
                                 <h:outputText value="tckn" />
                                 <h:outputText value="#{kullaniciGetirController.selectedUser.tckno}" />
 
-          
+
                             </p:panelGrid>
                         </p:outputPanel>
                     </p:dialog>
 
 
+                    
+                    
+                    
 
                 </div>
 
             </div>
 
 
-</h:form>
+        </h:form>
 
     </h:body>
 </html>

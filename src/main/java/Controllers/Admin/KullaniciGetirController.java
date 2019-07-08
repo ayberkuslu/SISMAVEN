@@ -10,10 +10,8 @@ import Models.*;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.inject.Named;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.model.LazyDataModel;
@@ -22,10 +20,9 @@ import org.primefaces.model.LazyDataModel;
  *
  * @author hp_user
  */
-//@Named(value = "kullaniciGetirController")
-//@Dependent
+
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class KullaniciGetirController extends Controller {
 
     private LazyDataModel<Users> users;
@@ -48,8 +45,9 @@ public class KullaniciGetirController extends Controller {
 //        userDetails = new UserDetailLazyDataModel();
 //    }
     @PostConstruct
-    @Override
     public void init() {
+        System.out.println("KullaniciGetir init()");
+
         setSession(HibernateUtil.getSessionFactory().openSession());
         getSession().beginTransaction();
 //        List<UserDetails> list = getSession().createCriteria(UserDetails.class).createAlias("userId","userId").add(Restrictions.eq("userId.type", Users.TYPE_STUDENT)).list();
@@ -63,13 +61,14 @@ public class KullaniciGetirController extends Controller {
     }
 
     @PreDestroy
-    @Override
     public void destroy() {
+        System.out.println("KullaniciGetir destroy()");
+
         getSession().close();
     }
 
     public void loadData() {
-        
+
         List<Users> list = getSession().createCriteria(Users.class).list();
         users = new UserLazyDataModel(list);
 

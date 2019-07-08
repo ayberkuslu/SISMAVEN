@@ -7,6 +7,7 @@ package Controllers.Admin;
 
 //import Models.UserDetails;
 import Models.Users;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -37,7 +38,7 @@ public class UserLazyDataModel extends LazyDataModel<Users> {
 
         for (Users obj : datasource) {
             if (obj.getUserId().equals(rowKey)) {
-                return obj;
+//                return obj;
             }
         }
 
@@ -53,28 +54,34 @@ public class UserLazyDataModel extends LazyDataModel<Users> {
             boolean match = true;
 
             if (filters != null) {
-                System.out.println("Filters inside");
+//                System.out.println("Filters inside");
                 for (Iterator<String> it = filters.keySet().iterator(); it.hasNext();) {
-                    System.out.println("foreach inside");
+//                    System.out.println("foreach inside");
 
                     try {
                         String filterProperty = it.next();
                         Object filterValue = filters.get(filterProperty);
-                        
-                        String fieldValue = String.valueOf(user.getClass().getDeclaredField(filterProperty).get(user));
 
-                        if (filterValue == null || fieldValue.startsWith(filterValue.toString())) {
-                            System.out.println("first if inside");
+
+                        Class userClass = user.getClass();
+                        Field declaredField = userClass.getDeclaredField(filterProperty);
+                        declaredField.setAccessible(true);
+                        Object userObject = declaredField.get(user);
+                        String fieldValue = String.valueOf(userObject);
+                        declaredField.setAccessible(false);
+
+                        if (filterValue == null || fieldValue.toUpperCase().startsWith(filterValue.toString().toUpperCase())) {
+//                            System.out.println("first if inside");
 
                             match = true;
                         } else {
-                            System.out.println("first else inside");
+//                            System.out.println("first else inside");
 
                             match = false;
                             break;
                         }
-                    } catch (IllegalAccessException | IllegalArgumentException | NoSuchFieldException | SecurityException e) {
-                        System.out.println("exception throwed\n" + e.toString() );
+                    } catch (IllegalArgumentException | NoSuchFieldException | IllegalAccessException | SecurityException e) {
+                        System.out.println("exception throwed\n" + e.toString());
 
                         match = false;
                     }
@@ -82,7 +89,7 @@ public class UserLazyDataModel extends LazyDataModel<Users> {
             }
 
             if (match) {
-                System.out.println("data eklendi");
+//                System.out.println("data eklendi");
 
                 data.add(user);
             }
@@ -90,7 +97,7 @@ public class UserLazyDataModel extends LazyDataModel<Users> {
 
         //sort
         if (sortField != null) {
-            System.out.println("sorfield != null");
+//            System.out.println("sorfield != null");
 
             Collections.sort(data, new LazySorterUsers(sortField, sortOrder));
         }

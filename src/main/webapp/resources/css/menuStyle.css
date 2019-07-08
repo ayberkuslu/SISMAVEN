@@ -11,7 +11,7 @@ body {
     /*background: #434560 !important;*/
     /*color:#434560 !;*/    
     font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
-	font-size: 14px;
+    font-size: 14px;
     -webkit-font-smoothing: antialiased;
     padding: 0;
     background-size: 100%;
@@ -40,18 +40,19 @@ body {
     width: 100%;
     position: fixed;   
     padding: 0px !important;
-/*        -webkit-border-radius: 0px !important; 
-     border-radius: 0px !important; */
+    /*        -webkit-border-radius: 0px !important; 
+         border-radius: 0px !important; */
     /*z-index: 0;*/ 
     /*top: 0px;*/  
 
 
 }
 .ui-menu, .ui-menu .ui-menu-child{
-    -webkit-border-radius: 0px !important    ; 
-     border-radius: 0px !important ; 
+    -webkit-border-radius: 0px !important; 
+    border-radius: 0px !important ; 
     background: #434560 !important;
-
+    position: fixed !important;
+    width: 75% !important ;
 
 }
 /*topmenu .ui-corner-all{
@@ -63,8 +64,8 @@ body {
 
 .ui-corner-all{  /* TOP MENU KOSELER*/
     -webkit-border-radius: 0px  ; 
-     border-radius: 0px ; 
-          border: none !important; 
+    border-radius: 0px ; 
+    border: none !important; 
 }
 
 .ui-widget-content{
@@ -87,13 +88,13 @@ body {
 
 .ui-panelmenu{
     background: #434560 !important;
-            /*background-image: -webkit-linear-gradient(top, #267871,#434560) !important;*/
+    /*background-image: -webkit-linear-gradient(top, #267871,#434560) !important;*/
 
     min-height: 100%;  /* Full-height: remove this if you want "auto" height */
     max-height :  100%;
-
+    margin-top : 51px;
     width: 25% !important;
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    position: fixed !important; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 0; /* Stay on top */
     left: 0;
 
@@ -116,7 +117,7 @@ body {
     /*display: block;*/
     background:  #434560 !important;
     font-size: medium !important;
-    	font-weight: bold;
+    font-weight: bold;
     color:white !important;
     /*border: 1px black solid;  menu ana baslik border */
     border-left: none !important;
@@ -128,13 +129,13 @@ body {
 .ui-panelmenu .ui-panelmenu-header a:hover{ /* admin yazisi hover */
     /*border: 2px black none !important;*/
     /*background: black !important;*/
-                    background-image: -webkit-linear-gradient(right, #267871,#434560) !important;
-                    border: 0px;
+    background-image: -webkit-linear-gradient(right, #267871,#434560) !important;
+    border: 0px;
 }
 .ui-panelmenu .ui-panelmenu-header a:focus{ /* admin yazisi click */
     /*background: red !important;*/
-                    background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
-                    border: 0px;
+    background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
+    border: 0px;
 
 }
 
@@ -163,28 +164,28 @@ ui-panelmenu-content a{
 }
 
 .ui-panelmenu .ui-menu-list:focus{
-                    /*background-image: -webkit-linear-gradient(left, #267871,#434560) !important;*/
+    /*background-image: -webkit-linear-gradient(left, #267871,#434560) !important;*/
 
-    
+
 }
 .ui-panelmenu .ui-menu-list:focus{
     color:black !important;
     /*background: black	 !important;*/
-                    /*background-image: -webkit-linear-gradient(right, #267871,#434560) !important;*/
+    /*background-image: -webkit-linear-gradient(right, #267871,#434560) !important;*/
 
 
 }
 
 .ui-panelmenu .ui-menu-list a:hover{
     background: #136a8a !important;  
-                background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
+    background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
 
 }
 
 .ui-panelmenu .ui-menu-list a:focus{
-        /*background: #136a8a !important;*/  
+    /*background: #136a8a !important;*/  
 
-/*                    background-image: -webkit-linear-gradient(right, #267871,#434560) !important;*/
+    /*                    background-image: -webkit-linear-gradient(right, #267871,#434560) !important;*/
 
 }
 
@@ -223,8 +224,8 @@ ui-widget ui-menuitem ui-corner-all ui-menu-parent:active{
 .navbar {
     overflow: hidden;
     background-color: #333;
-    position: fixed;
-    top: 0;
+    /*    position: fixed;*/
+    /*top: 0;*/
     width: 100%;
     /*height: 6%;*/
 }
@@ -245,22 +246,23 @@ ui-widget ui-menuitem ui-corner-all ui-menu-parent:active{
 }
 
 .sublist{
-     
+
 }
 
 .sublist:focus{
-        background: #136a8a !important;  
-                background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
-   
+    background: #136a8a !important;  
+    background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
+
 }
 
 .topLeftBar{
     background: #136a8a ;
+    position: fixed;
     background-image: -webkit-linear-gradient(left, #136a8a, #267871);
-    height: 100%;
-    width: 100%;
-    /*height: 51px;*/
-    
+    /*height: 100%;*/
+    width: 25%;
+    height: 51px !important;
+
 }
 
 
