@@ -37,8 +37,8 @@ public class UserLazyDataModel extends LazyDataModel<Users> {
     public Users getRowData(String rowKey) {
 
         for (Users obj : datasource) {
-            if (obj.getUserId().equals(rowKey)) {
-//                return obj;
+            if (obj.getUserId().toString().equals(rowKey)) {
+                return obj;
             }
         }
 

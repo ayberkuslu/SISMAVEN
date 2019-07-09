@@ -7,10 +7,14 @@ package Controllers.Admin;
 
 import Controllers.*;
 import Models.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -20,9 +24,8 @@ import org.primefaces.model.LazyDataModel;
  *
  * @author hp_user
  */
-
 @ManagedBean
-@ViewScoped
+@ApplicationScoped
 public class KullaniciGetirController extends Controller {
 
     private LazyDataModel<Users> users;
@@ -33,6 +36,7 @@ public class KullaniciGetirController extends Controller {
 
     private Users selectedUser;
     private UserDetails selectedUserDetails;
+    private Collection<Classes> selectedUserClasses;
 
     /**
      * Creates a new instance of KullaniciGetirController
@@ -40,27 +44,21 @@ public class KullaniciGetirController extends Controller {
     public KullaniciGetirController() {
     }
 
-//    @PostConstruct
-//    public void initial(){
-//        userDetails = new UserDetailLazyDataModel();
-//    }
     @PostConstruct
+    @Override
     public void init() {
         System.out.println("KullaniciGetir init()");
-
         setSession(HibernateUtil.getSessionFactory().openSession());
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         getSession().beginTransaction();
-//        List<UserDetails> list = getSession().createCriteria(UserDetails.class).createAlias("userId","userId").add(Restrictions.eq("userId.type", Users.TYPE_STUDENT)).list();
-//                userDetails = new UserDetailLazyDataModel(list);
 
         loadData();
-//        userDetails = new UserDetailLazyDataModel<UserDetails>(getSession().createCriteria(UserDetails.class).createAlias("userId","userId").add(Restrictions.eq("userId.type", Users.TYPE_STUDENT)).list());
-//        userDetails = (LazyDataModel<UserDetails>) getSession().createCriteria(UserDetails.class).createAlias("userId","userId").add(Restrictions.eq("userId.type", 2)).list();
-//        users=(LazyDataModel<Users>) getSession().createCriteria(Users.class).list();
-//        System.out.println("\n detail size : " );
+        System.out.println("SessionMap Size : " + sessionMap.size());
+
     }
 
     @PreDestroy
+    @Override
     public void destroy() {
         System.out.println("KullaniciGetir destroy()");
 
@@ -83,7 +81,18 @@ public class KullaniciGetirController extends Controller {
     }
 
     public UserDetails getSelectedUserDetails() {
+        if (selectedUserDetails == null
+                || !selectedUserDetails.getUserId().getUserId().equals(selectedUser.getUserId())) {
+            if (selectedUser == null) {
+                return null;
+            }
+            selectedUserDetails = getUserDetailsById(selectedUser.getUserId());
+        }
         return selectedUserDetails;
+    }
+
+    public void setUserDetails(LazyDataModel<UserDetails> userDetails) {
+        this.userDetails = userDetails;
     }
 
     public void setSelectedUserDetails(UserDetails selectedUserDetails) {
@@ -102,10 +111,6 @@ public class KullaniciGetirController extends Controller {
         return userDetails;
     }
 
-    public void setUserDetails(LazyDataModel<UserDetails> userDetails) {
-        this.userDetails = userDetails;
-    }
-
     public LazyDataModel<Users> getFilteredUsers() {
         return filteredUsers;
     }
@@ -122,10 +127,47 @@ public class KullaniciGetirController extends Controller {
         this.filteredUserDetails = filteredUserDetails;
     }
 
+    public List<Classes> getCurrentUserClasses() {
+        return currentUserClasses;
+    }
+
+    public void setCurrentUserClasses(List<Classes> currentUserClasses) {
+        this.currentUserClasses = currentUserClasses;
+    }
+
+    public Collection<Classes> getSelectedUserClasses() {
+        if(selectedUser == null) return null;
+//        if(selectedUserClasses == null){
+            selectedUserClasses = selectedUser.getClassesCollection();
+//        }
+        return selectedUserClasses;
+    }
+    
+    public ArrayList<Classes> ClassesList(){
+        if(getSelectedUserClasses() == null) return new ArrayList<Classes>();
+        
+        return new ArrayList<Classes>(getSelectedUserClasses());
+    }
+
+    public void setSelectedUserClasses(Collection selectedUserClasses) {
+        this.selectedUserClasses = selectedUserClasses;
+    }
+
     public void onRowSelect() {
         FacesMessage msg = new FacesMessage("User Selected " + selectedUser.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
+    }
+
+    public List<Models.Users> liste() {
+        ArrayList<Users> temp = new ArrayList<>();
+
+        temp.add(new Users(1));
+        temp.add(new Users(2));
+        temp.add(new Users(3));
+        temp.add(new Users(4));
+
+        return temp;
     }
 
 }

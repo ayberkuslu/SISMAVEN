@@ -18,7 +18,7 @@ import javax.faces.context.FacesContext;
  */
 @Named(value = "sideMenuController")
 @SessionScoped
-public class SideMenuController extends Controller{
+public class SideMenuController extends Controller {
 
     /**
      * Creates a new instance of SideMenuController

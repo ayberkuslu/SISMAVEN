@@ -6,29 +6,49 @@
 package Controllers.Giris;
 
 import Controllers.Controller;
+import Controllers.HibernateUtil;
 import Models.*;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-
 
 /**
  *
  * @author hp_user
  */
-
-@ViewScoped
+@ApplicationScoped
 @ManagedBean
 public class LoginController extends Controller {
 
     private Integer userId;
     private String userPassword;
     private boolean authorized = false;
+
+    @PreDestroy
+    @Override
+    public void destroy() {
+
+        System.out.println("Controllers.Giris.LoginController.destroy()");
+        getSession().close();
+    }
+
+    @PostConstruct
+    @Override
+    public void init() {
+        System.out.println("Controllers.Giris.LoginController.init()");
+        setSession(HibernateUtil.getSessionFactory().openSession());
+    }
 
     public void tryLogin() {
 
@@ -55,11 +75,15 @@ public class LoginController extends Controller {
 //            if (targetUser == null || targetUserDetail == null) {
 //                return false;
 //            }
-
             if (targetUser.getPassword().equals(sha256(userPassword))) {
+                Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
+                        getExternalContext().getSessionMap();
+
+                sessionMap.put("kullanici", targetUser);
+
                 setCurrentUser(targetUser);
 //                setCurrentUserDetail(targetUserDetail);
-                insertObject(new Logs(Logs.USER_LOGIN, "succesfully logined", getCurrentUser(), new Date()));
+                insertObject(new Logs(Logs.USER_LOGIN, "succesfully logined", targetUser, new Date()));
 
                 return true;
             }
@@ -75,7 +99,6 @@ public class LoginController extends Controller {
 
     private void goNextPage() throws IOException {
         FacesContext context = FacesContext.getCurrentInstance();
-
 
         String truePage = "faces/homePage.xhtml";
 
@@ -93,7 +116,7 @@ public class LoginController extends Controller {
     }
 
     public Integer getUserId() {
-        
+
         return userId;
     }
 

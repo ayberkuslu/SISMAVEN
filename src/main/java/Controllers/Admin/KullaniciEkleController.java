@@ -221,6 +221,7 @@ public class KullaniciEkleController extends Controller{
         user.setTckno(tckno);
         user.setName(name);
         user.setSurname(surname);
+        user.setPassword(sha256(password));
         user.setEmail(email);
         user.setStatus(true);
         user.setType(parse);
@@ -241,6 +242,7 @@ public class KullaniciEkleController extends Controller{
         userDetail.setMaster(master);
         userDetail.setEmergencyPhone(emergencyPhone);
         userDetail.setSecretQuestion(secretQuestion);
+        userDetail.setSecretAnswer(sha256(secretAnswer));
         userDetail.setRegisterDate(new Date());
         userDetail.setUserId(user);
 

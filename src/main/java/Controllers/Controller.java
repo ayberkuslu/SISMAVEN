@@ -13,12 +13,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -31,7 +33,7 @@ import org.hibernate.criterion.Restrictions;
  */
 @ManagedBean
 @ApplicationScoped
-public class Controller implements Serializable{
+public class Controller implements Serializable {
 
 //    private HibernateUtil helper;
     private Session session;
@@ -46,11 +48,14 @@ public class Controller implements Serializable{
 
     @PreDestroy
     public void destroy() {
+
+        System.out.println("Controllers.Controller.destroy()");
         session.close();
     }
 
     @PostConstruct
     public void init() {
+        System.out.println("Controllers.Controller.init()");
         session = HibernateUtil.getSessionFactory().openSession();
     }
 
@@ -186,5 +191,7 @@ public class Controller implements Serializable{
         }
 
     }
+
+
 
 }

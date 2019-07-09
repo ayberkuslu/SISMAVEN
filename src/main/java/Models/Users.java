@@ -6,7 +6,9 @@
 package Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -146,6 +148,11 @@ public class Users implements Serializable {
     public boolean getStatus() {
         return status;
     }
+    
+    public String getAktif(){
+        if(status) return "AKTIF";
+        else return "PASIF";
+    }
 
     public void setStatus(boolean status) {
         this.status = status;
@@ -227,5 +234,8 @@ public class Users implements Serializable {
     public String toString() {
         return "Models.Users[ userId=" + userId + " ]";
     }
+    
 
+    
+    
 }
