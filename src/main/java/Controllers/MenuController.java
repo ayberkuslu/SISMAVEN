@@ -5,8 +5,14 @@
  */
 package Controllers;
 
+import Models.Logs;
+import Models.UserDetails;
 import Models.Users;
+import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ApplicationScoped;
@@ -20,7 +26,7 @@ import javax.faces.context.FacesContext;
  * @author hp_user
  */
 @ManagedBean
-@ApplicationScoped
+@ViewScoped
 public class MenuController extends Controller {
 
     /**
@@ -28,8 +34,8 @@ public class MenuController extends Controller {
      */
     public MenuController() {
     }
-    
-        @PreDestroy
+
+    @PreDestroy
     @Override
     public void destroy() {
 
@@ -43,16 +49,44 @@ public class MenuController extends Controller {
         System.out.println("Controllers.MenuController.init()");
         setSession(HibernateUtil.getSessionFactory().openSession());
     }
-    
-    
-        public Users whoAmI() {
+
+    public Users whoAmI() {
         Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap();
-        Users temp = (Users) sessionMap.get("kullanici"); 
-         System.out.println("WhoAmI User toString(): "+temp);
-        
+        Users temp = (Users) sessionMap.get("kullanici");
+        System.out.println("WhoAmI User toString(): " + temp);
+
         return temp;
 
     }
-    
+
+    public String logout() {
+        System.out.println("logout girdi");
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
+                getExternalContext().getSessionMap();
+        Users targetUser;
+        targetUser = (Users) sessionMap.get("kullanici");
+        sessionMap.remove("kullanici");
+
+        insertObject(new Logs(Logs.USER_LOGOUT, "logined out", targetUser, new Date()));
+//        currentUser = new Users();
+//        currentUserDetail = new UserDetails();
+
+        System.out.println("logout basarili1");
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().invalidateSession();
+
+        try {
+            System.out.println("logout basarili2");
+
+            context.getExternalContext().redirect("loginPage.xhtml");
+            System.out.println("Yonlendirme basarili");
+            return "loginPage.xhtml";
+        } catch (IOException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "ABC";
+    }
+
 }
