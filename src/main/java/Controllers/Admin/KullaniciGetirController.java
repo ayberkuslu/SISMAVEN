@@ -32,11 +32,15 @@ public class KullaniciGetirController extends Controller {
     private LazyDataModel<UserDetails> userDetails;
     private LazyDataModel<Users> filteredUsers;
     private LazyDataModel<UserDetails> filteredUserDetails;
-    private List<Classes> currentUserClasses;
+    private List<Classes> selectedUserClassesList;
+    private List<Courses> selectedUserCoursesList;
 
     private Users selectedUser;
     private UserDetails selectedUserDetails;
-    private Collection<Classes> selectedUserClasses;
+    private Collection<Classes> selectedUserClassesCollection;
+    private Collection<Courses> selectedUserCoursesCollection;
+    private String isRenderedClasses = "true";
+    private String isRenderedCourses = "true";
 
     /**
      * Creates a new instance of KullaniciGetirController
@@ -127,47 +131,107 @@ public class KullaniciGetirController extends Controller {
         this.filteredUserDetails = filteredUserDetails;
     }
 
-    public List<Classes> getCurrentUserClasses() {
-        return currentUserClasses;
+    public List<Classes> getSelectedUserClassesList() {
+        return selectedUserClassesList;
     }
 
-    public void setCurrentUserClasses(List<Classes> currentUserClasses) {
-        this.currentUserClasses = currentUserClasses;
+    public void setSelectedUserClassesList(List<Classes> selectedUserClassesList) {
+        this.selectedUserClassesList = selectedUserClassesList;
     }
 
-    public Collection<Classes> getSelectedUserClasses() {
-        if(selectedUser == null) return null;
-//        if(selectedUserClasses == null){
-            selectedUserClasses = selectedUser.getClassesCollection();
-//        }
-        return selectedUserClasses;
+    public List<Courses> getSelectedUserCoursesList() {
+        return selectedUserCoursesList;
     }
-    
-    public ArrayList<Classes> ClassesList(){
-        if(getSelectedUserClasses() == null) return new ArrayList<Classes>();
-        
-        return new ArrayList<Classes>(getSelectedUserClasses());
+
+    public void setSelectedUserCoursesList(List<Courses> selectedUserCoursesList) {
+        this.selectedUserCoursesList = selectedUserCoursesList;
+    }
+
+    private Collection getSelectedUserClasses() {
+        if (selectedUser == null) {
+            return null;
+        }
+        selectedUserClassesCollection = selectedUser.getClassesCollection();
+        return selectedUserClassesCollection;
+    }
+
+    public List<Classes> ClassesList() {
+        Collection collection = getSelectedUserClasses();
+
+        if (collection == null) {
+            return new ArrayList<Classes>();
+        }
+        System.out.println("Collection is empty: " + collection.isEmpty());
+        System.out.println("Collection's size: " + collection.size());
+        return new ArrayList<Classes>(collection);
+    }
+
+    private Collection getSelectedUserCourses() {
+        if (selectedUser == null) {
+            return null;
+        }
+
+        selectedUserCoursesCollection = selectedUser.getCoursesCollection();
+        return selectedUserCoursesCollection;
+    }
+
+    public List<Courses> CoursesList() {
+        Collection collection = getSelectedUserCourses();
+        if (collection == null) {
+            return new ArrayList<>();
+        }
+        System.out.println("Collection is empty: " + collection.isEmpty());
+        System.out.println("Collection's size: " + collection.size());
+        return new ArrayList<>(collection);
     }
 
     public void setSelectedUserClasses(Collection selectedUserClasses) {
-        this.selectedUserClasses = selectedUserClasses;
+        this.selectedUserClassesCollection = selectedUserClasses;
+    }
+
+    public String getIsRenderedClasses() {
+        return isRenderedClasses;
+    }
+
+    public void setIsRenderedClasses(String isRenderedClasses) {
+        this.isRenderedClasses = isRenderedClasses;
+    }
+
+    public String getIsRenderedCourses() {
+        return isRenderedCourses;
+    }
+
+    public void setIsRenderedCourses(String isRenderedCourses) {
+        this.isRenderedCourses = isRenderedCourses;
     }
 
     public void onRowSelect() {
         FacesMessage msg = new FacesMessage("User Selected " + selectedUser.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
+        selectedUserClassesList = ClassesList();
+        selectedUserCoursesList = CoursesList();
 
+        if (selectedUser.getType() == Users.TYPE_STUDENT) {
+            isRenderedClasses = "true";
+            isRenderedCourses = "false";
+
+        } else if (selectedUser.getType() == Users.TYPE_TEACHER) {
+            isRenderedClasses = "false";
+            isRenderedCourses = "true";
+        } else {
+            isRenderedClasses = "false";
+            isRenderedCourses = "false";
+        }
+        System.out.println("IsRendered : " + isRenderedClasses + "  " + isRenderedCourses);
     }
 
-    public List<Models.Users> liste() {
-        ArrayList<Users> temp = new ArrayList<>();
+    public void deleteSelectedUser() {
 
-        temp.add(new Users(1));
-        temp.add(new Users(2));
-        temp.add(new Users(3));
-        temp.add(new Users(4));
+        if (selectedUser == null) {
+            FacesMessage msg = new FacesMessage("User Not Selected!" );
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
 
-        return temp;
     }
 
 }
