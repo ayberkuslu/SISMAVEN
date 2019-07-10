@@ -53,7 +53,7 @@ and open the template in the editor.
                             <br/>
                             <!--<p:panelGrid columns="2" columnClasses="firstColumn,firstColumn" style="padding-top: 40px;"  >-->
                             <div styleClass="firstColumn">
-                                <p:inputText  id="tckno" value="#{kullaniciEkleController.tckno}" title="Kullanici TCKN" placeholder="Kullanici TCKN" required="true" styleClass="firstColumn" />
+                                <p:inputText  id="tckn" value="#{kullaniciEkleController.tckn}" title="Kullanici TCKN" placeholder="Kullanici TCKN" required="true" styleClass="firstColumn" />
                                 <p:inputText id="name" value="#{kullaniciEkleController.name}" title="Kullanici Adi" placeholder="Kullanici Adi" required="true" styleClass="firstColumn"/>
 
                                 <p:inputText  id="surname" value="#{kullaniciEkleController.surname}" title="Kullanici soyadi" placeholder="Kullanici soyadi" required="true" styleClass="firstColumn" />
@@ -105,7 +105,9 @@ and open the template in the editor.
                         <p:commandButton value="Kullanici Ekle" action="#{kullaniciEkleController.insertNewUser()}" styleClass="insertButton"  />
                     </center>
                     <div id="message">
-                        <p:messages showIcon="true"  />
+                        <p:messages showIcon="true"  >
+                            <p:autoUpdate />
+                        </p:messages>
 
                     </div>
 
