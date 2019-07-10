@@ -170,27 +170,7 @@ public class Controller implements Serializable {
         }
     }
 
-    public void logout() {
-        System.out.println("logout girdi");
 
-        insertObject(new Logs(Logs.USER_LOGOUT, "logined out", getCurrentUser(), new Date()));
-        currentUser = new Users();
-        currentUserDetail = new UserDetails();
-
-        System.out.println("logout basarili1");
-
-        FacesContext context = FacesContext.getCurrentInstance();
-
-        try {
-            System.out.println("logout basarili2");
-
-            context.getExternalContext().redirect("loginPage.xhtml");
-            System.out.println("Yonlendirme basarili");
-        } catch (IOException ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
 
 
 
