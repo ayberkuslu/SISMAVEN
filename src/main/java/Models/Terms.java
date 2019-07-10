@@ -114,6 +114,11 @@ public class Terms implements Serializable {
     public void setStatus(int status) {
         this.status = status;
     }
+    
+    public String getAktif(){
+        if(this.status == 1) return "AKTIF";
+        else return "PASIF";
+    }
 
     @Override
     public int hashCode() {
@@ -137,7 +142,7 @@ public class Terms implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.Terms[ termId=" + termId + " ]";
+        return this.termName + "[" + this.termId.toString() +"]";
     }
 
     @XmlTransient

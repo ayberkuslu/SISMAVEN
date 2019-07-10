@@ -91,14 +91,17 @@ public class Courses implements Serializable {
     }
 
 
-
-
     public int getStatus() {
         return status;
     }
 
     public void setStatus(int status) {
         this.status = status;
+    }
+    
+       public String getAktif(){
+        if(this.status == 1) return "AKTIF";
+        else return "PASIF";
     }
 
     public Integer getCurrentSize() {
