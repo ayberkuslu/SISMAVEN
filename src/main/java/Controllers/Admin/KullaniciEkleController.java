@@ -13,6 +13,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -20,10 +22,10 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class KullaniciEkleController extends Controller{
+public class KullaniciEkleController extends Controller {
 // user
 
-    private String tckno;
+    private String tckn;
     private String name;
     private String surname;
     private String password;
@@ -53,12 +55,12 @@ public class KullaniciEkleController extends Controller{
         this.name = name;
     }
 
-    public String getTckno() {
-        return tckno;
+    public String getTckn() {
+        return tckn;
     }
 
-    public void setTckno(String tckno) {
-        this.tckno = tckno;
+    public void setTckn(String tckn) {
+        this.tckn = tckn;
     }
 
     public String getSurname() {
@@ -212,15 +214,19 @@ public class KullaniciEkleController extends Controller{
             parse = Integer.parseInt(type);
 
         } catch (NumberFormatException e) {
-            context.addMessage(null, new FacesMessage(e.toString() + "\nCan be wrong TYPE."));
         }
 
-//github commit test
+        if (!isValid(email)) {
+            System.out.println("not valid e mail");
+            context.addMessage(null, new FacesMessage("Wrong Email Adress\nUser is not added."));
+            return;
+        }
+
         Users user = new Users();
 
-        user.setTckno(tckno);
-        user.setName(name);
-        user.setSurname(surname);
+        user.setTckn(tckn);
+        user.setName(name.toUpperCase());
+        user.setSurname(surname.toUpperCase());
         user.setPassword(sha256(password));
         user.setEmail(email);
         user.setStatus(true);
@@ -235,11 +241,11 @@ public class KullaniciEkleController extends Controller{
         }
 
         userDetail.setPhone(phone);
-        userDetail.setAdress(adress);
+        userDetail.setAdress(adress.toUpperCase());
         userDetail.setBirthday(birthday);
         userDetail.setGender(gender.toUpperCase());
-        userDetail.setGraduate(graduate);
-        userDetail.setMaster(master);
+        userDetail.setGraduate(graduate.toUpperCase());
+        userDetail.setMaster(master.toUpperCase());
         userDetail.setEmergencyPhone(emergencyPhone);
         userDetail.setSecretQuestion(secretQuestion);
         userDetail.setSecretAnswer(sha256(secretAnswer));
@@ -251,11 +257,24 @@ public class KullaniciEkleController extends Controller{
             insertObject(userDetail);
         } catch (Exception e) {
             context.addMessage(null, new FacesMessage("Kullanici Ekleme BASARİSİZ."));
-           getSession().getTransaction().rollback();
+            getSession().getTransaction().rollback();
             return;
         }
         context.addMessage(null, new FacesMessage(user.getUserId() + " Numarali Kullanici Eklendi."));
 
+    }
+
+    public static boolean isValid(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."
+                + "[a-zA-Z0-9_+&*-]+)*@"
+                + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
+                + "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null) {
+            return false;
+        }
+        return pat.matcher(email).matches();
     }
 
 }
