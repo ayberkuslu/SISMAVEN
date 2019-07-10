@@ -29,9 +29,16 @@ import javax.persistence.Table;
     @NamedQuery(name = "Classes.findByClassesId", query = "SELECT c FROM Classes c WHERE c.classesId = :classesId"),
     @NamedQuery(name = "Classes.findByGrade", query = "SELECT c FROM Classes c WHERE c.grade = :grade")})
 public class Classes implements Serializable {
+    
+    
+
+    @Column(name = "VIZE_NOT")
+    private Integer vizeNot;
+    @Column(name = "FINAL_NOT")
+    private Integer finalNot;
 
     @Column(name = "GRADE")
-    private Integer grade;
+    private String grade;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,7 +60,7 @@ public class Classes implements Serializable {
         this.classesId = classesId;
     }
 
-    public Classes(Integer classesId, int grade) {
+    public Classes(Integer classesId, String grade) {
         this.classesId = classesId;
         this.grade = grade;
     }
@@ -108,12 +115,28 @@ public class Classes implements Serializable {
         return "Models.Classes[ classesId=" + classesId + " ]";
     }
 
-    public Integer getGrade() {
+    public String getGrade() {
         return grade;
     }
 
-    public void setGrade(Integer grade) {
+    public void setGrade(String grade) {
         this.grade = grade;
+    }
+
+    public Integer getVizeNot() {
+        return vizeNot;
+    }
+
+    public void setVizeNot(Integer vizeNot) {
+        this.vizeNot = vizeNot;
+    }
+
+    public Integer getFinalNot() {
+        return finalNot;
+    }
+
+    public void setFinalNot(Integer finalNot) {
+        this.finalNot = finalNot;
     }
     
 }
