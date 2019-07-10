@@ -5,6 +5,7 @@
  */
 package Models;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,6 +21,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -30,7 +33,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
     @NamedQuery(name = "Users.findByUserId", query = "SELECT u FROM Users u WHERE u.userId = :userId"),
-    @NamedQuery(name = "Users.findByTckno", query = "SELECT u FROM Users u WHERE u.tckno = :tckno"),
+    @NamedQuery(name = "Users.findByTckn", query = "SELECT u FROM Users u WHERE u.tckn = :tckn"),
     @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name"),
     @NamedQuery(name = "Users.findBySurname", query = "SELECT u FROM Users u WHERE u.surname = :surname"),
     @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
@@ -50,27 +53,40 @@ public class Users implements Serializable {
     @Column(name = "USER_ID")
     private Integer userId;
     @Basic(optional = false)
-    @Column(name = "TCKNO")
-    private String tckno;
+    @NotNull
+    @Size(min = 1, max = 25)
+    @Column(name = "TCKN")
+    private String tckn;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
     @Column(name = "NAME")
     private String name;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
     @Column(name = "SURNAME")
     private String surname;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "PASSWORD")
     private String password;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "EMAIL")
     private String email;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "STATUS")
     private boolean status;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "TYPE")
     private int type;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<Courses> coursesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<UserDetails> userDetailsCollection;
@@ -78,7 +94,7 @@ public class Users implements Serializable {
     private Collection<Classes> classesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<Logs> logsCollection;
-
+    
     public Users() {
     }
 
@@ -86,9 +102,9 @@ public class Users implements Serializable {
         this.userId = userId;
     }
 
-    public Users(Integer userId, String tckno, String name, String surname, String password, String email, boolean status, int type) {
+    public Users(Integer userId, String tckn, String name, String surname, String password, String email, boolean status, int type) {
         this.userId = userId;
-        this.tckno = tckno;
+        this.tckn = tckn;
         this.name = name;
         this.surname = surname;
         this.password = password;
@@ -105,12 +121,12 @@ public class Users implements Serializable {
         this.userId = userId;
     }
 
-    public String getTckno() {
-        return tckno;
+    public String getTckn() {
+        return tckn;
     }
 
-    public void setTckno(String tckno) {
-        this.tckno = tckno;
+    public void setTckn(String tckn) {
+        this.tckn = tckn;
     }
 
     public String getName() {
@@ -148,16 +164,26 @@ public class Users implements Serializable {
     public boolean getStatus() {
         return status;
     }
-    
-    public String getAktif(){
-        if(status) return "AKTIF";
-        else return "PASIF";
-    }
 
     public void setStatus(boolean status) {
         this.status = status;
     }
-
+    
+    
+    public String getAktif(){
+        if(this.status) return "AKTIF";
+        else return "PASIF";
+    }
+    
+    public String kullaniciTipi(){
+        if(this.type == Users.TYPE_ADMIN) return "ADMIN";
+        else if(this.type == Users.TYPE_STUDENT) return "STUDENT";
+        else if(this.type == Users.TYPE_TEACHER) return "TEACHER";
+        else return "unknown";
+        
+        
+    }
+ 
     public int getType() {
         return type;
     }
@@ -165,11 +191,6 @@ public class Users implements Serializable {
     public void setType(int type) {
         this.type = type;
     }
-    
-////    @Override
-//    public Class getClass2(){
-//        return Users.class;
-//    }
 
     public Collection<Courses> getCoursesCollection() {
         return coursesCollection;
@@ -202,6 +223,8 @@ public class Users implements Serializable {
     public void setLogsCollection(Collection<Logs> logsCollection) {
         this.logsCollection = logsCollection;
     }
+    
+    
 
     @Override
     public int hashCode() {
@@ -217,25 +240,15 @@ public class Users implements Serializable {
             return false;
         }
         Users other = (Users) object;
-
-
-        if (this.userId == null && other.userId != null) {
+        if ((this.userId == null && other.userId != null) || (this.userId != null && !this.userId.equals(other.userId))) {
             return false;
-        } else if (this.userId != null && other.userId == null) {
-            return false;
-        } else if (this.userId == null && other.userId == null) {
-            return true;
-        } else {
-            return (this.userId.equals(other.userId));
         }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "Models.Users[ userId=" + userId + " ]";
+        return "[ "+this.name + " " + this.surname +" ]" ;
     }
-    
 
-    
-    
 }
