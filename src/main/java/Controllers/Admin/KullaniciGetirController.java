@@ -25,7 +25,7 @@ import org.primefaces.model.LazyDataModel;
  * @author hp_user
  */
 @ManagedBean
-@ApplicationScoped
+@ViewScoped
 public class KullaniciGetirController extends Controller {
 
     private LazyDataModel<Users> users;

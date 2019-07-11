@@ -22,12 +22,12 @@ body{
 }
 
 .box{
-    width: 300px;
-    padding: 25px;
+    width: 350px !important;
+    padding: 25px !important;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    border-radius: 36px;
+    top: 50% !important;
+    left: 50% !important;
+    border-radius: 36px !important;
     font-family: 'Mali', cursive;
 
 
@@ -49,10 +49,10 @@ box-shadow: 13px -9px 7px 5px rgba(0,0,0,0.64);
     background: none;
     display : block;
     margin:20px auto;
-    text-align: center;
+    text-align: center ;
     border: 2px solid #0984e3;
     padding: 14px 10px;
-    width: 200px;
+    width: 200px !important;
     outline: none;
     color: white;
     border-radius: 36px;
@@ -64,7 +64,7 @@ box-shadow: 13px -9px 7px 5px rgba(0,0,0,0.64);
 }
 
 .box input[type = "text"]:hover, .box input[type = "password"]:hover{
-    width: 280px;
+    width: 280px !important;
     border-color: #2ecc71;   
 }
 
@@ -89,13 +89,13 @@ box-shadow: 13px -9px 7px 5px rgba(0,0,0,0.64);
 .loginButton{
     /*content: "\f09c";*/
 
-    height: 50px;
-    width:  120px;
+    height: 50px !important;
+    width:  120px !important ;
     border:0;
-    background: none;
+    background: none !important;
     display : block;
-    margin:20px auto;
-    text-align: center;;
+    margin:20px auto !important;
+    text-align: center !important;
     /*font-family: 'Mali', cursive;*/
     font-family: FontAwesome;
 
@@ -108,7 +108,7 @@ box-shadow: 13px -9px 7px 5px rgba(0,0,0,0.64);
     padding: 14px 40px;
     outline: none;
     color: white;
-    border-radius: 36px;
+    border-radius: 36px !important;
     transition: 0.25s;
     cursor: pointer; 
 
@@ -119,9 +119,9 @@ box-shadow: 13px -9px 7px 5px rgba(0,0,0,0.64);
 
 .loginButton:hover {
 
-    background: #2ecc71;
-    width: 220px;
-    transition: 0.20s;
+    background: #2ecc71 !important;
+    width: 220px !important;
+    transition: 0.20s ;
     /*fa-lock:active*/
     /*content: "\f09c";*/                   
 }

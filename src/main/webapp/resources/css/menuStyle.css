@@ -1,23 +1,24 @@
 /*
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
+and open the template in the editor.*/
+
 /* 
     Created on : 25 Haz 2019, 11:54:33
-    Author     : hp_user
-*/
+    Author     : hp_user*/
+
 body {
-    /*background: #434560 !important;*/
-    /*color:#434560 !;*/    
+    /*background: #434560 ;*/
+    color:#434560 ;    
     font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
     padding: 0;
-    background-size: 100%;
-    background: linear-gradient(to bottom, #cceeff 30%, white 100%);
+    /*background-size: 100%;*/
+    background:#cceeff;
+    /*background: linear-gradient(to bottom, #cceeff 50%, white 80%);*/
     /*background-size: 200% 100%;*/
-    transition: background-position 1s;
+    /*transition: background-position 1s;*/
     margin: 0;
     text-decoration: none;
 
@@ -26,7 +27,7 @@ body {
 
 
 
-/* The sidebar menu */
+The sidebar menu 
 .sidenav {
 
 }
@@ -35,15 +36,15 @@ body {
 
 
 .topmenu{
-    color: #434560 !important
-        border: 0px none ;
+    color: #434560 !important;
+    border: 0px none ;
     width: 100%;
     position: fixed;   
     padding: 0px !important;
-    /*        -webkit-border-radius: 0px !important; 
-         border-radius: 0px !important; */
-    /*z-index: 0;*/ 
-    /*top: 0px;*/  
+    -webkit-border-radius: 0px !important; 
+    border-radius: 0px !important; 
+    z-index: 0; 
+    top: 0px;  
 
 
 }
@@ -53,16 +54,18 @@ body {
     background: #434560 !important;
     position: fixed !important;
     width: 75% !important ;
+    height: 51px !important;
+
 
 }
-/*topmenu .ui-corner-all{
-        -webkit-border-radius: 0px !important ; 
-     border-radius: 0px !important; 
-}*/
+topmenu .ui-corner-all{
+    -webkit-border-radius: 0px !important ; 
+    border-radius: 0px !important; 
+}
 
-
-
-.ui-corner-all{  /* TOP MENU KOSELER*/
+/*
+ TOP MENU KOSELER*/
+.ui-corner-all{  
     -webkit-border-radius: 0px  ; 
     border-radius: 0px ; 
     border: none !important; 
@@ -87,70 +90,95 @@ body {
 
 
 .ui-panelmenu{
-    background: #434560 !important;
-    /*background-image: -webkit-linear-gradient(top, #267871,#434560) !important;*/
+    /*background: none !important;*/
+    background-image: -webkit-linear-gradient(top, #267871,#434560) !important;
 
-    min-height: 100%;  /* Full-height: remove this if you want "auto" height */
+    min-height: 100%;   
     max-height :  100%;
     margin-top : 51px;
     width: 25% !important;
-    position: fixed !important; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 0; /* Stay on top */
+    position: fixed !important;   
+    z-index: 0;  
     left: 0;
 
-    overflow-x: hidden !important; /* Disable horizontal scroll */
+    overflow-x: hidden !important;  
     overflow-y: hidden;
 }
 
 .ui-panelmenu a{
-    /*color: #000000;*/
+    color: #000000;
 
 }
 
 .ui-panelmenu-header{
-    color:#434560;
-    background:  red !important;
+    background: transparent !important;
+
+    margin : 0px !important;
+    /*color:#434560;*/
     border: none !important;
 
 }
+ui-panelmenu-header:hover{
+    /*background: red !important;*/
+
+}
+
+body .ui-panelmenu .ui-panelmenu-header.ui-state-active{
+    background: #434560 !important;
+border-radius: 0px !important;
+    /*color:#434560;*/
+    /*border: 0px !important;*/
+
+}
+body .ui-panelmenu .ui-panelmenu-header.ui-state-active:hover{
+    /*background : red !important;*/
+
+}
+
+
 .ui-panelmenu .ui-panelmenu-header a{
-    /*display: block;*/
-    background:  #434560 !important;
+    display: block;
+    background:  none !important;
     font-size: medium !important;
     font-weight: bold;
     color:white !important;
-    /*border: 1px black solid;  menu ana baslik border */
+    /*menu ana baslik border*/ 
+    /*border: 1px black solid;*/ 
     border-left: none !important;
     border-top: none;
     border-right: none;
 
 
 }
-.ui-panelmenu .ui-panelmenu-header a:hover{ /* admin yazisi hover */
+
+/*admin yazisi hover*/ 
+.ui-panelmenu .ui-panelmenu-header a:hover{  
     /*border: 2px black none !important;*/
-    /*background: black !important;*/
-    background-image: -webkit-linear-gradient(right, #267871,#434560) !important;
-    border: 0px;
+    /*background: none !important;*/
+    /*background-image: -webkit-linear-gradient(right, #267871,#434560) !important;*/
+    /*border: 0px;*/
 }
-.ui-panelmenu .ui-panelmenu-header a:focus{ /* admin yazisi click */
+
+/*admin yazisi click*/ 
+.ui-panelmenu .ui-panelmenu-header a:focus{  
     /*background: red !important;*/
-    background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
-    border: 0px;
+    /*background-image: -webkit-linear-gradient(left, #267871,#434560) !important;*/
+    /*border: 0px !important;*/
 
 }
 
 
 ui-panelmenu-header text{
     /*color: red	!important;*/
-    /*background-color:   red !important;*/
-    /*color:white !important;*/
+    background: blueviolet !important;
+    color:white !important;
 
 
 }
 
 .ui-panelmenu-content{
-    /*color: white !important;*/
-    background: #434560 !important;
+    color: white !important;
+    background: none !important;
 
     display: block;
     padding: 4px 16px;
@@ -159,19 +187,19 @@ ui-panelmenu-header text{
 }	
 
 ui-panelmenu-content a{
-    /*height: 160px !important;*/
+    height: 160px !important;
 
 }
 
-.ui-panelmenu .ui-menu-list:focus{
-    /*background-image: -webkit-linear-gradient(left, #267871,#434560) !important;*/
+/*.ui-panelmenu .ui-menu-list:focus{
+    background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
 
 
-}
+}*/
 .ui-panelmenu .ui-menu-list:focus{
     color:black !important;
-    /*background: black	 !important;*/
-    /*background-image: -webkit-linear-gradient(right, #267871,#434560) !important;*/
+    background: black	 !important;
+    background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
 
 
 }
@@ -182,12 +210,12 @@ ui-panelmenu-content a{
 
 }
 
-.ui-panelmenu .ui-menu-list a:focus{
-    /*background: #136a8a !important;*/  
+/*.ui-panelmenu .ui-menu-list a:focus{
+    background: #136a8a !important;  
 
-    /*                    background-image: -webkit-linear-gradient(right, #267871,#434560) !important;*/
+    background-image: -webkit-linear-gradient(right, #267871,#434560) !important;
 
-}
+}*/
 
 
 .ui-panelmenu .ui-menu-list ul{
@@ -198,7 +226,7 @@ ui-panelmenu-content a{
 
 .ui-panelmenu .ui-menuitem :enabled{
     /*background: red !important;*/
-    color: black !important;
+    /*    color: black !important;*/
 }	
 
 
@@ -209,7 +237,7 @@ ui-panelmenu-content a{
 }	
 
 ui-widget ui-menuitem ui-corner-all ui-menu-parent:active{
-    background: black !important;
+    /*background: black !important;*/
 }
 
 
@@ -223,11 +251,11 @@ ui-widget ui-menuitem ui-corner-all ui-menu-parent:active{
 
 .navbar {
     overflow: hidden;
-    background-color: #333;
-    /*    position: fixed;*/
-    /*top: 0;*/
+    /*background-color: #333;*/
+    position: fixed;
+    top: 0;
     width: 100%;
-    /*height: 6%;*/
+    height: 6%;
 }
 
 .navbar a {
@@ -245,10 +273,6 @@ ui-widget ui-menuitem ui-corner-all ui-menu-parent:active{
     color: black;
 }
 
-.sublist{
-
-}
-
 .sublist:focus{
     background: #136a8a !important;  
     background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
@@ -256,10 +280,12 @@ ui-widget ui-menuitem ui-corner-all ui-menu-parent:active{
 }
 
 .topLeftBar{
-    background: #136a8a ;
+    /*background: blue  ;*/
     position: fixed;
-    background-image: -webkit-linear-gradient(left, #136a8a, #267871);
-    /*height: 100%;*/
+    /*background-image: -webkit-linear-gradient(left, #136a8a, #267871);*/
+        background-image: -webkit-linear-gradient(top right, #434560,#136a8a) !important;
+        /*background-image: -webkit-linear-gradient();*/
+    height: 100%;
     width: 25%;
     height: 51px !important;
 

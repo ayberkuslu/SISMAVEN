@@ -9,14 +9,11 @@ and open the template in the editor.
 */
 .body{
 
-
-    font-family: 'Mali', cursive;
-
 }
 
 
 .firstColumn {
-    width: 200px;
+    width: 100px;
     height: 30px;
     /*padding: 0px !importantt;*/
     /*text-transform: uppercase;*/
@@ -37,27 +34,28 @@ and open the template in the editor.
 }
 
 .insertButton{
-    /*margin-right: 10% !important;*/     
-    width: 120px !important;
-    height: 50px;
-    border-width: 0px !important;
+    width: 100px !important;
+    height: 40px;
+    /*border-width: 0px !important;*/
     border-radius: 36px !important;
     padding: 0.1em 1em !important;
-    text-shadow: 0 0px 0  !important;
-
+    margin: 5px !important;
     transition: 0.25s;
-    /*    background: #434560 !important;*/
     background: #136a8a !important;
     background-image: -webkit-linear-gradient(left, #136a8a, #267871) !important;
-    font-family: 'Mali', cursive !important;
-
-
 }
 
 .insertButton:hover{
     background-image: -webkit-linear-gradient(left, #267871,#136a8a) !important;
+    border :solid green !important;
     transition: 0.25s;
-
+}
+.declineButton:hover{
+        background-image: -webkit-linear-gradient(left, #267871,#136a8a) !important;
+    border :solid red !important;
+    transition: 0.25s;
+    
+    
 }
 
 .insertButton:focus{

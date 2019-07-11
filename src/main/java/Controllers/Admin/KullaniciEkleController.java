@@ -13,8 +13,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.primefaces.PrimeFaces;
+import org.primefaces.event.FlowEvent;
 
 /**
  *
@@ -46,6 +47,8 @@ public class KullaniciEkleController extends Controller {
     private String secretAnswer;
     private Date registerDate;
     private Users userId;
+
+    private boolean skip;
 
     public String getName() {
         return name;
@@ -199,6 +202,14 @@ public class KullaniciEkleController extends Controller {
         this.userId = userId;
     }
 
+    public boolean isSkip() {
+        return skip;
+    }
+
+    public void setSkip(boolean skip) {
+        this.skip = skip;
+    }
+
     /**
      * Creates a new instance of KullaniciEkleController
      */
@@ -240,6 +251,8 @@ public class KullaniciEkleController extends Controller {
             gender = "FEMALE";
         }
 
+        System.out.println(phone + "||" + adress + "||" + gender + master + "||" + emergencyPhone + "||" + secretAnswer);
+
         userDetail.setPhone(phone);
         userDetail.setAdress(adress.toUpperCase());
         userDetail.setBirthday(birthday);
@@ -275,6 +288,24 @@ public class KullaniciEkleController extends Controller {
             return false;
         }
         return pat.matcher(email).matches();
+    }
+
+    public String onFlowProcess(FlowEvent event) {
+        if (skip) {
+            skip = false;   //reset in case user goes back
+            return "confirm";
+        } else {
+            return event.getNewStep();
+        }
+    }
+
+    public void cancelCreate() {
+        System.out.println("Iptal");
+        PrimeFaces.current().resetInputs("form:wizard");
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(" Canceled"));
+
     }
 
 }

@@ -41,11 +41,6 @@ and open the template in the editor.
                 </div>
 
                 <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
-                    <!--<p:autoUpdate  />-->
-                    <!--<div id="panel1">-->
-<!--                    <p:growl id="msgs" showDetail="true"  >
-                        <p:autoUpdate />
-                    </p:growl>-->
                     <p:messages showIcon="false"  >
                         <p:autoUpdate/>
                     </p:messages>
@@ -53,7 +48,6 @@ and open the template in the editor.
                     <p:panel 
                         id="panel1" header="Users" toggleable="true" closable="true" closeTitle="Kapat" toggleableHeader="true"
                         toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px; margin-top: 40px;" 
-
                         >
                         <h1><h:outputText value="List"/></h1>
 
@@ -125,21 +119,14 @@ and open the template in the editor.
                     <br/>
 
                     <br/>
-                    <!--                    <p:commandButton process="dersListe" update="dersListe"
-                                                         icon="pi pi-search" value="Ders Goster"  
-                                                         />-->
                     <p:panel id="panel2" header="Ders Bilgisi" toggleable="true" 
                              closable="true" toggleSpeed="500" closeSpeed="500"
-                             widgetVar="panel" style="margin-bottom:20px"
-                             >
-
-                        <f:view  >
-
+                             style="margin-bottom:20px"
+                              >
                             <p:autoUpdate />
-
-                            <h:form id="dersListe" >
-
+                            
                                 <h1><h:outputText value="Alinan Dersler"  rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" /></h1>
+                                
                                 <p:dataTable  value="#{kullaniciGetirController.selectedUserClassesList}" var="item" rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" >
 
                                     <p:column>
@@ -179,9 +166,7 @@ and open the template in the editor.
                                         <h:outputText value="#{item.grade}"/>
                                     </p:column>
                                 </p:dataTable>
-                            </h:form>
-
-                            <h:form id="courseListe"    >
+        
                                 <h1 ><h:outputText value="Verilen Dersler" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"/></h1>
 
                                 <p:dataTable value="#{kullaniciGetirController.selectedUserCoursesList}" var="item" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}" >
@@ -229,17 +214,8 @@ and open the template in the editor.
                                         <h:outputText value="#{item.courseName}"/>
                                     </p:column>
                                 </p:dataTable>
-                            </h:form>
-                        </f:view>
-
-
-
 
                     </p:panel>
-
-
-
-                    <!--<p:commandButton value="Getir" update="selected" action="#{kullaniciGetirController.loadData()}" style="width: 100px; height:60px;background: blue;" />-->
 
                     <p:dialog header="User Detail" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                         <h:form id="userDetail">
@@ -262,11 +238,6 @@ and open the template in the editor.
 
                     </p:dialog>
 
-                    <!--</div>-->
-                    <!--<div id="panel2">-->
-
-
-                    <!--</div>-->
 
 
 
