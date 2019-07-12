@@ -37,7 +37,9 @@ public class UserLazyDataModel extends LazyDataModel<Users> {
     public Users getRowData(String rowKey) {
 
         for (Users obj : datasource) {
+            System.out.println("getRowData: "+obj.getUserId().toString().equals(rowKey) +rowKey +"=="+obj.getUserId().toString());
             if (obj.getUserId().toString().equals(rowKey)) {
+                System.out.println("girdi");
                 return obj;
             }
         }

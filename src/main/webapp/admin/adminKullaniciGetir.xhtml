@@ -10,6 +10,8 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
     <h:head>
         <title>Kisisel Bilgi </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -47,23 +49,23 @@ and open the template in the editor.
 
                     <p:panel 
                         id="panel1" header="Users" toggleable="true" closable="true" closeTitle="Kapat" toggleableHeader="true"
-                        toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px; margin-top: 40px;" 
+                        toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px; margin-top: 20px; margin-right: 3%; margin-left: 3%;" 
                         >
                         <h1><h:outputText value="List"/></h1>
 
                         <p:dataTable 
                             id="userTable" var="item" value="#{kullaniciGetirController.users}"
                             selectionMode="single" selection="#{kullaniciGetirController.selectedUser}" 
-                            rowKey="#{users.userId}"  rows="10"
+                            rowKey="#{item.userId}"  rows="10"
                             paginator="true"  lazy="true" 
-                            editable="true" editMode="cell"
                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                            style="width: 90%;margin-left: 2%;"
+                            style="width: 90%;margin-left: 3%; margin-right: 3%;"
                             >
 
                             <p:ajax event="rowSelect"  
-                                    update=":form:panel2 :form:userDetail "
-                                    listener="#{kullaniciGetirController.onRowSelect}"/>
+                                    update=":form:panel2"
+                                    listener="#{kullaniciGetirController.onRowSelect}" 
+                                    />
 
                             <p:column sortBy="#{item.userId}" filterBy="#{item.userId}" filterMatchMode="contains">
                                 <f:facet name="header">
@@ -71,28 +73,23 @@ and open the template in the editor.
                                 </f:facet>
                                 <h:outputText value="#{item.userId}"/>
                             </p:column>
-                            <p:column  filterBy="#{item.tckn}" filterMatchMode="contains" >
-                                <f:facet name="header">
-                                    <h:outputText value="Tckn"/>
+                            <p:column headerText="TCKN" filterBy="#{item.tckn}" filterMatchMode="contains" >
+                                <f:facet name="output">                     
                                 </f:facet>
                                 <h:outputText value="#{item.tckn}"/>
+
+
                             </p:column>
-                            <p:column  filterBy="#{item.name}" filterMatchMode="contains">
-                                <f:facet name="header">
-                                    <h:outputText value="Name"/>
-                                </f:facet>
+                            <p:column headerText="NAME" filterBy="#{item.name}" filterMatchMode="contains" >
                                 <h:outputText value="#{item.name}"/>
+
                             </p:column>
-                            <p:column  filterBy="#{item.surname}" filterMatchMode="contains">
-                                <f:facet name="header">
-                                    <h:outputText value="Surname"/>
-                                </f:facet>
+                            <p:column headerText="SURNAME"  filterBy="#{item.surname}" filterMatchMode="contains">
+
                                 <h:outputText value="#{item.surname}"/>
                             </p:column  >
-                            <p:column  filterBy="#{item.email}" filterMatchMode="contains" >
-                                <f:facet name="header">
-                                    <h:outputText value="Email"/>
-                                </f:facet>
+                            <p:column headerText="EMAIL" filterBy="#{item.email}" filterMatchMode="contains" >
+       
                                 <h:outputText value="#{item.email}"/>
                             </p:column>
                             <p:column  filterBy="#{item.status}" filterMatchMode="contains">
@@ -119,121 +116,129 @@ and open the template in the editor.
                     <br/>
 
                     <br/>
-                    <p:panel id="panel2" header="Ders Bilgisi" toggleable="true" 
-                             closable="true" toggleSpeed="500" closeSpeed="500"
-                             style="margin-bottom:20px"
-                              >
-                            <p:autoUpdate />
-                            
-                                <h1><h:outputText value="Alinan Dersler"  rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" /></h1>
-                                
-                                <p:dataTable  value="#{kullaniciGetirController.selectedUserClassesList}" var="item" rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" >
+                    <p:accordionPanel id="panel2"  dynamic="true" 
+                                      style="margin-bottom:20px; margin-top: 20px; margin-right: 3%; margin-left: 3%;" 
 
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="ClassesID"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.classesId}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Course Name"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.courseId.courseName}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Ogrenci"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.userId.name} #{item.userId.surname}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Vize Notu"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.vizeNot}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Final Notu"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.finalNot}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Grade"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.grade}"/>
-                                    </p:column>
-                                </p:dataTable>
-        
-                                <h1 ><h:outputText value="Verilen Dersler" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"/></h1>
+                                      >
 
-                                <p:dataTable value="#{kullaniciGetirController.selectedUserCoursesList}" var="item" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}" >
+                        <p:tab title="Ders Bilgisi"  closable="true"  
+                               >
 
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="CourseId" />
-                                        </f:facet>
-                                        <h:outputText value="#{item.courseId}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Status"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.aktif}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="CurrentSize"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.currentSize}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="MaxSize"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.maxSize}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="UserId"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.userId}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="TermId"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.termId}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="CourseName"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.courseName}"/>
-                                    </p:column>
-                                </p:dataTable>
+                            <p:autoUpdate  />
 
-                    </p:panel>
+                            <h1><h:outputText value="Alinan Dersler"  rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" /></h1>
 
+                            <p:dataTable  value="#{kullaniciGetirController.selectedUserClassesList}" var="item" rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" >
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ClassesID"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.classesId}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Course Name"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.courseId.courseName}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Ogrenci"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.userId.name} #{item.userId.surname}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Vize Notu"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.vizeNot}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Final Notu"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.finalNot}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Grade"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.grade}"/>
+                                </p:column>
+                            </p:dataTable>
+
+                            <h1 ><h:outputText value="Verilen Dersler" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"/></h1>
+
+                            <p:dataTable value="#{kullaniciGetirController.selectedUserCoursesList}" var="item" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}" >
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CourseId" />
+                                    </f:facet>
+                                    <h:outputText value="#{item.courseId}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Status"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.aktif}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CurrentSize"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.currentSize}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="MaxSize"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.maxSize}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="UserId"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.userId}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="TermId"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.termId}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CourseName"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.courseName}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+
+                        <p:tab title="Personal Info"  closable="true">
+                            <p:repeat id="test" value="#{kullaniciGetirController.selectedUserDetails.values}" var="detail">
+                                <!--<p:outputPanel id="userDetail2"   >-->
+                                <p:panelGrid columns="2" style="padding-top: 40px;" rendered="#{not empty kullaniciGetirController.selectedUser}"  >
+                                    <p:autoUpdate />
+
+                                    <h:outputText value="#{detail.name}"  />
+                                    <h:outputText value="#{detail.value}" />
+                                </p:panelGrid>
+                                <!--                                </p:outputPanel>-->
+                            </p:repeat>
+
+
+
+                        </p:tab>
+
+
+
+                    </p:accordionPanel>
                     <p:dialog header="User Detail" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                         <h:form id="userDetail">
-                            <p:repeat id="test" value="#{kullaniciGetirController.selectedUserDetails.values}" var="detail">
-                                <p:outputPanel id="userDetail2" style="text-align:center;" >
-                                    <p:panelGrid  columns="2" rendered="#{not empty kullaniciGetirController.selectedUser}"  >
-                                        <f:facet name="header">
 
-                                        <!--<p:graphicImage name="demo/images/car/#{dtLazyView.selectedCar.brand}-big.gif"/>-->
-                                        </f:facet>
-                                        <h:outputText value="#{detail.name}" style="width: 100px !important; height: 180px; text-align: left;" />
-                                        <h:outputText value="#{detail.value}" style="width: 100px !important; height: 60px; text-align: right;" />
-
-
-
-                                    </p:panelGrid>
-                                </p:outputPanel>
-                            </p:repeat>
                         </h:form>
 
                     </p:dialog>

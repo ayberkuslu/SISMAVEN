@@ -15,6 +15,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.regex.Pattern;
 import org.primefaces.PrimeFaces;
+import org.primefaces.component.wizard.Wizard;
 import org.primefaces.event.FlowEvent;
 
 /**
@@ -34,7 +35,7 @@ public class KullaniciEkleController extends Controller {
     private boolean status;
     private String type;
 
-    //userDetail
+    //userDetail  
     private String phone;
     private String adress;
     private Date birthday;
@@ -236,8 +237,8 @@ public class KullaniciEkleController extends Controller {
         Users user = new Users();
 
         user.setTckn(tckn);
-        user.setName(name.toUpperCase());
-        user.setSurname(surname.toUpperCase());
+        user.setName(name.replaceAll("i", "I").toUpperCase());
+        user.setSurname(surname.replaceAll("i", "I").toUpperCase());
         user.setPassword(sha256(password));
         user.setEmail(email);
         user.setStatus(true);
@@ -254,11 +255,11 @@ public class KullaniciEkleController extends Controller {
         System.out.println(phone + "||" + adress + "||" + gender + master + "||" + emergencyPhone + "||" + secretAnswer);
 
         userDetail.setPhone(phone);
-        userDetail.setAdress(adress.toUpperCase());
+        userDetail.setAdress(adress.replaceAll("i", "I").toUpperCase());
         userDetail.setBirthday(birthday);
         userDetail.setGender(gender.toUpperCase());
-        userDetail.setGraduate(graduate.toUpperCase());
-        userDetail.setMaster(master.toUpperCase());
+        userDetail.setGraduate(graduate.replaceAll("i", "I").toUpperCase());
+        userDetail.setMaster(master.replaceAll("i", "I").toUpperCase());
         userDetail.setEmergencyPhone(emergencyPhone);
         userDetail.setSecretQuestion(secretQuestion);
         userDetail.setSecretAnswer(sha256(secretAnswer));
@@ -290,7 +291,9 @@ public class KullaniciEkleController extends Controller {
         return pat.matcher(email).matches();
     }
 
-    public String onFlowProcess(FlowEvent event) {
+    public String onFlowProcess(FlowEvent event) {      
+//        Wizard a = new Wizard();
+//        a.
         if (skip) {
             skip = false;   //reset in case user goes back
             return "confirm";
@@ -301,7 +304,20 @@ public class KullaniciEkleController extends Controller {
 
     public void cancelCreate() {
         System.out.println("Iptal");
-        PrimeFaces.current().resetInputs("form:wizard");
+//        PrimeFaces.current().resetInputs(":form:personal");
+        tckn = null;
+        phone = null;
+        adress = null;
+        birthday = null;
+        gender = null;
+        currentGpa = null;
+        graduate = null;
+        master = null;
+        emergencyPhone = null;
+        secretQuestion = null;
+        secretAnswer = null;
+        registerDate = null;
+        userId = null;
 
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(" Canceled"));

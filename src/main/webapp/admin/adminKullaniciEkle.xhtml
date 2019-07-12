@@ -47,137 +47,144 @@ and open the template in the editor.
                     <div class="ui-g" id="content"   >
                         <div class="ui-g-6" > 
 
-                            <p:growl id="growl" sticky="true" showDetail="true"/>
+                            <p:growl id="growl" sticky="true" showDetail="true"  />
 
                             <!--<p:outputPanel  id="infos1" styleClass="output"   >-->
                             <h1> Kullanici Ekle </h1>
                             <br/>
                             <br/>
-                            <p:wizard id="wizard" flowListener="#{kullaniciEkleController.onFlowProcess}">
-                                <p:tab id="personal" title="Personal">
-                                    <p:panel header="Personal Details">
-                                        <p:messages />
-                                        <p:panelGrid columns="2" style="padding-top: 40px;"  >
-                                            <p:autoUpdate />
+                            <p:wizard id="wizard" flowListener="#{kullaniciEkleController.onFlowProcess}" widgetVar="wiz"  showNavBar="true">
+                                <p:tab id="personal" title="Personal Details">
+                                    <p:messages />
+                                    <p:panelGrid columns="2" style="padding-top: 40px;"  >
+                                        <p:autoUpdate />
 
-                                            <h:outputText value ="TCKN" />
-                                            <p:inputText  id="tckn" value="#{kullaniciEkleController.tckn}" title="Kullanici TCKN" placeholder="Kullanici TCKN" required="true"  />
+                                        <h:outputText value ="TCKN" />
+                                        <p:inputText  id="tckn" value="#{kullaniciEkleController.tckn}" title="Kullanici TCKN"
+                                                      placeholder="Kullanici TCKN" required="true"
+                                                      />
 
-                                            <h:outputText value ="Isim" />
-                                            <p:inputText id="name" value="#{kullaniciEkleController.name}" title="Kullanici Adi" placeholder="Kullanici Adi" required="true" />
+                                        <h:outputText value ="Isim"  />
+                                        <p:inputText id="name" value="#{kullaniciEkleController.name}" title="Kullanici Adi"
+                                                     placeholder="Kullanici Adi" required="true"
+                                                     />
+                                        
+                                        <h:outputText value ="Soyad" />
+                                        <p:inputText  id="surname" value="#{kullaniciEkleController.surname}" title="Kullanici soyadi"
+                                                      placeholder="Kullanici soyadi" required="true"
+                                                      />
 
-                                            <h:outputText value ="Soyad" />
-                                            <p:inputText  id="surname" value="#{kullaniciEkleController.surname}" title="Kullanici soyadi" placeholder="Kullanici soyadi" required="true" />
-
-                                            <h:outputText value ="Sifre" />
-                                            <p:password id="password" value="#{kullaniciEkleController.password}" title="Kullanici sifre" placeholder="Kullanici Sifre" required="true" />
-                                        </p:panelGrid>
-                                        <br/>
-                                        <h:outputText value="Skip to confirmation: " />
-                                        <h:selectBooleanCheckbox value="#{kullaniciEkleController.skip}" />
-                                    </p:panel>
+                                        <h:outputText value ="Sifre" />
+                                        <p:password id="password" value="#{kullaniciEkleController.password}" title="Kullanici sifre"
+                                                    placeholder="Kullanici Sifre" required="true" 
+                                                    />
+                                    </p:panelGrid>
+                                    <br/>
+                                    <h:outputText value="Skip to confirmation: " />
+                                    <h:selectBooleanCheckbox value="#{kullaniciEkleController.skip}" />
                                 </p:tab>
                                 <p:tab id="address" title="1">
-                                    <p:panel header="1">
-                                        <p:messages />
-                                        <p:panelGrid columns="2" columnClasses="label, value">
-                                            <p:autoUpdate />
+                                    <p:messages />
+                                    <p:panelGrid columns="2" >
+                                        <p:autoUpdate />
 
 
-                                            <h:outputText value ="Email" />
-                                            <p:inputText id="email" value="#{kullaniciEkleController.email}" 
-                                                         title="Kullanici email" placeholder="Kullanici Email"
-                                                         required="true" requiredMessage="Not a valid Email." >
+                                        <h:outputText value ="Email" />
+                                        <p:inputText id="email" value="#{kullaniciEkleController.email}" 
+                                                     title="Kullanici email" placeholder="Kullanici Email"
+                                                     required="true" requiredMessage="Not a valid Email." >
 
-                                            </p:inputText>
+                                        </p:inputText>
 
-                                            <h:outputText value ="Tip" />
-                                            <p:selectOneMenu id="type" value="#{kullaniciEkleController.type}"   autoWidth="true" placeholder="Kullanici Tipi"   >
-                                                <f:selectItem itemLabel="Kullanici Tipi" itemValue="" />
-                                                <f:selectItem itemLabel="ADMIN" itemValue="0" />
-                                                <f:selectItem itemLabel="STUDENT" itemValue="1" />
-                                                <f:selectItem itemLabel="TEACHER" itemValue="2" />
-                                            </p:selectOneMenu>
+                                        <h:outputText value ="Tip" />
+                                        <p:selectOneMenu id="type" value="#{kullaniciEkleController.type}"   autoWidth="true" placeholder="Kullanici Tipi"   >
+                                            <f:selectItem itemLabel="Kullanici Tipi" itemValue="" />
+                                            <f:selectItem itemLabel="ADMIN" itemValue="0" />
+                                            <f:selectItem itemLabel="STUDENT" itemValue="1" />
+                                            <f:selectItem itemLabel="TEACHER" itemValue="2" />
+                                        </p:selectOneMenu>
 
-                                            <h:outputText value ="Telefon No" />
-                                            <p:inputText id="phone" value="#{kullaniciEkleController.phone}" title="Kullanici Telefon" placeholder="(5**)-***-****" required="false" />
+                                        <h:outputText value ="Telefon No" />
+                                        <p:inputText id="phone" value="#{kullaniciEkleController.phone}"
+                                                     title="Kullanici Telefon" placeholder="(5**)-***-****" 
+                                                     required="false"
+                                                     />
 
-                                            <h:outputText value ="Adres" />
-                                            <p:inputText id="adress" value="#{kullaniciEkleController.adress}" title="Kullanici Adres" placeholder="Adres" required="false" />
+                                        <h:outputText value ="Adres" />
+                                        <p:inputText id="adress" value="#{kullaniciEkleController.adress}" title="Kullanici Adres" placeholder="Adres" required="false" />
 
-                                        </p:panelGrid>
-                                        <br/>
-                                        <h:outputText value="Skip to confirmation: " />
-                                        <h:selectBooleanCheckbox value="#{kullaniciEkleController.skip}" />
-                                    </p:panel>
+                                    </p:panelGrid>
+                                    <br/>
+                                    <h:outputText value="Skip to confirmation: " />
+                                    <h:selectBooleanCheckbox value="#{kullaniciEkleController.skip}" />
                                 </p:tab>
 
                                 <p:tab id="contact" title="2">
-                                    <p:panel header="2">
-                                        <p:messages />
-                                        <p:panelGrid columns="2" columnClasses="label, value">
-                                            <p:autoUpdate />
+                                    <p:messages />
+                                    <p:panelGrid columns="2" >
+                                        <p:autoUpdate />
 
-                                            <h:outputText value ="Dogum Gunu" />
-                                            <p:datePicker id="button" value="#{kullaniciEkleController.birthday}" placeholder="Dogum Tarihi"    />
+                                        <h:outputText value ="Dogum Gunu" />
+                                        <p:datePicker id="button" value="#{kullaniciEkleController.birthday}" placeholder="Dogum Tarihi"    />
 
-                                            <h:outputText value ="Lisans" />
-                                            <p:inputText id="graduate" value="#{kullaniciEkleController.graduate}" title="Kullanici Lisans" placeholder="Lisans" required="false"  />
+                                        <h:outputText value ="Lisans" />
+                                        <p:inputText id="graduate" value="#{kullaniciEkleController.graduate}" title="Kullanici Lisans" placeholder="Lisans" required="false"  />
 
-                                            <h:outputText value ="Yuksek Lisans" />
-                                            <p:inputText id="master" value="#{kullaniciEkleController.master}" title="Yuksek Lisans" placeholder="Yuksek Lisans" required="false" />
+                                        <h:outputText value ="Yuksek Lisans" />
+                                        <p:inputText id="master" value="#{kullaniciEkleController.master}" title="Yuksek Lisans" placeholder="Yuksek Lisans" required="false" />
 
-                                        </p:panelGrid>
-                                        <br/>
-                                        <h:outputText value="Skip to confirmation: " />
-                                        <h:selectBooleanCheckbox value="#{kullaniciEkleController.skip}" />
-                                    </p:panel>
+                                    </p:panelGrid>
+                                    <br/>
+                                    <h:outputText value="Skip to confirmation: " />
+                                    <h:selectBooleanCheckbox value="#{kullaniciEkleController.skip}" />
                                 </p:tab>
                                 <p:tab id="contact2" title="3">
-                                    <p:panel header="3">
-                                        <p:messages />
-                                        <p:panelGrid columns="2" columnClasses="label, value">
-                                            <p:autoUpdate />
-                                            <h:outputText value ="Acil Durum Tlf" />
-                                            <p:inputText id="acilTelf" value="#{kullaniciEkleController.emergencyPhone}" title="Kullanici Acil Telefon" placeholder="(5**)-***-****" required="false" />
+                                    <p:messages />
+                                    <p:panelGrid columns="2" columnClasses="label, value">
+                                        <p:autoUpdate />
+                                        <h:outputText value ="Acil Durum Tlf" />
+                                        <p:inputText id="acilTelf" value="#{kullaniciEkleController.emergencyPhone}" title="Kullanici Acil Telefon" placeholder="(5**)-***-****" required="false" />
 
-                                            <h:outputText value ="Gizli soru" />
-                                            <p:inputText id="secretQuestion" value="#{kullaniciEkleController.secretQuestion}"
-                                                         title="Kullanici Gizli Soru" placeholder="Gizli Soru"
-                                                         required="true" requiredMessage="Required secret question."  >
-                                            </p:inputText>
+                                        <h:outputText value ="Gizli soru" />
+                                        <p:inputText id="secretQuestion" value="#{kullaniciEkleController.secretQuestion}"
+                                                     title="Kullanici Gizli Soru" placeholder="Gizli Soru"
+                                                     required="true" requiredMessage="Required secret question."  >
+                                        </p:inputText>
 
-                                            <h:outputText value ="Gizli cevap" />
-                                            <p:inputText id="secretAnswer" value="#{kullaniciEkleController.secretAnswer}"
-                                                         title="Kullanici Gizli Cevap" placeholder="Gizli Cevap"
-                                                         required="true" requiredMessage="Required answer for secret question">
-                                            </p:inputText>
+                                        <h:outputText value ="Gizli cevap" />
+                                        <p:inputText id="secretAnswer" value="#{kullaniciEkleController.secretAnswer}"
+                                                     title="Kullanici Gizli Cevap" placeholder="Gizli Cevap"
+                                                     required="true" requiredMessage="Required answer for secret question">
+                                        </p:inputText>
 
-                                            <h:outputText value ="Cinsiyet" />
-                                            <p:selectOneRadio id="gender" value="#{kullaniciEkleController.gender}" unselectable="true">
-                                                <f:selectItem itemLabel="MALE" itemValue="MALE" />
-                                                <f:selectItem itemLabel="FEMALE" itemValue="FEMALE" />
-                                            </p:selectOneRadio>
-                                        </p:panelGrid>
-
-                                    </p:panel>
+                                        <h:outputText value ="Cinsiyet" />
+                                        <p:selectOneRadio id="gender" value="#{kullaniciEkleController.gender}" unselectable="true">
+                                            <f:selectItem itemLabel="MALE" itemValue="MALE" />
+                                            <f:selectItem itemLabel="FEMALE" itemValue="FEMALE" />
+                                        </p:selectOneRadio>
+                                    </p:panelGrid>
                                 </p:tab>
 
                                 <p:tab id="confirm" title="Confirmation">
                                     <p:panel header="Confirmation">
-                                        <p:messages />
                                         Confirm user will be added.
                                         <h:panelGrid columns="2" columnClasses="label, value" style="padding-top: 40px;"  >
                                             <h:outputText  value="#{kullaniciEkleController.name}" title="Kullanici Adi"  />
                                             <h:outputText   value="#{kullaniciEkleController.surname}" title="Kullanici soyadi"   />
+
+                                            <p:autoUpdate />
                                             <br/>
                                         </h:panelGrid>
 
-                                        <p:commandButton value="Create" action="#{kullaniciEkleController.insertNewUser()}" update="growl" process="@this" icon="fa fa-check-circle" styleClass="insertButton"   />
-                                        <p:commandButton value="Cancel" action="#{kullaniciEkleController.cancelCreate()}" update="growl" process="@this" icon="fa fa-times-circle" styleClass="insertButton declineButton"   >
-                                            <p:resetInput target="wizard" />
-                                        </p:commandButton>
-
+                                        <p:commandButton value="Create" action="#{kullaniciEkleController.insertNewUser()}"
+                                                         update="growl" process="@this"
+                                                         icon="fa fa-check-circle" styleClass="insertButton"  
+                                                         />
+                                        <p:commandButton value="Cancel" action="#{kullaniciEkleController.cancelCreate()}" 
+                                                         update="@parent , confirm" oncomplete="PF('wiz').loadStep('personal', false)" 
+                                                         icon="fa fa-times-circle" styleClass="insertButton declineButton"
+                                                         immediate="true" ajax="false" resetValues="true" 
+                                                         />
 
                                     </p:panel>
                                 </p:tab>
