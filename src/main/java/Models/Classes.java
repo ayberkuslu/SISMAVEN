@@ -68,6 +68,10 @@ public class Classes implements Serializable {
     public Integer getClassesId() {
         return classesId;
     }
+    
+    public String getClassIdAsString(){
+        return classesId.toString();
+    }
 
     public void setClassesId(Integer classesId) {
         this.classesId = classesId;

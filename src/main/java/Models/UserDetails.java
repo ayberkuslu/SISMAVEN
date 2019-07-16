@@ -252,16 +252,16 @@ public class UserDetails implements Serializable {
     public ArrayList<Pair> getValues() {
 //       List<String> values = new ArrayList();
         ArrayList<Pair> values = new ArrayList<>();
-        values.add(new Pair("Isim: ",this.getUserId().getName()+" " +this.getUserId().getSurname() ));
-        values.add(new Pair("Cinsiyet: ", this.gender));
-        values.add(new Pair("Telefon: ", this.phone));
-        values.add(new Pair("Adres: ", this.adress));
-        values.add(new Pair("DetayID: ", this.detailId.toString()));
-        values.add(new Pair("Acil Tlf NO:", this.emergencyPhone));
-        values.add(new Pair("Lisans: ", this.graduate));
-        values.add(new Pair("Yuksek Lisans: ", this.master));
+        values.add(new Pair("Isim           : ",this.getUserId().getName()+" " +this.getUserId().getSurname() ));
+        values.add(new Pair("Cinsiyet       : ", this.gender));
+        values.add(new Pair("Telefon        : ", this.phone));
+        values.add(new Pair("Adres          : ", this.adress));
+        values.add(new Pair("DetayID        : ", this.detailId.toString()));
+        values.add(new Pair("Acil Tlf NO    :", this.emergencyPhone));
+        values.add(new Pair("Lisans         : ", this.graduate));
+        values.add(new Pair("Yuksek Lisans  : ", this.master));
 //       values.add(new Pair("Gizli Cevap: ",this.secretAnswer));
-        values.add(new Pair("Gizli Soru: ", this.secretQuestion));
+        values.add(new Pair("Gizli Soru     : ", this.secretQuestion));
         return values;
     }
 

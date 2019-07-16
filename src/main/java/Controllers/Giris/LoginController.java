@@ -75,6 +75,13 @@ public class LoginController extends Controller {
 //            if (targetUser == null || targetUserDetail == null) {
 //                return false;
 //            }
+            FacesContext context = FacesContext.getCurrentInstance();
+
+            if (targetUser.getStatus() == false) {
+                context.addMessage(null, new FacesMessage("User is not an active user.\nPlease contact with School."));
+                return false;
+            }
+
             if (targetUser.getPassword().equals(sha256(userPassword))) {
                 Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
                         getExternalContext().getSessionMap();
@@ -87,6 +94,7 @@ public class LoginController extends Controller {
 
                 return true;
             }
+            context.addMessage(null, new FacesMessage("Authentication Failed. Check username or password."));
 
         } catch (Exception e) {
             System.out.println(e);
@@ -109,7 +117,6 @@ public class LoginController extends Controller {
 
             return;
         }
-        context.addMessage(null, new FacesMessage("Authentication Failed. Check username or password."));
 
         System.out.println("Giris Basarisiz. Kullanici : " + userId + "\n");
 

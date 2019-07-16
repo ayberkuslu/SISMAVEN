@@ -34,14 +34,11 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Logs.findByEventCode", query = "SELECT l FROM Logs l WHERE l.eventCode = :eventCode")})
 public class Logs implements Serializable {
 
-
-    
-       public static final int USER_LOGIN = 1;
-       public static final int USER_LOGOUT = 2;
-       public static final int USER_CHANGE_PASSWORD = 3;
-       public static final int USER_RESET_PASSWORD = 4;
-    
-    
+    public static final int USER_LOGIN = 1;
+    public static final int USER_LOGOUT = 2;
+    public static final int USER_CHANGE_PASSWORD = 3;
+    public static final int USER_RESET_PASSWORD = 4;
+    public static final int USER_DELETE = 5;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -58,7 +55,7 @@ public class Logs implements Serializable {
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     @ManyToOne(optional = false)
     private Users userId;
-    
+
     @Column(name = "DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
@@ -88,7 +85,6 @@ public class Logs implements Serializable {
         this.userId = userId;
         this.date = date;
     }
-    
 
     public Integer getLogId() {
         return logId;
@@ -154,5 +150,5 @@ public class Logs implements Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
-    
+
 }

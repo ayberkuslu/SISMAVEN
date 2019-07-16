@@ -116,6 +116,7 @@ public class Controller implements Serializable {
     public UserDetails getUserDetailsById(int userId) {
         try {
 
+//             if(!getSession())
             getSession().beginTransaction();
             List userDetailsList = getSession().createCriteria(UserDetails.class).add(Restrictions.eq("userId.userId", userId)).list();
             getSession().getTransaction().commit();

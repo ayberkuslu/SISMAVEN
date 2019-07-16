@@ -123,7 +123,7 @@ public class ForgetPasswordController extends Controller {
         }
 
         UserDetails targetUserDetail = getUserDetailsById(Integer.parseInt(userId));
-        Users targetUser = getUserById(Integer.parseInt(userId));
+//        Users targetUser = getUserById(Integer.parseInt(userId));
         System.out.println("@@@ HASH@@@");
         System.out.println(sha256(userAnswer));
         System.out.println("@@@ HASH@@@");

@@ -54,19 +54,24 @@ and open the template in the editor.
                         <h1><h:outputText value="List"/></h1>
 
                         <p:dataTable 
-                            id="userTable" var="item" value="#{kullaniciGetirController.users}"
-                            selectionMode="single" selection="#{kullaniciGetirController.selectedUser}" 
-                            rowKey="#{item.userId}"  rows="10"
-                            paginator="true"  lazy="true" 
+                            id="userTable"
+                            var="item" 
+                            value="#{kullaniciGetirController.users}"
+                            selectionMode="single" 
+                            selection="#{kullaniciGetirController.selectedUser}" 
+                            rowKey="#{item.userId}" 
+                            rows="10"
+                            paginator="true"  paginatorPosition="bottom"
+                            lazy="true" 
                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                             style="width: 90%;margin-left: 3%; margin-right: 3%;"
                             >
 
                             <p:ajax event="rowSelect"  
-                                    update=":form:panel2"
+                                    update=":form:panel2 @this @parent "
+                                    process="@parent"
                                     listener="#{kullaniciGetirController.onRowSelect}" 
                                     />
-
                             <p:column sortBy="#{item.userId}" filterBy="#{item.userId}" filterMatchMode="contains">
                                 <f:facet name="header">
                                     <h:outputText value="UserId"/>
@@ -74,8 +79,7 @@ and open the template in the editor.
                                 <h:outputText value="#{item.userId}"/>
                             </p:column>
                             <p:column headerText="TCKN" filterBy="#{item.tckn}" filterMatchMode="contains" >
-                                <f:facet name="output">                     
-                                </f:facet>
+
                                 <h:outputText value="#{item.tckn}"/>
 
 
@@ -89,10 +93,10 @@ and open the template in the editor.
                                 <h:outputText value="#{item.surname}"/>
                             </p:column  >
                             <p:column headerText="EMAIL" filterBy="#{item.email}" filterMatchMode="contains" >
-       
+
                                 <h:outputText value="#{item.email}"/>
                             </p:column>
-                            <p:column  filterBy="#{item.status}" filterMatchMode="contains">
+                            <p:column  filterBy="#{item.status}"  filterMatchMode="contains">
                                 <f:facet name="header">
                                     <h:outputText value="Status"/>
                                 </f:facet>
@@ -105,146 +109,157 @@ and open the template in the editor.
                                 <h:outputText value="#{item.kullaniciTipi()}"/>
                             </p:column>
 
-                            <f:facet name="footer"> 
-                                <p:commandButton process="userTable" update=":form:userDetail"
-                                                 oncomplete="PF('userDialog').show()" 
-                                                 icon="pi pi-search" value="Bilgi Goster"  
-                                                 />
-                            </f:facet>
                         </p:dataTable>
                     </p:panel>
                     <br/>
+                    
+                    <p:commandButton value="Active" 
+                                     action="#{kullaniciGetirController.deleteSelectedUser()}"
+                                     styleClass="insertButton" style=""
+                                     />
+                    <p:commandButton value="Passive" 
+                                     action="#{kullaniciGetirController.deleteSelectedUser()}"
+                                     styleClass="insertButton declineButton" 
+                                     />
+                    
 
+                    
                     <br/>
-                    <p:accordionPanel id="panel2"  dynamic="true" 
+                    
+                    
+                    <p:accordionPanel id="panel2" 
                                       style="margin-bottom:20px; margin-top: 20px; margin-right: 3%; margin-left: 3%;" 
-
                                       >
 
-                        <p:tab title="Ders Bilgisi"  closable="true"  
-                               >
+                        <p:tab id="userCourseOrClass" title="Ders Bilgisi"  closable="true" >
 
-                            <p:autoUpdate  />
 
                             <h1><h:outputText value="Alinan Dersler"  rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" /></h1>
 
-                            <p:dataTable  value="#{kullaniciGetirController.selectedUserClassesList}" var="item" rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" >
+                            <p:dataTable  value="#{kullaniciGetirController.selectedUserClassesList}" var="abc" rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" >
 
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="ClassesID"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.classesId}"/>
+                                    <h:outputText value="#{abc.classesId}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Course Name"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.courseId.courseName}"/>
+                                    <h:outputText value="#{abc.courseId.courseName}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Ogrenci"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.userId.name} #{item.userId.surname}"/>
+                                    <h:outputText value="#{abc.userId.name} #{abc.userId.surname}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Vize Notu"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.vizeNot}"/>
+                                    <h:outputText value="#{abc.vizeNot}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Final Notu"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.finalNot}"/>
+                                    <h:outputText value="#{abc.finalNot}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Grade"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.grade}"/>
+                                    <h:outputText value="#{abc.grade}"/>
                                 </p:column>
                             </p:dataTable>
 
                             <h1 ><h:outputText value="Verilen Dersler" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"/></h1>
 
-                            <p:dataTable value="#{kullaniciGetirController.selectedUserCoursesList}" var="item" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}" >
+                            <p:dataTable value="#{kullaniciGetirController.selectedUserCoursesList}" var="course" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}" >
 
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="CourseId" />
                                     </f:facet>
-                                    <h:outputText value="#{item.courseId}"/>
+                                    <h:outputText value="#{course.courseId}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Status"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.aktif}"/>
+                                    <h:outputText value="#{course.aktif}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="CurrentSize"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.currentSize}"/>
+                                    <h:outputText value="#{course.currentSize}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="MaxSize"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.maxSize}"/>
+                                    <h:outputText value="#{course.maxSize}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="UserId"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.userId}"/>
+                                    <h:outputText value="#{course.userId}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="TermId"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.termId}"/>
+                                    <h:outputText value="#{course.termId}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="CourseName"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.courseName}"/>
+                                    <h:outputText value="#{course.courseName}"/>
                                 </p:column>
                             </p:dataTable>
                         </p:tab>
 
-                        <p:tab title="Personal Info"  closable="true">
-                            <p:repeat id="test" value="#{kullaniciGetirController.selectedUserDetails.values}" var="detail">
-                                <!--<p:outputPanel id="userDetail2"   >-->
-                                <p:panelGrid columns="2" style="padding-top: 40px;" rendered="#{not empty kullaniciGetirController.selectedUser}"  >
-                                    <p:autoUpdate />
+                        <p:tab title="Personal Info"  closable="true" id="userDetail">
+                            <p:outputPanel id="userDetail2"  style="text-align:center;"    >
+                                                            <h1 ><h:outputText value="Verilen Dersler" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"/></h1>
 
-                                    <h:outputText value="#{detail.name}"  />
-                                    <h:outputText value="#{detail.value}" />
-                                </p:panelGrid>
-                                <!--                                </p:outputPanel>-->
-                            </p:repeat>
+                                <p:repeat id="test" value="#{kullaniciGetirController.selectedUserDetails.values}" var="detail">
+
+                                    <p:panelGrid columns="2" style="padding-top: 40px;"   rendered="#{not empty kullaniciGetirController.selectedUser}"  >
+
+                                                
+                                        <h:outputText value="#{detail.name}" style="width: 200px !important;"  />
+                                        <h:outputText value="#{detail.value}" style="width: 200px !important;"/> 
+
+                                    </p:panelGrid>
+                                </p:repeat>
+
+                            </p:outputPanel>
 
 
 
                         </p:tab>
+                        
+<!--                        <p:tab 
+                            id="userChange"
+                            title="User Change Info"
+                            >
+                            
+                            Only fill the areas that you want to change !<br/>
+                            <h:outputText value="#{kullaniciGetirController.selectedUser.name}" />
+                            
+                            
+                        </p:tab>-->
 
 
 
                     </p:accordionPanel>
-                    <p:dialog header="User Detail" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                        <h:form id="userDetail">
-
-                        </h:form>
-
-                    </p:dialog>
-
-
-
 
 
                 </div>
