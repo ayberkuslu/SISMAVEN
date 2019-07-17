@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">   
+    <h:head>
+        <title>Donem Yonetim Islemleri</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+
+
+    </h:head>
+    <h:body>
+        <h:form id="form" >
+
+            <div class="ui-g">
+                <div class="ui-g-3" >
+                    <div class="topLeftBar" >
+                        <ui:include src="../default/defaultTopLeftBar.xhtml"   />
+                    </div>                   
+                </div>
+                <div class="ui-g-9"   >
+                    <div styleClass="topmenu" >
+                        <ui:include src="../default/defaultTopBar.xhtml"   />
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-g"  >
+                <div class="ui-g-3">
+                    <div class="sidenav" >
+                        <ui:include src="../default/defaultMenu.xhtml"   />
+                    </div>
+                </div>
+
+                <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
+
+                    <div class="ui-g"  >
+                        <div class="ui-g-6" >
+                            <p:panel id="panel1" header="TERM" toggleable="true" closable="true" toggleableHeader="true" style="margin-bottom:20px">
+                                <p:messages id="messages1"  showIcon="true" />
+
+                                <h3><h:outputText   value="#{donemYonetimController.currentTermName}" /></h3>
+
+                                <p:panelGrid id="panelgrid" columns="2" >
+ <!--TODO ADD NEW TERM DOES NOT WORK--> 
+                                        <h:outputText value ="New Term Name" />
+                                        <p:inputText id="termName" value="#{donemYonetimController.newTermName}" title="New Term Name" placeholder="Name" required="true"   />
+
+                                </p:panelGrid>
+                                <p:commandButton value="test" action="#{donemYonetimController.yazdir()}" update="panelgrid messages1" />
+
+
+                            </p:panel>
+
+                        </div>
+                        <div class="ui-g-6" >
+                            <p:panel id="panel2" header="ADD-DROP" toggleable="true" closable="true" toggleableHeader="true" style="margin-bottom:20px">
+
+                                <p:messages id="messages2"  showIcon="true" />
+
+                                <h3><h:outputText   value="ADD-DROP IS CURRENTLY CLOSE" rendered="#{not donemYonetimController.addDropOpen}"/></h3>
+                                <h3><h:outputText   value="ADD-DROP IS CURRENTLY OPEN" rendered="#{donemYonetimController.addDropOpen}"/></h3>
+
+                                <p:commandButton value="Start Add Drop" action="#{donemYonetimController.startAddDrop()}" update="panel2" style="margin: 20px;" />
+
+                                <p:commandButton value="End Add Drop" action="#{donemYonetimController.endAddDrop()}" update="panel2" />
+                            </p:panel>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+        </h:form>
+
+
+
+    </h:body>
+</html>
