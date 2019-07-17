@@ -72,14 +72,13 @@ and open the template in the editor.
                                     process="@parent"
                                     listener="#{kullaniciGetirController.onRowSelect}" 
                                     />
-                            <p:column sortBy="#{item.userId}" filterBy="#{item.userId}" filterMatchMode="contains">
-                                <f:facet name="header">
+                            <p:column headerText="UserId" sortBy="#{item.userId}" filterBy="#{item.userId}" filterMatchMode="contains" >
+<!--                                <f:facet name="header">
                                     <h:outputText value="UserId"/>
-                                </f:facet>
+                                </f:facet>-->
                                 <h:outputText value="#{item.userId}"/>
                             </p:column>
                             <p:column headerText="TCKN" filterBy="#{item.tckn}" filterMatchMode="contains" >
-
                                 <h:outputText value="#{item.tckn}"/>
 
 
@@ -112,21 +111,21 @@ and open the template in the editor.
                         </p:dataTable>
                     </p:panel>
                     <br/>
-                    
+
                     <p:commandButton value="Active" 
-                                     action="#{kullaniciGetirController.deleteSelectedUser()}"
-                                     styleClass="insertButton" style=""
+                                     action="#{kullaniciGetirController.activateSelectedUser()}"
+                                     styleClass="insertButton" style="margin-left: 30px !important;"
                                      />
                     <p:commandButton value="Passive" 
                                      action="#{kullaniciGetirController.deleteSelectedUser()}"
-                                     styleClass="insertButton declineButton" 
+                                     styleClass="insertButton declineButton" style=""
                                      />
-                    
 
-                    
+
+
                     <br/>
-                    
-                    
+
+
                     <p:accordionPanel id="panel2" 
                                       style="margin-bottom:20px; margin-top: 20px; margin-right: 3%; margin-left: 3%;" 
                                       >
@@ -227,13 +226,13 @@ and open the template in the editor.
 
                         <p:tab title="Personal Info"  closable="true" id="userDetail">
                             <p:outputPanel id="userDetail2"  style="text-align:center;"    >
-                                                            <h1 ><h:outputText value="Verilen Dersler" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"/></h1>
+                                <h1 ><h:outputText value="Verilen Dersler" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"/></h1>
 
                                 <p:repeat id="test" value="#{kullaniciGetirController.selectedUserDetails.values}" var="detail">
 
                                     <p:panelGrid columns="2" style="padding-top: 40px;"   rendered="#{not empty kullaniciGetirController.selectedUser}"  >
 
-                                                
+
                                         <h:outputText value="#{detail.name}" style="width: 200px !important;"  />
                                         <h:outputText value="#{detail.value}" style="width: 200px !important;"/> 
 
@@ -245,17 +244,17 @@ and open the template in the editor.
 
 
                         </p:tab>
-                        
-<!--                        <p:tab 
-                            id="userChange"
-                            title="User Change Info"
-                            >
-                            
-                            Only fill the areas that you want to change !<br/>
-                            <h:outputText value="#{kullaniciGetirController.selectedUser.name}" />
-                            
-                            
-                        </p:tab>-->
+
+                        <!--                        <p:tab 
+                                                    id="userChange"
+                                                    title="User Change Info"
+                                                    >
+                                                    
+                                                    Only fill the areas that you want to change !<br/>
+                                                    <h:outputText value="#{kullaniciGetirController.selectedUser.name}" />
+                                                    
+                                                    
+                                                </p:tab>-->
 
 
 

@@ -14,8 +14,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.regex.Pattern;
-import org.primefaces.PrimeFaces;
-import org.primefaces.component.wizard.Wizard;
 import org.primefaces.event.FlowEvent;
 
 /**

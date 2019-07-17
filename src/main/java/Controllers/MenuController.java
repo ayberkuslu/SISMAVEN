@@ -53,7 +53,7 @@ public class MenuController extends Controller {
     public Users whoAmI() {
         Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap();
-        Users temp = (Users) sessionMap.get("kullanici");
+        Users temp = (Users) sessionMap.get(CURRENT_USER);
         System.out.println("WhoAmI User toString(): " + temp);
 
         return temp;

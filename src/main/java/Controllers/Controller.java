@@ -34,6 +34,13 @@ import org.hibernate.criterion.Restrictions;
 @ManagedBean
 @ApplicationScoped
 public class Controller implements Serializable {
+    
+    public static final String CURRENT_USER = "mevcut_kullanici";
+    public static final String SELECTED_USER="selectedUser";
+    public static final int RUN_TIME_PROPERTY = 1;
+    public static final boolean OPEN_ADD_DROP = true;
+    public static final boolean CLOSED_ADD_DROP = false;
+    
 
 //    private HibernateUtil helper;
     private Session session;
@@ -105,13 +112,13 @@ public class Controller implements Serializable {
 //        return null;
     }
 
-    public Object getObject(Class type, Serializable srzbl) {
-        getSession().beginTransaction();
-        Object o = getSession().get(type, srzbl);
-        getSession().getTransaction().commit();
-
-        return o;
-    }
+//    public Object getObject(Class type, Serializable srzbl) {
+//        getSession().beginTransaction();
+//        Object o = getSession().get(type, srzbl);
+//        getSession().getTransaction().commit();
+//
+//        return o;
+//    }
 
     public UserDetails getUserDetailsById(int userId) {
         try {

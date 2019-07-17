@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,6 +39,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Terms.findByStatus", query = "SELECT t FROM Terms t WHERE t.status = :status")})
 public class Terms implements Serializable {
 
+    @OneToMany(mappedBy = "currentTerm", fetch = FetchType.EAGER)
+    private Collection<RuntimeProperties> runtimePropertiesCollection;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "termId")
     private Collection<Courses> coursesCollection;
 
@@ -60,6 +64,10 @@ public class Terms implements Serializable {
     @Basic(optional = false)
     @Column(name = "STATUS")
     private int status;
+    
+    public static final int OPEN = 1;
+    public static final int CLOSE = 0;
+    
 
     public Terms() {
     }
@@ -152,6 +160,17 @@ public class Terms implements Serializable {
 
     public void setCoursesCollection(Collection<Courses> coursesCollection) {
         this.coursesCollection = coursesCollection;
+    }
+
+
+
+    @XmlTransient
+    public Collection<RuntimeProperties> getRuntimePropertiesCollection() {
+        return runtimePropertiesCollection;
+    }
+
+    public void setRuntimePropertiesCollection(Collection<RuntimeProperties> runtimePropertiesCollection) {
+        this.runtimePropertiesCollection = runtimePropertiesCollection;
     }
     
 }

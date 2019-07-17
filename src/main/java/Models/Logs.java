@@ -39,6 +39,12 @@ public class Logs implements Serializable {
     public static final int USER_CHANGE_PASSWORD = 3;
     public static final int USER_RESET_PASSWORD = 4;
     public static final int USER_DELETE = 5;
+    public static final int USER_ACTIVATE = 6;
+    public static final int NEW_TERM_START = 7;
+    public static final int TERM_END = 8;
+    public static final int ADD_DROP_START = 9;
+    public static final int ADD_DROP_END = 10;
+    
 
     private static final long serialVersionUID = 1L;
     @Id

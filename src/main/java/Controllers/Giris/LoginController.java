@@ -18,10 +18,9 @@ import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import org.hibernate.HibernateException;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -34,6 +33,7 @@ public class LoginController extends Controller {
     private Integer userId;
     private String userPassword;
     private boolean authorized = false;
+    Transaction tx ;
 
     @PreDestroy
     @Override
@@ -62,23 +62,16 @@ public class LoginController extends Controller {
     }
 
     private boolean isCorrectUser() {
+
         try {
 
-//            setSession(HibernateUtil.getSessionFactory().openSession());
-//            getSession().beginTransaction();
-//            Users targetUser = (Users) getSession().get(Users.class, userId);
-//            UserDetails targetUserDetail = (UserDetails) getSession().get(UserDetails.class, userId);
-            Users targetUser = (Users) getObject(Users.class, userId);
-//            UserDetails targetUserDetail = (UserDetails) getObject(UserDetails.class, userId);
-//            getSession().close();
-
-//            if (targetUser == null || targetUserDetail == null) {
-//                return false;
-//            }
+            tx = getSession().beginTransaction();
+            Users targetUser = (Users) getSession().get(Users.class, userId);
+            
             FacesContext context = FacesContext.getCurrentInstance();
 
             if (targetUser.getStatus() == false) {
-                context.addMessage(null, new FacesMessage("User is not an active user.\nPlease contact with School."));
+                context.addMessage(null, new FacesMessage("User is not an active user.\nPlease contact with the School Admin."));
                 return false;
             }
 
@@ -86,17 +79,18 @@ public class LoginController extends Controller {
                 Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
                         getExternalContext().getSessionMap();
 
-                sessionMap.put("kullanici", targetUser);
+                sessionMap.put(CURRENT_USER, targetUser);
 
                 setCurrentUser(targetUser);
-//                setCurrentUserDetail(targetUserDetail);
-                insertObject(new Logs(Logs.USER_LOGIN, "succesfully logined", targetUser, new Date()));
+                getSession().save(new Logs(Logs.USER_LOGIN, "succesfully logined", targetUser, new Date()));
 
+                tx.commit();
                 return true;
             }
             context.addMessage(null, new FacesMessage("Authentication Failed. Check username or password."));
 
-        } catch (Exception e) {
+        } catch (HibernateException e) {
+            tx.rollback();
             System.out.println(e);
             System.out.println("<<HiberNateException \nAranan ID : " + userId + "\n Aranan sifre : " + userPassword
                     + "\n Aranan hash : " + sha256(userPassword));
