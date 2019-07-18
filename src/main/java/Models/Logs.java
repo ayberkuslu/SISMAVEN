@@ -45,6 +45,8 @@ public class Logs implements Serializable {
     public static final int ADD_DROP_START = 9;
     public static final int ADD_DROP_END = 10;
     
+    public static final int NEW_COURSE = 11;
+    
 
     private static final long serialVersionUID = 1L;
     @Id

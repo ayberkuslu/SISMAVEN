@@ -16,9 +16,9 @@ and open the template in the editor.
 
     </h:head>
     <h:body>
-        <h:form style="position: fixed !important;" >
+        <ui:component>
             <p:growl id="messages"/>
-            <p:panelMenu   >
+            <p:panelMenu style="position: fixed !important;"   >
                 <p:submenu   id="menuAdmin" label="Admin" icon="fa fa-font"   >
                     <p:submenu label="Kullanici Islemeri" icon="pi pi-briefcase"   >
                         <p:menuitem value="Kullanici Incele" icon="fa fa-user" url="http://localhost:8080/mavenproject1/faces/admin/adminKullaniciGetir.xhtml"  />
@@ -26,20 +26,15 @@ and open the template in the editor.
                     </p:submenu>
                     <p:submenu label="Donem Islemleri" icon="pi pi-briefcase" styleClass="deneme" >
                         <p:menuitem value="Donem Ayarlari" url="http://localhost:8080/mavenproject1/faces/admin/adminYonetimIslemleri.xhtml" />   
-                      
                     </p:submenu>
-
-                    <p:menuitem value="Open" url="#" />
-                    <p:separator />
-                    <p:menuitem value="Quit" url="#" />
                 </p:submenu>
 
-                <p:submenu label="Edit" icon="pi pi-pencil" >
-                    <p:menuitem value="Undo" url="#" icon="pi pi-angle-double-left" />
-                    <p:menuitem value="Redo" url="#" icon="pi pi-angle-double-right" />
+                <p:submenu   id="menuTeacher" label="Teacher"   >
+                    <p:menuitem value="Course" url="http://localhost:8080/mavenproject1/faces/teacher/teacherCourses.xhtml" icon="pi pi-table" />
+                    <p:menuitem value="Enroll" url="#" icon="pi pi-user-plus" />
                 </p:submenu>
 
-                <p:submenu label="Help" icon="pi pi-question" >
+                <p:submenu label="Student"  >
                     <p:menuitem value="Contents" url="#" />
                     <p:submenu label="Search" icon="pi pi-search">
                         <p:submenu label="Text">
@@ -68,7 +63,6 @@ and open the template in the editor.
             </p:panelMenu>
 
 
-
-        </h:form>
+        </ui:component>
     </h:body>
 </html>

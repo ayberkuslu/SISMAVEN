@@ -73,9 +73,9 @@ and open the template in the editor.
                                     listener="#{kullaniciGetirController.onRowSelect}" 
                                     />
                             <p:column headerText="UserId" sortBy="#{item.userId}" filterBy="#{item.userId}" filterMatchMode="contains" >
-<!--                                <f:facet name="header">
-                                    <h:outputText value="UserId"/>
-                                </f:facet>-->
+                                <!--                                <f:facet name="header">
+                                                                    <h:outputText value="UserId"/>
+                                                                </f:facet>-->
                                 <h:outputText value="#{item.userId}"/>
                             </p:column>
                             <p:column headerText="TCKN" filterBy="#{item.tckn}" filterMatchMode="contains" >
@@ -175,7 +175,8 @@ and open the template in the editor.
                                 </p:column>
                             </p:dataTable>
 
-                            <h1 ><h:outputText value="Verilen Dersler" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"/></h1>
+                            <h1 ><h:outputText value="Verilen Dersler"
+                                               rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"/></h1>
 
                             <p:dataTable value="#{kullaniciGetirController.selectedUserCoursesList}" var="course" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}" >
 
@@ -225,8 +226,9 @@ and open the template in the editor.
                         </p:tab>
 
                         <p:tab title="Personal Info"  closable="true" id="userDetail">
-                            <p:outputPanel id="userDetail2"  style="text-align:center;"    >
-                                <h1 ><h:outputText value="Verilen Dersler" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"/></h1>
+                            <h1 ><h:outputText value="Personal Infos" rendered="#{not empty kullaniciGetirController.selectedUser}" /></h1>
+
+                            <p:outputPanel id="userDetail2"     >
 
                                 <p:repeat id="test" value="#{kullaniciGetirController.selectedUserDetails.values}" var="detail">
 

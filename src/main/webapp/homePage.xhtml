@@ -15,30 +15,33 @@ and open the template in the editor.
         <title>Homepage1</title>
     </h:head>
     <h:body>
-                            <div class="topLeftBar" >
-                        <ui:include src="./default/defaultTopLeftBar.xhtml"   />
-                    </div>  
-        <div class="ui-g">
-            <!--<div class="ui-g-12" style="background-color: #efa64c; height: 100px; width: 10px; position: fixed;"/>-->
-        </div>
-        <div class="ui-g" id="page">
-            
-            <div class="ui-g-3" >
-                <div class="sidenav">
-                    <ui:insert  >
-                        <ui:include src="./default/defaultMenu.xhtml"  />
-                    </ui:insert>
-                </div>
+        <h:form>
+
+            <div class="topLeftBar" >
+                <ui:include src="./default/defaultTopLeftBar.xhtml"   />
+            </div>  
+            <div class="ui-g">
+                <!--<div class="ui-g-12" style="background-color: #efa64c; height: 100px; width: 10px; position: fixed;"/>-->
             </div>
-<!--            <div class="ui-g-9" id="slideShow" style="margin-left: 25%">
+            <div class="ui-g" id="page">
 
-                <ui:insert id="content">
+                <div class="ui-g-3" >
+                    <div class="sidenav">
+                        <ui:insert  >
+                            <ui:include src="./default/defaultMenu.xhtml"  />
+                        </ui:insert>
+                    </div>
+                </div>
+                <!--            <div class="ui-g-9" id="slideShow" style="margin-left: 25%">
+                
+                                <ui:insert id="content">
+                
+                
+                                </ui:insert>   
+                            </div>-->
 
+            </div>
+        </h:form>
 
-                </ui:insert>   
-            </div>-->
-
-
-        </div>
     </h:body>
 </html>

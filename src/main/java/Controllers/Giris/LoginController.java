@@ -66,7 +66,7 @@ public class LoginController extends Controller {
         try {
 
             tx = getSession().beginTransaction();
-            Users targetUser = (Users) getSession().get(Users.class, userId);
+            Users targetUser = (Users) getSession().get(Users.class , userId);
             
             FacesContext context = FacesContext.getCurrentInstance();
 

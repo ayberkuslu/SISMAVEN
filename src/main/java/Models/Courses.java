@@ -38,6 +38,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Courses.findByCurrentSize", query = "SELECT c FROM Courses c WHERE c.currentSize = :currentSize"),
     @NamedQuery(name = "Courses.findByMaxSize", query = "SELECT c FROM Courses c WHERE c.maxSize = :maxSize")})
 public class Courses implements Serializable {
+    
+    public static final int  DEFAULT_COURSE_MAX_SIZE  = 50;
 
     @Basic(optional = false)
     @NotNull

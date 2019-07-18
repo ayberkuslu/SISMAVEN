@@ -17,19 +17,18 @@ and open the template in the editor.
 
     </h:head>
     <h:body>
-
-        <div >
+        <ui:component>
             <p:menubar >
                 <p:autoUpdate/> 
 
                 <f:facet name="options">
-               
+
                     <h:outputText value="#{menuController.whoAmI().name} #{menuController.whoAmI().surname}" style="margin-right: 100px; color: red;"  />
                     <p:inputText style="margin:1px 20px 1px 1px !important; background: white !important;" placeholder="Search"/>
                     <h:commandButton type="button" value="Logout"  action="#{menuController.logout}"  style="margin-right: 10px !important;" />
-                
+
                 </f:facet>                                   
-            </p:menubar>       
-        </div>
+            </p:menubar> 
+        </ui:component>
     </h:body>
 </html>

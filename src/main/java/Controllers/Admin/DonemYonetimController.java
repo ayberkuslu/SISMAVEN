@@ -34,7 +34,7 @@ public class DonemYonetimController extends Controller {
 
     Transaction tx;
     private boolean addDropOpen;
-    private String currentTermName = "There is no active term!";
+    private String currentTermName;
     private String newTermName;
 
     /**
@@ -56,10 +56,13 @@ public class DonemYonetimController extends Controller {
             addDropOpen = properties.getIsOpenAddDrop();
             if (properties.getCurrentTerm() != null) {
                 currentTermName = properties.getCurrentTerm().getTermName();
+            } else {
+                currentTermName = null;
             }
 
             tx.commit();
         } catch (HibernateException e) {
+            System.out.println(e.getLocalizedMessage());
             tx.rollback();
         }
     }
@@ -71,42 +74,8 @@ public class DonemYonetimController extends Controller {
         getSession().close();
     }
 
-    public void endCurrentTerm() {
-        tx = getSession().beginTransaction();
-
-        RuntimeProperties properties = (RuntimeProperties) getSession().get(RuntimeProperties.class, RUN_TIME_PROPERTY);
-        FacesContext context = FacesContext.getCurrentInstance();
-
-        Terms currentTerm = properties.getCurrentTerm();
-
-        if (currentTerm != null) {
-
-            context.addMessage(null, new FacesMessage("Term is not open."));
-
-            tx.commit();
-
-            return;
-        }
-
-        currentTerm.setEndDate(new Date());
-        currentTerm.setStatus(Terms.CLOSE);
-
-        try {
-            tx = getSession().beginTransaction();
-            getSession().update(currentTerm);
-            properties.setCurrentTerm(null);
-            getSession().update(properties);
-            tx.commit();
-            currentTermName = "There is no active term!";
-
-        } catch (HibernateException e) {
-            tx.rollback();
-            System.out.println(e.getLocalizedMessage() + "\n EndCurrentTermFailed ");
-        }
-
-    }
-
     public void startNewTerm() {
+        FacesContext context = FacesContext.getCurrentInstance();
 
         Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap();
@@ -116,9 +85,20 @@ public class DonemYonetimController extends Controller {
         try {
             tx = getSession().beginTransaction();
             properties = (RuntimeProperties) getSession().get(RuntimeProperties.class, RUN_TIME_PROPERTY);
+            if (properties.getCurrentTerm() != null) {
+
+                context.addMessage(null, new FacesMessage("You need to end current term first!."));
+                tx.commit();
+                return;
+            }
+            if (newTermName == null || newTermName.length() < 1) {
+                context.addMessage(null, new FacesMessage("Provide a proper Term name."));
+                tx.commit();
+                return;
+
+            }
             Terms newTerm = new Terms();
-//             newTermName = "newTermToBeAdded";
-            newTerm.setTermName(newTermName);
+            newTerm.setTermName(newTermName.toUpperCase());
             newTerm.setStatus(Terms.OPEN);
             newTerm.setStartDate(new Date());
 
@@ -126,13 +106,61 @@ public class DonemYonetimController extends Controller {
             getSession().save(newTerm);
             getSession().save(new Logs(Logs.NEW_TERM_START, "new term started", currentUser, new Date()));
             getSession().update(properties);
+            context.addMessage(null, new FacesMessage("New Term " + newTermName + " started!."));
+
             tx.commit();
             currentTermName = newTermName;
+            newTermName = "";
 
         } catch (HibernateException e) {
             tx.rollback();
 
         }
+    }
+
+    public void endCurrentTerm() {
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
+                getExternalContext().getSessionMap();
+
+        Users currentUser = (Users) sessionMap.get(CURRENT_USER);
+        try {
+            tx = getSession().beginTransaction();
+
+            FacesContext context = FacesContext.getCurrentInstance();
+
+            RuntimeProperties properties = (RuntimeProperties) getSession().get(RuntimeProperties.class, RUN_TIME_PROPERTY);
+            Terms currentTerm = properties.getCurrentTerm();
+            if (currentTerm == null) {
+                context.addMessage(null, new FacesMessage("Term is not open."));
+                tx.commit();
+                return;
+            } else if (properties.getIsOpenAddDrop() == OPEN_ADD_DROP) {
+                context.addMessage(null, new FacesMessage("Term can not be finished while ADD-DROP is still open."));
+
+                System.out.println("Already Open!!!!!");
+                tx.commit();
+                return;
+            }
+
+            currentTerm.setEndDate(new Date());
+            currentTerm.setStatus(Terms.CLOSE);
+
+            getSession().update(currentTerm);
+            properties.setCurrentTerm(null);
+            getSession().update(properties);
+            getSession().save(new Logs(Logs.TERM_END, "new term ended", currentUser, new Date()));
+
+            context.addMessage(null, new FacesMessage("Term is succesfully ended."));
+
+            currentTermName = null;
+
+            tx.commit();
+
+        } catch (HibernateException e) {
+            tx.rollback();
+            System.out.println(e.getLocalizedMessage() + "\n EndCurrentTermFailed ");
+        }
+
     }
 
     public void startAddDrop() {
@@ -146,7 +174,12 @@ public class DonemYonetimController extends Controller {
             tx = getSession().beginTransaction();
             RuntimeProperties properties = (RuntimeProperties) getSession().get(RuntimeProperties.class, RUN_TIME_PROPERTY);
 
-            if (properties.getIsOpenAddDrop() == OPEN_ADD_DROP) {
+            if (properties.getCurrentTerm() == null) {
+                context.addMessage(null, new FacesMessage("There is no current Term"));
+                tx.commit();
+                System.out.println("There is no current Term!");
+                return;
+            } else if (properties.getIsOpenAddDrop() == OPEN_ADD_DROP) {
                 context.addMessage(null, new FacesMessage("ADD-DROP is Already Open"));
 
                 System.out.println("Already Open!!!!!");
@@ -185,15 +218,17 @@ public class DonemYonetimController extends Controller {
         try {
             tx = getSession().beginTransaction();
             RuntimeProperties properties = (RuntimeProperties) getSession().get(RuntimeProperties.class, RUN_TIME_PROPERTY);
-
-            if (properties.getIsOpenAddDrop() == CLOSED_ADD_DROP) {
+            if (properties.getCurrentTerm() == null) {
+                context.addMessage(null, new FacesMessage("There is no current Term"));
+                tx.commit();
+                System.out.println("There is no current Term!");
+                return;
+            } else if (properties.getIsOpenAddDrop() == CLOSED_ADD_DROP) {
                 context.addMessage(null, new FacesMessage("ADD-DROP is Already Closed"));
                 tx.commit();
-
                 System.out.println("Already closed!!!!!");
                 return;
             }
-
             properties.setIsOpenAddDrop(CLOSED_ADD_DROP);
             getSession().save(new Logs(Logs.ADD_DROP_END, "add drop ended", currentUser, new Date()));
             getSession().update(properties);
@@ -202,22 +237,11 @@ public class DonemYonetimController extends Controller {
         } catch (HibernateException e) {
             System.out.println(e.toString());
             context.addMessage(null, new FacesMessage("ADD-DROP Couldnt closed.!"));
-
             tx.rollback();
-
             return;
-
         }
         context.addMessage(null, new FacesMessage("ADD-DROP Closed"));
 
-    }
-
-    public String getNewTermName() {
-        return newTermName;
-    }
-
-    public void setNewTermName(String newTermName) {
-        this.newTermName = newTermName;
     }
 
     public boolean isAddDropOpen() {
@@ -236,10 +260,11 @@ public class DonemYonetimController extends Controller {
         this.currentTermName = currentTermName;
     }
 
-    public void yazdir() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("!!:"+newTermName));
-
+    public String getNewTermName() {
+        return newTermName;
     }
 
+    public void setNewTermName(String newTermName) {
+        this.newTermName = newTermName;
+    }
 }

@@ -45,7 +45,6 @@ public class KullaniciGetirController extends Controller {
 
     private String isRenderedClasses = "true";
     private String isRenderedCourses = "true";
-    
 
     /**
      * Creates a new instance of KullaniciGetirController
@@ -53,150 +52,25 @@ public class KullaniciGetirController extends Controller {
     public KullaniciGetirController() {
     }
 
-@PostConstruct
-@Override
-public void init() {
-    System.out.println("KullaniciGetir init()");
-    setSession(HibernateUtil.getSessionFactory().openSession());
-    Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-    loadData();
+    @PostConstruct
+    @Override
+    public void init() {
+        System.out.println("KullaniciGetir init()");
+        setSession(HibernateUtil.getSessionFactory().openSession());
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        loadData();
 
-    System.out.println("SessionMap Size : " + sessionMap.size());
-}
-
-@PreDestroy
-@Override
-public void destroy() {
-    System.out.println("KullaniciGetir destroy()");
-    Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
-            getExternalContext().getSessionMap();
-    sessionMap.remove(SELECTED_USER);
-    getSession().close();
-}
-
-    public List<Courses> CoursesList() {
-        Collection collection = selectedUser.getCoursesCollection();
-
-        if (collection == null) {
-            return new ArrayList<>();
-        }
-        return new ArrayList<>(collection);
+        System.out.println("SessionMap Size : " + sessionMap.size());
     }
 
-    public List<Classes> ClassesList() {
-        Collection collection = selectedUser.getClassesCollection();
-
-        if (collection == null) {
-            return new ArrayList<>();
-        }
-        return new ArrayList<>(collection);
-    }
-
-    public void loadData() {
-        Transaction tx = getSession().beginTransaction();
-        List<Users> list = getSession().createCriteria(Users.class).list();
-        users = new UserLazyDataModel(list);
-        tx.commit();
-    }
-
-    public Users getSelectedUser() {
-        return selectedUser;
-    }
-
-    public void setSelectedUser(Users selectedUser) {
-        this.selectedUser = selectedUser;
-    }
-
-    public UserDetails getSelectedUserDetails() {
-        return selectedUserDetails;
-    }
-
-//    public void setUserDetails(LazyDataModel<UserDetails> userDetails) {
-//        this.userDetails = userDetails;
-//    }
-
-    public void setSelectedUserDetails(UserDetails selectedUserDetails) {
-        this.selectedUserDetails = selectedUserDetails;
-    }
-
-    public LazyDataModel<Users> getUsers() {
-        return users;
-    }
-
-    public void setUsers(LazyDataModel<Users> users) {
-        this.users = users;
-    }
-
-//    public LazyDataModel<UserDetails> getUserDetails() {
-//        return userDetails;
-//    }
-
-    public LazyDataModel<Users> getFilteredUsers() {
-        return filteredUsers;
-    }
-
-    public void setFilteredUsers(LazyDataModel<Users> filteredUsers) {
-        this.filteredUsers = filteredUsers;
-    }
-
-//    public LazyDataModel<UserDetails> getFilteredUserDetails() {
-//        return filteredUserDetails;
-//    }
-//
-//    public void setFilteredUserDetails(LazyDataModel<UserDetails> filteredUserDetails) {
-//        this.filteredUserDetails = filteredUserDetails;
-//    }
-
-    public List<Classes> getSelectedUserClassesList() {
-        return selectedUserClassesList;
-    }
-
-    public void setSelectedUserClassesList(List<Classes> selectedUserClassesList) {
-        this.selectedUserClassesList = selectedUserClassesList;
-    }
-
-    public List<Courses> getSelectedUserCoursesList() {
-        return selectedUserCoursesList;
-    }
-
-    public void setSelectedUserCoursesList(List<Courses> selectedUserCoursesList) {
-        this.selectedUserCoursesList = selectedUserCoursesList;
-    }
-
-//    private Collection getSelectedUserClassesCollection() {
-//        if (selectedUser == null) {
-//            return null;
-//        }
-//        selectedUserClassesCollection = selectedUser.getClassesCollection();
-//        return selectedUserClassesCollection;
-//    }
-
-//    private Collection getSelectedUserCoursesCollection() {
-//        if (selectedUser == null) {
-//            return null;
-//        }
-//        selectedUserCoursesCollection = selectedUser.getCoursesCollection();
-//        return selectedUserCoursesCollection;
-//    }
-
-//    private void setSelectedUserClassesCollection(Collection selectedUserClasses) {
-//        this.selectedUserClassesCollection = selectedUserClasses;
-//    }
-
-    public String getIsRenderedClasses() {
-        return isRenderedClasses;
-    }
-
-    public void setIsRenderedClasses(String isRenderedClasses) {
-        this.isRenderedClasses = isRenderedClasses;
-    }
-
-    public String getIsRenderedCourses() {
-        return isRenderedCourses;
-    }
-
-    public void setIsRenderedCourses(String isRenderedCourses) {
-        this.isRenderedCourses = isRenderedCourses;
+    @PreDestroy
+    @Override
+    public void destroy() {
+        System.out.println("KullaniciGetir destroy()");
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
+                getExternalContext().getSessionMap();
+        sessionMap.remove(SELECTED_USER);
+        getSession().close();
     }
 
     public void onRowSelect(SelectEvent event) {
@@ -210,8 +84,8 @@ public void destroy() {
 
         sessionMap.put(SELECTED_USER, selectedUser);
 
-        selectedUserClassesList = ClassesList();
-        selectedUserCoursesList = CoursesList();
+        selectedUserClassesList = classesList();
+        selectedUserCoursesList = coursesList();
 
         FacesMessage msg = new FacesMessage("User Selected " + selectedUser.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -239,9 +113,9 @@ public void destroy() {
 
         Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap();
-        
+
         selectedUser = (Users) sessionMap.get(SELECTED_USER);
-        System.out.println("Kontrol"+selectedUser);
+        System.out.println("Kontrol" + selectedUser);
 
         if (getSelectedUser() == null) {
             FacesMessage msg = new FacesMessage("User Not Selected!");
@@ -259,21 +133,21 @@ public void destroy() {
         } catch (HibernateException e) {
             getSession().getTransaction().rollback();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getLocalizedMessage() + "\nFAILED WHILE DELETING!"));
-           System.out.println(e.getLocalizedMessage()+"\n"+e.getMessage());
+            System.out.println(e.getLocalizedMessage() + "\n" + e.getMessage());
             return;
 
         }
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("USER DELETED"));
 
     }
-    
+
     public void activateSelectedUser() {
 
         Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap();
-        
+
         selectedUser = (Users) sessionMap.get(SELECTED_USER);
-        System.out.println("Kontrol"+selectedUser);
+        System.out.println("Kontrol" + selectedUser);
 
         if (getSelectedUser() == null) {
             FacesMessage msg = new FacesMessage("User Not Selected!");
@@ -291,14 +165,101 @@ public void destroy() {
         } catch (HibernateException e) {
             getSession().getTransaction().rollback();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getLocalizedMessage() + "\nFAILED WHILE ACTIVATING!"));
-           System.out.println(e.getLocalizedMessage()+"\n"+e.getMessage());
+            System.out.println(e.getLocalizedMessage() + "\n" + e.getMessage());
             return;
 
         }
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("USER ACTIVATED"));
 
     }
-    
-    
+
+    public List<Courses> coursesList() {
+        Collection collection = selectedUser.getCoursesCollection();
+
+        if (collection == null) {
+            return new ArrayList<>();
+        }
+        return new ArrayList<>(collection);
+    }
+
+    public List<Classes> classesList() {
+        Collection collection = selectedUser.getClassesCollection();
+
+        if (collection == null) {
+            return new ArrayList<>();
+        }
+        return new ArrayList<>(collection);
+    }
+
+    public void loadData() {
+        Transaction tx = getSession().beginTransaction();
+        List<Users> list = getSession().createCriteria(Users.class).list();
+        users = new UserLazyDataModel(list);
+        tx.commit();
+    }
+
+    public Users getSelectedUser() {
+        return selectedUser;
+    }
+
+    public void setSelectedUser(Users selectedUser) {
+        this.selectedUser = selectedUser;
+    }
+
+    public UserDetails getSelectedUserDetails() {
+        return selectedUserDetails;
+    }
+
+    public void setSelectedUserDetails(UserDetails selectedUserDetails) {
+        this.selectedUserDetails = selectedUserDetails;
+    }
+
+    public LazyDataModel<Users> getUsers() {
+        return users;
+    }
+
+    public void setUsers(LazyDataModel<Users> users) {
+        this.users = users;
+    }
+
+    public LazyDataModel<Users> getFilteredUsers() {
+        return filteredUsers;
+    }
+
+    public void setFilteredUsers(LazyDataModel<Users> filteredUsers) {
+        this.filteredUsers = filteredUsers;
+    }
+
+    public List<Classes> getSelectedUserClassesList() {
+        return selectedUserClassesList;
+    }
+
+    public void setSelectedUserClassesList(List<Classes> selectedUserClassesList) {
+        this.selectedUserClassesList = selectedUserClassesList;
+    }
+
+    public List<Courses> getSelectedUserCoursesList() {
+        return selectedUserCoursesList;
+    }
+
+    public void setSelectedUserCoursesList(List<Courses> selectedUserCoursesList) {
+        this.selectedUserCoursesList = selectedUserCoursesList;
+    }
+
+    public String getIsRenderedClasses() {
+        return isRenderedClasses;
+    }
+
+    public void setIsRenderedClasses(String isRenderedClasses) {
+        this.isRenderedClasses = isRenderedClasses;
+    }
+
+    public String getIsRenderedCourses() {
+        return isRenderedCourses;
+    }
+
+    public void setIsRenderedCourses(String isRenderedCourses) {
+        this.isRenderedCourses = isRenderedCourses;
+    }
 
 }
