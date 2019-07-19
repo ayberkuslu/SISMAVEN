@@ -41,21 +41,22 @@ and open the template in the editor.
     padding: 0.1em 1em !important;
     margin: 5px !important;
     transition: 0.25s;
-    background: #136a8a !important;
-    background-image: -webkit-linear-gradient(left, #136a8a, #267871) !important;
+    background-color : #007AD9;
+    /*background: #136a8a !important;*/
+    /*background-image: -webkit-linear-gradient(left, #136a8a, #267871) !important;*/
 }
 
 .insertButton:hover{
-    background-image: -webkit-linear-gradient(left, #267871,#136a8a) !important;
+    /*background-image: -webkit-linear-gradient(left, #267871,#136a8a) !important;*/
     border :solid green !important;
     transition: 0.25s;
 }
 .declineButton:hover{
-        background-image: -webkit-linear-gradient(left, #267871,#136a8a) !important;
+    /*background-image: -webkit-linear-gradient(left, #267871,#136a8a) !important;*/
     border :solid red !important;
     transition: 0.25s;
-    
-    
+
+
 }
 
 .insertButton:focus{
@@ -101,4 +102,39 @@ and open the template in the editor.
     height: 40px !important;
     background: none transparent;
     border: none;
+}
+
+
+/*Datatable column header*/
+
+body .ui-datatable thead th{
+    background : grey !important;
+}
+
+body .ui-datatable thead th:hover{
+    background : darkgrey !important;
+
+    /*background-image: -webkit-linear-gradient(right, #136a8a, #267871) !important;*/
+}
+
+/*Panel Header*/
+
+body .ui-panel .ui-panel-titlebar{
+    background-color : #007AD9 !important;
+    /*background-image: -webkit-linear-gradient(left, #136a8a, #267871) !important;*/
+
+}
+
+.ui-datatable table {
+    border-collapse: separate !important;
+    background: lightgrey !important;
+    border: 2px grey  solid !important;
+}
+
+
+/*Datatable footer sayfa yonlendirme*/
+
+body .ui-paginator{
+    border: 2px grey  solid !important;
+
 }
