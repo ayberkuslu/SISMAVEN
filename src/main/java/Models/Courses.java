@@ -40,6 +40,8 @@ import javax.validation.constraints.Size;
 public class Courses implements Serializable {
     
     public static final int  DEFAULT_COURSE_MAX_SIZE  = 50;
+    public static final int  COURSE_ACTIVE  = 1;
+    public static final int  COURSE_PASIVE  = 0;
 
     @Basic(optional = false)
     @NotNull
