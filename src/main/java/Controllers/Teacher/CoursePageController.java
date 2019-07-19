@@ -87,6 +87,7 @@ public class CoursePageController extends Controller {
             newCourse = new Courses();
             newCourse.setCourseName(newCourseName);
             newCourse.setMaxSize((int) maxCourseSize);
+            newCourse.setStatus(Courses.COURSE_ACTIVE);
             newCourse.setTermId(currentTerm);
             newCourse.setUserId(currentUser);
             getSession().save(newCourse);
