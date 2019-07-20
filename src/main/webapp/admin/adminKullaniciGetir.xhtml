@@ -42,7 +42,7 @@ and open the template in the editor.
                     </div>
                 </div>
 
-                <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
+                <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;background-image: url(wppbackground.jpg) !important;">
                     <p:messages showIcon="false"  >
                         <p:autoUpdate/>
                     </p:messages>
@@ -109,17 +109,30 @@ and open the template in the editor.
                             </p:column>
 
                         </p:dataTable>
+
+
+                        <div class="ui-g">
+                            <div class="ui-g-4">
+                                <p:commandButton value="Active" 
+                                                 action="#{kullaniciGetirController.activateSelectedUser()}"
+                                                 styleClass="insertButton" style="margin-left: 30px !important;"
+                                                 />
+                            </div>
+                            <div class="ui-g-4"></div>
+                            <div class="ui-g-4">
+                                <p:commandButton value="Passive" 
+                                                                  action="#{kullaniciGetirController.deleteSelectedUser()}"
+                                                                  styleClass="insertButton declineButton" style="margin-left: 30px !important;"
+                                                                  />
+                            </div>
+
+                        </div>
+
+
                     </p:panel>
                     <br/>
 
-                    <p:commandButton value="Active" 
-                                     action="#{kullaniciGetirController.activateSelectedUser()}"
-                                     styleClass="insertButton" style="margin-left: 30px !important;"
-                                     />
-                    <p:commandButton value="Passive" 
-                                     action="#{kullaniciGetirController.deleteSelectedUser()}"
-                                     styleClass="insertButton declineButton" style=""
-                                     />
+
 
 
 
@@ -228,20 +241,23 @@ and open the template in the editor.
                         <p:tab title="Personal Info"  closable="true" id="userDetail">
                             <h1 ><h:outputText value="Personal Infos" rendered="#{not empty kullaniciGetirController.selectedUser}" /></h1>
 
-                            <p:outputPanel id="userDetail2"     >
+                            <!--<p:outputPanel id="userDetail2"     >-->
 
+
+                            <p:panelGrid columns="2" rendered="#{not empty kullaniciGetirController.selectedUser}" style="width: 500px;" styleClass="ui-noborder">
                                 <p:repeat id="test" value="#{kullaniciGetirController.selectedUserDetails.values}" var="detail">
-
-                                    <p:panelGrid columns="2" style="padding-top: 40px;"   rendered="#{not empty kullaniciGetirController.selectedUser}"  >
-
-
-                                        <h:outputText value="#{detail.name}" style="width: 200px !important;"  />
-                                        <h:outputText value="#{detail.value}" style="width: 200px !important;"/> 
-
-                                    </p:panelGrid>
+                                    <div class="ui-g">
+                                        <div class="ui-g-6">
+                                            <p:outputLabel value="#{detail.name}"/>
+                                        </div>
+                                        <div class="ui-g-6">
+                                            <p:outputLabel value="#{detail.value}"/> 
+                                        </div>
+                                    </div>
                                 </p:repeat>
+                            </p:panelGrid>
 
-                            </p:outputPanel>
+                            <!--</p:outputPanel>-->
 
 
 

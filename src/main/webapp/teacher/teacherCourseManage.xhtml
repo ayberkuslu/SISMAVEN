@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">   
+    <h:head>
+        <title>Donem Yonetim Islemleri</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <h:outputStylesheet library="css" name="columns.css"/>
+
+
+
+    </h:head>
+    <h:body>
+        <h:form id="form" >
+
+            <div class="ui-g">
+                <div class="ui-g-3" >
+                    <div class="topLeftBar" >
+                        <ui:include src="../default/defaultTopLeftBar.xhtml"   />
+                    </div>                   
+                </div>
+                <div class="ui-g-9"   >
+                    <div styleClass="topmenu" >
+                        <ui:include src="../default/defaultTopBar.xhtml"   />
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-g"  >
+                <div class="ui-g-3">
+                    <div class="sidenav" >
+                        <ui:include src="../default/defaultMenu.xhtml"   />
+                    </div>
+                </div>
+
+                <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
+
+                    <div class="ui-g"  >
+                        <div class="ui-g-6" >
+                            <p:messages id="messages1"  showIcon="false" />
+
+                            <p:panel id="panel1" 
+                                     header="Courses Given"
+                                     toggleable="true" 
+                                     closable="true" 
+                                     toggleableHeader="true"
+                                     style="margin-top:40px;">
+
+                                <h1 ><h:outputText value="Open Courses" rendered="#{not empty courseManageController.activeCoursesList}" /></h1>  
+                                <h1 ><h:outputText value="There is no active course" rendered="#{empty courseManageController.activeCoursesList}" /></h1>  
+                                <p:dataTable value="#{courseManageController.activeCoursesList}"
+                                             var="item"
+                                             rendered="#{not empty courseManageController.activeCoursesList}"
+                                             selectionMode="single"
+                                             selection="#{courseManageController.selectedCourse}"
+                                             rowKey="#{item.courseId}">
+                                    <p:ajax event="rowSelect"  
+                                            update=":form:panel1 :form:panel2 :form:messages1"
+                                            process="@parent"
+                                            listener="#{courseManageController.onRowSelect}" 
+                                            />
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CourseName"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.courseName}"/>
+                                    </p:column>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CurrentSize"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.currentSize}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="MaxSize"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.maxSize}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Term"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.termId.termName}"/>
+                                    </p:column>
+
+                                </p:dataTable>
+
+
+
+                            </p:panel>
+
+                        </div>
+
+                        <div class="ui-g-6" >
+                            <p:panel id="panel2" header="Students"
+                                     toggleable="true" closable="true" toggleableHeader="true"
+                                     style="margin-top: 40px;;">
+                            <p:messages id="messages2"  showIcon="false" />
+
+                                <h3><h:outputText value="Student List" rendered="#{not empty courseManageController.selectedClassesList}"/></h3>
+                                <p:dataTable value="#{courseManageController.selectedClassesList}"
+                                             var="item"
+                                             rendered="#{not empty courseManageController.selectedClassesList}">
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Course Name"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.courseId.courseName}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Student Name"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.userId.name} #{item.userId.surname}"/>
+                                    </p:column>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Vısa Grade"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.vizeNot}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Fınal Grade"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.finalNot}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Letter Grade"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.grade}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:panel>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+        </h:form>
+
+
+
+    </h:body>
+</html>
