@@ -41,10 +41,11 @@ public class CourseManageController extends Controller implements Serializable {
     private List<Courses> activeCoursesList;
     private List<Classes> selectedCourseClassesList;
     private Courses selectedCourse;
+    private Classes selectedCourseTakerAsClasses;
+    private Users selectedCourseTakerAsUsers;
     private Terms currentTerm;
-    
-    private LazyDataModel<Users> users;
-    private LazyDataModel<Users> filteredUsers;
+
+    private boolean renderedGradeUpdate = false;
 
     /**
      * Creates a new instance of CourseManageController
@@ -55,6 +56,7 @@ public class CourseManageController extends Controller implements Serializable {
     @PostConstruct
     @Override
     public void init() {
+        resetValues();
         System.out.println("CourseManage init()");
         FacesContext context = FacesContext.getCurrentInstance();
 
@@ -88,10 +90,16 @@ public class CourseManageController extends Controller implements Serializable {
     @Override
     public void destroy() {
         System.out.println("CourseManage destroy()");
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
+                getExternalContext().getSessionMap();
+        sessionMap.remove(SELECTED_COURSE);
+        sessionMap.remove(SELECTED_COURSE_TAKER_AS_CLASSES);
+        sessionMap.remove(SELECTED_COURSE_TAKER_AS_USERS);
+
         getSession().close();
     }
 
-    public void onRowSelect(SelectEvent event) {
+    public void onCourseRowSelect(SelectEvent event) {
 
         tx = getSession().beginTransaction();
 
@@ -100,22 +108,101 @@ public class CourseManageController extends Controller implements Serializable {
         selectedCourse = (Courses) event.getObject();
         Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap();
+
+        sessionMap.remove(SELECTED_COURSE_TAKER_AS_CLASSES);
+        sessionMap.remove(SELECTED_COURSE_TAKER_AS_USERS);
+
+        selectedCourseTakerAsClasses = null;
+        selectedCourseTakerAsUsers = null;
+
         sessionMap.put(SELECTED_COURSE, selectedCourse);
         currentUser = (Users) sessionMap.get(CURRENT_USER);
 
-//        List<Courses> activeCourses = getSession().createCriteria(Courses.class)
-//                .add(Restrictions.eq("userId.userId", currentUser.getUserId())).list();
         selectedCourseClassesList = new ArrayList<>(selectedCourse.getClassesCollection());
-        System.out.println("selectedCourseClassesList.size() = " + selectedCourseClassesList.size());
+        renderedGradeUpdate = false;
 
-//        for (Classes classes : selectedCourseClassesList) {
-//            selectedCourseTakers.add(classes.getUserId());
-//        }
-//        selectedUserClassesList = classesList();
-//        selectedUserCoursesList = coursesList();
-        FacesMessage msg = new FacesMessage("Course Selected " + selectedCourse.getCourseName());
+        FacesContext.getCurrentInstance()
+                .addMessage(null, new FacesMessage("Course Selected " + selectedCourse.getCourseName()));
+        tx.commit();
+    }
+
+    public void onCourseTakerRowSelect(SelectEvent event) {
+        tx = getSession().beginTransaction();
+
+        System.out.println("CourseTaker Name " + ((Classes) event.getObject()).getUserId().getName());
+
+        selectedCourseTakerAsClasses = ((Classes) event.getObject());
+        selectedCourseTakerAsUsers = ((Users) selectedCourseTakerAsClasses.getUserId());
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
+                getExternalContext().getSessionMap();
+        sessionMap.put(SELECTED_COURSE_TAKER_AS_CLASSES, selectedCourseTakerAsClasses);
+        sessionMap.put(SELECTED_COURSE_TAKER_AS_USERS, selectedCourseTakerAsUsers);
+        renderedGradeUpdate = true;
+        FacesMessage msg = new FacesMessage("CourseTaker Selected " + selectedCourseTakerAsUsers.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
         tx.commit();
+    }
+
+    public void updateStudentGrades() {
+        try {
+            tx = getSession().beginTransaction();
+            System.out.println("updateStudentGrades()");
+            String grade = letterGrade(selectedCourseTakerAsClasses.getVizeNot(),selectedCourseTakerAsClasses.getFinalNot());
+            selectedCourseTakerAsClasses.setGrade(grade);
+            getSession().update(selectedCourseTakerAsClasses);
+
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Fail!Student grades NOT updated!"));
+
+            return;
+        }
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Student grades updated!"));
+    }
+
+    public void resetValues() {
+        selectedCourseClassesList = null;
+        selectedCourse = null;
+        selectedCourseTakerAsClasses = null;
+        selectedCourseTakerAsUsers = null;
+        renderedGradeUpdate = false;
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
+                getExternalContext().getSessionMap();
+
+        sessionMap.remove(SELECTED_COURSE);
+
+        sessionMap.remove(SELECTED_COURSE_TAKER_AS_CLASSES);
+        sessionMap.remove(SELECTED_COURSE_TAKER_AS_USERS);
+
+    }
+
+    public String letterGrade(int midTerm , int finalExam) {
+//        if(classes == null) return "U";
+//        
+//        int midTerm = classes.getVizeNot();
+//        int finalExam = classes.getFinalNot();
+
+        double termGrade = (0.4 * midTerm + 0.6 * finalExam);
+        if (termGrade >= 89.5) {
+            return "AA";
+        } else if (termGrade >= 84.5) {
+            return "BA";
+        } else if (termGrade >= 79.5) {
+            return "BB";
+        } else if (termGrade >= 74.5) {
+            return "CB";
+        } else if (termGrade >= 69.5) {
+            return "CC";
+        } else if (termGrade >= 64.5) {
+            return "DC"; 
+        } else if (termGrade >= 59.5) {
+            return "DD";
+        }
+
+        return "FF";
     }
 
     public List<Courses> getActiveCoursesList() {
@@ -134,12 +221,28 @@ public class CourseManageController extends Controller implements Serializable {
         this.selectedCourse = selectedCourse;
     }
 
+    public Classes getSelectedCourseTakerAsClasses() {
+        return selectedCourseTakerAsClasses;
+    }
+
+    public void setSelectedCourseTakerAsClasses(Classes selectedCourseTakerAsClasses) {
+        this.selectedCourseTakerAsClasses = selectedCourseTakerAsClasses;
+    }
+
     public List<Classes> getSelectedClassesList() {
         return selectedCourseClassesList;
     }
 
     public void setSelectedClassesList(List<Classes> selectedCourseClasses) {
         this.selectedCourseClassesList = selectedCourseClasses;
+    }
+
+    public boolean isRenderedGradeUpdate() {
+        return renderedGradeUpdate;
+    }
+
+    public void setRenderedGradeUpdate(boolean renderedGradeUpdate) {
+        this.renderedGradeUpdate = renderedGradeUpdate;
     }
 
 }

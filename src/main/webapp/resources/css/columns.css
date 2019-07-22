@@ -138,3 +138,19 @@ body .ui-paginator{
     border: 2px grey  solid !important;
 
 }
+
+
+.normal{
+    
+    
+    
+}
+
+.red{
+    background-color: red !important;
+}
+
+.green{
+        background-color: green !important;
+
+}

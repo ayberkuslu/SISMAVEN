@@ -19,7 +19,7 @@ and open the template in the editor.
         <ui:component>
             <p:growl id="messages"/>
             <p:panelMenu style="position: fixed !important;"   >
-                <p:submenu   id="menuAdmin" label="Admin" icon="fa fa-font"   >
+                <p:submenu   id="menuAdmin" label="Admin" icon="fa fa-font" expanded="true"   >
                     <p:submenu label="Kullanici Islemeri" icon="pi pi-briefcase"   >
                         <p:menuitem value="Kullanici Incele" icon="fa fa-user" url="http://localhost:8080/mavenproject1/faces/admin/adminKullaniciGetir.xhtml"  />
                         <p:menuitem value="Kullanici Ekle"  icon="fa fa-user-plus" url="http://localhost:8080/mavenproject1/faces/admin/adminKullaniciEkle.xhtml"/>
@@ -29,37 +29,20 @@ and open the template in the editor.
                     </p:submenu>
                 </p:submenu>
 
-                <p:submenu   id="menuTeacher" label="Teacher"   >
-                    <p:menuitem value="Course" url="http://localhost:8080/mavenproject1/faces/teacher/teacherCourses.xhtml" icon="pi pi-table" />
-                    <p:menuitem value="Enroll" url="http://localhost:8080/mavenproject1/faces/teacher/teacherCourseManage.xhtml" icon="pi pi-user-plus" />
+                <p:submenu   id="menuTeacher" label="Teacher" expanded="true"   >
+                    <p:menuitem value="Add Course" url="http://localhost:8080/mavenproject1/faces/teacher/teacherCourses.xhtml" icon="pi pi-table" />
+                    <p:menuitem value="Course Manage" url="http://localhost:8080/mavenproject1/faces/teacher/teacherCourseManage.xhtml" icon="pi pi-user-plus" />
                 </p:submenu>
 
                 <p:submenu label="Student"  >
-                    <p:menuitem value="Contents" url="#" />
-                    <p:submenu label="Search" icon="pi pi-search">
-                        <p:submenu label="Text">
-                            <p:menuitem value="Workspace" url="#" />
-                        </p:submenu>
-                        <p:menuitem value="File" url="#" />
-                    </p:submenu>
+                    <p:menuitem value="Enroll" url="http://localhost:8080/mavenproject1/faces/student/studentEnroll.xhtml" />
+
                 </p:submenu>
 
-                <p:submenu label="Actions" icon="pi pi-cog" >
-                    <p:submenu label="Ajax" icon="pi pi-refresh">
-                        <p:menuitem value="Save" action="#{menuView.save}" icon="pi pi-save" update="messages"/>
-                        <p:menuitem value="Update" action="#{menuView.update}" icon="pi pi-refresh" update="messages"/>
-                    </p:submenu>
-                    <p:submenu label="Non-Ajax" icon="pi pi-clone">
-                        <p:menuitem value="Delete" action="#{menuView.delete}" icon="pi pi-times" update="messages" ajax="false"/>
-                    </p:submenu>
-                </p:submenu>
 
-                <p:menuitem value="Quit" url="http://www.primefaces.org" icon="pi pi-times" />
+                <p:menuitem value="Quit"  url="http://www.primefaces.org" icon="pi pi-times" />
 
-                <f:facet name="options">
-                    <p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search" />
-                    <p:commandButton type="button" value="Logout" icon="pi pi-home"  action="#{controller.logout()}" />
-                </f:facet>
+
             </p:panelMenu>
 
 
