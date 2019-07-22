@@ -43,10 +43,11 @@ and open the template in the editor.
                 </div>
 
                 <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
+                    <p:messages id="messages1"  showIcon="false" />
 
                     <div class="ui-g"  >
+
                         <div class="ui-g-6" >
-                            <p:messages id="messages1"  showIcon="false" />
 
                             <p:panel id="panel1" 
                                      header="Courses Given"
@@ -102,11 +103,12 @@ and open the template in the editor.
 
                         </div>
 
+                        <!--TODO DRAG AND DROP DATABASE , USER TO COURSELIST-->
+
                         <div class="ui-g-6" >
                             <p:panel id="panel2" header="Students"
                                      toggleable="true" closable="true" toggleableHeader="true"
-                                     style="margin-top: 40px;;">
-                            <p:messages id="messages2"  showIcon="false" />
+                                     style="margin-top: 40px;">
 
                                 <h3><h:outputText value="Student List" rendered="#{not empty courseManageController.selectedClassesList}"/></h3>
                                 <p:dataTable value="#{courseManageController.selectedClassesList}"

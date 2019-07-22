@@ -25,6 +25,7 @@ import javax.faces.view.ViewScoped;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.LazyDataModel;
 
 /**
  *
@@ -36,11 +37,14 @@ public class CourseManageController extends Controller implements Serializable {
 
     private Users currentUser;
     Transaction tx;
+
     private List<Courses> activeCoursesList;
     private List<Classes> selectedCourseClassesList;
     private Courses selectedCourse;
-//    private List<Users> selectedCourseTakers;
     private Terms currentTerm;
+    
+    private LazyDataModel<Users> users;
+    private LazyDataModel<Users> filteredUsers;
 
     /**
      * Creates a new instance of CourseManageController
