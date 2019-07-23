@@ -34,7 +34,7 @@ public class KullaniciGetirController extends Controller {
     private LazyDataModel<Users> users;
 //    private LazyDataModel<UserDetails> userDetails;
 
-    private LazyDataModel<Users> filteredUsers;
+//    private LazyDataModel<Users> filteredUsers;
 //    private LazyDataModel<UserDetails> filteredUserDetails;
 
     private List<Classes> selectedUserClassesList;
@@ -222,13 +222,13 @@ public class KullaniciGetirController extends Controller {
         this.users = users;
     }
 
-    public LazyDataModel<Users> getFilteredUsers() {
-        return filteredUsers;
-    }
-
-    public void setFilteredUsers(LazyDataModel<Users> filteredUsers) {
-        this.filteredUsers = filteredUsers;
-    }
+//    public LazyDataModel<Users> getFilteredUsers() {
+//        return filteredUsers;
+//    }
+//
+//    public void setFilteredUsers(LazyDataModel<Users> filteredUsers) {
+//        this.filteredUsers = filteredUsers;
+//    }
 
     public List<Classes> getSelectedUserClassesList() {
         return selectedUserClassesList;

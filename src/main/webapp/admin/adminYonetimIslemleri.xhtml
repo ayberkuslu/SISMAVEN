@@ -62,8 +62,14 @@ and open the template in the editor.
                                     <p:outputLabel value ="New Term Name" />
                                     <p:inputText id="termName" value="#{donemYonetimController.newTermName}" title="New Term Name" placeholder="Name"  />
                                 </p:panelGrid>
-                                <p:commandButton id="openTerm" value="Start New Term" action="#{donemYonetimController.startNewTerm}" update="panel1"/>
-                                <p:commandButton value="End Current Term" action="#{donemYonetimController.endCurrentTerm()}" update="panel1"/>
+                                <p:commandButton id="openTerm" value="Start New Term"
+                                                 action="#{donemYonetimController.startNewTerm}" update="panel1"
+                                                 style="margin:30px;"
+                                                 />
+                                <p:commandButton id="closeTerm" value="End Current Term"
+                                                 action="#{donemYonetimController.endCurrentTerm()}" update="panel1"
+                                                 />
+
 
                             </p:panel>
 
@@ -78,9 +84,14 @@ and open the template in the editor.
 
                                 <h3><h:outputText   value="ADD-DROP IS CURRENTLY CLOSE" rendered="#{not donemYonetimController.addDropOpen}"/></h3>
                                 <h3><h:outputText   value="ADD-DROP IS CURRENTLY OPEN" rendered="#{donemYonetimController.addDropOpen}"/></h3>
-                                <p:commandButton value="Start Add Drop" action="#{donemYonetimController.startAddDrop()}" update="panel2" style="margin: 20px;" />
+                                <p:commandButton value="Start Add Drop"
+                                                 action="#{donemYonetimController.startAddDrop()}" update="panel2"
+                                                 style="margin: 20px;" 
+                                                 />
 
-                                <p:commandButton value="End Add Drop" action="#{donemYonetimController.endAddDrop()}" update="panel2" />
+                                <p:commandButton value="End Add Drop"
+                                                 action="#{donemYonetimController.endAddDrop()}" update="panel2" 
+                                                 />
                             </p:panel>
                         </div>
 

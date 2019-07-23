@@ -17,6 +17,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -26,7 +27,7 @@ import javax.faces.context.FacesContext;
  * @author hp_user
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class MenuController extends Controller {
 
     /**

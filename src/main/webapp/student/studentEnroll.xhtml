@@ -10,8 +10,8 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"> 
-    
-    
+
+
 
     <h:head>
         <title>Donem Yonetim Islemleri</title>
@@ -49,9 +49,146 @@ and open the template in the editor.
                 <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
                     <p:messages id="messages1"  showIcon="false" />
 
-                    <div >
-                        
-                        
+                    <div class="ui-g">
+                        <div class="ui-g-12">
+                            <p:panel id="panel1" 
+                                     header="Open Courses"
+                                     toggleable="true" 
+                                     closable="true" 
+                                     toggleableHeader="true"
+                                     style="margin-bottom:20px;"
+                                     >
+                                <p:messages id="msg1"  showIcon="true" />
+
+
+                                <h1><h:outputText value="List"/></h1>
+                                <p:dataTable value="#{enrollCourseContoller.openCourses}"
+                                             var="course"
+                                             selection="#{enrollCourseContoller.selectedCourseForEnroll}"
+                                             selectionMode="single"
+                                             rowKey="#{course.courseId}"
+                                             rows="5"
+                                             paginator="true"  paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowStyleClass="#{course.currentSize ge course.maxSize ? 'red' :  course.currentSize*2 ge course.maxSize ? 'yellow' : null }"
+                                             >
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CourseId"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.courseId}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Status"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.status}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Aktif"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.aktif}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CurrentSize"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.currentSize}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="MaxSize"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.maxSize}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="UserId"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.userId}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="TermId"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.termId}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CourseName"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.courseName}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+
+                                <p:commandButton value="Enroll" action="#{enrollCourseContoller.enrollCourse}" update=":form:panel1 :form:panel2"/>
+
+                            </p:panel>
+
+
+                        </div>
+                        <div class="ui-g-6">
+                            
+                            <p:panel id="panel2" 
+                                     header="Taken Courses"
+                                     toggleable="true" 
+                                     closable="true" 
+                                     toggleableHeader="true"
+                                     style="margin-bottom:20px;"                                
+                                >
+     
+                                        <h1><h:outputText value="List"/></h1>
+                                        <p:dataTable value="#{enrollCourseContoller.currentUserClasses}" var="item">
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="ClassesId"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.classesId}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="ClassIdAsString"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.classIdAsString}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="CourseId"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.courseId}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="UserId"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.userId}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Grade"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.grade}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="VizeNot"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.vizeNot}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="FinalNot"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.finalNot}"/>
+                                            </p:column>
+                                        </p:dataTable>
+                                                                                             
+                            </p:panel>
+
+
+                        </div>
                     </div>
 
 

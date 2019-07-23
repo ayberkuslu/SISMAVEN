@@ -66,6 +66,7 @@ public class CourseManageController extends Controller implements Serializable {
 
         RuntimeProperties properties = (RuntimeProperties) getSession().get(RuntimeProperties.class, RUN_TIME_PROPERTY);
 
+        System.out.println("Add Drop : "+ properties.getIsOpenAddDrop());
         currentTerm = properties.getCurrentTerm();
 
         currentUser = (Users) sessionMap.get(CURRENT_USER);
@@ -98,7 +99,25 @@ public class CourseManageController extends Controller implements Serializable {
 
         getSession().close();
     }
+    public void updateStudentGrades() {
+        try {
+            tx = getSession().beginTransaction();
+            System.out.println("updateStudentGrades()");
+            String grade = letterGrade(selectedCourseTakerAsClasses.getVizeNot(),selectedCourseTakerAsClasses.getFinalNot());
+            selectedCourseTakerAsClasses.setGrade(grade);
+            getSession().update(selectedCourseTakerAsClasses);
 
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Fail!Student grades NOT updated!"));
+
+            return;
+        }
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Student grades updated!"));
+    }
     public void onCourseRowSelect(SelectEvent event) {
 
         tx = getSession().beginTransaction();
@@ -143,26 +162,6 @@ public class CourseManageController extends Controller implements Serializable {
         tx.commit();
     }
 
-    public void updateStudentGrades() {
-        try {
-            tx = getSession().beginTransaction();
-            System.out.println("updateStudentGrades()");
-            String grade = letterGrade(selectedCourseTakerAsClasses.getVizeNot(),selectedCourseTakerAsClasses.getFinalNot());
-            selectedCourseTakerAsClasses.setGrade(grade);
-            getSession().update(selectedCourseTakerAsClasses);
-
-            tx.commit();
-        } catch (Exception e) {
-            tx.rollback();
-            e.printStackTrace();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Fail!Student grades NOT updated!"));
-
-            return;
-        }
-
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Student grades updated!"));
-    }
-
     public void resetValues() {
         selectedCourseClassesList = null;
         selectedCourse = null;
@@ -180,11 +179,6 @@ public class CourseManageController extends Controller implements Serializable {
     }
 
     public String letterGrade(int midTerm , int finalExam) {
-//        if(classes == null) return "U";
-//        
-//        int midTerm = classes.getVizeNot();
-//        int finalExam = classes.getFinalNot();
-
         double termGrade = (0.4 * midTerm + 0.6 * finalExam);
         if (termGrade >= 89.5) {
             return "AA";

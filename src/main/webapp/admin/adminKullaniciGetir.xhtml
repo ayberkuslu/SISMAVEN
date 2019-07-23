@@ -17,6 +17,37 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <h:outputStylesheet library="css" name="columns.css"/>
         <h:outputStylesheet library="css" name="menuStyle.css" />
+
+        <style type="text/css">
+            /*            .ui-datatable .ui-datatable-header {
+                            text-align: right !important;
+                        }*/
+
+            /*            .ui-button-text-only .ui-button-text {
+                            padding: 0.3em 0.4em;
+                        }*/
+
+            /*            .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+                            visibility: hidden;
+                        }*/
+
+            /*            .ui-filter-column .ui-column-customfilter .custom-filter {
+                            width: 100%;
+                            box-sizing: border-box;
+                        }*/
+
+            body .ui-selectonemenu .ui-selectonemenu-trigger{
+                visibility: hidden;
+            }
+            /*            body .ui-selectonemenu {
+                            max-width: 40px !important;  
+                            background: red;
+                        }*/
+
+        </style>
+
+
+
     </h:head>
     <h:body>
         <h:form id="form">
@@ -55,6 +86,7 @@ and open the template in the editor.
 
                         <p:dataTable 
                             id="userTable"
+                            widgetVar="userTableVar"
                             var="item" 
                             value="#{kullaniciGetirController.users}"
                             selectionMode="single" 
@@ -72,18 +104,13 @@ and open the template in the editor.
                                     process="@parent"
                                     listener="#{kullaniciGetirController.onRowSelect}" 
                                     />
-                            <p:column headerText="UserId" sortBy="#{item.userId}" filterBy="#{item.userId}" filterMatchMode="contains" >
-                                <!--                                <f:facet name="header">
-                                                                    <h:outputText value="UserId"/>
-                                                                </f:facet>-->
+                            <p:column headerText="UserId" filterBy="#{item.userId}" filterMatchMode="contains" >
                                 <h:outputText value="#{item.userId}"/>
                             </p:column>
-                            <p:column headerText="TCKN" filterBy="#{item.tckn}" filterMatchMode="contains" >
+                            <p:column headerText="TCKN"  filterBy="#{item.tckn}" filterMatchMode="contains" >
                                 <h:outputText value="#{item.tckn}"/>
-
-
                             </p:column>
-                            <p:column headerText="NAME" filterBy="#{item.name}" filterMatchMode="contains" >
+                            <p:column headerText="NAME"  filterBy="#{item.name}" filterMatchMode="contains" >
                                 <h:outputText value="#{item.name}"/>
 
                             </p:column>
@@ -95,15 +122,27 @@ and open the template in the editor.
 
                                 <h:outputText value="#{item.email}"/>
                             </p:column>
-                            <p:column  filterBy="#{item.status}"  filterMatchMode="contains">
-                                <f:facet name="header">
-                                    <h:outputText value="Status"/>
+                            <p:column headerText="Status"  
+                                      filterBy="#{item.status}" 
+                                      >
+                                <f:facet name="filter">
+                                    <p:selectOneMenu  onchange="PF('userTableVar').filter()"  styleClass="custom-filter" >
+                                        <f:converter converterId="javax.faces.Boolean" />
+                                        <f:selectItem itemLabel="All" itemValue="" />
+                                        <f:selectItem itemLabel="ACTIVE" itemValue="true" />
+                                        <f:selectItem itemLabel="PASSIVE" itemValue="false" />
+                                    </p:selectOneMenu>
                                 </f:facet>
-                                <h:outputText value="#{item.aktif}"/>
+                                <h:outputText value="#{item.status ? 'ACTIVE' : 'PASSIVE'}"/>
                             </p:column>
-                            <p:column  filterBy="#{item.type}" filterMatchMode="contains">
-                                <f:facet name="header">
-                                    <h:outputText value="Type"/>
+                            <p:column headerText="Type" filterBy="#{item.type}" >
+                                       <f:facet name="filter">
+                                    <p:selectOneMenu  onchange="PF('userTableVar').filter()"  styleClass="custom-filter" >
+                                        <f:selectItem itemLabel="All" itemValue="" />
+                                        <f:selectItem itemLabel="ADMIN" itemValue="0" />
+                                        <f:selectItem itemLabel="STUDENT" itemValue="1" />
+                                        <f:selectItem itemLabel="TEACHER" itemValue="2" />
+                                    </p:selectOneMenu>
                                 </f:facet>
                                 <h:outputText value="#{item.kullaniciTipi()}"/>
                             </p:column>
@@ -121,9 +160,9 @@ and open the template in the editor.
                             <div class="ui-g-4"></div>
                             <div class="ui-g-4">
                                 <p:commandButton value="Passive" 
-                                                                  action="#{kullaniciGetirController.deleteSelectedUser()}"
-                                                                  styleClass="insertButton declineButton" style="margin-left: 30px !important;"
-                                                                  />
+                                                 action="#{kullaniciGetirController.deleteSelectedUser()}"
+                                                 styleClass="insertButton declineButton" style="margin-left: 30px !important;"
+                                                 />
                             </div>
 
                         </div>

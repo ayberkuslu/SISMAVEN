@@ -7,6 +7,7 @@ package Controllers.Admin;
 
 import Controllers.Controller;
 import Controllers.HibernateUtil;
+import Models.Courses;
 import Models.Logs;
 
 import java.util.Map;
@@ -21,8 +22,10 @@ import Models.RuntimeProperties;
 import Models.Terms;
 import Models.Users;
 import java.util.Date;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import org.hibernate.HibernateException;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -144,6 +147,13 @@ public class DonemYonetimController extends Controller {
 
             currentTerm.setEndDate(new Date());
             currentTerm.setStatus(Terms.CLOSE);
+            
+            List<Courses> currentCourses = getSession().createCriteria(Courses.class)
+                    .add(Restrictions.eq("status", Courses.COURSE_ACTIVE)).list();
+            for(Courses course : currentCourses){
+                course.setStatus(Courses.COURSE_PASIVE);
+                getSession().update(course);
+            }
 
             getSession().update(currentTerm);
             properties.setCurrentTerm(null);

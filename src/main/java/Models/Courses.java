@@ -38,20 +38,16 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Courses.findByCurrentSize", query = "SELECT c FROM Courses c WHERE c.currentSize = :currentSize"),
     @NamedQuery(name = "Courses.findByMaxSize", query = "SELECT c FROM Courses c WHERE c.maxSize = :maxSize")})
 public class Courses implements Serializable {
-    
-    public static final int  DEFAULT_COURSE_MAX_SIZE  = 50;
-    public static final int  COURSE_ACTIVE  = 1;
-    public static final int  COURSE_PASIVE  = 0;
+
+    public static final int DEFAULT_COURSE_MAX_SIZE = 50;
+    public static final int COURSE_ACTIVE = 1;
+    public static final int COURSE_PASIVE = 0;
 
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
     @Column(name = "COURSE_NAME")
     private String courseName;
-
-    @JoinColumn(name = "TERM_ID", referencedColumnName = "TERM_ID")
-    @ManyToOne(optional = false)
-    private Terms termId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -72,6 +68,10 @@ public class Courses implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "courseId")
     private Collection<Classes> classesCollection;
 
+    @JoinColumn(name = "TERM_ID", referencedColumnName = "TERM_ID")
+    @ManyToOne(optional = false)
+    private Terms termId;
+
     public Courses() {
     }
 
@@ -86,6 +86,10 @@ public class Courses implements Serializable {
         this.status = status;
     }
 
+    public void incrementCurrentSize() {
+        this.currentSize++;
+    }
+
     public Integer getCourseId() {
         return courseId;
     }
@@ -94,7 +98,6 @@ public class Courses implements Serializable {
         this.courseId = courseId;
     }
 
-
     public int getStatus() {
         return status;
     }
@@ -102,10 +105,13 @@ public class Courses implements Serializable {
     public void setStatus(int status) {
         this.status = status;
     }
-    
-       public String getAktif(){
-        if(this.status == 1) return "AKTIF";
-        else return "PASIF";
+
+    public String getAktif() {
+        if (this.status == 1) {
+            return "AKTIF";
+        } else {
+            return "PASIF";
+        }
     }
 
     public Integer getCurrentSize() {
@@ -180,5 +186,5 @@ public class Courses implements Serializable {
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
-    
+
 }

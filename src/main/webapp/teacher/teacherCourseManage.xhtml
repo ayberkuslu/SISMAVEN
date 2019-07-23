@@ -51,14 +51,15 @@ and open the template in the editor.
 
                     <div class="ui-g"  >
 
-                        <div class="ui-g-6" >
+                        <div class="ui-g-6"  >
 
                             <p:panel id="panel1" 
                                      header="Courses Given"
                                      toggleable="true" 
                                      closable="true" 
                                      toggleableHeader="true"
-                                     style="margin-top:40px;">
+                                     style="margin-top:40px;"
+                                     >
 
                                 <h1 ><h:outputText value="Open Courses" rendered="#{not empty courseManageController.activeCoursesList}" /></h1>  
                                 <h1 ><h:outputText value="There is no active course" rendered="#{empty courseManageController.activeCoursesList}" /></h1>  
@@ -67,7 +68,11 @@ and open the template in the editor.
                                              rendered="#{not empty courseManageController.activeCoursesList}"
                                              selectionMode="single"
                                              selection="#{courseManageController.selectedCourse}"
-                                             rowKey="#{item.courseId}">
+                                             rowKey="#{item.courseId}"
+                                             rows="5"
+                                             paginator="true"  paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             style="height : 400px;">
                                     <p:ajax event="rowSelect"  
                                             update=":form:panel1 :form:panel2 :form:panel3   :form:messages1"
                                             process="@parent"
@@ -114,8 +119,8 @@ and open the template in the editor.
                                      toggleable="true" 
                                      closable="true"
                                      toggleableHeader="true"
-
-                                     style="margin-top: 40px;"  >
+                                     style="margin-top: 40px;"
+                                    >
 
                                 <h1><h:outputText value="Student List" rendered="#{not empty courseManageController.selectedClassesList}"/></h1>
                                 <p:dataTable value="#{courseManageController.selectedClassesList}"
@@ -128,6 +133,7 @@ and open the template in the editor.
                                              paginator="true"  paginatorPosition="bottom"
                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rowStyleClass="#{classes.grade eq 'FF' ? 'red' : classes.grade eq 'AA' ? 'green': null}"
+                                             style="height : 400px;"
                                              >
                                     <p:ajax event="rowSelect"  
                                             update=":form:panel2 :form:panel3 :form:messages1"
@@ -172,15 +178,17 @@ and open the template in the editor.
                                 closable="true" 
                                 toggleableHeader="true"
                                 rendered="#{courseManageController.renderedGradeUpdate}"
-                                style="margin:40px;">
+                                style="margin:40px;"
+                                >
 
-                                <p:panelGrid columns="4"  >
-                                    <p:outputLabel value="Student Name" style="text-decoration: underline;" />
+                                <p:panelGrid columns="4" 
+                                            style="margin:10px;width: 97%;" >
+                                    <p:outputLabel value="Student Name" style="text-decoration: underline; " />
                                     <p:outputLabel value="Student Mid-Term Grade" style="text-decoration: underline;" />
                                     <p:outputLabel value="Student Final Grade" style="text-decoration: underline;" />
                                     <p:outputLabel value="Student Letter Grade" style="text-decoration: underline;" />
 
-                                    <p:outputLabel value="#{courseManageController.selectedCourseTakerAsClasses.userId.name}"/>
+                                    <p:outputLabel value="#{courseManageController.selectedCourseTakerAsClasses.userId.name}"  />
                                     <p:inputText value="#{courseManageController.selectedCourseTakerAsClasses.vizeNot}" />
                                     <p:inputText value="#{courseManageController.selectedCourseTakerAsClasses.finalNot}" />
                                     <p:outputLabel value="#{courseManageController.selectedCourseTakerAsClasses.grade}" />
