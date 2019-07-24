@@ -58,7 +58,7 @@ and open the template in the editor.
                                      toggleableHeader="true"
                                      style="margin-bottom:20px;"
                                      >
-                                <p:messages id="msg1"  showIcon="true" />
+                                <!--<p:messages id="msg1"  showIcon="true" />-->
 
 
                                 <h1><h:outputText value="List"/></h1>
@@ -82,13 +82,7 @@ and open the template in the editor.
                                         <f:facet name="header">
                                             <h:outputText value="Status"/>
                                         </f:facet>
-                                        <h:outputText value="#{course.status}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Aktif"/>
-                                        </f:facet>
-                                        <h:outputText value="#{course.aktif}"/>
+                                        <h:outputText value="#{course.status == 1 ? 'ACTIVE' : 'PASSIVE'}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
@@ -123,68 +117,65 @@ and open the template in the editor.
                                 </p:dataTable>
 
 
-                                <p:commandButton value="Enroll" action="#{enrollCourseContoller.enrollCourse}" update=":form:panel1 :form:panel2"/>
+                                <p:commandButton value="Enroll" action="#{enrollCourseContoller.enrollCourse}" update=":form:panel1 :form:panel2 messages1"/>
 
                             </p:panel>
 
 
                         </div>
-                        <div class="ui-g-6">
-                            
+                        <div class="ui-g-12">
+
                             <p:panel id="panel2" 
                                      header="Taken Courses"
                                      toggleable="true" 
                                      closable="true" 
                                      toggleableHeader="true"
                                      style="margin-bottom:20px;"                                
-                                >
-     
-                                        <h1><h:outputText value="List"/></h1>
-                                        <p:dataTable value="#{enrollCourseContoller.currentUserClasses}" var="item">
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="ClassesId"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.classesId}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="ClassIdAsString"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.classIdAsString}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="CourseId"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.courseId}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="UserId"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.userId}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Grade"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.grade}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="VizeNot"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.vizeNot}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="FinalNot"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.finalNot}"/>
-                                            </p:column>
-                                        </p:dataTable>
-                                                                                             
+                                     >
+
+                                <h1><h:outputText value="List"/></h1>
+                                <p:dataTable value="#{enrollCourseContoller.currentUserClasses}"
+                                             var="item"
+                                             selection="#{enrollCourseContoller.selectedClassesForDeroll}"
+                                             selectionMode="single"
+                                             rowKey="#{item.classesId}"
+                                             rows="5"
+                                             paginator="true"  paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             >
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CourseName"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.courseId.courseName}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Student Name "/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.userId.name}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Grade"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.grade}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Mid-Term Exam"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.vizeNot}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Final Exam"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.finalNot}"/>
+                                    </p:column>
+                                </p:dataTable>
+                                <p:commandButton value="Deroll" action="#{enrollCourseContoller.derollCourse}" update=":form:panel1 :form:panel2"/>
+
                             </p:panel>
 
 

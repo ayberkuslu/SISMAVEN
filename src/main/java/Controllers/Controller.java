@@ -20,6 +20,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import org.hibernate.HibernateException;
@@ -31,8 +32,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author hp_user
  */
-@ManagedBean
-@ApplicationScoped
+
 public class Controller implements Serializable {
     
     public static final String CURRENT_USER = "mevcut_kullanici";

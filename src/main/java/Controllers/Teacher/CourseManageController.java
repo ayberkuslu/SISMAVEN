@@ -21,11 +21,10 @@ import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.model.LazyDataModel;
 
 /**
  *
@@ -103,7 +102,14 @@ public class CourseManageController extends Controller implements Serializable {
         try {
             tx = getSession().beginTransaction();
             System.out.println("updateStudentGrades()");
-            String grade = letterGrade(selectedCourseTakerAsClasses.getVizeNot(),selectedCourseTakerAsClasses.getFinalNot());
+            int midTermExam = 0 ;
+            if(selectedCourseTakerAsClasses.getVizeNot() != null)
+            midTermExam= selectedCourseTakerAsClasses.getVizeNot();
+            int finalExam = 0 ;
+            if(selectedCourseTakerAsClasses.getFinalNot() !=null)
+            finalExam= selectedCourseTakerAsClasses.getFinalNot();
+            
+            String grade = letterGrade(midTermExam,finalExam);
             selectedCourseTakerAsClasses.setGrade(grade);
             getSession().update(selectedCourseTakerAsClasses);
 
@@ -178,7 +184,7 @@ public class CourseManageController extends Controller implements Serializable {
 
     }
 
-    public String letterGrade(int midTerm , int finalExam) {
+    public String letterGrade(int midTerm , int finalExam ) {
         double termGrade = (0.4 * midTerm + 0.6 * finalExam);
         if (termGrade >= 89.5) {
             return "AA";

@@ -90,6 +90,13 @@ public class Courses implements Serializable {
         this.currentSize++;
     }
 
+    public void decrementCurrentSize() {
+        if (this.currentSize > 0) {
+            this.currentSize--;
+        }
+
+    }
+
     public Integer getCourseId() {
         return courseId;
     }

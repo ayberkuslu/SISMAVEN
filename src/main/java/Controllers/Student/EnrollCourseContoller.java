@@ -8,9 +8,6 @@ package Controllers.Student;
 import Controllers.Controller;
 import static Controllers.Controller.CURRENT_USER;
 import static Controllers.Controller.RUN_TIME_PROPERTY;
-import static Controllers.Controller.SELECTED_COURSE;
-import static Controllers.Controller.SELECTED_COURSE_TAKER_AS_CLASSES;
-import static Controllers.Controller.SELECTED_COURSE_TAKER_AS_USERS;
 import Controllers.HibernateUtil;
 import Models.Classes;
 import Models.Courses;
@@ -22,12 +19,10 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -36,6 +31,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author hp_user
  */
+
 @ManagedBean
 @ViewScoped
 public class EnrollCourseContoller extends Controller {
@@ -49,7 +45,8 @@ public class EnrollCourseContoller extends Controller {
     private Courses selectedCourseForEnroll;
 
     private List<Classes> currentUserClasses;
-    private Courses selectedCourseForDeroll;
+//    private Courses selectedCourseForDeroll;
+    private Classes selectedClassesForDeroll;
 
     /**
      * Creates a new instance of EnrollCourseContoller
@@ -73,19 +70,16 @@ public class EnrollCourseContoller extends Controller {
 
         if (currentTerm == null) {
             openCourses = new ArrayList();
-            context.addMessage(null, new FacesMessage("THERE IS NO OPEN TERM"));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"THERE IS NO OPEN TERM" ,""));
         } else {
 
             openCourses = getSession().createCriteria(Courses.class)
                     .add(Restrictions.eq("status", Courses.COURSE_ACTIVE)).list(); // TODO : ZATEN ALINAN DERSLER CIKARILMALI
 //            currentUserClasses = new ArrayList(currentUser.getClassesCollection());
             currentUserClasses = getSession().createCriteria(Classes.class)
-                    .add(Restrictions.eq("userId.userId", currentUser.getUserId() ))
-//                    .add(Restrictions.eq("courseId.termId.termId", currentTerm.getTermId() ))
+                    .add(Restrictions.eq("userId.userId", currentUser.getUserId()))
+                    //                    .add(Restrictions.eq("courseId.termId.termId", currentTerm.getTermId() ))
                     .list();
-            
-            
-
 
             List<Courses> courseToBeRemovedFromAvaliableList = new ArrayList();
             for (Classes classes : currentUserClasses) {
@@ -103,7 +97,7 @@ public class EnrollCourseContoller extends Controller {
         }
 
         if (!properties.getIsOpenAddDrop()) {
-            context.addMessage(null, new FacesMessage("ADD-DROP IS CLOSE"));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ADD-DROP IS CLOSE","ERROR"));
         }
 
         currentUser = (Users) sessionMap.get(CURRENT_USER);
@@ -118,8 +112,8 @@ public class EnrollCourseContoller extends Controller {
     @Override
     public void destroy() {
         System.out.println("EnrollCourse destroy()");
-        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
-                getExternalContext().getSessionMap();
+//        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
+//                getExternalContext().getSessionMap();
 
         getSession().close();
     }
@@ -134,15 +128,13 @@ public class EnrollCourseContoller extends Controller {
             System.out.println("Open Drop : " + properties.getIsOpenAddDrop());
 
             if (!properties.getIsOpenAddDrop()) {
-                context.addMessage(null, new FacesMessage("FAIL!ADD-DROP IS CLOSE"));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ADD-DROP IS CLOSE","WAIT"));
                 tx.commit();
                 return;
             }
-//            if(currentUser.){
-//                
-//            }
+
             if (selectedCourseForEnroll.getCurrentSize() >= selectedCourseForEnroll.getMaxSize()) {
-                context.addMessage(null, new FacesMessage("FAIL!CLASS IS FULL"));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"FAIL!CLASS IS FULL",""));
                 tx.commit();
                 return;
 
@@ -158,14 +150,46 @@ public class EnrollCourseContoller extends Controller {
             tx.commit();
         } catch (HibernateException e) {
 
-            context.addMessage(null, new FacesMessage("FAIL! ERROR WHILE ENROLLING"));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"FAIL! ERROR WHILE ENROLLING",""));
 
             tx.rollback();
             System.out.println(e);
         }
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"SUCCESSFULLY ENROLLED"," "));
+
     }
 
-    public void derollClass() {
+    public void derollCourse() {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        try {
+            tx = getSession().beginTransaction();
+            RuntimeProperties properties = (RuntimeProperties) getSession().get(RuntimeProperties.class, RUN_TIME_PROPERTY);
+
+            System.out.println("Open Drop : " + properties.getIsOpenAddDrop());
+
+            if (!properties.getIsOpenAddDrop()) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"FAIL!ADD-DROP IS CLOSE" , ""));
+                tx.commit();
+                return;
+            }
+
+            Courses selectedCourseForDeroll = selectedClassesForDeroll.getCourseId();
+
+            selectedCourseForDeroll.decrementCurrentSize(); // courseCurrentSize--;
+            getSession().update(selectedCourseForDeroll);
+            getSession().delete(selectedClassesForDeroll);
+            openCourses.add(selectedCourseForDeroll);
+            currentUserClasses.remove(selectedClassesForDeroll);
+            tx.commit();
+        } catch (HibernateException e) {
+
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"FAIL! ERROR WHILE DEROLLING" , ""));
+
+            tx.rollback();
+            System.out.println(e);
+        }
+        context.addMessage(null, new FacesMessage("SUCCESSFULLY DEROLLED"));
 
     }
 
@@ -185,6 +209,14 @@ public class EnrollCourseContoller extends Controller {
         this.selectedCourseForEnroll = selectedCourseForEnroll;
     }
 
+    public Classes getSelectedClassesForDeroll() {
+        return selectedClassesForDeroll;
+    }
+
+    public void setSelectedClassesForDeroll(Classes selectedClassesForDeroll) {
+        this.selectedClassesForDeroll = selectedClassesForDeroll;
+    }
+
     public List<Classes> getCurrentUserClasses() {
         return currentUserClasses;
     }
@@ -192,7 +224,5 @@ public class EnrollCourseContoller extends Controller {
     public void setCurrentUserClasses(List<Classes> currentUserClasses) {
         this.currentUserClasses = currentUserClasses;
     }
-    
-    
 
 }

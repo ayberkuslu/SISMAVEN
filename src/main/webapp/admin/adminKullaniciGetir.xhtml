@@ -19,30 +19,11 @@ and open the template in the editor.
         <h:outputStylesheet library="css" name="menuStyle.css" />
 
         <style type="text/css">
-            /*            .ui-datatable .ui-datatable-header {
-                            text-align: right !important;
-                        }*/
 
-            /*            .ui-button-text-only .ui-button-text {
-                            padding: 0.3em 0.4em;
-                        }*/
-
-            /*            .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
-                            visibility: hidden;
-                        }*/
-
-            /*            .ui-filter-column .ui-column-customfilter .custom-filter {
-                            width: 100%;
-                            box-sizing: border-box;
-                        }*/
 
             body .ui-selectonemenu .ui-selectonemenu-trigger{
                 visibility: hidden;
             }
-            /*            body .ui-selectonemenu {
-                            max-width: 40px !important;  
-                            background: red;
-                        }*/
 
         </style>
 
@@ -100,7 +81,7 @@ and open the template in the editor.
                             >
 
                             <p:ajax event="rowSelect"  
-                                    update=":form:panel2 @this @parent "
+                                    update=":form:panel2 @parent "
                                     process="@parent"
                                     listener="#{kullaniciGetirController.onRowSelect}" 
                                     />
@@ -136,7 +117,7 @@ and open the template in the editor.
                                 <h:outputText value="#{item.status ? 'ACTIVE' : 'PASSIVE'}"/>
                             </p:column>
                             <p:column headerText="Type" filterBy="#{item.type}" >
-                                       <f:facet name="filter">
+                                <f:facet name="filter">
                                     <p:selectOneMenu  onchange="PF('userTableVar').filter()"  styleClass="custom-filter" >
                                         <f:selectItem itemLabel="All" itemValue="" />
                                         <f:selectItem itemLabel="ADMIN" itemValue="0" />
@@ -154,6 +135,7 @@ and open the template in the editor.
                             <div class="ui-g-4">
                                 <p:commandButton value="Active" 
                                                  action="#{kullaniciGetirController.activateSelectedUser()}"
+                                                 update="panel1"
                                                  styleClass="insertButton" style="margin-left: 30px !important;"
                                                  />
                             </div>
@@ -161,161 +143,159 @@ and open the template in the editor.
                             <div class="ui-g-4">
                                 <p:commandButton value="Passive" 
                                                  action="#{kullaniciGetirController.deleteSelectedUser()}"
+                                                 update="panel1"
                                                  styleClass="insertButton declineButton" style="margin-left: 30px !important;"
                                                  />
                             </div>
-
                         </div>
-
-
                     </p:panel>
                     <br/>
 
-
-
-
-
                     <br/>
 
+                    <p:outputPanel id="panel2">
+                        <p:accordionPanel 
+                            style="margin-bottom:20px; margin-top: 20px; margin-right: 3%; margin-left: 3%;" 
+                            rendered="#{not empty kullaniciGetirController.selectedUserClassesList or 
+                                        not empty kullaniciGetirController.selectedUserCoursesList or 
+                                        not empty kullaniciGetirController.selectedUser}"
+                            >
 
-                    <p:accordionPanel id="panel2" 
-                                      style="margin-bottom:20px; margin-top: 20px; margin-right: 3%; margin-left: 3%;" 
-                                      >
-
-                        <p:tab id="userCourseOrClass" title="Ders Bilgisi"  closable="true" >
-
-
-                            <h1><h:outputText value="Alinan Dersler"  rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" /></h1>
-
-                            <p:dataTable  value="#{kullaniciGetirController.selectedUserClassesList}" var="abc" rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" >
-
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="ClassesID"/>
-                                    </f:facet>
-                                    <h:outputText value="#{abc.classesId}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Course Name"/>
-                                    </f:facet>
-                                    <h:outputText value="#{abc.courseId.courseName}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Ogrenci"/>
-                                    </f:facet>
-                                    <h:outputText value="#{abc.userId.name} #{abc.userId.surname}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Vize Notu"/>
-                                    </f:facet>
-                                    <h:outputText value="#{abc.vizeNot}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Final Notu"/>
-                                    </f:facet>
-                                    <h:outputText value="#{abc.finalNot}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Grade"/>
-                                    </f:facet>
-                                    <h:outputText value="#{abc.grade}"/>
-                                </p:column>
-                            </p:dataTable>
-
-                            <h1 ><h:outputText value="Verilen Dersler"
-                                               rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"/></h1>
-
-                            <p:dataTable value="#{kullaniciGetirController.selectedUserCoursesList}" var="course" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}" >
-
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="CourseId" />
-                                    </f:facet>
-                                    <h:outputText value="#{course.courseId}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Status"/>
-                                    </f:facet>
-                                    <h:outputText value="#{course.aktif}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="CurrentSize"/>
-                                    </f:facet>
-                                    <h:outputText value="#{course.currentSize}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="MaxSize"/>
-                                    </f:facet>
-                                    <h:outputText value="#{course.maxSize}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="UserId"/>
-                                    </f:facet>
-                                    <h:outputText value="#{course.userId}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="TermId"/>
-                                    </f:facet>
-                                    <h:outputText value="#{course.termId}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="CourseName"/>
-                                    </f:facet>
-                                    <h:outputText value="#{course.courseName}"/>
-                                </p:column>
-                            </p:dataTable>
-                        </p:tab>
-
-                        <p:tab title="Personal Info"  closable="true" id="userDetail">
-                            <h1 ><h:outputText value="Personal Infos" rendered="#{not empty kullaniciGetirController.selectedUser}" /></h1>
-
-                            <!--<p:outputPanel id="userDetail2"     >-->
+                            <p:tab id="userCourseOrClass" title="Ders Bilgisi"  closable="true" >
 
 
-                            <p:panelGrid columns="2" rendered="#{not empty kullaniciGetirController.selectedUser}" style="width: 500px;" styleClass="ui-noborder">
-                                <p:repeat id="test" value="#{kullaniciGetirController.selectedUserDetails.values}" var="detail">
-                                    <div class="ui-g">
-                                        <div class="ui-g-6">
-                                            <p:outputLabel value="#{detail.name}"/>
+                                <h1><h:outputText value="Alinan Dersler"  rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" /></h1>
+
+                                <p:dataTable  value="#{kullaniciGetirController.selectedUserClassesList}" var="abc" rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" >
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="ClassesID"/>
+                                        </f:facet>
+                                        <h:outputText value="#{abc.classesId}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Course Name"/>
+                                        </f:facet>
+                                        <h:outputText value="#{abc.courseId.courseName}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Ogrenci"/>
+                                        </f:facet>
+                                        <h:outputText value="#{abc.userId.name} #{abc.userId.surname}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Vize Notu"/>
+                                        </f:facet>
+                                        <h:outputText value="#{abc.vizeNot}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Final Notu"/>
+                                        </f:facet>
+                                        <h:outputText value="#{abc.finalNot}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Grade"/>
+                                        </f:facet>
+                                        <h:outputText value="#{abc.grade}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+                                <h1 ><h:outputText value="Verilen Dersler"
+                                                   rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"/></h1>
+
+                                <p:dataTable value="#{kullaniciGetirController.selectedUserCoursesList}" var="course" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}" >
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CourseId" />
+                                        </f:facet>
+                                        <h:outputText value="#{course.courseId}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Status"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.aktif}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CurrentSize"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.currentSize}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="MaxSize"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.maxSize}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="UserId"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.userId}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="TermId"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.termId}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CourseName"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.courseName}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:tab>
+
+                            <p:tab title="Personal Info"  closable="true" id="userDetail">
+                                <h1 ><h:outputText value="Personal Infos" rendered="#{not empty kullaniciGetirController.selectedUser}" /></h1>
+
+                                <!--<p:outputPanel id="userDetail2"     >-->
+
+
+                                <p:panelGrid columns="2" rendered="#{not empty kullaniciGetirController.selectedUser}" style="width: 500px;" styleClass="ui-noborder">
+                                    <p:repeat id="test" value="#{kullaniciGetirController.selectedUserDetails.values}" var="detail">
+                                        <div class="ui-g">
+                                            <div class="ui-g-6">
+                                                <p:outputLabel value="#{detail.name}"/>
+                                            </div>
+                                            <div class="ui-g-6">
+                                                <p:outputLabel value="#{detail.value}"/> 
+                                            </div>
                                         </div>
-                                        <div class="ui-g-6">
-                                            <p:outputLabel value="#{detail.value}"/> 
-                                        </div>
-                                    </div>
-                                </p:repeat>
-                            </p:panelGrid>
+                                    </p:repeat>
+                                </p:panelGrid>
 
-                            <!--</p:outputPanel>-->
+                                <!--</p:outputPanel>-->
 
 
 
-                        </p:tab>
+                            </p:tab>
 
-                        <!--                        <p:tab 
-                                                    id="userChange"
-                                                    title="User Change Info"
-                                                    >
-                                                    
-                                                    Only fill the areas that you want to change !<br/>
-                                                    <h:outputText value="#{kullaniciGetirController.selectedUser.name}" />
-                                                    
-                                                    
-                                                </p:tab>-->
+                            <!--                        <p:tab 
+                                                        id="userChange"
+                                                        title="User Change Info"
+                                                        >
+                                                        
+                                                        Only fill the areas that you want to change !<br/>
+                                                        <h:outputText value="#{kullaniciGetirController.selectedUser.name}" />
+                                                        
+                                                        
+                                                    </p:tab>-->
 
 
 
-                    </p:accordionPanel>
+                        </p:accordionPanel>
+                    </p:outputPanel>
 
 
                 </div>

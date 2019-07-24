@@ -145,7 +145,7 @@ public class Terms implements Serializable {
         if ((this.termId == null && other.termId != null) || (this.termId != null && !this.termId.equals(other.termId))) {
             return false;
         }
-        return other.termId == this.termId;
+        return other.termId.intValue() == this.termId.intValue();
     }
 
     @Override

@@ -147,10 +147,10 @@ public class DonemYonetimController extends Controller {
 
             currentTerm.setEndDate(new Date());
             currentTerm.setStatus(Terms.CLOSE);
-            
+
             List<Courses> currentCourses = getSession().createCriteria(Courses.class)
                     .add(Restrictions.eq("status", Courses.COURSE_ACTIVE)).list();
-            for(Courses course : currentCourses){
+            for (Courses course : currentCourses) {
                 course.setStatus(Courses.COURSE_PASIVE);
                 getSession().update(course);
             }
@@ -185,12 +185,12 @@ public class DonemYonetimController extends Controller {
             RuntimeProperties properties = (RuntimeProperties) getSession().get(RuntimeProperties.class, RUN_TIME_PROPERTY);
 
             if (properties.getCurrentTerm() == null) {
-                context.addMessage(null, new FacesMessage("There is no current Term"));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"There is no current Term",""));
                 tx.commit();
                 System.out.println("There is no current Term!");
                 return;
             } else if (properties.getIsOpenAddDrop() == OPEN_ADD_DROP) {
-                context.addMessage(null, new FacesMessage("ADD-DROP is Already Open"));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ADD-DROP is Already Open" , ""));
 
                 System.out.println("Already Open!!!!!");
                 tx.commit();
@@ -200,13 +200,16 @@ public class DonemYonetimController extends Controller {
             properties.setIsOpenAddDrop(OPEN_ADD_DROP);
             getSession().save(new Logs(Logs.ADD_DROP_START, "add drop started", currentUser, new Date()));
             getSession().update(properties);
+            properties = (RuntimeProperties) getSession().get(RuntimeProperties.class, RUN_TIME_PROPERTY);
+
+            System.out.println("After Update (Should be true)" + properties.getIsOpenAddDrop());
             tx.commit();
             System.out.println("Add drop basladi");
             addDropOpen = true;
 
         } catch (HibernateException e) {
             System.out.println(e.toString());
-            context.addMessage(null, new FacesMessage("ADD-DROP Couldnt opened.!"));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ADD-DROP Couldnt opened.!",""));
 
             tx.rollback();
 
@@ -229,12 +232,12 @@ public class DonemYonetimController extends Controller {
             tx = getSession().beginTransaction();
             RuntimeProperties properties = (RuntimeProperties) getSession().get(RuntimeProperties.class, RUN_TIME_PROPERTY);
             if (properties.getCurrentTerm() == null) {
-                context.addMessage(null, new FacesMessage("There is no current Term"));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"There is no current Term",""));
                 tx.commit();
                 System.out.println("There is no current Term!");
                 return;
             } else if (properties.getIsOpenAddDrop() == CLOSED_ADD_DROP) {
-                context.addMessage(null, new FacesMessage("ADD-DROP is Already Closed"));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ADD-DROP is Already Closed",""));
                 tx.commit();
                 System.out.println("Already closed!!!!!");
                 return;
@@ -242,11 +245,14 @@ public class DonemYonetimController extends Controller {
             properties.setIsOpenAddDrop(CLOSED_ADD_DROP);
             getSession().save(new Logs(Logs.ADD_DROP_END, "add drop ended", currentUser, new Date()));
             getSession().update(properties);
+            properties = (RuntimeProperties) getSession().get(RuntimeProperties.class, RUN_TIME_PROPERTY);
+            System.out.println("After Update (Should be false)" + properties.getIsOpenAddDrop());
+
             tx.commit();
             addDropOpen = false;
         } catch (HibernateException e) {
             System.out.println(e.toString());
-            context.addMessage(null, new FacesMessage("ADD-DROP Couldnt closed.!"));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ADD-DROP Couldnt closed.!",""));
             tx.rollback();
             return;
         }
