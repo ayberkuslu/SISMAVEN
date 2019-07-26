@@ -138,7 +138,7 @@ public class DonemYonetimController extends Controller {
                 tx.commit();
                 return;
             } else if (properties.getIsOpenAddDrop() == OPEN_ADD_DROP) {
-                context.addMessage(null, new FacesMessage("Term can not be finished while ADD-DROP is still open."));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Term can not be finished while ADD-DROP is still open.",""));
 
                 System.out.println("Already Open!!!!!");
                 tx.commit();
