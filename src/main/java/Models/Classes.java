@@ -68,15 +68,14 @@ public class Classes implements Serializable {
     public Integer getClassesId() {
         return classesId;
     }
-    
-    public String getClassIdAsString(){
+
+    public String getClassIdAsString() {
         return classesId.toString();
     }
 
     public void setClassesId(Integer classesId) {
         this.classesId = classesId;
     }
-
 
     public Courses getCourseId() {
         return courseId;
@@ -142,5 +141,5 @@ public class Classes implements Serializable {
     public void setFinalNot(Integer finalNot) {
         this.finalNot = finalNot;
     }
-    
+
 }

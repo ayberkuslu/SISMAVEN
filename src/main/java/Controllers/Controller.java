@@ -20,6 +20,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import org.hibernate.HibernateException;
@@ -31,13 +32,14 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author hp_user
  */
-@ManagedBean
-@ApplicationScoped
+
 public class Controller implements Serializable {
     
     public static final String CURRENT_USER = "mevcut_kullanici";
     public static final String SELECTED_USER="selectedUser";
     public static final String SELECTED_COURSE="selectedCourse";
+    public static final String SELECTED_COURSE_TAKER_AS_CLASSES="selectedCourseTakerAsClasses";
+    public static final String SELECTED_COURSE_TAKER_AS_USERS="selectedCourseTakerAsUsers";
     public static final int RUN_TIME_PROPERTY = 1;
     public static final boolean OPEN_ADD_DROP = true;
     public static final boolean CLOSED_ADD_DROP = false;

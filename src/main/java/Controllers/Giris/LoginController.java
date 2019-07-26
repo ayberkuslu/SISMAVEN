@@ -18,6 +18,7 @@ import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
@@ -26,7 +27,7 @@ import org.hibernate.Transaction;
  *
  * @author hp_user
  */
-@ApplicationScoped
+@ViewScoped
 @ManagedBean
 public class LoginController extends Controller {
 

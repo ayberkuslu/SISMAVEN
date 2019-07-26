@@ -94,7 +94,7 @@ and open the template in the editor.
 
 .ui-selectonemenu .ui-selectonemenu-label {
 
-    width: 200px !important;     
+    width: 200px ;     
 }
 
 .ui-selectonemenu .ui-selectonemenu-trigger {
@@ -136,5 +136,25 @@ body .ui-panel .ui-panel-titlebar{
 
 body .ui-paginator{
     border: 2px grey  solid !important;
+
+}
+
+
+.normal{
+    
+    
+    
+}
+
+.red{
+    background-color: lightcoral !important;
+}
+
+.green{
+        background-color: lightgreen !important;
+}
+
+.yellow{
+            background-color: lightpink !important;
 
 }

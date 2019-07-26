@@ -9,7 +9,10 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">   
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+
+
     <h:head>
         <title>Donem Yonetim Islemleri</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -19,6 +22,7 @@ and open the template in the editor.
 
 
     </h:head>
+
     <h:body>
         <h:form id="form" >
 
@@ -43,17 +47,19 @@ and open the template in the editor.
                 </div>
 
                 <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
+                    <p:messages id="messages1"  showIcon="false" />
 
                     <div class="ui-g"  >
-                        <div class="ui-g-6" >
-                            <p:messages id="messages1"  showIcon="false" />
+
+                        <div class="ui-g-6"  >
 
                             <p:panel id="panel1" 
                                      header="Courses Given"
                                      toggleable="true" 
                                      closable="true" 
                                      toggleableHeader="true"
-                                     style="margin-top:40px;">
+                                     style="margin-top:40px;"
+                                     >
 
                                 <h1 ><h:outputText value="Open Courses" rendered="#{not empty courseManageController.activeCoursesList}" /></h1>  
                                 <h1 ><h:outputText value="There is no active course" rendered="#{empty courseManageController.activeCoursesList}" /></h1>  
@@ -62,11 +68,15 @@ and open the template in the editor.
                                              rendered="#{not empty courseManageController.activeCoursesList}"
                                              selectionMode="single"
                                              selection="#{courseManageController.selectedCourse}"
-                                             rowKey="#{item.courseId}">
+                                             rowKey="#{item.courseId}"
+                                             rows="5"
+                                             paginator="true"  paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             style="height : 400px;">
                                     <p:ajax event="rowSelect"  
-                                            update=":form:panel1 :form:panel2 :form:messages1"
+                                            update=":form:panel1 :form:panel2 :form:panel3   :form:messages1"
                                             process="@parent"
-                                            listener="#{courseManageController.onRowSelect}" 
+                                            listener="#{courseManageController.onCourseRowSelect}" 
                                             />
                                     <p:column>
                                         <f:facet name="header">
@@ -102,53 +112,105 @@ and open the template in the editor.
 
                         </div>
 
+                        <!--TODO DRAG AND DROP DATABASE , USER TO COURSELIST-->
+
                         <div class="ui-g-6" >
-                            <p:panel id="panel2" header="Students"
-                                     toggleable="true" closable="true" toggleableHeader="true"
-                                     style="margin-top: 40px;;">
-                            <p:messages id="messages2"  showIcon="false" />
+                            <p:outputPanel id="panel2"  >
 
-                                <h3><h:outputText value="Student List" rendered="#{not empty courseManageController.selectedClassesList}"/></h3>
-                                <p:dataTable value="#{courseManageController.selectedClassesList}"
-                                             var="item"
-                                             rendered="#{not empty courseManageController.selectedClassesList}">
+                                <p:panel  header="Students"
+                                          toggleable="true" 
+                                          closable="true"
+                                          toggleableHeader="true"
+                                          style="margin-top: 40px;"
+                                          rendered="#{not empty courseManageController.selectedClassesList}"
 
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Course Name"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.courseId.courseName}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Student Name"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.userId.name} #{item.userId.surname}"/>
-                                    </p:column>
+                                          >
 
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Vısa Grade"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.vizeNot}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Fınal Grade"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.finalNot}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Letter Grade"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.grade}"/>
-                                    </p:column>
-                                </p:dataTable>
-                            </p:panel>
+                                    <h1><h:outputText value="Student List" rendered="#{not empty courseManageController.selectedClassesList}"/></h1>
+                                    <p:dataTable value="#{courseManageController.selectedClassesList}"
+                                                 var="classes"
+                                                 selectionMode="single"
+                                                 selection="#{courseManageController.selectedCourseTakerAsClasses}"
+                                                 rowKey="#{classes.classesId}"
+                                                 rows="5"
+                                                 paginator="true"  paginatorPosition="bottom"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowStyleClass="#{classes.grade eq 'FF' ? 'red' : classes.grade eq 'AA' ? 'green': null}"
+                                                 emptyMessage="There is no current Student!"
+                                                 style="height : 400px;"
+                                                 >
+                                        <p:ajax event="rowSelect"  
+                                                update=":form:panel2 :form:panel3 :form:messages1"
+                                                listener="#{courseManageController.onCourseTakerRowSelect}" 
+                                                />
+
+                                        <p:column filterable="true" filterBy="#{classes.userId.name}">
+                                            <f:facet name="header">
+                                                <h:outputText value="Student Name"/>
+                                            </f:facet>
+                                            <h:outputText value="#{classes.userId.name} #{classes.userId.surname}"/>
+                                        </p:column>
+
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Vısa Grade"/>
+                                            </f:facet>
+                                            <h:outputText value="#{classes.vizeNot}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Fınal Grade"/>
+                                            </f:facet>
+                                            <h:outputText value="#{classes.finalNot}"/>
+                                        </p:column>
+                                        <p:column filterable="true" filterBy="#{classes.grade}" sortable="true" sortBy="#{classes.grade}">
+                                            <f:facet name="header">
+                                                <h:outputText value="Letter Grade"/>
+                                            </f:facet>
+                                            <h:outputText value="#{classes.grade}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:panel>
+                            </p:outputPanel>
                         </div>
 
                     </div>
+                    <div >
+                        <p:outputPanel id="panel3"  >
+                            <p:panel  
+                                header="Grade"
+                                toggleable="true" 
+                                closable="true" 
+                                toggleableHeader="true"
+                                rendered="#{courseManageController.renderedGradeUpdate}"
+                                style="margin:40px;"
+                                >
+                                <!--rendered="#{courseManageController.renderedGradeUpdate}"-->
+
+                                <p:panelGrid columns="4" 
+                                             style="margin:10px;width: 97%;" >
+                                    <p:outputLabel value="Student Name" style="text-decoration: underline; " />
+                                    <p:outputLabel value="Student Mid-Term Grade" style="text-decoration: underline;" />
+                                    <p:outputLabel value="Student Final Grade" style="text-decoration: underline;" />
+                                    <p:outputLabel value="Student Letter Grade" style="text-decoration: underline;" />
+
+                                    <p:outputLabel value="#{courseManageController.selectedCourseTakerAsClasses.userId.name}"  />
+                                    <p:inputText value="#{courseManageController.selectedCourseTakerAsClasses.vizeNot}" />
+                                    <p:inputText value="#{courseManageController.selectedCourseTakerAsClasses.finalNot}" />
+                                    <p:outputLabel value="#{courseManageController.selectedCourseTakerAsClasses.grade}" />
+                                </p:panelGrid>
+                                <p:commandButton value="Change Grades"
+                                                 action="#{courseManageController.updateStudentGrades}"
+                                                 update=":form:panel2 :form:panel3 "
+                                                 style="margin: 20px; width: 95%;"
+                                                 />
+
+                            </p:panel>
+                        </p:outputPanel>
+                    </div>
+
+
+
 
 
 

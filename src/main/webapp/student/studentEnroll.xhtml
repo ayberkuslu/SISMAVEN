@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+
+
+    <h:head>
+        <title>Donem Yonetim Islemleri</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <h:outputStylesheet library="css" name="columns.css"/>
+
+
+
+    </h:head>
+
+    <h:body>
+        <h:form id="form" >
+
+            <div class="ui-g">
+                <div class="ui-g-3" >
+                    <div class="topLeftBar" >
+                        <ui:include src="../default/defaultTopLeftBar.xhtml"   />
+                    </div>                   
+                </div>
+                <div class="ui-g-9"   >
+                    <div styleClass="topmenu" >
+                        <ui:include src="../default/defaultTopBar.xhtml"   />
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-g"  >
+                <div class="ui-g-3">
+                    <div class="sidenav" >
+                        <ui:include src="../default/defaultMenu.xhtml"   />
+                    </div>
+                </div>
+
+                <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
+                    <p:messages id="messages1"   showIcon="false" />
+
+                    <div class="ui-g">
+                        <div class="ui-g-12">
+                            <p:panel id="panel1" 
+                                     header="Open Courses"
+                                     toggleable="true" 
+                                     closable="true" 
+                                     toggleableHeader="true"
+                                     style="margin-bottom:20px;"
+                                     >
+                                <!--<p:messages id="msg1"  showIcon="true" />-->
+
+
+                                <h1><h:outputText value="List"/></h1>
+                                <p:dataTable value="#{enrollCourseContoller.openCourses}"
+                                             var="course"
+                                             selection="#{enrollCourseContoller.selectedCourseForEnroll}"
+                                             selectionMode="single"
+                                             rowKey="#{course.courseId}"
+                                             rows="5"
+                                             paginator="true"  paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowStyleClass="#{course.currentSize ge course.maxSize ? 'red' :  course.currentSize*2 ge course.maxSize ? 'yellow' : null }"
+                                             >
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CourseId"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.courseId}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Status"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.status == 1 ? 'ACTIVE' : 'PASSIVE'}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CurrentSize"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.currentSize}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="MaxSize"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.maxSize}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="UserId"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.userId}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="TermId"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.termId}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CourseName"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.courseName}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+
+                                <p:commandButton value="Enroll" action="#{enrollCourseContoller.enrollCourse}" update=":form:panel1 :form:panel2 messages1"/>
+
+                            </p:panel>
+
+
+                        </div>
+                        <div class="ui-g-12">
+
+                            <p:panel id="panel2" 
+                                     header="Taken Courses"
+                                     toggleable="true" 
+                                     closable="true" 
+                                     toggleableHeader="true"
+                                     style="margin-bottom:20px;"                                
+                                     >
+
+                                <h1><h:outputText value="List"/></h1>
+                                <p:dataTable value="#{enrollCourseContoller.currentUserClasses}"
+                                             var="item"
+                                             selection="#{enrollCourseContoller.selectedClassesForDeroll}"
+                                             selectionMode="single"
+                                             rowKey="#{item.classesId}"
+                                             rows="5"
+                                             paginator="true"  paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             >
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CourseName"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.courseId.courseName}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Student Name "/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.userId.name}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Grade"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.grade}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Mid-Term Exam"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.vizeNot}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Final Exam"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.finalNot}"/>
+                                    </p:column>
+                                </p:dataTable>
+                                <p:commandButton value="Deroll" action="#{enrollCourseContoller.derollCourse}" update=":form:panel1 :form:panel2"/>
+
+                            </p:panel>
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+        </h:form>
+
+
+
+    </h:body>
+</html>
