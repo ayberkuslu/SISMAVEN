@@ -27,13 +27,7 @@ public class LazySorterUsers implements Comparator<Users> {
     @Override
     public int compare(Users user1, Users user2) {
         try {
-//            Object value1 = Users.class.getField(this.sortField).get(user1);
-//            Object value2 = Users.class.getField(this.sortField).get(user2);
-
-//            int value = ((Comparable)value1).compareTo(value2);
             int value = user1.getUserId() - user2.getUserId();
-            System.out.println("Compare value : >" + value);
-
             return SortOrder.ASCENDING.equals(sortOrder) ? value : -1 * value;
         } catch (Exception e) {
             throw new RuntimeException("for User compare @");
