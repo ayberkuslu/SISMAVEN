@@ -34,7 +34,7 @@
     </welcome-file-list>
     <error-page> 
         <exception-type>java.lang.Exception</exception-type> 
-        <location>/faces/error.xhtml</location> 
+        <location>/faces/error.xhtml</location>  
     </error-page> 
     
        <error-page>
