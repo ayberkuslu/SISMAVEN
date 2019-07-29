@@ -67,7 +67,7 @@ and open the template in the editor.
                                         <p:inputText id="name" value="#{kullaniciEkleController.name}" title="User Name"
                                                      placeholder="User Name" required="true"
                                                      />
-                                        
+
                                         <h:outputText value ="Surname" />
                                         <p:inputText  id="surname" value="#{kullaniciEkleController.surname}" title="User Surname"
                                                       placeholder="User Surname" required="true"
@@ -184,7 +184,10 @@ and open the template in the editor.
                                                          update="@parent , confirm" oncomplete="PF('wiz').loadStep('personal', false)" 
                                                          icon="fa fa-times-circle" styleClass="insertButton declineButton"
                                                          immediate="true" ajax="false" resetValues="true" 
-                                                         />
+                                                         >
+                                        </p:commandButton>
+
+
 
                                     </p:panel>
                                 </p:tab>
@@ -197,11 +200,6 @@ and open the template in the editor.
                             <p:keyFilter for="acilTelf" mask="num"/>
                         </div>
 
-
-                    </div>
-                    <center>
-                    </center>
-                    <div id="message">
 
                     </div>
 

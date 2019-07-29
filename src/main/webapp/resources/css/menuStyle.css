@@ -4,33 +4,36 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.*/
 
 /* 
-    Created on : 25 Haz 2019, 11:54:33
-    Author     : hp_user*/
+*   Created on : 25 Haz 2019, 11:54:33
+*    Author     : Ayberk
+*/
 
 body {
-    /*background: #434560 ;*/
-    color:#434560 ;    
+    /*color:#434560 ;*/    
     font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
-    padding: 0;
-    /*background-size: 100%;*/
+    /*padding: 0;*/
     background:#cceeff;
-    /*background: linear-gradient(to bottom, #cceeff 50%, white 80%);*/
-    /*background-size: 200% 100%;*/
-    /*transition: background-position 1s;*/
-    margin: 0;
+
+        margin: 0px;
     text-decoration: none;
 
 
 }
 
+.topLeftMenuButton{
 
-
-The sidebar menu 
-.sidenav {
+    /*    margin: 0px !important;*/
+    background: transparent; height: 100%;
+    width: 100%;
+    /*border: 1px solid black !important;*/
+    border-radius: 0px !important;
+    margin: 0px !important;
 
 }
+
+
 
 
 
@@ -41,9 +44,11 @@ The sidebar menu
     width: 100%;
     position: fixed;   
     padding: 0px !important;
+    margin: 0px !important;
+
     -webkit-border-radius: 0px !important; 
     border-radius: 0px !important; 
-    z-index: 0; 
+    z-index: 0 ; 
     top: 0px;  
 
 
@@ -55,6 +60,7 @@ The sidebar menu
     position: fixed !important;
     width: 75% !important ;
     height: 51px !important;
+    margin: 0px !important;
 
 
 }
@@ -125,7 +131,7 @@ ui-panelmenu-header:hover{
 
 body .ui-panelmenu .ui-panelmenu-header.ui-state-active{
     background: #434560 !important;
-border-radius: 0px !important;
+    border-radius: 0px !important;
     /*color:#434560;*/
     /*border: 0px !important;*/
 
@@ -278,8 +284,8 @@ ui-widget ui-menuitem ui-corner-all ui-menu-parent:active{
     /*background: blue  ;*/
     position: fixed;
     /*background-image: -webkit-linear-gradient(left, #136a8a, #267871);*/
-        background-image: -webkit-linear-gradient(top right, #434560,#136a8a) !important;
-        /*background-image: -webkit-linear-gradient();*/
+    background-image: -webkit-linear-gradient(top right, #434560,#136a8a) !important;
+    /*background-image: -webkit-linear-gradient();*/
     height: 100%;
     width: 25%;
     height: 51px !important;

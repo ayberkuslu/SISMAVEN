@@ -16,13 +16,16 @@ and open the template in the editor.
         <title>Kisisel Bilgi </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <h:outputStylesheet library="css" name="columns.css"/>
-        <h:outputStylesheet library="css" name="menuStyle.css" />
 
         <style type="text/css">
 
 
             body .ui-selectonemenu .ui-selectonemenu-trigger{
                 visibility: hidden;
+            }
+
+            .buttonInherit{
+                position: inherit !important;
             }
 
         </style>
@@ -78,6 +81,8 @@ and open the template in the editor.
                             lazy="true" 
                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                             style="width: 90%;margin-left: 3%; margin-right: 3%;"
+                            emptyMessage="There is no such User!"
+
                             >
 
                             <p:ajax event="rowSelect"  
@@ -85,6 +90,9 @@ and open the template in the editor.
                                     process="@parent"
                                     listener="#{kullaniciGetirController.onRowSelect}" 
                                     />
+                            <f:facet name="header">
+                                User List
+                            </f:facet>
                             <p:column headerText="UserId" filterBy="#{item.userId}" filterMatchMode="contains" >
                                 <h:outputText value="#{item.userId}"/>
                             </p:column>
@@ -136,7 +144,7 @@ and open the template in the editor.
                                 <p:commandButton value="Active" 
                                                  action="#{kullaniciGetirController.activateSelectedUser()}"
                                                  update="panel1"
-                                                 styleClass="insertButton" style="margin-left: 30px !important;"
+                                                 styleClass="insertButton buttonInherit" style="margin-left: 30px !important;"
                                                  />
                             </div>
                             <div class="ui-g-4"></div>
@@ -144,7 +152,8 @@ and open the template in the editor.
                                 <p:commandButton value="Passive" 
                                                  action="#{kullaniciGetirController.deleteSelectedUser()}"
                                                  update="panel1"
-                                                 styleClass="insertButton declineButton" style="margin-left: 30px !important;"
+                                                 styleClass="insertButton declineButton buttonInherit" style="margin-left: 30px !important;"
+
                                                  />
                             </div>
                         </div>
@@ -169,6 +178,7 @@ and open the template in the editor.
                                 <p:dataTable 
                                     value="#{kullaniciGetirController.selectedUserClassesList}"
                                     var="abc"
+                                    emptyMessage="There is no such class!"
                                     rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" >
 
                                     <p:column>
@@ -215,6 +225,8 @@ and open the template in the editor.
                                 <p:dataTable value="#{kullaniciGetirController.selectedUserCoursesList}"
                                              var="course"
                                              widgetVar="verilenDersler"
+                                             emptyMessage="There is no such course!"
+
                                              rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"
                                              >
                                     <p:column>
@@ -224,18 +236,18 @@ and open the template in the editor.
                                         <h:outputText value="#{course.courseId}"/>
                                     </p:column>
                                     <p:column headerText="Status"  
-                                      filterBy="#{course.status}" 
-                                      >
-                                <f:facet name="filter">
-                                    <p:selectOneMenu  onchange="PF('verilenDersler').filter()"  styleClass="custom-filter" >
-                                        <f:converter converterId="javax.faces.Integer" />
-                                        <f:selectItem itemLabel="All" itemValue="" />
-                                        <f:selectItem itemLabel="ACTIVE" itemValue="1" />
-                                        <f:selectItem itemLabel="PASSIVE" itemValue="0" />
-                                    </p:selectOneMenu>
-                                </f:facet>
-                                <h:outputText value="#{course.status == 1 ? 'ACTIVE' : 'PASSIVE'}"/>
-                            </p:column>
+                                              filterBy="#{course.status}" 
+                                              >
+                                        <f:facet name="filter">
+                                            <p:selectOneMenu  onchange="PF('verilenDersler').filter()"  styleClass="custom-filter" >
+                                                <f:converter converterId="javax.faces.Integer" />
+                                                <f:selectItem itemLabel="All" itemValue="" />
+                                                <f:selectItem itemLabel="ACTIVE" itemValue="1" />
+                                                <f:selectItem itemLabel="PASSIVE" itemValue="0" />
+                                            </p:selectOneMenu>
+                                        </f:facet>
+                                        <h:outputText value="#{course.status == 1 ? 'ACTIVE' : 'PASSIVE'}"/>
+                                    </p:column>
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="Current Size"/>

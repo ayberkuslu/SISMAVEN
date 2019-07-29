@@ -112,8 +112,6 @@ and open the template in the editor.
 
                         </div>
 
-                        <!--TODO DRAG AND DROP DATABASE , USER TO COURSELIST-->
-
                         <div class="ui-g-6" >
                             <p:outputPanel id="panel2"  >
 
@@ -122,11 +120,11 @@ and open the template in the editor.
                                           closable="true"
                                           toggleableHeader="true"
                                           style="margin-top: 40px;"
-                                          rendered="#{not empty courseManageController.selectedClassesList}"
+                                          rendered="#{not empty courseManageController.selectedCourse}"
 
                                           >
 
-                                    <h1><h:outputText value="Student List" rendered="#{not empty courseManageController.selectedClassesList}"/></h1>
+                                    <h1><h:outputText value="Student List" rendered="#{not empty courseManageController.selectedCourse}"/></h1>
                                     <p:dataTable value="#{courseManageController.selectedClassesList}"
                                                  var="classes"
                                                  selectionMode="single"
@@ -136,7 +134,7 @@ and open the template in the editor.
                                                  paginator="true"  paginatorPosition="bottom"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                  rowStyleClass="#{classes.grade eq 'FF' ? 'red' : classes.grade eq 'AA' ? 'green': null}"
-                                                 emptyMessage="There is no current Student!"
+                                                 emptyMessage="There is no such Student!"
                                                  style="height : 400px;"
                                                  >
                                         <p:ajax event="rowSelect"  
