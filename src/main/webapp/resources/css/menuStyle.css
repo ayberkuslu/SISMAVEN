@@ -131,7 +131,6 @@ border-radius: 0px !important;
 
 }
 body .ui-panelmenu .ui-panelmenu-header.ui-state-active:hover{
-    /*background : red !important;*/
 
 }
 
@@ -161,7 +160,6 @@ body .ui-panelmenu .ui-panelmenu-header.ui-state-active:hover{
 
 /*admin yazisi click*/ 
 .ui-panelmenu .ui-panelmenu-header a:focus{  
-    /*background: red !important;*/
     /*background-image: -webkit-linear-gradient(left, #267871,#434560) !important;*/
     /*border: 0px !important;*/
 
@@ -169,7 +167,6 @@ body .ui-panelmenu .ui-panelmenu-header.ui-state-active:hover{
 
 
 ui-panelmenu-header text{
-    /*color: red	!important;*/
     background: blueviolet !important;
     color:white !important;
 
@@ -225,8 +222,6 @@ ui-panelmenu-content a{
 }	
 
 .ui-panelmenu .ui-menuitem :enabled{
-    /*background: red !important;*/
-    /*    color: black !important;*/
 }	
 
 
