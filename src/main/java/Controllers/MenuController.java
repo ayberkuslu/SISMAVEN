@@ -6,7 +6,6 @@
 package Controllers;
 
 import Models.Logs;
-import Models.UserDetails;
 import Models.Users;
 import java.io.IOException;
 import java.util.Date;
@@ -15,19 +14,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.inject.Named;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
+
 import javax.faces.context.FacesContext;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class MenuController extends Controller {
 
     /**
@@ -70,9 +67,6 @@ public class MenuController extends Controller {
         sessionMap.remove("kullanici");
 
         insertObject(new Logs(Logs.USER_LOGOUT, "logined out", targetUser, new Date()));
-//        currentUser = new Users();
-//        currentUserDetail = new UserDetails();
-
         System.out.println("logout basarili1");
 
         FacesContext context = FacesContext.getCurrentInstance();

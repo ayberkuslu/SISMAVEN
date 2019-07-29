@@ -11,17 +11,11 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -30,22 +24,22 @@ import org.hibernate.criterion.Restrictions;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
-
 public class Controller implements Serializable {
-    
+
     public static final String CURRENT_USER = "mevcut_kullanici";
-    public static final String SELECTED_USER="selectedUser";
-    public static final String SELECTED_COURSE="selectedCourse";
-    public static final String SELECTED_COURSE_TAKER_AS_CLASSES="selectedCourseTakerAsClasses";
-    public static final String SELECTED_COURSE_TAKER_AS_USERS="selectedCourseTakerAsUsers";
+    public static final String SELECTED_USER = "selectedUser";
+    public static final String SELECTED_COURSE = "selectedCourse";
+    public static final String SELECTED_COURSE_TAKER_AS_CLASSES = "selectedCourseTakerAsClasses";
+    public static final String SELECTED_COURSE_TAKER_AS_USERS = "selectedCourseTakerAsUsers";
     public static final int RUN_TIME_PROPERTY = 1;
     public static final boolean OPEN_ADD_DROP = true;
     public static final boolean CLOSED_ADD_DROP = false;
-    
 
-//    private HibernateUtil helper;
+    public static final String PAGE_LOGIN = "http://localhost:8080/mavenproject1";
+    public static final String PAGE_ERROR = "http://localhost:8080/mavenproject1/faces/error.xhtml";
+
     private Session session;
     private Users currentUser;
     private UserDetails currentUserDetail;
@@ -67,6 +61,41 @@ public class Controller implements Serializable {
     public void init() {
         System.out.println("Controllers.Controller.init()");
         session = HibernateUtil.getSessionFactory().openSession();
+    }
+
+    public boolean hasPermission(Users currentUser, int pageType) {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        if (currentUser == null) {
+            try {
+                System.out.println("Kullanici yok !");
+                context.getExternalContext().redirect(PAGE_LOGIN);
+            } catch (IOException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return false;
+        }
+        System.out.println("User Type : "+currentUser.getType()+ " Page Type : " + pageType );
+
+        int userType = currentUser.getType();
+        if (userType == Users.TYPE_ADMIN) {
+
+            return true;
+        }
+        if (userType == Users.TYPE_TEACHER && pageType == Users.TYPE_STUDENT) {
+
+            return true;
+        }
+
+        if (userType != pageType) {
+            try {
+                context.getExternalContext().redirect(PAGE_ERROR);
+                return false;
+            } catch (IOException ex) {
+            }
+
+        }
+        return true;
     }
 
     public Users getCurrentUser() {
@@ -93,10 +122,10 @@ public class Controller implements Serializable {
     public void setSession(Session session) {
         this.session = session;
     }
-    
-    public void redirectErrorPage(FacesContext context){
-        
-    } 
+
+    public void redirectErrorPage(FacesContext context) {
+
+    }
 
     public Users getUserById(int userId) {
 
@@ -119,11 +148,9 @@ public class Controller implements Serializable {
 //        return null;
     }
 
-
     public UserDetails getUserDetailsById(int userId) {
         try {
 
-//             if(!getSession())
             getSession().beginTransaction();
             List userDetailsList = getSession().createCriteria(UserDetails.class).add(Restrictions.eq("userId.userId", userId)).list();
             getSession().getTransaction().commit();
@@ -177,9 +204,5 @@ public class Controller implements Serializable {
             System.out.println(e + "\n InsertObjectException while inserting :" + o.toString());
         }
     }
-
-
-
-
 
 }

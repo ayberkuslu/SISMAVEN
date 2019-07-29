@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -25,7 +24,7 @@ import org.hibernate.Transaction;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
 @ViewScoped
 @ManagedBean
@@ -72,7 +71,7 @@ public class LoginController extends Controller {
             FacesContext context = FacesContext.getCurrentInstance();
 
             if (targetUser.getStatus() == false) {
-                context.addMessage(null, new FacesMessage("User is not an active user.\nPlease contact with the School Admin."));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"User is not an active user.\nPlease contact with the School Admin.",""));
                 return false;
             }
 

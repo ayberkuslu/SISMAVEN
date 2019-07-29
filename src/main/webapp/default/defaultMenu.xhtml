@@ -8,7 +8,6 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"> 
     <h:head>
         <h:outputStylesheet library="css" name="menuStyle.css" />
@@ -20,12 +19,12 @@ and open the template in the editor.
             <p:growl id="messages"/>
             <p:panelMenu style="position: fixed !important;"   >
                 <p:submenu   id="menuAdmin" label="Admin" icon="fa fa-font" expanded="true"   >
-                    <p:submenu label="Kullanici Islemeri" icon="pi pi-briefcase"   >
-                        <p:menuitem value="Kullanici Incele" icon="fa fa-user" url="http://localhost:8080/mavenproject1/faces/admin/adminKullaniciGetir.xhtml"  />
-                        <p:menuitem value="Kullanici Ekle"  icon="fa fa-user-plus" url="http://localhost:8080/mavenproject1/faces/admin/adminKullaniciEkle.xhtml"/>
+                    <p:submenu label="User Management" icon="pi pi-briefcase"   >
+                        <p:menuitem value="User Examine" icon="fa fa-user" url="http://localhost:8080/mavenproject1/faces/admin/adminKullaniciGetir.xhtml"  />
+                        <p:menuitem value="User Insert"  icon="fa fa-user-plus" url="http://localhost:8080/mavenproject1/faces/admin/adminKullaniciEkle.xhtml"/>
                     </p:submenu>
-                    <p:submenu label="Donem Islemleri" icon="pi pi-briefcase" styleClass="deneme" >
-                        <p:menuitem value="Donem Ayarlari" url="http://localhost:8080/mavenproject1/faces/admin/adminYonetimIslemleri.xhtml" />   
+                    <p:submenu label="Term Management" icon="pi pi-briefcase"  >
+                        <p:menuitem value="Term Settings" url="http://localhost:8080/mavenproject1/faces/admin/adminYonetimIslemleri.xhtml" />   
                     </p:submenu>
                 </p:submenu>
 
@@ -35,12 +34,9 @@ and open the template in the editor.
                 </p:submenu>
 
                 <p:submenu label="Student"  >
-                    <p:menuitem value="Enroll" url="http://localhost:8080/mavenproject1/faces/student/studentEnroll.xhtml" />
+                    <p:menuitem value="Enroll" url="http://localhost:8080/mavenproject1/faces/student/studentEnroll.xhtml" icon="fa fa-bookmark" />
 
                 </p:submenu>
-
-
-                <p:menuitem value="Quit"  url="http://www.primefaces.org" icon="pi pi-times" />
 
 
             </p:panelMenu>

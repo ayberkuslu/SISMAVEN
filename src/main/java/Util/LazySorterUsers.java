@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers.Admin;
+package Util;
 
 import Models.Users;
 import java.util.Comparator;
@@ -11,7 +11,7 @@ import org.primefaces.model.SortOrder;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
 public class LazySorterUsers implements Comparator<Users> {
 

@@ -6,23 +6,32 @@ package Controllers.Admin;
  * and open the template in the editor.
  */
 import Controllers.*;
+import static Controllers.Controller.CURRENT_USER;
+import Models.Logs;
 import Models.UserDetails;
 import Models.Users;
 import java.util.Date;
+import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.regex.Pattern;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import org.hibernate.Transaction;
 import org.primefaces.event.FlowEvent;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
 @ManagedBean
 @ViewScoped
 public class KullaniciEkleController extends Controller {
+
+    private Users currentUser;
+    Transaction tx;
 // user
 
     private String tckn;
@@ -55,7 +64,30 @@ public class KullaniciEkleController extends Controller {
     public KullaniciEkleController() {
     }
 
-    public void insertNewUser() { // DENENMEDI , TODO DENE
+    @PostConstruct
+    @Override
+    public void init() {
+        System.out.println("Kullanici Ekle init()");
+        setSession(HibernateUtil.getSessionFactory().openSession());
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+        currentUser = (Users) sessionMap.get(CURRENT_USER);
+
+        if (hasPermission(currentUser, Users.TYPE_ADMIN) == false) {
+            return;
+        }
+
+    }
+
+    @PreDestroy
+    @Override
+    public void destroy() {
+        System.out.println("CourseManage destroy()");
+
+        getSession().close();
+    }
+
+    public void insertNewUser() { 
         System.out.println("insertNewUser()");
         FacesContext context = FacesContext.getCurrentInstance();
 
@@ -68,7 +100,8 @@ public class KullaniciEkleController extends Controller {
 
         if (!isValid(email)) {
             System.out.println("not valid e mail");
-            context.addMessage(null, new FacesMessage("Wrong Email Adress\nUser is not added."));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wrong Email Adress\nUser is not added.!.", ""));
+
             return;
         }
 
@@ -90,7 +123,7 @@ public class KullaniciEkleController extends Controller {
             gender = "FEMALE";
         }
 
-        System.out.println(phone + "||" + adress + "||" + gender + master + "||" + emergencyPhone + "||" + secretAnswer);
+//        System.out.println(phone + "||" + adress + "||" + gender + master + "||" + emergencyPhone + "||" + secretAnswer);
 
         userDetail.setPhone(phone);
         userDetail.setAdress(adress.replaceAll("i", "I").toUpperCase());
@@ -105,10 +138,17 @@ public class KullaniciEkleController extends Controller {
         userDetail.setUserId(user);
 
         try {
-            insertObject(user);
-            insertObject(userDetail);
+            tx = getSession().beginTransaction();
+            getSession().save(user);
+            getSession().save(userDetail);
+            getSession().save(new Logs(Logs.USER_NEW, "new user created", currentUser, new Date()));
+            System.out.println("Kullanici Eklendi !");
+            resetValues();
+            tx.commit();
+
         } catch (Exception e) {
-            context.addMessage(null, new FacesMessage("Kullanici Ekleme BASARİSİZ."));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "User creating FAILED!.", ""));
+            e.printStackTrace();
             getSession().getTransaction().rollback();
             return;
         }
@@ -129,9 +169,8 @@ public class KullaniciEkleController extends Controller {
         return pat.matcher(email).matches();
     }
 
-    public String onFlowProcess(FlowEvent event) {      
-//        Wizard a = new Wizard();
-//        a.
+    public String onFlowProcess(FlowEvent event) {
+
         if (skip) {
             skip = false;   //reset in case user goes back
             return "confirm";
@@ -142,7 +181,17 @@ public class KullaniciEkleController extends Controller {
 
     public void cancelCreate() {
         System.out.println("Iptal");
-        tckn = null;
+        resetValues();
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(" Canceled"));
+    }
+
+    public void resetValues() {
+        name = null;
+        surname = null;
+        password = null;
+        email = null;
+        tckn = "";
         phone = null;
         adress = null;
         birthday = null;
@@ -155,13 +204,9 @@ public class KullaniciEkleController extends Controller {
         secretAnswer = null;
         registerDate = null;
         userId = null;
-
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(" Canceled"));
-
     }
-    
-        public String getName() {
+
+    public String getName() {
         return name;
     }
 

@@ -28,7 +28,7 @@ import org.primefaces.event.SelectEvent;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
 @ManagedBean
 @ViewScoped
@@ -69,8 +69,9 @@ public class CourseManageController extends Controller implements Serializable {
         currentTerm = properties.getCurrentTerm();
 
         currentUser = (Users) sessionMap.get(CURRENT_USER);
-        if (currentUser.getType() != Users.TYPE_TEACHER) {
-            System.out.println("Not teacher");
+        
+        if(hasPermission(currentUser, Users.TYPE_TEACHER) == false){
+            return;
         }
 
         if (currentTerm == null) {

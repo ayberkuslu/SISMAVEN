@@ -36,14 +36,12 @@ and open the template in the editor.
 .insertButton{
     width: 100px !important;
     height: 40px;
-    /*border-width: 0px !important;*/
     border-radius: 36px !important;
     padding: 0.1em 1em !important;
     margin: 5px !important;
     transition: 0.25s;
     background-color : #007AD9;
-    /*background: #136a8a !important;*/
-    /*background-image: -webkit-linear-gradient(left, #136a8a, #267871) !important;*/
+    position: inherit !important;
 }
 
 .insertButton:hover{

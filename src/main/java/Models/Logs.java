@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
 @Entity
 @Table(name = "logs")
@@ -44,9 +44,9 @@ public class Logs implements Serializable {
     public static final int TERM_END = 8;
     public static final int ADD_DROP_START = 9;
     public static final int ADD_DROP_END = 10;
-    
+
     public static final int NEW_COURSE = 11;
-    
+    public static final int USER_NEW = 12;
 
     private static final long serialVersionUID = 1L;
     @Id

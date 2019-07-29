@@ -20,7 +20,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
 @Entity
 @Table(name = "classes")

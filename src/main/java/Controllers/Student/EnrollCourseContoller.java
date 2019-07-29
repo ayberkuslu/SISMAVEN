@@ -33,7 +33,7 @@ import org.hibernate.criterion.Restrictions;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
 @ManagedBean
 @ViewScoped
@@ -66,15 +66,11 @@ public class EnrollCourseContoller extends Controller {
         tx = getSession().beginTransaction();
         Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         currentUser = (Users) sessionMap.get(CURRENT_USER);
-        if (currentUser == null || !(currentUser.getType() == Users.TYPE_STUDENT)) {
-            System.out.println("YOU ARE NOT A STUDENT !! ");
-            try {
-                context.getExternalContext().redirect("http://localhost:8080/mavenproject1/faces/error.xhtml");
-            } catch (IOException ex) {
-                Logger.getLogger(EnrollCourseContoller.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        
+        if(hasPermission(currentUser, Users.TYPE_STUDENT) == false){
             return;
         }
+
         RuntimeProperties properties = (RuntimeProperties) getSession().get(RuntimeProperties.class, RUN_TIME_PROPERTY);
         
         currentTerm = properties.getCurrentTerm();

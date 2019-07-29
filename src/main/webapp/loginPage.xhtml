@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Hosgeldiniz</title>
+        <title>Welcome</title>
         <h:outputStylesheet library="css" name="loginStyle.css" />
 
 
@@ -16,27 +16,27 @@
 
             <div>
                 <!--<i class="fa fa-user icon"></i>-->
-                <p:inputText type="text" id="studentid" value="#{loginController.userId}"  placeholder="Kullanici Numarasi"   />
+                <p:inputText type="text" id="studentid" value="#{loginController.userId}"  placeholder="User ID"   />
 
             </div>
             <!--<br/>-->
             <div>
 
                 <!--<i class="fa fa-key icon" ></i>-->
-                <p:password id="password" value="#{loginController.userPassword}" placeholder="Sifre"   />
+                <p:password id="password" value="#{loginController.userPassword}" placeholder="Password"   />
             </div> 
             <div >
 
-            <p:commandButton  value="Giris" action="#{loginController.tryLogin()}" icon="fa fa-lock" styleClass="loginButton" />
+            <p:commandButton  value="Login" action="#{loginController.tryLogin()}" icon="fa fa-lock" styleClass="loginButton" />
             
             </div> 
                 <!--<i class="fa fa-key icon" ></i>-->
 
             <br/>
 
-            <p:link  outcome="forgetPassword" value="Sifremi Unuttum" styleClass="secondaryButton"/> <br/>
+            <p:link  outcome="forgetPassword" value="Forget my password" styleClass="secondaryButton"/> <br/>
 
-            <p:link outcome="homePage" value="homePage" styleClass="secondaryButton" />
+            <!--<p:link outcome="homePage" value="homePage" styleClass="secondaryButton" />-->
 
 
             <h:messages globalOnly="true"  styleClass="message"  />

@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
 @Entity
 @Table(name = "runtime_properties")

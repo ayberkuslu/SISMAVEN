@@ -5,6 +5,7 @@
  */
 package Controllers.Admin;
 
+import Util.UserLazyDataModel;
 import Controllers.*;
 import Models.*;
 import java.util.ArrayList;
@@ -25,17 +26,15 @@ import org.primefaces.model.LazyDataModel;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
 @ManagedBean
 @ViewScoped
 public class KullaniciGetirController extends Controller {
 
-    private LazyDataModel<Users> users;
-//    private LazyDataModel<UserDetails> userDetails;
+    private Users currentUser;
 
-//    private LazyDataModel<Users> filteredUsers;
-//    private LazyDataModel<UserDetails> filteredUserDetails;
+    private LazyDataModel<Users> users;
 
     private List<Classes> selectedUserClassesList;
     private List<Courses> selectedUserCoursesList;
@@ -58,6 +57,13 @@ public class KullaniciGetirController extends Controller {
         System.out.println("KullaniciGetir init()");
         setSession(HibernateUtil.getSessionFactory().openSession());
         Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+        currentUser = (Users) sessionMap.get(CURRENT_USER);
+
+        if (hasPermission(currentUser, Users.TYPE_ADMIN) == false) {
+            return;
+        }
+
         loadData();
 
         System.out.println("SessionMap Size : " + sessionMap.size());
@@ -118,9 +124,8 @@ public class KullaniciGetirController extends Controller {
         System.out.println("Kontrol" + selectedUser);
 
         if (getSelectedUser() == null) {
-            FacesMessage msg = new FacesMessage("User Not Selected!");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            return;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"User not selected!",""));
+//            return;
         }
         getSession().beginTransaction();
 
@@ -132,7 +137,7 @@ public class KullaniciGetirController extends Controller {
 
         } catch (HibernateException e) {
             getSession().getTransaction().rollback();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getLocalizedMessage() + "\nFAILED WHILE DELETING!"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"FAILED WHILE DELETING!",""));
             System.out.println(e.getLocalizedMessage() + "\n" + e.getMessage());
             return;
 
@@ -150,7 +155,7 @@ public class KullaniciGetirController extends Controller {
         System.out.println("Kontrol" + selectedUser);
 
         if (getSelectedUser() == null) {
-            FacesMessage msg = new FacesMessage("User Not Selected!");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"User Not Selected!","");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return;
         }
@@ -164,7 +169,7 @@ public class KullaniciGetirController extends Controller {
 
         } catch (HibernateException e) {
             getSession().getTransaction().rollback();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getLocalizedMessage() + "\nFAILED WHILE ACTIVATING!"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"FAILED WHILE ACTIVATING!",""));
             System.out.println(e.getLocalizedMessage() + "\n" + e.getMessage());
             return;
 
@@ -221,14 +226,6 @@ public class KullaniciGetirController extends Controller {
     public void setUsers(LazyDataModel<Users> users) {
         this.users = users;
     }
-
-//    public LazyDataModel<Users> getFilteredUsers() {
-//        return filteredUsers;
-//    }
-//
-//    public void setFilteredUsers(LazyDataModel<Users> filteredUsers) {
-//        this.filteredUsers = filteredUsers;
-//    }
 
     public List<Classes> getSelectedUserClassesList() {
         return selectedUserClassesList;

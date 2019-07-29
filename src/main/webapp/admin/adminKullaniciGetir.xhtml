@@ -161,12 +161,15 @@ and open the template in the editor.
                                         not empty kullaniciGetirController.selectedUser}"
                             >
 
-                            <p:tab id="userCourseOrClass" title="Ders Bilgisi"  closable="true" >
+                            <p:tab id="userCourseOrClass" title="Course Information"  closable="true" >
 
 
-                                <h1><h:outputText value="Alinan Dersler"  rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" /></h1>
+                                <h1><h:outputText value="Taken Courses"  rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" /></h1>
 
-                                <p:dataTable  value="#{kullaniciGetirController.selectedUserClassesList}" var="abc" rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" >
+                                <p:dataTable 
+                                    value="#{kullaniciGetirController.selectedUserClassesList}"
+                                    var="abc"
+                                    rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" >
 
                                     <p:column>
                                         <f:facet name="header">
@@ -182,19 +185,19 @@ and open the template in the editor.
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Ogrenci"/>
+                                            <h:outputText value="Student"/>
                                         </f:facet>
                                         <h:outputText value="#{abc.userId.name} #{abc.userId.surname}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Vize Notu"/>
+                                            <h:outputText value="Mid-Term Exam"/>
                                         </f:facet>
                                         <h:outputText value="#{abc.vizeNot}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Final Notu"/>
+                                            <h:outputText value="Final Exam"/>
                                         </f:facet>
                                         <h:outputText value="#{abc.finalNot}"/>
                                     </p:column>
@@ -206,44 +209,54 @@ and open the template in the editor.
                                     </p:column>
                                 </p:dataTable>
 
-                                <h1 ><h:outputText value="Verilen Dersler"
+                                <h1 ><h:outputText value="Given Courses"
                                                    rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"/></h1>
 
-                                <p:dataTable value="#{kullaniciGetirController.selectedUserCoursesList}" var="course" rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}" >
-
+                                <p:dataTable value="#{kullaniciGetirController.selectedUserCoursesList}"
+                                             var="course"
+                                             widgetVar="verilenDersler"
+                                             rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"
+                                             >
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="CourseId" />
                                         </f:facet>
                                         <h:outputText value="#{course.courseId}"/>
                                     </p:column>
+                                    <p:column headerText="Status"  
+                                      filterBy="#{course.status}" 
+                                      >
+                                <f:facet name="filter">
+                                    <p:selectOneMenu  onchange="PF('verilenDersler').filter()"  styleClass="custom-filter" >
+                                        <f:converter converterId="javax.faces.Integer" />
+                                        <f:selectItem itemLabel="All" itemValue="" />
+                                        <f:selectItem itemLabel="ACTIVE" itemValue="1" />
+                                        <f:selectItem itemLabel="PASSIVE" itemValue="0" />
+                                    </p:selectOneMenu>
+                                </f:facet>
+                                <h:outputText value="#{course.status == 1 ? 'ACTIVE' : 'PASSIVE'}"/>
+                            </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Status"/>
-                                        </f:facet>
-                                        <h:outputText value="#{course.aktif}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="CurrentSize"/>
+                                            <h:outputText value="Current Size"/>
                                         </f:facet>
                                         <h:outputText value="#{course.currentSize}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="MaxSize"/>
+                                            <h:outputText value="Max Size"/>
                                         </f:facet>
                                         <h:outputText value="#{course.maxSize}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="UserId"/>
+                                            <h:outputText value="Lecturer Name"/>
                                         </f:facet>
                                         <h:outputText value="#{course.userId}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="TermId"/>
+                                            <h:outputText value="Term"/>
                                         </f:facet>
                                         <h:outputText value="#{course.termId}"/>
                                     </p:column>
@@ -259,8 +272,6 @@ and open the template in the editor.
                             <p:tab title="Personal Info"  closable="true" id="userDetail">
                                 <h1 ><h:outputText value="Personal Infos" rendered="#{not empty kullaniciGetirController.selectedUser}" /></h1>
 
-                                <!--<p:outputPanel id="userDetail2"     >-->
-
 
                                 <p:panelGrid columns="2" rendered="#{not empty kullaniciGetirController.selectedUser}" style="width: 500px;" styleClass="ui-noborder">
                                     <p:repeat id="test" value="#{kullaniciGetirController.selectedUserDetails.values}" var="detail">
@@ -275,23 +286,10 @@ and open the template in the editor.
                                     </p:repeat>
                                 </p:panelGrid>
 
-                                <!--</p:outputPanel>-->
 
 
 
                             </p:tab>
-
-                            <!--                        <p:tab 
-                                                        id="userChange"
-                                                        title="User Change Info"
-                                                        >
-                                                        
-                                                        Only fill the areas that you want to change !<br/>
-                                                        <h:outputText value="#{kullaniciGetirController.selectedUser.name}" />
-                                                        
-                                                        
-                                                    </p:tab>-->
-
 
 
                         </p:accordionPanel>

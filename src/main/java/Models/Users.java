@@ -24,7 +24,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
 @Entity
 @Table(name = "users")
@@ -246,7 +246,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "[ "+this.name + " " + this.surname +" ]" ;
+        return this.name + " " + this.surname  ;
     }
 
 }

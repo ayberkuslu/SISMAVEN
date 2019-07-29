@@ -5,12 +5,10 @@
  */
 package Models;
 
-import Controllers.Admin.Pair;
+import Util.Pair;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Map.Entry;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +26,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
 @Entity
 @Table(name = "user_details")
@@ -244,25 +242,23 @@ public class UserDetails implements Serializable {
         return true;
     }
 
+    public ArrayList<Pair> getValues() {
+        
+        ArrayList<Pair> values = new ArrayList<>();
+        values.add(new Pair("Name : ", this.getUserId().getName() + " " + this.getUserId().getSurname()));
+        values.add(new Pair("Gender : ", this.gender));
+        values.add(new Pair("Phone : ", this.phone));
+        values.add(new Pair("Adress : ", this.adress));
+        values.add(new Pair("Emergency Phone :", this.emergencyPhone));
+        values.add(new Pair("Graduate : ", this.graduate));
+        values.add(new Pair("Master : ", this.master));
+        values.add(new Pair("Secret Question : ", this.secretQuestion));
+        return values;
+    }
+
     @Override
     public String toString() {
         return "Models.UserDetails[ detailId=" + detailId + " ]";
-    }
-
-    public ArrayList<Pair> getValues() {
-//       List<String> values = new ArrayList();
-        ArrayList<Pair> values = new ArrayList<>();
-        values.add(new Pair("Isim           : ",this.getUserId().getName()+" " +this.getUserId().getSurname() ));
-        values.add(new Pair("Cinsiyet       : ", this.gender));
-        values.add(new Pair("Telefon        : ", this.phone));
-        values.add(new Pair("Adres          : ", this.adress));
-        values.add(new Pair("DetayID        : ", this.detailId.toString()));
-        values.add(new Pair("Acil Tlf NO    :", this.emergencyPhone));
-        values.add(new Pair("Lisans         : ", this.graduate));
-        values.add(new Pair("Yuksek Lisans  : ", this.master));
-//       values.add(new Pair("Gizli Cevap: ",this.secretAnswer));
-        values.add(new Pair("Gizli Soru     : ", this.secretQuestion));
-        return values;
     }
 
 }

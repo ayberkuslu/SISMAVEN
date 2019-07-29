@@ -12,13 +12,13 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 /**
- * @author imssbora
+ * @author Ayberk
+ *
  */
 public class HibernateUtil {
     
   private static StandardServiceRegistry registry; 
   private static SessionFactory sessionFactory;
-//   private static final ThreadLocal<Session> threadLocal = new ThreadLocal();
 
   
   

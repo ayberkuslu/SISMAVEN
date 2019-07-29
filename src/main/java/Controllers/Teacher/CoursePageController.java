@@ -25,7 +25,7 @@ import org.hibernate.Transaction;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
 @ManagedBean
 @ViewScoped
@@ -50,8 +50,8 @@ public class CoursePageController extends Controller {
         Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
         currentUser = (Users) sessionMap.get(CURRENT_USER);
-        if (currentUser.getType() != Users.TYPE_TEACHER) {
-            System.out.println("Not teacher");
+        if(hasPermission(currentUser, Users.TYPE_TEACHER) == false){
+            return;
         }
         System.out.println("SessionMap Size : " + sessionMap.size());
     }
@@ -60,7 +60,6 @@ public class CoursePageController extends Controller {
     @Override
     public void destroy() {
         System.out.println("CoursePage destroy()");
-//        getSession().
         getSession().close();
     }
 
