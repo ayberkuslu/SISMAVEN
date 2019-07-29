@@ -93,6 +93,10 @@ public class Controller implements Serializable {
     public void setSession(Session session) {
         this.session = session;
     }
+    
+    public void redirectErrorPage(FacesContext context){
+        
+    } 
 
     public Users getUserById(int userId) {
 
@@ -115,13 +119,6 @@ public class Controller implements Serializable {
 //        return null;
     }
 
-//    public Object getObject(Class type, Serializable srzbl) {
-//        getSession().beginTransaction();
-//        Object o = getSession().get(type, srzbl);
-//        getSession().getTransaction().commit();
-//
-//        return o;
-//    }
 
     public UserDetails getUserDetailsById(int userId) {
         try {

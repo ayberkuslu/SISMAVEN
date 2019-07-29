@@ -49,7 +49,119 @@ public class KullaniciEkleController extends Controller {
 
     private boolean skip;
 
-    public String getName() {
+    /**
+     * Creates a new instance of KullaniciEkleController
+     */
+    public KullaniciEkleController() {
+    }
+
+    public void insertNewUser() { // DENENMEDI , TODO DENE
+        System.out.println("insertNewUser()");
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        int parse = 0;
+        try {
+            parse = Integer.parseInt(type);
+
+        } catch (NumberFormatException e) {
+        }
+
+        if (!isValid(email)) {
+            System.out.println("not valid e mail");
+            context.addMessage(null, new FacesMessage("Wrong Email Adress\nUser is not added."));
+            return;
+        }
+
+        Users user = new Users();
+
+        user.setTckn(tckn);
+        user.setName(name.replaceAll("i", "I").toUpperCase());
+        user.setSurname(surname.replaceAll("i", "I").toUpperCase());
+        user.setPassword(sha256(password));
+        user.setEmail(email);
+        user.setStatus(true);
+        user.setType(parse);
+
+        UserDetails userDetail = new UserDetails();
+
+        if (gender.toLowerCase().charAt(0) == 'm') {
+            gender = "MALE";
+        } else {
+            gender = "FEMALE";
+        }
+
+        System.out.println(phone + "||" + adress + "||" + gender + master + "||" + emergencyPhone + "||" + secretAnswer);
+
+        userDetail.setPhone(phone);
+        userDetail.setAdress(adress.replaceAll("i", "I").toUpperCase());
+        userDetail.setBirthday(birthday);
+        userDetail.setGender(gender.toUpperCase());
+        userDetail.setGraduate(graduate.replaceAll("i", "I").toUpperCase());
+        userDetail.setMaster(master.replaceAll("i", "I").toUpperCase());
+        userDetail.setEmergencyPhone(emergencyPhone);
+        userDetail.setSecretQuestion(secretQuestion);
+        userDetail.setSecretAnswer(sha256(secretAnswer));
+        userDetail.setRegisterDate(new Date());
+        userDetail.setUserId(user);
+
+        try {
+            insertObject(user);
+            insertObject(userDetail);
+        } catch (Exception e) {
+            context.addMessage(null, new FacesMessage("Kullanici Ekleme BASARİSİZ."));
+            getSession().getTransaction().rollback();
+            return;
+        }
+        context.addMessage(null, new FacesMessage(user.getUserId() + " Numarali Kullanici Eklendi."));
+
+    }
+
+    public static boolean isValid(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."
+                + "[a-zA-Z0-9_+&*-]+)*@"
+                + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
+                + "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null) {
+            return false;
+        }
+        return pat.matcher(email).matches();
+    }
+
+    public String onFlowProcess(FlowEvent event) {      
+//        Wizard a = new Wizard();
+//        a.
+        if (skip) {
+            skip = false;   //reset in case user goes back
+            return "confirm";
+        } else {
+            return event.getNewStep();
+        }
+    }
+
+    public void cancelCreate() {
+        System.out.println("Iptal");
+        tckn = null;
+        phone = null;
+        adress = null;
+        birthday = null;
+        gender = null;
+        currentGpa = null;
+        graduate = null;
+        master = null;
+        emergencyPhone = null;
+        secretQuestion = null;
+        secretAnswer = null;
+        registerDate = null;
+        userId = null;
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(" Canceled"));
+
+    }
+    
+        public String getName() {
         return name;
     }
 
@@ -207,119 +319,6 @@ public class KullaniciEkleController extends Controller {
 
     public void setSkip(boolean skip) {
         this.skip = skip;
-    }
-
-    /**
-     * Creates a new instance of KullaniciEkleController
-     */
-    public KullaniciEkleController() {
-    }
-
-    public void insertNewUser() { // DENENMEDI , TODO DENE
-        System.out.println("insertNewUser()");
-        FacesContext context = FacesContext.getCurrentInstance();
-
-        int parse = 0;
-        try {
-            parse = Integer.parseInt(type);
-
-        } catch (NumberFormatException e) {
-        }
-
-        if (!isValid(email)) {
-            System.out.println("not valid e mail");
-            context.addMessage(null, new FacesMessage("Wrong Email Adress\nUser is not added."));
-            return;
-        }
-
-        Users user = new Users();
-
-        user.setTckn(tckn);
-        user.setName(name.replaceAll("i", "I").toUpperCase());
-        user.setSurname(surname.replaceAll("i", "I").toUpperCase());
-        user.setPassword(sha256(password));
-        user.setEmail(email);
-        user.setStatus(true);
-        user.setType(parse);
-
-        UserDetails userDetail = new UserDetails();
-
-        if (gender.toLowerCase().charAt(0) == 'm') {
-            gender = "MALE";
-        } else {
-            gender = "FEMALE";
-        }
-
-        System.out.println(phone + "||" + adress + "||" + gender + master + "||" + emergencyPhone + "||" + secretAnswer);
-
-        userDetail.setPhone(phone);
-        userDetail.setAdress(adress.replaceAll("i", "I").toUpperCase());
-        userDetail.setBirthday(birthday);
-        userDetail.setGender(gender.toUpperCase());
-        userDetail.setGraduate(graduate.replaceAll("i", "I").toUpperCase());
-        userDetail.setMaster(master.replaceAll("i", "I").toUpperCase());
-        userDetail.setEmergencyPhone(emergencyPhone);
-        userDetail.setSecretQuestion(secretQuestion);
-        userDetail.setSecretAnswer(sha256(secretAnswer));
-        userDetail.setRegisterDate(new Date());
-        userDetail.setUserId(user);
-
-        try {
-            insertObject(user);
-            insertObject(userDetail);
-        } catch (Exception e) {
-            context.addMessage(null, new FacesMessage("Kullanici Ekleme BASARİSİZ."));
-            getSession().getTransaction().rollback();
-            return;
-        }
-        context.addMessage(null, new FacesMessage(user.getUserId() + " Numarali Kullanici Eklendi."));
-
-    }
-
-    public static boolean isValid(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."
-                + "[a-zA-Z0-9_+&*-]+)*@"
-                + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
-                + "A-Z]{2,7}$";
-
-        Pattern pat = Pattern.compile(emailRegex);
-        if (email == null) {
-            return false;
-        }
-        return pat.matcher(email).matches();
-    }
-
-    public String onFlowProcess(FlowEvent event) {      
-//        Wizard a = new Wizard();
-//        a.
-        if (skip) {
-            skip = false;   //reset in case user goes back
-            return "confirm";
-        } else {
-            return event.getNewStep();
-        }
-    }
-
-    public void cancelCreate() {
-        System.out.println("Iptal");
-//        PrimeFaces.current().resetInputs(":form:personal");
-        tckn = null;
-        phone = null;
-        adress = null;
-        birthday = null;
-        gender = null;
-        currentGpa = null;
-        graduate = null;
-        master = null;
-        emergencyPhone = null;
-        secretQuestion = null;
-        secretAnswer = null;
-        registerDate = null;
-        userId = null;
-
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(" Canceled"));
-
     }
 
 }
