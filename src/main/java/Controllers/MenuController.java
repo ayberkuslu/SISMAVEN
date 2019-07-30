@@ -16,13 +16,16 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 import javax.faces.context.FacesContext;
 
 /**
  *
  * @author Ayberk
+ * 
  */
+
 @ManagedBean
 @RequestScoped
 public class MenuController extends Controller {
@@ -58,13 +61,14 @@ public class MenuController extends Controller {
 
     }
 
-    public String logout() {
+    public void logout() {
         System.out.println("logout girdi");
         Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap();
         Users targetUser;
-        targetUser = (Users) sessionMap.get("kullanici");
-        sessionMap.remove("kullanici");
+        targetUser = (Users) sessionMap.get(Controller.CURRENT_USER);
+        sessionMap.remove(Controller.CURRENT_USER);
+        sessionMap.clear();
 
         insertObject(new Logs(Logs.USER_LOGOUT, "logined out", targetUser, new Date()));
         System.out.println("logout basarili1");
@@ -73,15 +77,11 @@ public class MenuController extends Controller {
         context.getExternalContext().invalidateSession();
 
         try {
-            System.out.println("logout basarili2");
-
-            context.getExternalContext().redirect("loginPage.xhtml");
+            context.getExternalContext().redirect(Controller.PAGE_LOGIN);
             System.out.println("Yonlendirme basarili");
-            return "loginPage.xhtml";
         } catch (IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "ABC";
     }
 
 }

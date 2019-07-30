@@ -17,32 +17,41 @@ and open the template in the editor.
 
     </h:head>
     <h:body>
-        <h:form>
+               <h:form id="form">
 
-            <div class="topLeftBar" >
-                <ui:include src="./default/defaultTopLeftBar.xhtml"   />
-            </div>  
             <div class="ui-g">
-                <!--<div class="ui-g-12" style="background-color: #efa64c; height: 100px; width: 10px; position: fixed;"/>-->
-            </div>
-            <div class="ui-g" id="page">
-
                 <div class="ui-g-3" >
-                    <div class="sidenav">
-                        <ui:insert  >
-                            <ui:include src="./default/defaultMenu.xhtml"  />
-                        </ui:insert>
+                    <div class="topLeftBar" >
+                        <ui:include src="./default/defaultTopLeftBar.xhtml"   />
+                    </div>                   
+                </div>
+                <div class="ui-g-9"   >
+                    <div styleClass="topmenu" >
+                        <ui:include src="./default/defaultTopBar.xhtml"   />
                     </div>
                 </div>
-                <!--            <div class="ui-g-9" id="slideShow" style="margin-left: 25%">
-                
-                                <ui:insert id="content">
-                
-                
-                                </ui:insert>   
-                            </div>-->
+            </div>
+
+
+            <div class="ui-g"  >
+                <div class="ui-g-3">
+                    <div class="sidenav" >
+                        <ui:include src="./default/defaultMenu.xhtml"   />
+                    </div>
+                </div>
+
+                <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
+
+
+
+
+
+                </div>
+
+
 
             </div>
+
         </h:form>
 
     </h:body>

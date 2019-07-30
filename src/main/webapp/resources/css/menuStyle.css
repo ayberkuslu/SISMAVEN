@@ -9,14 +9,11 @@ and open the template in the editor.*/
 */
 
 body {
-    /*color:#434560 ;*/    
     font-family: "Source Sans Pro", "Helvetica Neue", sans-serif !important;
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
-    /*padding: 0;*/
-    background:#cceeff;
 
-        margin: 0px;
+    margin: 0px;
     text-decoration: none;
 
 
@@ -56,11 +53,14 @@ body {
 .ui-menu, .ui-menu .ui-menu-child{
     -webkit-border-radius: 0px !important; 
     border-radius: 0px !important ; 
-    background: #434560 !important;
+    /*background: #434560 !important;*/
+    background: white !important;
     position: fixed !important;
     width: 75% !important ;
     height: 51px !important;
     margin: 0px !important;
+    box-shadow : 0 0 4px rgba(0, 0, 0, 0.3);
+
 
 
 }
@@ -74,7 +74,7 @@ topmenu .ui-corner-all{
 .ui-corner-all{  
     -webkit-border-radius: 0px  ; 
     border-radius: 0px ; 
-    border: none !important; 
+    /*border: none !important;*/ 
 }
 
 .ui-widget-content{
@@ -96,8 +96,9 @@ topmenu .ui-corner-all{
 
 
 .ui-panelmenu{
-    /*background: none !important;*/
-    background-image: -webkit-linear-gradient(top, #267871,#434560) !important;
+    /*background : #42494f!important;*/
+    background : #2d353c !important;
+    /*color: white ;*/
 
     min-height: 100%;   
     max-height :  100%;
@@ -114,6 +115,10 @@ topmenu .ui-corner-all{
 .ui-panelmenu a{
     color: #000000;
 
+}
+
+body .ui-panelmenu .ui-panelmenu-content .ui-menuitem-link {
+    color: #a8acb1 !important;
 }
 
 .ui-panelmenu-header{
@@ -174,7 +179,7 @@ body .ui-panelmenu .ui-panelmenu-header.ui-state-active:hover{
 
 ui-panelmenu-header text{
     background: blueviolet !important;
-    color:white !important;
+    color:white  !important;
 
 
 }
@@ -197,7 +202,6 @@ ui-panelmenu-content a{
 /*.ui-panelmenu .ui-menu-list:focus{
     background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
 
-
 }*/
 .ui-panelmenu .ui-menu-list:focus{
     color:black !important;
@@ -208,8 +212,10 @@ ui-panelmenu-content a{
 }
 
 .ui-panelmenu .ui-menu-list a:hover{
-    background: #136a8a !important;  
-    background-image: -webkit-linear-gradient(left, #267871,#434560) !important;
+        background : #444d56 !important;
+
+    /*background: #136a8a !important;*/  
+    /*background-image: -webkit-linear-gradient(left, #267871,#434560) !important;*/
 
 }
 
@@ -225,14 +231,19 @@ ui-panelmenu-content a{
     /*background: x !important;*/
     background:   none !important;
 
-}	
+}
+.layout-wrapper .layout-menu li a {
+    
+    /*color: #a8acb1 !important;*/
+
+}
 
 .ui-panelmenu .ui-menuitem :enabled{
 }	
 
 
 .ui-menuitem-text{
-    color: white !important;
+    color: #a8acb1 !important;
     font-size: 14px !important;
     background: none	 !important;
 }	

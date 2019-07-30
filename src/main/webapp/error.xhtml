@@ -30,8 +30,61 @@ MA 02110-1301  USA
         <title>Donem Yonetim Islemleri</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        <h:outputStylesheet library="css" name="columns.css"/>
 
+        <style type="text/css">
+            .exception-top{
+
+                height: 30% !important;
+                top:0px !important;
+                left:0px !important;
+                position: absolute !important;
+                width: 100% !important;
+                background-color: #F0F3F5  !important;
+                padding: 0px !important;
+                margin: 0px !important;
+                border: 0px !important;
+            }
+
+
+
+            .exception-bottom{
+                min-height: 70% !important;
+                position: absolute !important;
+
+                width: 100% !important;
+                top: 30%;
+                left:0px !important;
+                background: #ce5051 !important;
+                padding: 0px !important;
+                margin: 0px !important;
+                border: 0px !important;
+                height: 70%;
+            }
+
+
+            .ui-button {
+                /*height: 40px ;*/
+                width: 100px;
+                /*border-radius: 24px !important;*/
+                padding: 0.1em 1em !important;
+                margin: 5px !important;
+                transition: 0.25s !important;
+                /*text-align: center!important ;*/
+
+                background: #2d353c   !important;
+                border : 1.5px solid transparent !important;
+            }
+
+            .ui-button:hover {
+
+                background : #693a8c !important;
+
+            }
+
+
+
+
+        </style>
 
 
     </h:head>
@@ -39,38 +92,37 @@ MA 02110-1301  USA
     <h:body>
         <h:form id="form" >
 
-            <div class="ui-g">
-                <div class="ui-g-3" >
-                    <div class="topLeftBar" >
-                        <ui:include src="./default/defaultTopLeftBar.xhtml"   />
-                    </div>                   
-                </div>
-                <div class="ui-g-9"   >
-                    <div styleClass="topmenu" >
-                        <ui:include src="./default/defaultTopBar.xhtml"   />
-                    </div>
-                </div>
+
+            <div class="exception-top">
+                <center >
+
+
+                    <img id="j_idt7" src="./resources/images/icon-access.png" alt="" style="margin-top: 70px; height: 100px; width: 100px;" />
+                </center>
             </div>
 
-            <div class="ui-g"  >
-                <div class="ui-g-3">
-                    <div class="sidenav" >
-                        <ui:include src="./default/defaultMenu.xhtml"   />
-                    </div>
-                </div>
+            <div class="exception-bottom">
 
-                <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
-                    <p:messages id="messages1"   showIcon="false" />
-                    <center>
-                        <h1><h:outputText value ="NOT PERMISSION FOR THIS PAGE" /> </h1>
-                        <p:commandButton value="Go to main page !" />;
-                    </center>
+                <p:messages id="messages1"   showIcon="false" />
+                <center>
+                    <h1 style="color: white;">Access Denied</h1>
+                    <br/>
+                    <p:outputLabel value="You Don't Have Permissions To Access This Resource"
+                                   style="color : white;"
+                                   />
 
-                </div>
+                    <br/>
+                    <br/>
+
+                    <p:commandButton 
+                        value="Dashboard"
+                        action="#{errorPageController.goHomePage()}" 
+                        style="width: 25%;"
+                        icon="fa fa-home"
+                        iconPos="left"/>
+                </center>
+
             </div>
-
-
-
 
 
         </h:form>

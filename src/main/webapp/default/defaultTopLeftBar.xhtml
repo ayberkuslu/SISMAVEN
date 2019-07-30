@@ -18,9 +18,15 @@ and open the template in the editor.
     <h:body>
         <!--<ui:component>-->
 
-            <p:commandButton  value="Dashboard" 
-                              styleClass="topLeftMenuButton"
-                              />
+        <p:commandButton  value="Dashboard"
+                          action="#{errorPageController.goHomePage()}" 
+                          icon="fa fa-home"
+                          iconPos="left"
+                          styleClass="topLeftMenuButton"
+                          />
+
+
+
         <!--</ui:component>-->
     </h:body>
 </html>

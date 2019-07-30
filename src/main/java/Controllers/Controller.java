@@ -39,6 +39,7 @@ public class Controller implements Serializable {
 
     public static final String PAGE_LOGIN = "http://localhost:8080/mavenproject1";
     public static final String PAGE_ERROR = "http://localhost:8080/mavenproject1/faces/error.xhtml";
+    public static final String PAGE_HOME = "http://localhost:8080/mavenproject1/faces/homePage.xhtml";
 
     private Session session;
     private Users currentUser;
@@ -75,7 +76,7 @@ public class Controller implements Serializable {
             }
             return false;
         }
-        System.out.println("User Type : "+currentUser.getType()+ " Page Type : " + pageType );
+        System.out.println("User Type : " + currentUser.getType() + " Page Type : " + pageType);
 
         int userType = currentUser.getType();
         if (userType == Users.TYPE_ADMIN) {

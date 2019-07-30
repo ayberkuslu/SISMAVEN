@@ -115,7 +115,10 @@ and open the template in the editor.
                                 </p:dataTable>
 
 
-                                <p:commandButton value="Enroll" action="#{enrollCourseContoller.enrollCourse}" update=":form:panel1 :form:panel2 messages1"/>
+                                <p:commandButton value="Enroll" action="#{enrollCourseContoller.enrollCourse}"
+                                                 update=":form:panel1 :form:panel2 messages1"
+                                                 style="margin:30px; width: 100%;"
+                                                 />
 
                             </p:panel>
 
@@ -172,7 +175,11 @@ and open the template in the editor.
                                         <h:outputText value="#{item.finalNot}"/>
                                     </p:column>
                                 </p:dataTable>
-                                <p:commandButton value="Deroll" action="#{enrollCourseContoller.derollCourse}" update=":form:panel1 :form:panel2"/>
+                                <p:commandButton value="Deroll" action="#{enrollCourseContoller.derollCourse}"
+                                                 update=":form:panel1 :form:panel2"
+                                                 style="margin:30px; width: 100%;"
+
+                                                 />
 
                             </p:panel>
 

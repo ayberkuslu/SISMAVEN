@@ -11,6 +11,11 @@ and open the template in the editor.
 
 }
 
+:root { 
+    /*background:#cceeff;*/
+    background: #c2dfef !important;
+}
+
 
 .firstColumn {
     width: 100px;
@@ -33,41 +38,33 @@ and open the template in the editor.
 }
 
 .insertButton:hover{
-    /*background-image: -webkit-linear-gradient(left, #267871,#136a8a) !important;*/
-    border :0.7px solid green !important;
+    border : 1.5px solid green !important;
     transition: 0.25s;
 }
 .declineButton:hover{
-    /*background-image: -webkit-linear-gradient(left, #267871,#136a8a) !important;*/
-    border :0.7px solid red !important;
+    border :1.5px  solid red !important;
     transition: 0.25s;
 
 
 }
 
-.insertButton:focus{
-
-    /*background-image: -webkit-linear-gradient(right, #267871,#136a8a) !important;*/
-    transition: 0.25s;
-
-}
 
 .ui-button {
-/*    height: 40px ;
-    width: 100px;*/
+    /*height: 40px ;*/
+    width: 100px;
     border-radius: 24px !important;
     padding: 0.1em 1em !important;
     margin: 5px !important;
     transition: 0.25s !important;
     /*text-align: center!important ;*/
-    background: #00acac !important;
 
+    background: #6c76af !important;
+    border : 1.5px solid transparent !important;
 }
 
 .ui-button:hover {
-            background: #007979 !important;
 
-        /*background: #2c3e50 !important;*/
+    background : #693a8c !important;
 
 }
 
@@ -87,7 +84,8 @@ and open the template in the editor.
 
     width: 200px;
     height: 30px;
-    /*background : white !important;*/    
+    border: 1px solid black;
+    /*background : #cccccc !important;*/    
 }
 
 .p-datepicker{
@@ -104,7 +102,7 @@ and open the template in the editor.
 
 .ui-selectonemenu .ui-selectonemenu-trigger {
 
-    height: 40px !important;
+    /*height: 40px !important;*/
     background: none transparent;
     border: none;
 }
@@ -112,24 +110,25 @@ and open the template in the editor.
 
 /*Datatable column header*/
 
- /*BURADA BIRAKTIM DATATABLE HEADER TEXT*/
+/*BURADA BIRAKTIM DATATABLE HEADER TEXT*/
 
 body .ui-datatable thead th{
-    background : grey !important;
+    background : darkgrey !important;
+    /*background : #caffff !important;*/
+    color : white !important ;
 }
 
 body .ui-datatable thead th:hover{
-    /*background : darkgrey !important;*/
-    background : #2d353c !important;
+    background : grey !important;
+
+    /*background : #2d353c !important;*/
     /*background-image: -webkit-linear-gradient(right, #136a8a, #267871) !important;*/
 }
 
 /*Panel Header*/
 
 body .ui-panel .ui-panel-titlebar{
-    background-color : #2c3e50 !important;
-   
-    /*background-image: -webkit-linear-gradient(left, #136a8a, #267871) !important;*/
+    background-color : #444D56 !important;
 
 }
 
@@ -137,6 +136,8 @@ body .ui-panel .ui-panel-titlebar{
     border-collapse: separate !important;
     background: lightgrey !important;
     border: 2px grey  solid !important;
+    /*color: white !important;*/
+
 }
 body .ui-panel .ui-panel-titlebar {
 }
@@ -144,16 +145,86 @@ body .ui-panel .ui-panel-titlebar {
 
 /*Datatable footer sayfa yonlendirme*/
 
+
 body .ui-paginator{
-    border: 2px grey  solid !important;
+    /*border: 2px grey  solid !important;*/
+    background-color: #22282d !important;
 
 }
 
+body .ui-paginator .ui-paginator-first, body .ui-paginator .ui-paginator-prev, body .ui-paginator .ui-paginator-next, body .ui-paginator .ui-paginator-last {
+color:white !important;
+}
+body .ui-paginator .ui-paginator-current {
+    color: white !important;
+}
+
+
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+    background-color: #6c76af !important ;
+}
+
+
+body .ui-datatable .ui-datatable-header, body .ui-datatable .ui-datatable-footer {
+    background-color: #2D353C !important;
+    color : white !important;
+
+}
+body .ui-datatable .ui-datatable-data>tr.ui-state-highlight {
+    background: #6c76af !important;
+
+}
+
+body .ui-accordion .ui-accordion-header {
+    background-color: #444D56 !important;
+    padding: 8px 14px;
+    padding-left: 30px;
+    color: #ffffff;
+    font-size: 14px;
+    -moz-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+}
+
+
+
+body .ui-accordion .ui-accordion-header.ui-state-hover {
+    background-color: #444d56 !important;
+}
+
+
+body .ui-accordion .ui-accordion-header.ui-state-active {
+    background-color: #6c76af !important;
+    border: 1px solid #6c76af !important;
+
+    color: #ffffff !important;
+}
+body .ui-accordion .ui-accordion-header.ui-state-active:hover, body .ui-accordion .ui-accordion-header.ui-state-active.ui-tabs-outline {
+    /*border: 1px solid blue !important;*/
+    /*#6c76af*/
+}
+
+body .ui-panel .ui-panel-titlebar {
+    color : white !important;
+
+}
+
+.ui-panelmenu .ui-menuitem-link {
+    border: none!important;
+}
+
+
+body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight {
+    border: 1px solid #6c76af !important;
+    background-color: #6c76af !important;
+    color: #fff;
+}
 
 .normal{
-    
-    
-    
+
+
+
 }
 
 .red{
@@ -161,25 +232,46 @@ body .ui-paginator{
 }
 
 .green{
-        background-color: lightgreen !important;
+    background-color: lightgreen !important;
 }
 
 .yellow{
-            background-color: lightpink !important;
+    background-color: lightpink !important;
 
 }
-html {
-    /*color: -internal-root-color;*/
+
+
+
+/*EXCEPTION PAGE*/ 
+
+/*********/
+
+/*.exception-top{
+
+        height: 30% !important;
+
+    position: relative;
+    width: 100% !important;
+    background-color: white !important;
+    padding: 0;
+    margin: 0px;
+
 }
 
-/*:root {
-    --input-border-color: #a6a6a6;
-    --input-hover-border-color: #212121;
-    --input-focus-border-color: #007ad9;
-}
 
-:root {
-    --input-border-color: #a6a6a6;
-    --input-hover-border-color: #212121;
-    --input-focus-border-color: #007ad9;
+
+.exception-bottom{
+    min-height: 70% !important;
+    position: absolute;
+
+    width: 100%;
+    top: 30%;
+    background: purple !important;
+    padding: 0;
+    margin: 0px;
+    height: 70%;
+
+
 }*/
+
+

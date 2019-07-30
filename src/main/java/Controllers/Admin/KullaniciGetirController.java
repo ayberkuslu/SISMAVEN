@@ -8,11 +8,14 @@ package Controllers.Admin;
 import Util.UserLazyDataModel;
 import Controllers.*;
 import Models.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
@@ -61,6 +64,13 @@ public class KullaniciGetirController extends Controller {
         currentUser = (Users) sessionMap.get(CURRENT_USER);
 
         if (hasPermission(currentUser, Users.TYPE_ADMIN) == false) {
+//            FacesContext context = FacesContext.getCurrentInstance();
+//            try {
+//                context.getExternalContext().redirect(Controller.PAGE_HOME);
+//            } catch (IOException ex) {
+//                Logger.getLogger(KullaniciGetirController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+
             return;
         }
 
@@ -124,7 +134,7 @@ public class KullaniciGetirController extends Controller {
         System.out.println("Kontrol" + selectedUser);
 
         if (getSelectedUser() == null) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"User not selected!",""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "User not selected!", ""));
 //            return;
         }
         getSession().beginTransaction();
@@ -137,7 +147,7 @@ public class KullaniciGetirController extends Controller {
 
         } catch (HibernateException e) {
             getSession().getTransaction().rollback();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"FAILED WHILE DELETING!",""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "FAILED WHILE DELETING!", ""));
             System.out.println(e.getLocalizedMessage() + "\n" + e.getMessage());
             return;
 
@@ -155,7 +165,7 @@ public class KullaniciGetirController extends Controller {
         System.out.println("Kontrol" + selectedUser);
 
         if (getSelectedUser() == null) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"User Not Selected!","");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "User Not Selected!", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return;
         }
@@ -169,7 +179,7 @@ public class KullaniciGetirController extends Controller {
 
         } catch (HibernateException e) {
             getSession().getTransaction().rollback();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"FAILED WHILE ACTIVATING!",""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "FAILED WHILE ACTIVATING!", ""));
             System.out.println(e.getLocalizedMessage() + "\n" + e.getMessage());
             return;
 
