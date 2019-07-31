@@ -33,7 +33,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @RequestScoped
-public class ErrorPageController {
+public class ErrorPageController extends Controller {
 
     /**
      * Creates a new instance of ErrorPageController
@@ -41,7 +41,7 @@ public class ErrorPageController {
     public ErrorPageController() {
     }
     
-    public static void goHomePage(){
+    public void goHomePage(){
         System.out.println("goHomePage()");
         
         
@@ -49,7 +49,8 @@ public class ErrorPageController {
 
         
         try {
-            context.getExternalContext().redirect(Controller.PAGE_HOME);
+            Controller a = new Controller();
+            context.getExternalContext().redirect(PAGE_HOME);
         } catch (IOException ex) {
             System.out.println(ex);
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error", ""));

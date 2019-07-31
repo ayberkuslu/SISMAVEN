@@ -13,7 +13,9 @@ and open the template in the editor.
 
 :root { 
     /*background:#cceeff;*/
-    background: #c2dfef !important;
+    background: #f0f0f0 !important;
+    font-family: 'Roboto', sans-serif;
+
 }
 
 
@@ -93,6 +95,10 @@ and open the template in the editor.
     text-transform: uppercase !important;
 }
 
+body .ui-selectonemenu.ui-state-highlight ,.ui-selectonemenu.ui-state-active ,.ui-selectonemenu.ui-state-hover  {
+    
+border: 1px solid #6c76af !important;
+}
 
 
 .ui-selectonemenu .ui-selectonemenu-label {
@@ -106,6 +112,12 @@ and open the template in the editor.
     background: none transparent;
     border: none;
 }
+
+body .ui-selectonemenu-panel .ui-selectonemenu-items .ui-selectonemenu-item.ui-state-highlight {
+    background: #6c76af !important;
+}
+
+
 
 
 /*Datatable column header*/
@@ -129,6 +141,7 @@ body .ui-datatable thead th:hover{
 
 body .ui-panel .ui-panel-titlebar{
     background-color : #444D56 !important;
+    /*background-color : #3D372E !important;*/
 
 }
 

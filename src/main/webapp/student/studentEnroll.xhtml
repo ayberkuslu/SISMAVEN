@@ -21,6 +21,8 @@ and open the template in the editor.
 
 
 
+       
+
     </h:head>
 
     <h:body>
@@ -59,7 +61,9 @@ and open the template in the editor.
                                      style="margin-bottom:20px;"
                                      >
 
-                                <h1><h:outputText value="List"/></h1>
+                                <h1>Avaliable classes for #{enrollCourseContoller.currentUserName}</h1>
+                                <h4>Select the Course and press "Enroll" to enroll course.</h4>
+                                (Add-Drop must be open to enroll.)
                                 <p:dataTable value="#{enrollCourseContoller.openCourses}"
                                              var="course"
                                              selection="#{enrollCourseContoller.selectedCourseForEnroll}"
@@ -117,6 +121,7 @@ and open the template in the editor.
 
                                 <p:commandButton value="Enroll" action="#{enrollCourseContoller.enrollCourse}"
                                                  update=":form:panel1 :form:panel2 messages1"
+                                                 icon="fa fa-chevron-circle-right"
                                                  style="margin:30px; width: 100%;"
                                                  />
 
@@ -133,8 +138,9 @@ and open the template in the editor.
                                      toggleableHeader="true"
                                      style="margin-bottom:20px;"                                
                                      >
-
-                                <h1><h:outputText value="List"/></h1>
+                                <h1>Current taken classes for #{enrollCourseContoller.currentUserName}</h1>
+                                <h4>Select the Course and press "Deroll" to deroll course.</h4>
+                                (Add-Drop must be open to deroll.)
                                 <p:dataTable value="#{enrollCourseContoller.currentUserClasses}"
                                              var="item"
                                              selection="#{enrollCourseContoller.selectedClassesForDeroll}"
@@ -178,8 +184,10 @@ and open the template in the editor.
                                 <p:commandButton value="Deroll" action="#{enrollCourseContoller.derollCourse}"
                                                  update=":form:panel1 :form:panel2"
                                                  style="margin:30px; width: 100%;"
+                                                 icon="fa fa-chevron-circle-left"
 
                                                  />
+
 
                             </p:panel>
 
@@ -188,6 +196,9 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
+
+
+
 
         </h:form>
 

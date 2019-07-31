@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2019 hp_user.
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301  USA
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:head>
+        <title>User Information </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet library="css" name="columns.css"/>
+        <link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet"/>
+
+        <style type="text/css">
+
+            body .ui-selectonemenu .ui-selectonemenu-trigger{
+                visibility: hidden;
+            }
+
+            .buttonInherit{
+                position: inherit !important;
+            }
+
+            body .ui-selectonemenu {
+                position: inherit !important;
+
+            }
+
+        </style>
+
+
+
+    </h:head>
+    <h:body>
+        <h:form id="form">
+
+            <div class="ui-g">
+                <div class="ui-g-3" >
+                    <div class="topLeftBar" >
+                        <ui:include src="../default/defaultTopLeftBar.xhtml"   />
+                    </div>                   
+                </div>
+                <div class="ui-g-9"   >
+                    <div styleClass="topmenu" >
+                        <ui:include src="../default/defaultTopBar.xhtml"   />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="ui-g"  >
+                <div class="ui-g-3">
+                    <div class="sidenav" >
+                        <ui:include src="../default/defaultMenu.xhtml"   />
+                    </div>
+                </div>
+
+                <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
+                    <p:messages showIcon="false"  >
+                        <p:autoUpdate/>
+                    </p:messages>
+
+                    <p:panel 
+                        id="panel1" header="Logs" toggleable="true" closable="true" closeTitle="Close" toggleableHeader="true"
+                        toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px; margin-top: 20px; margin-right: 3%; margin-left: 3%;" 
+                        >
+                        <!--<h1><h:outputText value="List"/></h1>-->
+                        Click the user to show Course Information and Personal Detail
+                        <br/>
+                        <br/>
+                        
+                        
+
+                    </p:panel>
+                </div> 
+            </div> 
+        </h:form>
+    </h:body>
+</html>

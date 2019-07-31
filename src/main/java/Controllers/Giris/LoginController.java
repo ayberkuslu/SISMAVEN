@@ -80,6 +80,9 @@ public class LoginController extends Controller {
                         getExternalContext().getSessionMap();
 
                 sessionMap.put(CURRENT_USER, targetUser);
+                if(targetUser.getType() == Users.TYPE_ADMIN){
+                    
+                }
 
                 setCurrentUser(targetUser);
                 getSession().save(new Logs(Logs.USER_LOGIN, "succesfully logined", targetUser, new Date()));
@@ -106,7 +109,7 @@ public class LoginController extends Controller {
 
         String falsePage = "index";
         if (authorized == true) {
-            System.out.println("Giris Basarili. Kullanici : " + userId + "\n");
+            System.out.println("Giris Basarili. Kullanici : " + userId + "\n");                      
             context.getExternalContext().redirect(truePage);
 
             return;

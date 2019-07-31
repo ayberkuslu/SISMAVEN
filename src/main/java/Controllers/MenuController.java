@@ -15,20 +15,22 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 import javax.faces.context.FacesContext;
 
 /**
  *
  * @author Ayberk
- * 
+ *
  */
-
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class MenuController extends Controller {
+
+    private boolean renderedAdmin = false;
+    private boolean renderedTeacher = false;
+    private boolean renderedStudent = true;
 
     /**
      * Creates a new instance of MenuController
@@ -55,6 +57,19 @@ public class MenuController extends Controller {
         Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap();
         Users temp = (Users) sessionMap.get(CURRENT_USER);
+        switch (temp.getType()) {
+            case Users.TYPE_ADMIN:
+                setRenderedForAdmin();
+                break;
+            case Users.TYPE_TEACHER:
+                setRenderedForTeacher();
+                break;
+            case Users.TYPE_STUDENT:
+                setRenderedForStudent();
+                break;
+            default:
+                break;
+        }
         System.out.println("WhoAmI User toString(): " + temp);
 
         return temp;
@@ -77,11 +92,60 @@ public class MenuController extends Controller {
         context.getExternalContext().invalidateSession();
 
         try {
-            context.getExternalContext().redirect(Controller.PAGE_LOGIN);
+            context.getExternalContext().redirect(PAGE_LOGIN);
             System.out.println("Yonlendirme basarili");
         } catch (IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void setRenderedForAdmin() {
+
+        renderedAdmin = true;
+        renderedTeacher = true;
+        renderedStudent = true;
+
+    }
+
+    public void setRenderedForTeacher() {
+
+        renderedAdmin = false;
+        renderedTeacher = true;
+        renderedStudent = true;
+
+    }
+
+    public void setRenderedForStudent() {
+        renderedAdmin = false;
+        renderedTeacher = false;
+        renderedStudent = true;
+
+    }
+
+    public boolean isRenderedAdmin() {
+        return renderedAdmin;
+    }
+
+    public void setRenderedAdmin(boolean renderedAdmin) {
+        this.renderedAdmin = renderedAdmin;
+    }
+
+    public boolean isRenderedTeacher() {
+        return renderedTeacher;
+    }
+
+    public void setRenderedTeacher(boolean renderedTeacher) {
+        this.renderedTeacher = renderedTeacher;
+    }
+
+    public boolean isRenderedStudent() {
+        return renderedStudent;
+    }
+
+    public void setRenderedStudent(boolean renderedStudent) {
+        this.renderedStudent = renderedStudent;
+    }
+
+
 
 }

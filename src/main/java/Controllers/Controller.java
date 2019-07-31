@@ -36,10 +36,30 @@ public class Controller implements Serializable {
     public static final int RUN_TIME_PROPERTY = 1;
     public static final boolean OPEN_ADD_DROP = true;
     public static final boolean CLOSED_ADD_DROP = false;
+    
+    private final String DOMAIN_TAG = "http://localhost:8080/";
+    private final String CONTEXT_PATH = "mavenproject1/";
+    
+    private final String PROJECT_PATH = DOMAIN_TAG + CONTEXT_PATH;
+    
+    
+    
 
-    public static final String PAGE_LOGIN = "http://localhost:8080/mavenproject1";
-    public static final String PAGE_ERROR = "http://localhost:8080/mavenproject1/faces/error.xhtml";
-    public static final String PAGE_HOME = "http://localhost:8080/mavenproject1/faces/homePage.xhtml";
+    public final String PAGE_LOGIN =  PROJECT_PATH;
+    public final String PAGE_FORGET_PASSWORD = PROJECT_PATH + "/faces/forgetPassword.xhtml";
+    public final String PAGE_HOME = PROJECT_PATH + "/faces/homePage.xhtml";
+    
+    public final String PAGE_ADMIN_EXAMINE_USER = PROJECT_PATH + "/faces/admin/adminKullaniciGetir.xhtml";
+    public final String PAGE_ADMIN_INSERT = PROJECT_PATH + "/faces/admin/adminKullaniciEkle.xhtml";
+    public final String PAGE_ADMIN_YONETIM = PROJECT_PATH + "/faces/admin/adminYonetimIslemleri.xhtml";
+    public final String PAGE_ADMIN_EXAMINE_LOG = PROJECT_PATH + "/faces/admin/adminExamineLog.xhtml";
+
+    public final String PAGE_TEACHER_COURSE_MANAGE = PROJECT_PATH + "/faces/teacher/teacherCourseManage.xhtml";
+    public final String PAGE_TEACHER_COURSES = PROJECT_PATH + "/faces/teacher/teacherCourses.xhtml";
+   
+    public final String PAGE_STUDENT_ENROLL = PROJECT_PATH + "/faces/student/studentEnroll.xhtml";
+    
+    public final String PAGE_ERROR = PROJECT_PATH + "/faces/error.xhtml";
 
     private Session session;
     private Users currentUser;
@@ -97,35 +117,6 @@ public class Controller implements Serializable {
 
         }
         return true;
-    }
-
-    public Users getCurrentUser() {
-        return currentUser;
-    }
-
-    public void setCurrentUser(Users currentUser) {
-        this.currentUser = currentUser;
-    }
-
-    public UserDetails getCurrentUserDetail() {
-        return currentUserDetail;
-    }
-
-    public void setCurrentUserDetail(UserDetails currentUserDetail) {
-        this.currentUserDetail = currentUserDetail;
-    }
-
-    public Session getSession() {
-
-        return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
-    }
-
-    public void redirectErrorPage(FacesContext context) {
-
     }
 
     public Users getUserById(int userId) {
@@ -206,4 +197,81 @@ public class Controller implements Serializable {
         }
     }
 
+    public Users getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(Users currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public UserDetails getCurrentUserDetail() {
+        return currentUserDetail;
+    }
+
+    public void setCurrentUserDetail(UserDetails currentUserDetail) {
+        this.currentUserDetail = currentUserDetail;
+    }
+
+    public Session getSession() {
+
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public void redirectErrorPage(FacesContext context) {
+
+    }
+
+    public String getPAGE_LOGIN() {
+        return PAGE_LOGIN;
+    }
+
+    public String getPAGE_FORGET_PASSWORD() {
+        return PAGE_FORGET_PASSWORD;
+    }
+
+    public String getPAGE_HOME() {
+        return PAGE_HOME;
+    }
+
+    public String getPAGE_ADMIN_EXAMINE_USER() {
+        return PAGE_ADMIN_EXAMINE_USER;
+    }
+
+    public String getPAGE_ADMIN_INSERT() {
+        return PAGE_ADMIN_INSERT;
+    }
+
+    public String getPAGE_ADMIN_YONETIM() {
+        return PAGE_ADMIN_YONETIM;
+    }
+
+    public String getPAGE_ADMIN_EXAMINE_LOG() {
+        return PAGE_ADMIN_EXAMINE_LOG;
+    }
+
+    public String getPAGE_TEACHER_COURSE_MANAGE() {
+        return PAGE_TEACHER_COURSE_MANAGE;
+    }
+
+    public String getPAGE_TEACHER_COURSES() {
+        return PAGE_TEACHER_COURSES;
+    }
+
+    public String getPAGE_STUDENT_ENROLL() {
+        return PAGE_STUDENT_ENROLL;
+    }
+
+    public String getPAGE_ERROR() {
+        return PAGE_ERROR;
+    }
+
+    
+    
+    
+    
 }

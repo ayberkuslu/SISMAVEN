@@ -13,20 +13,25 @@ and open the template in the editor.
 
 
     <h:head>
-        <title>Kisisel Bilgi </title>
+        <title>User Information </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <h:outputStylesheet library="css" name="columns.css"/>
+        <link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet"/>
 
         <style type="text/css">
 
+        body .ui-selectonemenu .ui-selectonemenu-trigger{
+            visibility: hidden;
+        }
 
-            body .ui-selectonemenu .ui-selectonemenu-trigger{
-                visibility: hidden;
-            }
+        .buttonInherit{
+            position: inherit !important;
+        }
+        
+        body .ui-selectonemenu {
+                        position: inherit !important;
 
-            .buttonInherit{
-                position: inherit !important;
-            }
+        }
 
         </style>
 
@@ -67,7 +72,9 @@ and open the template in the editor.
                         toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px; margin-top: 20px; margin-right: 3%; margin-left: 3%;" 
                         >
                         <!--<h1><h:outputText value="List"/></h1>-->
-
+Click the user to show Course Information and Personal Detail
+<br/>
+<br/>
                         <p:dataTable 
                             id="userTable"
                             widgetVar="userTableVar"

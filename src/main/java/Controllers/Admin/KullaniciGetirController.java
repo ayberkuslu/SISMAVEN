@@ -64,13 +64,6 @@ public class KullaniciGetirController extends Controller {
         currentUser = (Users) sessionMap.get(CURRENT_USER);
 
         if (hasPermission(currentUser, Users.TYPE_ADMIN) == false) {
-//            FacesContext context = FacesContext.getCurrentInstance();
-//            try {
-//                context.getExternalContext().redirect(Controller.PAGE_HOME);
-//            } catch (IOException ex) {
-//                Logger.getLogger(KullaniciGetirController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-
             return;
         }
 

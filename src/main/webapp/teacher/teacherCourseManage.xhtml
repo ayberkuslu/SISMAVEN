@@ -124,7 +124,7 @@ and open the template in the editor.
 
                                           >
 
-                                    <h1><h:outputText value="Student List" rendered="#{not empty courseManageController.selectedCourse}"/></h1>
+                                    <h1><h:outputText value="#{courseManageController.selectedCourse.courseName} Students List" rendered="#{not empty courseManageController.selectedCourse}"/></h1>
                                     <p:dataTable value="#{courseManageController.selectedClassesList}"
                                                  var="classes"
                                                  selectionMode="single"

@@ -34,6 +34,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Logs.findByEventCode", query = "SELECT l FROM Logs l WHERE l.eventCode = :eventCode")})
 public class Logs implements Serializable {
 
+    public static final int USER_NEW = 0;
     public static final int USER_LOGIN = 1;
     public static final int USER_LOGOUT = 2;
     public static final int USER_CHANGE_PASSWORD = 3;
@@ -46,7 +47,9 @@ public class Logs implements Serializable {
     public static final int ADD_DROP_END = 10;
 
     public static final int NEW_COURSE = 11;
-    public static final int USER_NEW = 12;
+
+    public static final int COURSE_ENROLL = 12;
+    public static final int COURSE_DEROLL = 13;
 
     private static final long serialVersionUID = 1L;
     @Id
