@@ -104,13 +104,13 @@ public class LoginController extends Controller {
 
     private void goNextPage() throws IOException {
         FacesContext context = FacesContext.getCurrentInstance();
-
-        String truePage = "faces/homePage.xhtml";
-
-        String falsePage = "index";
+//
+//        String truePage = "faces/homePage.xhtml";
+//
+//        String falsePage = "index";
         if (authorized == true) {
             System.out.println("Giris Basarili. Kullanici : " + userId + "\n");                      
-            context.getExternalContext().redirect(truePage);
+            context.getExternalContext().redirect(PAGE_HOME);
 
             return;
         }

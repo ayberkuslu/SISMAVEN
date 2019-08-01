@@ -37,9 +37,7 @@ public class UserLazyDataModel extends LazyDataModel<Users> {
     public Users getRowData(String rowKey) {
 
         for (Users obj : datasource) {
-            System.out.println("getRowData: "+obj.getUserId().toString().equals(rowKey) +rowKey +"=="+obj.getUserId().toString());
             if (obj.getUserId().toString().equals(rowKey)) {
-                System.out.println("girdi");
                 return obj;
             }
         }
@@ -56,9 +54,7 @@ public class UserLazyDataModel extends LazyDataModel<Users> {
             boolean match = true;
 
             if (filters != null) {
-//                System.out.println("Filters inside");
                 for (Iterator<String> it = filters.keySet().iterator(); it.hasNext();) {
-//                    System.out.println("foreach inside");
 
                     try {
                         String filterProperty = it.next();
@@ -73,11 +69,8 @@ public class UserLazyDataModel extends LazyDataModel<Users> {
                         declaredField.setAccessible(false);
 
                         if (filterValue == null || fieldValue.toUpperCase().startsWith(filterValue.toString().toUpperCase())) {
-//                            System.out.println("first if inside");
-
                             match = true;
                         } else {
-//                            System.out.println("first else inside");
 
                             match = false;
                             break;

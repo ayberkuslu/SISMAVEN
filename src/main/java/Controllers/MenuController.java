@@ -15,9 +15,11 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import javax.faces.context.FacesContext;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -25,13 +27,16 @@ import javax.faces.context.FacesContext;
  *
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class MenuController extends Controller {
 
     private boolean renderedAdmin = false;
     private boolean renderedTeacher = false;
     private boolean renderedStudent = true;
 
+    private Users currentUser;
+    private String currentUserName = "";
+    
     /**
      * Creates a new instance of MenuController
      */
@@ -51,12 +56,21 @@ public class MenuController extends Controller {
     public void init() {
         System.out.println("Controllers.MenuController.init()");
         setSession(HibernateUtil.getSessionFactory().openSession());
+        currentUser= whoAmI(); 
+//        currentUserName = currentUser.getName() +  " " + currentUser.getSurname();
     }
 
     public Users whoAmI() {
-        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
+        Map<String, Object> sessionMap = null;
+        Users temp = null;
+        try{
+        sessionMap = FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap();
-        Users temp = (Users) sessionMap.get(CURRENT_USER);
+        temp = (Users) sessionMap.get(CURRENT_USER);
+        }catch(Exception e){
+            System.out.println(e+"\nwhoAmI() null pointer");
+        }
+        if(temp == null) return null;
         switch (temp.getType()) {
             case Users.TYPE_ADMIN:
                 setRenderedForAdmin();
@@ -77,6 +91,9 @@ public class MenuController extends Controller {
     }
 
     public void logout() {
+
+        Transaction tx = getSession().beginTransaction();
+
         System.out.println("logout girdi");
         Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap();
@@ -84,8 +101,9 @@ public class MenuController extends Controller {
         targetUser = (Users) sessionMap.get(Controller.CURRENT_USER);
         sessionMap.remove(Controller.CURRENT_USER);
         sessionMap.clear();
-
-        insertObject(new Logs(Logs.USER_LOGOUT, "logined out", targetUser, new Date()));
+        getSession().save(new Logs(Logs.USER_LOGOUT, "logined out", targetUser, new Date()));
+        tx.commit();
+        
         System.out.println("logout basarili1");
 
         FacesContext context = FacesContext.getCurrentInstance();
@@ -95,7 +113,7 @@ public class MenuController extends Controller {
             context.getExternalContext().redirect(PAGE_LOGIN);
             System.out.println("Yonlendirme basarili");
         } catch (IOException ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Cikis Yapilamadi.");
         }
     }
 
@@ -122,6 +140,16 @@ public class MenuController extends Controller {
 
     }
 
+    public Users getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(Users currentUser) {
+        this.currentUser = currentUser;
+    }
+
+ 
+    
     public boolean isRenderedAdmin() {
         return renderedAdmin;
     }
@@ -145,7 +173,5 @@ public class MenuController extends Controller {
     public void setRenderedStudent(boolean renderedStudent) {
         this.renderedStudent = renderedStudent;
     }
-
-
 
 }

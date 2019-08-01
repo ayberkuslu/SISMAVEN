@@ -88,7 +88,7 @@ public class ForgetPasswordController extends Controller {
 
         if (userId == null || userId.equals("")) {
             userQuestion = "User could NOT find!";
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error with User", ""));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error with finding User", ""));
             return;
         }
 
@@ -118,7 +118,7 @@ public class ForgetPasswordController extends Controller {
 
         }
         context.addMessage(null, new FacesMessage("Password succesfully changed !"));
-        System.out.println("PASSWORD CHANGED FOR USER : " + userId + "\n New Password : " + ((Users) getUserById(Integer.parseInt(userId))).getPassword());
+        System.out.println("PASSWORD CHANGED FOR USER : " + userId );
         System.out.println("Yeni sifre hashlenmemis : " + userPassword1);
 
     }
