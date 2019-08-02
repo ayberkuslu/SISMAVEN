@@ -56,7 +56,8 @@ public class MenuController extends Controller {
     public void init() {
         System.out.println("Controllers.MenuController.init()");
         setSession(HibernateUtil.getSessionFactory().openSession());
-        currentUser= whoAmI(); 
+        currentUser= whoAmI();
+//        hasPermission(currentUser, Users.TYPE_STUDENT);
 //        currentUserName = currentUser.getName() +  " " + currentUser.getSurname();
     }
 

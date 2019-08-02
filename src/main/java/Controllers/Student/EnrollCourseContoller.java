@@ -70,11 +70,12 @@ public class EnrollCourseContoller extends Controller {
         tx = getSession().beginTransaction();
         Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         currentUser = (Users) sessionMap.get(CURRENT_USER);
-        currentUserName = currentUser.getName() + " " + currentUser.getSurname();
 
         if (hasPermission(currentUser, Users.TYPE_STUDENT) == false) {
             return;
         }
+
+        currentUserName = currentUser.getName() + " " + currentUser.getSurname();
 
         RuntimeProperties properties = (RuntimeProperties) getSession().get(RuntimeProperties.class, RUN_TIME_PROPERTY);
 

@@ -26,7 +26,7 @@ MA 02110-1301  USA
 
 
     <h:head>
-        <title>User Information </title>
+        <title>Log Information </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <h:outputStylesheet library="css" name="columns.css"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet"/>
@@ -81,15 +81,65 @@ MA 02110-1301  USA
                     </p:messages>
 
                     <p:panel 
-                        id="panel1" header="Logs" toggleable="true" closable="true" closeTitle="Close" toggleableHeader="true"
+                        id="panel1"  toggleable="true" closable="true" closeTitle="Close" toggleableHeader="true"
                         toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px; margin-top: 20px; margin-right: 3%; margin-left: 3%;" 
                         >
-                        <!--<h1><h:outputText value="List"/></h1>-->
-                        Click the user to show Course Information and Personal Detail
                         <br/>
                         <br/>
-                        
-                        
+
+                        <p:dataTable
+
+                            id="logTable"
+                            widgetVar="logTable"
+                            value="#{examineLogBean.logs}"
+                            var="item"
+                            rowKey="#{item.logId}" 
+                            rows="10"
+                            paginator="true"  paginatorPosition="bottom"
+                            lazy="true" 
+                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            style="width: 90%;margin-left: 3%; margin-right: 3%;"
+                            emptyMessage="There is no such Log!"
+                            >
+                            <f:facet name="header">
+                                Logs
+                            </f:facet>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Log No"/>
+                                </f:facet>
+                                <h:outputText value="#{item.logId}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Event Code"/>
+                                </f:facet>
+                                <h:outputText value="#{item.eventCode}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Detail"/>
+                                </f:facet>
+                                <h:outputText value="#{item.detail}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="User"/>
+                                </f:facet>
+                                <h:outputText value="#{item.userId}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Date"/>
+                                </f:facet>
+                                <h:outputText value="#{item.date}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                </h:outputText>
+                            </p:column>
+                        </p:dataTable>
+
+
+
 
                     </p:panel>
                 </div> 

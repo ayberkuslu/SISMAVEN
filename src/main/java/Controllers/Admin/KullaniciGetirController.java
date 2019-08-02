@@ -6,16 +6,18 @@
 package Controllers.Admin;
 
 import Util.UserLazyDataModel;
-import Controllers.*;
-import Models.*;
-import java.io.IOException;
+import Controllers.Controller;
+import Controllers.HibernateUtil;
+import Models.Users;
+import Models.UserDetails;
+import Models.Courses;
+import Models.Classes;
+import Models.Logs;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;

@@ -26,7 +26,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -34,16 +34,16 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/loginPage.xhtml</welcome-file>
+        <welcome-file>loginPage.xhtml</welcome-file>
     </welcome-file-list>
     <error-page> 
         <exception-type>java.lang.Exception</exception-type> 
-        <location>/faces/error.xhtml</location>  
+        <location>/error.xhtml</location>  
     </error-page> 
     
     <error-page>
         <error-code>404</error-code>
-        <location>/faces/error.xhtml</location>
+        <location>/error.xhtml</location>
     </error-page>
 
 </web-app>

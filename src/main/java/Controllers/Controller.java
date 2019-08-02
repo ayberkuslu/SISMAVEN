@@ -16,10 +16,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -92,14 +92,15 @@ public class Controller implements Serializable {
                 System.out.println("Kullanici yok !");
                 context.getExternalContext().redirect(PAGE_LOGIN);
             } catch (IOException ex) {
-                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                System.out.println("Exception while redirecting to PAGE_LOGIN");
+                System.out.println(ex);
+        }
             return false;
         }
         System.out.println("User Type : " + currentUser.getType() + " Page Type : " + pageType);
 
         int userType = currentUser.getType();
-        if (userType == Users.TYPE_ADMIN) {
+        if (userType == Users.TYPE_ADMIN || pageType == Users.TYPE_ANYONE) {
 
             return true;
         }

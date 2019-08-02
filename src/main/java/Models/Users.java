@@ -43,6 +43,7 @@ public class Users implements Serializable {
     public static final int TYPE_ADMIN = 0;
     public static final int TYPE_STUDENT = 1;
     public static final int TYPE_TEACHER = 2;
+    public static final int TYPE_ANYONE = 3;
 
     private static final long serialVersionUID = 1L;
     @Id
