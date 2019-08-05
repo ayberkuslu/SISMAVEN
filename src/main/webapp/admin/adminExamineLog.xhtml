@@ -86,7 +86,14 @@ MA 02110-1301  USA
                         >
                         <br/>
                         <br/>
+                        <p:panelGrid columns="2"  >
+                            <p:outputLabel value="Starting date:"  />
+                            <p:datePicker value="#{examineLogBean.firstDate}" placeholder="Click to pick starting date." />
 
+                            <p:outputLabel value="Ending date:"  />
+                            <p:datePicker value="#{examineLogBean.lastDate}" placeholder="Click to pick ending date." />
+                        </p:panelGrid>
+                        <p:commandButton value="Filter" update="logTable" action="#{examineLogBean.loadData()}" style="width: 100px;" />
                         <p:dataTable
 
                             id="logTable"
@@ -128,14 +135,12 @@ MA 02110-1301  USA
                                 </f:facet>
                                 <h:outputText value="#{item.userId}"/>
                             </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Date"/>
-                                </f:facet>
+                            <p:column headerText="Date">
                                 <h:outputText value="#{item.date}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                                 </h:outputText>
                             </p:column>
+
                         </p:dataTable>
 
 

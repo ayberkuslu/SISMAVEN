@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import org.hibernate.Criteria;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
@@ -97,9 +98,9 @@ public class LogsLazyDataModel extends LazyDataModel<Logs> {
             }
 
             if (match) {
-//                System.out.println("data eklendi");
 
                 data.add(log);
+                
             }
         }
 
@@ -125,6 +126,16 @@ public class LogsLazyDataModel extends LazyDataModel<Logs> {
             return data;
         }
     }
+
+    public List<Logs> getDatasource() {
+        return datasource;
+    }
+
+    public void setDatasource(List<Logs> datasource) {
+        this.datasource = datasource;
+    }
+    
+    
 
 }
 

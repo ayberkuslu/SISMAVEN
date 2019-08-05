@@ -10,14 +10,10 @@ import Models.Users;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-
 import javax.faces.context.FacesContext;
 import org.hibernate.Transaction;
 
