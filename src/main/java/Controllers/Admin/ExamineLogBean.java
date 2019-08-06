@@ -24,6 +24,8 @@ import Controllers.HibernateUtil;
 import Models.Logs;
 import Models.Users;
 import Util.LogsLazyDataModel;
+import Util.Pair;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -96,6 +98,12 @@ public class ExamineLogBean extends Controller {
                 criteria.add(Restrictions.between("date", firstDate, new Date()));
 
             } else {
+                lastDate.setHours(23);
+                lastDate.setMinutes(59);
+                lastDate.setSeconds(59);
+
+                System.out.println("lastDate:" + lastDate);
+
                 criteria.add(Restrictions.between("date", firstDate, lastDate));
                 System.out.println("lastDate != null");
 
@@ -105,9 +113,26 @@ public class ExamineLogBean extends Controller {
         List<Logs> list = criteria.list();
         logs = new LogsLazyDataModel(list);
         System.out.println("row Count" + logs.getRowCount());
-
-//        logs.setRowCount(0);
         tx.commit();
+    }
+
+    public List<Pair> eventCodes() {
+        List<Pair> list = new ArrayList();
+        list.add(new Pair( "USER_NEW" ,"0"));
+        list.add(new Pair( "USER_LOGIN", "1"));
+        list.add(new Pair( "USER_LOGOUT" , "2"));
+        list.add(new Pair( "USER_CHANGE_PASSWORD" ,"3"));
+        list.add(new Pair( "USER_RESET_PASSWORD"," 4"));
+        list.add(new Pair( "USER_DELETE"," 5"));
+        list.add(new Pair( "USER_ACTIVATE" , "6"));
+//        list.add(new Pair( "NEW_TERM_START" = 7;
+//        list.add(new Pair( "TERM_END" = 8;
+//        list.add(new Pair( "ADD_DROP_START" = 9;
+//        list.add(new Pair( "ADD_DROP_END" = 10;
+//        list.add(new Pair( "NEW_COURSE" = 11;
+//        list.add(new Pair( "COURSE_ENROLL" = 12;
+//        COURSE_DEROLL = 13;
+        return list;
     }
 
     public LazyDataModel<Logs> getLogs() {

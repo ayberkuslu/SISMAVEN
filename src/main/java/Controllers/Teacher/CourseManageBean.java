@@ -32,7 +32,7 @@ import org.primefaces.event.SelectEvent;
  */
 @ManagedBean
 @ViewScoped
-public class CourseManageController extends Controller implements Serializable {
+public class CourseManageBean extends Controller implements Serializable {
 
     private Users currentUser;
     Transaction tx;
@@ -49,7 +49,7 @@ public class CourseManageController extends Controller implements Serializable {
     /**
      * Creates a new instance of CourseManageController
      */
-    public CourseManageController() {
+    public CourseManageBean() {
     }
 
     @PostConstruct

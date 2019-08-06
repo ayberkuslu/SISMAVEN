@@ -78,9 +78,9 @@ and open the template in the editor.
                             id="userTable"
                             widgetVar="userTableVar"
                             var="item" 
-                            value="#{kullaniciGetirController.users}"
+                            value="#{examineUserBean.users}"
                             selectionMode="single" 
-                            selection="#{kullaniciGetirController.selectedUser}" 
+                            selection="#{examineUserBean.selectedUser}" 
                             rowKey="#{item.userId}" 
                             rows="10"
                             paginator="true"  paginatorPosition="bottom"
@@ -94,7 +94,7 @@ and open the template in the editor.
                             <p:ajax event="rowSelect"  
                                     update=":form:panel2 @parent "
                                     process="@parent"
-                                    listener="#{kullaniciGetirController.onRowSelect}" 
+                                    listener="#{examineUserBean.onRowSelect}" 
                                     />
                             <f:facet name="header">
                                 User List
@@ -148,7 +148,7 @@ and open the template in the editor.
                         <div class="ui-g">
                             <div class="ui-g-4">
                                 <p:commandButton value="Active" 
-                                                 action="#{kullaniciGetirController.activateSelectedUser()}"
+                                                 action="#{examineUserBean.activateSelectedUser()}"
                                                  update="panel1"
                                                  styleClass="insertButton buttonInherit" style="margin-left: 30px !important;"
                                                  />
@@ -156,7 +156,7 @@ and open the template in the editor.
                             <div class="ui-g-4"></div>
                             <div class="ui-g-4">
                                 <p:commandButton value="Passive" 
-                                                 action="#{kullaniciGetirController.deleteSelectedUser()}"
+                                                 action="#{examineUserBean.deleteSelectedUser()}"
                                                  update="panel1"
                                                  styleClass="insertButton declineButton buttonInherit" style="margin-left: 30px !important;"
 
@@ -171,21 +171,21 @@ and open the template in the editor.
                     <p:outputPanel id="panel2">
                         <p:accordionPanel 
                             style="margin-bottom:20px; margin-top: 20px; margin-right: 3%; margin-left: 3%;" 
-                            rendered="#{not empty kullaniciGetirController.selectedUserClassesList or 
-                                        not empty kullaniciGetirController.selectedUserCoursesList or 
-                                        not empty kullaniciGetirController.selectedUser}"
+                            rendered="#{not empty examineUserBean.selectedUserClassesList or 
+                                        not empty examineUserBean.selectedUserCoursesList or 
+                                        not empty examineUserBean.selectedUser}"
                             >
 
                             <p:tab id="userCourseOrClass" title="Course Information"  closable="true" >
 
 
-                                <h1><h:outputText value="Taken Courses"  rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" /></h1>
+                                <h1><h:outputText value="Taken Courses"  rendered="#{not empty examineUserBean.selectedUserClassesList}" /></h1>
 
                                 <p:dataTable 
-                                    value="#{kullaniciGetirController.selectedUserClassesList}"
+                                    value="#{examineUserBean.selectedUserClassesList}"
                                     var="abc"
                                     emptyMessage="There is no such class!"
-                                    rendered="#{not empty kullaniciGetirController.selectedUserClassesList}" >
+                                    rendered="#{not empty examineUserBean.selectedUserClassesList}" >
 
                                     <p:column>
                                         <f:facet name="header">
@@ -226,14 +226,14 @@ and open the template in the editor.
                                 </p:dataTable>
 
                                 <h1 ><h:outputText value="Given Courses"
-                                                   rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"/></h1>
+                                                   rendered="#{not empty examineUserBean.selectedUserCoursesList}"/></h1>
 
-                                <p:dataTable value="#{kullaniciGetirController.selectedUserCoursesList}"
+                                <p:dataTable value="#{examineUserBean.selectedUserCoursesList}"
                                              var="course"
                                              widgetVar="verilenDersler"
                                              emptyMessage="There is no such course!"
 
-                                             rendered="#{not empty kullaniciGetirController.selectedUserCoursesList}"
+                                             rendered="#{not empty examineUserBean.selectedUserCoursesList}"
                                              >
                                     <p:column>
                                         <f:facet name="header">
@@ -288,11 +288,11 @@ and open the template in the editor.
                             </p:tab>
 
                             <p:tab title="Personal Info"  closable="true" id="userDetail">
-                                <h1 ><h:outputText value="Personal Infos" rendered="#{not empty kullaniciGetirController.selectedUser}" /></h1>
+                                <h1 ><h:outputText value="Personal Infos" rendered="#{not empty examineUserBean.selectedUser}" /></h1>
 
 
-                                <p:panelGrid columns="2" rendered="#{not empty kullaniciGetirController.selectedUser}" style="width: 500px;" styleClass="ui-noborder">
-                                    <p:repeat id="test" value="#{kullaniciGetirController.selectedUserDetails.values}" var="detail">
+                                <p:panelGrid columns="2" rendered="#{not empty examineUserBean.selectedUser}" style="width: 500px;" styleClass="ui-noborder">
+                                    <p:repeat id="test" value="#{examineUserBean.selectedUserDetails.values}" var="detail">
                                         <div class="ui-g">
                                             <div class="ui-g-6">
                                                 <p:outputLabel value="#{detail.name}"/>

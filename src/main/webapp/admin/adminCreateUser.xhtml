@@ -62,35 +62,35 @@ and open the template in the editor.
                             <br/>
                             <p:panel header="Create New User">
                                 <h4>Fill the blanks to add new user.</h4>
-                                <p:wizard id="wizard" flowListener="#{kullaniciEkleController.onFlowProcess}" widgetVar="wiz"  showNavBar="true">
+                                <p:wizard id="wizard" flowListener="#{createUserBean.onFlowProcess}" widgetVar="wiz"  showNavBar="true">
                                     <p:tab id="personal" title="Personal Details">
                                         <p:messages />
                                         <p:panelGrid columns="2" style="padding-top: 40px;"  >
                                             <p:autoUpdate />
 
                                             <h:outputText value ="TCKN" />
-                                            <p:inputText  id="tckn" value="#{kullaniciEkleController.tckn}" title="User TCKN"
+                                            <p:inputText  id="tckn" value="#{createUserBean.tckn}" title="User TCKN"
                                                           placeholder="User TCKN" required="true"
                                                           />
 
                                             <h:outputText value ="Name"  />
-                                            <p:inputText id="name" value="#{kullaniciEkleController.name}" title="User Name"
+                                            <p:inputText id="name" value="#{createUserBean.name}" title="User Name"
                                                          placeholder="User Name" required="true"
                                                          />
 
                                             <h:outputText value ="Surname" />
-                                            <p:inputText  id="surname" value="#{kullaniciEkleController.surname}" title="User Surname"
+                                            <p:inputText  id="surname" value="#{createUserBean.surname}" title="User Surname"
                                                           placeholder="User Surname" required="true"
                                                           />
 
                                             <h:outputText value ="Password" />
-                                            <p:password id="password" value="#{kullaniciEkleController.password}" title="User Password"
+                                            <p:password id="password" value="#{createUserBean.password}" title="User Password"
                                                         placeholder="User Password" required="true" 
                                                         />
                                         </p:panelGrid>
                                         <br/>
                                         <h:outputText value="Skip to confirmation: " />
-                                        <h:selectBooleanCheckbox value="#{kullaniciEkleController.skip}" />
+                                        <h:selectBooleanCheckbox value="#{createUserBean.skip}" />
                                     </p:tab>
                                     <p:tab id="address" title="1">
                                         <p:messages />
@@ -99,14 +99,14 @@ and open the template in the editor.
 
 
                                             <h:outputText value ="Email" />
-                                            <p:inputText id="email" value="#{kullaniciEkleController.email}" 
+                                            <p:inputText id="email" value="#{createUserBean.email}" 
                                                          title="User Email" placeholder="User Email"
                                                          required="true" requiredMessage="Not a valid Email." >
 
                                             </p:inputText>
 
                                             <h:outputText value ="Type" />
-                                            <p:selectOneMenu id="type" value="#{kullaniciEkleController.type}"   autoWidth="true" placeholder="User Type"   >
+                                            <p:selectOneMenu id="type" value="#{createUserBean.type}"   autoWidth="true" placeholder="User Type"   >
                                                 <f:selectItem itemLabel="User Type" itemValue="" />
                                                 <f:selectItem itemLabel="ADMIN" itemValue="0" />
                                                 <f:selectItem itemLabel="STUDENT" itemValue="1" />
@@ -114,19 +114,19 @@ and open the template in the editor.
                                             </p:selectOneMenu>
 
                                             <h:outputText value ="Phone " />
-                                            <p:inputText id="phone" value="#{kullaniciEkleController.phone}"
+                                            <p:inputText id="phone" value="#{createUserBean.phone}"
                                                          title="User Phone" placeholder="(5**)-***-****" 
                                                          required="false"
                                                          />
 
                                             <h:outputText value ="Adress" />
-                                            <p:inputText id="adress" value="#{kullaniciEkleController.adress}" title="User Adress"
+                                            <p:inputText id="adress" value="#{createUserBean.adress}" title="User Adress"
                                                          placeholder="User Adress" required="false" />
 
                                         </p:panelGrid>
                                         <br/>
                                         <h:outputText value="Skip to confirmation: " />
-                                        <h:selectBooleanCheckbox value="#{kullaniciEkleController.skip}" />
+                                        <h:selectBooleanCheckbox value="#{createUserBean.skip}" />
                                     </p:tab>
 
                                     <p:tab id="contact" title="2">
@@ -135,40 +135,40 @@ and open the template in the editor.
                                             <p:autoUpdate />
 
                                             <h:outputText value ="Birthday" />
-                                            <p:datePicker id="button" value="#{kullaniciEkleController.birthday}" placeholder="Birthday"    />
+                                            <p:datePicker id="button" value="#{createUserBean.birthday}" placeholder="Birthday"    />
 
                                             <h:outputText value ="Graduate" />
-                                            <p:inputText id="graduate" value="#{kullaniciEkleController.graduate}" title="User Graduate" placeholder="User Graduate" required="false"  />
+                                            <p:inputText id="graduate" value="#{createUserBean.graduate}" title="User Graduate" placeholder="User Graduate" required="false"  />
 
                                             <h:outputText value ="Master" />
-                                            <p:inputText id="master" value="#{kullaniciEkleController.master}" title="User Master" placeholder="User Master" required="false" />
+                                            <p:inputText id="master" value="#{createUserBean.master}" title="User Master" placeholder="User Master" required="false" />
 
                                         </p:panelGrid>
                                         <br/>
                                         <h:outputText value="Skip to confirmation: " />
-                                        <h:selectBooleanCheckbox value="#{kullaniciEkleController.skip}" />
+                                        <h:selectBooleanCheckbox value="#{createUserBean.skip}" />
                                     </p:tab>
                                     <p:tab id="contact2" title="3">
                                         <p:messages />
                                         <p:panelGrid columns="2" columnClasses="label, value">
                                             <p:autoUpdate />
                                             <h:outputText value ="Emergency Phone" />
-                                            <p:inputText id="acilTelf" value="#{kullaniciEkleController.emergencyPhone}" title="User Emergency Phone" placeholder="(5**)-***-****" required="false" />
+                                            <p:inputText id="acilTelf" value="#{createUserBean.emergencyPhone}" title="User Emergency Phone" placeholder="(5**)-***-****" required="false" />
 
                                             <h:outputText value ="Secret Question" />
-                                            <p:inputText id="secretQuestion" value="#{kullaniciEkleController.secretQuestion}"
+                                            <p:inputText id="secretQuestion" value="#{createUserBean.secretQuestion}"
                                                          title="User Secret Question" placeholder="User Secret Question"
                                                          required="true" requiredMessage="Required secret question."  >
                                             </p:inputText>
 
                                             <h:outputText value ="Secret Answer" />
-                                            <p:inputText id="secretAnswer" value="#{kullaniciEkleController.secretAnswer}"
+                                            <p:inputText id="secretAnswer" value="#{createUserBean.secretAnswer}"
                                                          title="User Secret Answer" placeholder="User Secret Answer"
                                                          required="true" requiredMessage="Required answer for secret question">
                                             </p:inputText>
 
                                             <h:outputText value ="Gender" />
-                                            <p:selectOneRadio id="gender" value="#{kullaniciEkleController.gender}" unselectable="true">
+                                            <p:selectOneRadio id="gender" value="#{createUserBean.gender}" unselectable="true">
                                                 <f:selectItem itemLabel="MALE" itemValue="MALE" />
                                                 <f:selectItem itemLabel="FEMALE" itemValue="FEMALE" />
                                             </p:selectOneRadio>
@@ -179,18 +179,18 @@ and open the template in the editor.
                                         <p:panel header="Confirmation">
                                             Confirm user will be added.
                                             <h:panelGrid columns="2" columnClasses="label, value" style="padding-top: 40px;"  >
-                                                <h:outputText  value="#{kullaniciEkleController.name}" title="Kullanici Adi"  />
-                                                <h:outputText   value="#{kullaniciEkleController.surname}" title="Kullanici soyadi"   />
+                                                <h:outputText  value="#{createUserBean.name}" title="Kullanici Adi"  />
+                                                <h:outputText   value="#{createUserBean.surname}" title="Kullanici soyadi"   />
 
                                                 <p:autoUpdate />
                                                 <br/>
                                             </h:panelGrid>
 
-                                            <p:commandButton value="Create" action="#{kullaniciEkleController.insertNewUser()}"
+                                            <p:commandButton value="Create" action="#{createUserBean.insertNewUser()}"
                                                              update="growl" process="@this"
                                                              icon="fa fa-check-circle" styleClass="insertButton"  
                                                              />
-                                            <p:commandButton value="Cancel" action="#{kullaniciEkleController.cancelCreate()}" 
+                                            <p:commandButton value="Cancel" action="#{createUserBean.cancelCreate()}" 
                                                              update="@parent , confirm" oncomplete="PF('wiz').loadStep('personal', false)" 
                                                              icon="fa fa-times-circle" styleClass="insertButton declineButton"
                                                              immediate="true" ajax="false" resetValues="true" 

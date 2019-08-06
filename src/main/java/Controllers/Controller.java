@@ -49,13 +49,13 @@ public class Controller implements Serializable {
     public final String PAGE_FORGET_PASSWORD = PROJECT_PATH + "forgetPassword.xhtml";
     public final String PAGE_HOME = PROJECT_PATH + "homePage.xhtml";
     
-    public final String PAGE_ADMIN_EXAMINE_USER = PROJECT_PATH + "admin/adminKullaniciGetir.xhtml";
-    public final String PAGE_ADMIN_INSERT = PROJECT_PATH + "admin/adminKullaniciEkle.xhtml";
-    public final String PAGE_ADMIN_YONETIM = PROJECT_PATH + "admin/adminYonetimIslemleri.xhtml";
+    public final String PAGE_ADMIN_EXAMINE_USER = PROJECT_PATH + "admin/adminExamineUser.xhtml";
+    public final String PAGE_ADMIN_CREATE_USER = PROJECT_PATH + "admin/adminCreateUser.xhtml";
+    public final String PAGE_ADMIN_SCHOOL_MANAGE = PROJECT_PATH + "admin/adminSchoolManage.xhtml";
     public final String PAGE_ADMIN_EXAMINE_LOG = PROJECT_PATH + "admin/adminExamineLog.xhtml";
 
     public final String PAGE_TEACHER_COURSE_MANAGE = PROJECT_PATH + "teacher/teacherCourseManage.xhtml";
-    public final String PAGE_TEACHER_COURSES = PROJECT_PATH + "teacher/teacherCourses.xhtml";
+    public final String PAGE_TEACHER_CREATE_COURSE = PROJECT_PATH + "teacher/teacherCreateCourse.xhtml";
    
     public final String PAGE_STUDENT_ENROLL = PROJECT_PATH + "student/studentEnroll.xhtml";
     
@@ -224,12 +224,12 @@ public class Controller implements Serializable {
         return PAGE_ADMIN_EXAMINE_USER;
     }
 
-    public String getPAGE_ADMIN_INSERT() {
-        return PAGE_ADMIN_INSERT;
+    public String getPAGE_ADMIN_CREATE_USER() {
+        return PAGE_ADMIN_CREATE_USER;
     }
 
-    public String getPAGE_ADMIN_YONETIM() {
-        return PAGE_ADMIN_YONETIM;
+    public String getPAGE_ADMIN_SCHOOL_MANAGE() {
+        return PAGE_ADMIN_SCHOOL_MANAGE;
     }
 
     public String getPAGE_ADMIN_EXAMINE_LOG() {
@@ -240,8 +240,8 @@ public class Controller implements Serializable {
         return PAGE_TEACHER_COURSE_MANAGE;
     }
 
-    public String getPAGE_TEACHER_COURSES() {
-        return PAGE_TEACHER_COURSES;
+    public String getPAGE_TEACHER_CREATE_COURSE() {
+        return PAGE_TEACHER_CREATE_COURSE;
     }
 
     public String getPAGE_STUDENT_ENROLL() {

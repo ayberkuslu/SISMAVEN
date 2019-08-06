@@ -21,7 +21,7 @@ and open the template in the editor.
 
 
 
-       
+
 
     </h:head>
 
@@ -76,45 +76,41 @@ and open the template in the editor.
                                              >
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="CourseId"/>
+                                            <h:outputText value="CourseName"/>
                                         </f:facet>
-                                        <h:outputText value="#{course.courseId}"/>
+                                        <h:outputText value="#{course.courseName}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Status"/>
-                                        </f:facet>
-                                        <h:outputText value="#{course.status == 1 ? 'ACTIVE' : 'PASSIVE'}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="CurrentSize"/>
-                                        </f:facet>
-                                        <h:outputText value="#{course.currentSize}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="MaxSize"/>
-                                        </f:facet>
-                                        <h:outputText value="#{course.maxSize}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="UserId"/>
+                                            <h:outputText value="Course Teacher"/>
                                         </f:facet>
                                         <h:outputText value="#{course.userId}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="TermId"/>
+                                            <h:outputText value="Current Size"/>
                                         </f:facet>
-                                        <h:outputText value="#{course.termId}"/>
+                                        <h:outputText value="#{course.currentSize}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="CourseName"/>
+                                            <h:outputText value="Max Size"/>
                                         </f:facet>
-                                        <h:outputText value="#{course.courseName}"/>
+                                        <h:outputText value="#{course.maxSize}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Term Name"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.termId}"/>
+                                    </p:column>
+
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Status"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.status == 1 ? 'ACTIVE' : 'PASSIVE'}"/>
                                     </p:column>
                                 </p:dataTable>
 
@@ -162,12 +158,7 @@ and open the template in the editor.
                                         </f:facet>
                                         <h:outputText value="#{item.userId.name}"/>
                                     </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Grade"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.grade}"/>
-                                    </p:column>
+
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="Mid-Term Exam"/>
@@ -179,6 +170,12 @@ and open the template in the editor.
                                             <h:outputText value="Final Exam"/>
                                         </f:facet>
                                         <h:outputText value="#{item.finalNot}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Grade"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.grade}"/>
                                     </p:column>
                                 </p:dataTable>
                                 <p:commandButton value="Deroll" action="#{enrollCourseContoller.derollCourse}"

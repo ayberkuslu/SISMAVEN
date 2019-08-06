@@ -45,6 +45,16 @@ MA 02110-1301  USA
                 position: inherit !important;
 
             }
+            .p-datepicker{
+                position: inherit !important;
+            }
+
+            .ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all.ui-shadow.ui-input-overlay.p-datepicker-panel {
+                left: auto !important;
+                top: auto !important;
+            }
+
+
 
         </style>
 
@@ -86,14 +96,32 @@ MA 02110-1301  USA
                         >
                         <br/>
                         <br/>
-                        <p:panelGrid columns="2"  >
-                            <p:outputLabel value="Starting date:"  />
-                            <p:datePicker value="#{examineLogBean.firstDate}" placeholder="Click to pick starting date." />
+                        <div class="ui-g">
 
-                            <p:outputLabel value="Ending date:"  />
-                            <p:datePicker value="#{examineLogBean.lastDate}" placeholder="Click to pick ending date." />
-                        </p:panelGrid>
-                        <p:commandButton value="Filter" update="logTable" action="#{examineLogBean.loadData()}" style="width: 100px;" />
+                            <div class="ui-g-6">
+                                <p:panel header="Filter">
+                                    You can give a range of days to filter.(Optional)
+                                    <br/>
+                                    <br/>
+                                    <p:panelGrid columns="2" styleClass="ui-noborder"  >
+                                        <p:outputLabel value="Starting date:"  />
+                                        <p:datePicker value="#{examineLogBean.firstDate}" placeholder="Click to pick starting date." showButtonBar="true" />
+                                        <p:outputLabel value="Ending date:"  />
+                                        <p:datePicker value="#{examineLogBean.lastDate}" placeholder="Click to pick ending date." showButtonBar="true" />
+                                    </p:panelGrid>
+
+                                </p:panel>
+
+                            </div>
+                            <div class="ui-g-6">
+
+                            </div>
+                            <p:commandButton value="Filter" update="logTable" action="#{examineLogBean.loadData()}" styleClass="buttonInherit" style="width: 12%; margin-left: 37% !important;" />
+                        </div>
+
+
+
+
                         <p:dataTable
 
                             id="logTable"
@@ -111,17 +139,32 @@ MA 02110-1301  USA
                             <f:facet name="header">
                                 Logs
                             </f:facet>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Log No"/>
-                                </f:facet>
+                            <p:column headerText="Log ID">
+
                                 <h:outputText value="#{item.logId}"/>
                             </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Event Code"/>
+                            <p:column headerText="Event Code" filterBy="#{item.eventCode}">
+                                <f:facet name="filter">
+                                    <p:selectOneMenu  onchange="PF('logTable').filter()"  styleClass="custom-filter" style="width: 80% !important;" >
+                                        <f:converter converterId="javax.faces.Integer" />
+
+                                        <f:selectItem itemLabel="All"                    itemValue="" />
+                                        <f:selectItem itemLabel=" USER_NEW"              itemValue="0" />
+                                        <f:selectItem itemLabel=" USER_LOGIN"            itemValue="1" />
+                                        <f:selectItem itemLabel=" USER_LOGOUT"           itemValue="2" />
+                                        <f:selectItem itemLabel=" USER_RESET_PASSWORD"   itemValue="4" />
+                                        <f:selectItem itemLabel=" USER_DELETE"           itemValue="5" />
+                                        <f:selectItem itemLabel="USER_ACTIVATE"          itemValue="6" />
+                                        <f:selectItem itemLabel="NEW_TERM_START"         itemValue="7" />
+                                        <f:selectItem itemLabel="TERM_END"               itemValue="8" />
+                                        <f:selectItem itemLabel="ADD_DROP_START"         itemValue="9" />
+                                        <f:selectItem itemLabel="ADD_DROP_END"           itemValue="10" />
+                                        <f:selectItem itemLabel="NEW_COURSE"             itemValue="11" />
+                                        <f:selectItem itemLabel="COURSE_ENROLL"          itemValue="12" />
+                                        <f:selectItem itemLabel="COURSE_DEROLL"          itemValue="13" />
+                                    </p:selectOneMenu>
                                 </f:facet>
-                                <h:outputText value="#{item.eventCode}"/>
+                                <h:outputText value="#{item.event}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
@@ -129,15 +172,12 @@ MA 02110-1301  USA
                                 </f:facet>
                                 <h:outputText value="#{item.detail}"/>
                             </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="User"/>
-                                </f:facet>
+                            <p:column headerText="Log Owner" filterBy="#{item.userId}">
                                 <h:outputText value="#{item.userId}"/>
                             </p:column>
-                            <p:column headerText="Date">
+                            <p:column headerText="Date" >
                                 <h:outputText value="#{item.date}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
                                 </h:outputText>
                             </p:column>
 

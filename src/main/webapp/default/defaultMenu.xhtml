@@ -21,10 +21,10 @@ and open the template in the editor.
                 <p:submenu   id="menuAdmin" label="Admin" icon="fa fa-font" rendered="#{menuController.renderedAdmin}"    >
                     <p:submenu label="User Management" icon="pi pi-briefcase"   >
                         <p:menuitem value="User Examine" icon="fa fa-user" url="#{menuController.PAGE_ADMIN_EXAMINE_USER}"  />
-                        <p:menuitem value="User Insert"  icon="fa fa-user-plus"  url="#{menuController.PAGE_ADMIN_INSERT}" />
+                        <p:menuitem value="User Insert"  icon="fa fa-user-plus"  url="#{menuController.PAGE_ADMIN_CREATE_USER}" />
                     </p:submenu>
                     <p:submenu label="Term Management" icon="pi pi-briefcase"  >
-                        <p:menuitem value="Term Settings" icon="pi pi-cog" url="#{menuController.PAGE_ADMIN_YONETIM}"/>   
+                        <p:menuitem value="Term Settings" icon="pi pi-cog" url="#{menuController.PAGE_ADMIN_SCHOOL_MANAGE}"/>   
                     </p:submenu>
                     <!--<p:submenu label="Log " icon="pi pi-briefcase"  >-->
                     <p:menuitem value="Log Examine" icon="pi pi-cog" url="#{menuController.PAGE_ADMIN_EXAMINE_LOG}" />   
@@ -32,8 +32,8 @@ and open the template in the editor.
                 </p:submenu>
 
                 <p:submenu   id="menuTeacher" label="Teacher" rendered="#{menuController.renderedTeacher}"   >
-                    <p:menuitem value="Add Course" icon="pi pi-table" url="#{menuController.PAGE_TEACHER_COURSE_MANAGE}"  />
-                    <p:menuitem value="Course Manage" icon="pi pi-user-plus" url="#{menuController.PAGE_TEACHER_COURSES}" />
+                    <p:menuitem value="Create Course" icon="pi pi-user-plus" url="#{menuController.PAGE_TEACHER_CREATE_COURSE}"  />
+                    <p:menuitem value="Course Manage" icon="pi pi-table" url="#{menuController.PAGE_TEACHER_COURSE_MANAGE}" />
                 </p:submenu>
 
                 <p:submenu label="Student"  rendered="#{menuController.renderedStudent}"  >

@@ -32,24 +32,26 @@ import org.primefaces.model.SortOrder;
  *
  * @author Ayberk
  */
-public class LogsLazyDataModel extends LazyDataModel<Logs> {
+public class GenericLazyDataModel extends LazyDataModel<Object> {
     
-     private List<Logs> datasource;
+        private List<Object> datasource;
 
-    public LogsLazyDataModel(List<Logs> datasource) {
+    public GenericLazyDataModel(List<Object> datasource) {
         this.datasource = datasource;
     }
 
     @Override
-    public Object getRowKey(Logs object) {
-        return object.getLogId();
+    public Object getRowKey(Object object) {
+        
+        // should be primary key of class
+        return object.hashCode();
     }
 
     @Override
-    public Logs getRowData(String rowKey) {
+    public Object getRowData(String rowKey) {
 
-        for (Logs obj : datasource) {
-            if (obj.getLogId().toString().equals(rowKey)) {
+        for (Object obj : datasource) {
+            if ((obj.hashCode()+"").equals(rowKey)) {
                 return obj;
             }
         }
@@ -59,11 +61,11 @@ public class LogsLazyDataModel extends LazyDataModel<Logs> {
     
     
         @Override
-    public List<Logs> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
-        List<Logs> data = new ArrayList<>();
+    public List<Object> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+        List<Object> data = new ArrayList<>();
 
         //filter
-        for (Logs log : datasource) {
+        for (Object object : datasource) {
             boolean match = true;
 
             if (filters != null) {
@@ -74,10 +76,10 @@ public class LogsLazyDataModel extends LazyDataModel<Logs> {
                         Object filterValue = filters.get(filterProperty);
 
 
-                        Class logClass = log.getClass();
+                        Class logClass = object.getClass();
                         Field declaredField = logClass.getDeclaredField(filterProperty);
                         declaredField.setAccessible(true);
-                        Object logObject = declaredField.get(log);
+                        Object logObject = declaredField.get(object);
                         String fieldValue = String.valueOf(logObject);
                         declaredField.setAccessible(false);
 
@@ -98,7 +100,7 @@ public class LogsLazyDataModel extends LazyDataModel<Logs> {
 
             if (match) {
 
-                data.add(log);
+                data.add(object);
                 
             }
         }
@@ -107,7 +109,7 @@ public class LogsLazyDataModel extends LazyDataModel<Logs> {
         if (sortField != null) {
 //            System.out.println("sorfield != null");
 
-            Collections.sort(data, new LazySorterLogs(sortField, sortOrder));
+            Collections.sort(data, new LazySorterObject(sortField, sortOrder));
         }
 
         //rowCount
@@ -151,11 +153,11 @@ public class LogsLazyDataModel extends LazyDataModel<Logs> {
     }
 
 
-    public List<Logs> getDatasource() {
+    public List<Object> getDatasource() {
         return datasource;
     }
 
-    public void setDatasource(List<Logs> datasource) {
+    public void setDatasource(List<Object> datasource) {
         this.datasource = datasource;
     }
     
@@ -172,9 +174,9 @@ public class LogsLazyDataModel extends LazyDataModel<Logs> {
                 super.setRowIndex(rowIndex);
             }    
         }
-    
-    
 
+
+    
+    
+    
 }
-
-    

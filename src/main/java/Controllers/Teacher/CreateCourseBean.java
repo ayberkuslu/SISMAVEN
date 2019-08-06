@@ -29,7 +29,7 @@ import org.hibernate.Transaction;
  */
 @ManagedBean
 @ViewScoped
-public class CoursePageController extends Controller {
+public class CreateCourseBean extends Controller {
 
     private Users currentUser;
     Transaction tx;
@@ -39,7 +39,7 @@ public class CoursePageController extends Controller {
     /**
      * Creates a new instance of CoursePageController
      */
-    public CoursePageController() {
+    public CreateCourseBean() {
     }
 
     @PostConstruct

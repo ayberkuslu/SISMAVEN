@@ -96,8 +96,8 @@ and open the template in the editor.
 }
 
 body .ui-selectonemenu.ui-state-highlight ,.ui-selectonemenu.ui-state-active ,.ui-selectonemenu.ui-state-hover  {
-    
-border: 1px solid #6c76af !important;
+
+    border: 1px solid #6c76af !important;
 }
 
 
@@ -166,7 +166,7 @@ body .ui-paginator{
 }
 
 body .ui-paginator .ui-paginator-first, body .ui-paginator .ui-paginator-prev, body .ui-paginator .ui-paginator-next, body .ui-paginator .ui-paginator-last {
-color:white !important;
+    color:white !important;
 }
 body .ui-paginator .ui-paginator-current {
     color: white !important;

@@ -67,7 +67,10 @@ public class MenuController extends Controller {
         }catch(Exception e){
             System.out.println(e+"\nwhoAmI() null pointer");
         }
-        if(temp == null) return null;
+        if(temp == null){
+            System.out.println("User == null");
+            return null;
+        }
         switch (temp.getType()) {
             case Users.TYPE_ADMIN:
                 setRenderedForAdmin();
@@ -81,8 +84,6 @@ public class MenuController extends Controller {
             default:
                 break;
         }
-        System.out.println("WhoAmI User toString(): " + temp);
-
         return temp;
 
     }

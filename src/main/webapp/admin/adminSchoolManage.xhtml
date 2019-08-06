@@ -62,21 +62,21 @@ and open the template in the editor.
                                      style="margin-bottom:20px;"
                                      >
 
-                                <h3><h:outputText id="out" rendered="#{donemYonetimController.currentTermName != null}"  value="Current Term : #{donemYonetimController.currentTermName}" /></h3>
-                                <h3><h:outputText id="out2" rendered="#{donemYonetimController.currentTermName == null}"  value="There is no active term!" /></h3>
+                                <h3><h:outputText id="out" rendered="#{schoolManageBean.currentTermName != null}"  value="Current Term : #{schoolManageBean.currentTermName}" /></h3>
+                                <h3><h:outputText id="out2" rendered="#{schoolManageBean.currentTermName == null}"  value="There is no active term!" /></h3>
                                 <p:messages id="messages1"  showIcon="true" />
                                 <p:outputPanel style=" height: 200px !important;">
                                     <p:panelGrid id="panelgrid"  columns="2" >
                                         <p:outputLabel value ="New Term Name" />
-                                        <p:inputText id="termName" value="#{donemYonetimController.newTermName}" title="New Term Name" placeholder="Name"  />
+                                        <p:inputText id="termName" value="#{schoolManageBean.newTermName}" title="New Term Name" placeholder="Name"  />
                                     </p:panelGrid>
                                     <p:commandButton id="openTerm" value="Start New Term"
-                                                     action="#{donemYonetimController.startNewTerm}" 
+                                                     action="#{schoolManageBean.startNewTerm}" 
                                                      update="panel1"
                                                      style="margin:30px; width: 45%;"
                                                      />
                                     <p:commandButton id="closeTerm" value="End Current Term"
-                                                     action="#{donemYonetimController.endCurrentTerm()}"
+                                                     action="#{schoolManageBean.endCurrentTerm()}"
                                                      update="panel1"
                                                      style=" width: 45%;"
 
@@ -97,17 +97,17 @@ and open the template in the editor.
 
                                 <p:messages id="messages2"  showIcon="true" />
 
-                                <h3><h:outputText   value="ADD-DROP IS CURRENTLY CLOSE" rendered="#{not donemYonetimController.addDropOpen}"/></h3>
-                                <h3><h:outputText   value="ADD-DROP IS CURRENTLY OPEN" rendered="#{donemYonetimController.addDropOpen}"/></h3>
+                                <h3><h:outputText   value="ADD-DROP IS CURRENTLY CLOSE" rendered="#{not schoolManageBean.addDropOpen}"/></h3>
+                                <h3><h:outputText   value="ADD-DROP IS CURRENTLY OPEN" rendered="#{schoolManageBean.addDropOpen}"/></h3>
                                 <p:outputPanel style=" height: 200px !important;">
                                     <br/><br/>
                                     <p:commandButton value="Start Add Drop"
-                                                     action="#{donemYonetimController.startAddDrop()}" update="panel2"
+                                                     action="#{schoolManageBean.startAddDrop()}" update="panel2"
                                                      style="margin: 20px;width: 45%;" 
                                                      />
 
                                     <p:commandButton value="End Add Drop"
-                                                     action="#{donemYonetimController.endAddDrop()}"
+                                                     action="#{schoolManageBean.endAddDrop()}"
                                                      update="panel2" 
                                                      style="width: 45%;"
                                                      />

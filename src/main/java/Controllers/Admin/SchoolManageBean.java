@@ -33,7 +33,7 @@ import org.hibernate.criterion.Restrictions;
  */
 @ManagedBean
 @ViewScoped
-public class DonemYonetimController extends Controller {
+public class SchoolManageBean extends Controller {
 
     private Users currentUser;
 
@@ -45,7 +45,7 @@ public class DonemYonetimController extends Controller {
     /**
      * Creates a new instance of AdminDonemYonetimi
      */
-    public DonemYonetimController() {
+    public SchoolManageBean() {
 
     }
 
