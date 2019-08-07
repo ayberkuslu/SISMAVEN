@@ -38,16 +38,16 @@ public class Controller implements Serializable {
     public static final boolean CLOSED_ADD_DROP = false;
     
     private final String DOMAIN_TAG = "http://localhost:8080/";
-    private final String CONTEXT_PATH = "mavenproject1/";
+    private final String CONTEXT_PATH = "edu/";
     
     private final String PROJECT_PATH = DOMAIN_TAG + CONTEXT_PATH;
     
     
     
 
-    public final String PAGE_LOGIN =  PROJECT_PATH;
+    public final String PAGE_LOGIN =  PROJECT_PATH +  "login.xhtml";
     public final String PAGE_FORGET_PASSWORD = PROJECT_PATH + "forgetPassword.xhtml";
-    public final String PAGE_HOME = PROJECT_PATH + "homePage.xhtml";
+    public final String PAGE_HOME = PROJECT_PATH + "home.xhtml";
     
     public final String PAGE_ADMIN_EXAMINE_USER = PROJECT_PATH + "admin/adminExamineUser.xhtml";
     public final String PAGE_ADMIN_CREATE_USER = PROJECT_PATH + "admin/adminCreateUser.xhtml";

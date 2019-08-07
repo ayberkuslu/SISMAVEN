@@ -18,26 +18,26 @@ and open the template in the editor.
         <ui:component>
             <p:growl id="messages"/>
             <p:panelMenu style="position: fixed !important;"   >
-                <p:submenu   id="menuAdmin" label="Admin" icon="fa fa-font" rendered="#{menuController.renderedAdmin}"    >
+                <p:submenu   id="menuAdmin" label="Admin" icon="fa fa-font" rendered="#{topMenuBean.renderedAdmin}"    >
                     <p:submenu label="User Management" icon="pi pi-briefcase"   >
-                        <p:menuitem value="User Examine" icon="fa fa-user" url="#{menuController.PAGE_ADMIN_EXAMINE_USER}"  />
-                        <p:menuitem value="User Insert"  icon="fa fa-user-plus"  url="#{menuController.PAGE_ADMIN_CREATE_USER}" />
+                        <p:menuitem value="User Examine" icon="fa fa-user" url="#{topMenuBean.PAGE_ADMIN_EXAMINE_USER}"  />
+                        <p:menuitem value="User Insert"  icon="fa fa-user-plus"  url="#{topMenuBean.PAGE_ADMIN_CREATE_USER}" />
                     </p:submenu>
                     <p:submenu label="Term Management" icon="pi pi-briefcase"  >
-                        <p:menuitem value="Term Settings" icon="pi pi-cog" url="#{menuController.PAGE_ADMIN_SCHOOL_MANAGE}"/>   
+                        <p:menuitem value="Term Settings" icon="pi pi-cog" url="#{topMenuBean.PAGE_ADMIN_SCHOOL_MANAGE}"/>   
                     </p:submenu>
                     <!--<p:submenu label="Log " icon="pi pi-briefcase"  >-->
-                    <p:menuitem value="Log Examine" icon="pi pi-cog" url="#{menuController.PAGE_ADMIN_EXAMINE_LOG}" />   
+                    <p:menuitem value="Log Examine" icon="pi pi-cog" url="#{topMenuBean.PAGE_ADMIN_EXAMINE_LOG}" />   
                     <!--</p:submenu>-->
                 </p:submenu>
 
-                <p:submenu   id="menuTeacher" label="Teacher" rendered="#{menuController.renderedTeacher}"   >
-                    <p:menuitem value="Create Course" icon="pi pi-user-plus" url="#{menuController.PAGE_TEACHER_CREATE_COURSE}"  />
-                    <p:menuitem value="Course Manage" icon="pi pi-table" url="#{menuController.PAGE_TEACHER_COURSE_MANAGE}" />
+                <p:submenu   id="menuTeacher" label="Teacher" rendered="#{topMenuBean.renderedTeacher}"   >
+                    <p:menuitem value="Create Course" icon="pi pi-user-plus" url="#{topMenuBean.PAGE_TEACHER_CREATE_COURSE}"  />
+                    <p:menuitem value="Course Manage" icon="pi pi-table" url="#{topMenuBean.PAGE_TEACHER_COURSE_MANAGE}" />
                 </p:submenu>
 
                 <p:submenu label="Student"  rendered="#{menuController.renderedStudent}"  >
-                    <p:menuitem value="Enroll" icon="fa fa-bookmark" url="#{menuController.PAGE_STUDENT_ENROLL}"  />
+                    <p:menuitem value="Enroll" icon="fa fa-bookmark" url="#{topMenuBean.PAGE_STUDENT_ENROLL}"  />
 
                 </p:submenu>
 

@@ -22,7 +22,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class ForgetPasswordController extends Controller {
+public class ForgetPasswordBean extends Controller {
 
     private String userId;
     private String userAnswer = "";
@@ -34,7 +34,7 @@ public class ForgetPasswordController extends Controller {
     /**
      * Creates a new instance of ForgetPasswordController
      */
-    public ForgetPasswordController() {
+    public ForgetPasswordBean() {
     }
 
     @PreDestroy

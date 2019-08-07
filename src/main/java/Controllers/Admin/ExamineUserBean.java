@@ -26,6 +26,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
 
@@ -117,6 +118,8 @@ public class ExamineUserBean extends Controller {
 
                 break;
         }
+        PrimeFaces instance = PrimeFaces.current();
+        instance.scrollTo("panel2");
         System.out.println("IsRendered : " + isRenderedClasses + "  " + isRenderedCourses);
     }
 

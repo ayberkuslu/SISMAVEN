@@ -11,7 +11,7 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">   
     <h:head>
-        <title>Donem Yonetim Islemleri</title>
+        <title>Term Management</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <h:outputStylesheet library="css" name="columns.css"/>
 
@@ -64,7 +64,7 @@ and open the template in the editor.
 
                                 <h3><h:outputText id="out" rendered="#{schoolManageBean.currentTermName != null}"  value="Current Term : #{schoolManageBean.currentTermName}" /></h3>
                                 <h3><h:outputText id="out2" rendered="#{schoolManageBean.currentTermName == null}"  value="There is no active term!" /></h3>
-                                <p:messages id="messages1"  showIcon="true" />
+                                <p:growl id="messages1"  life="3000" />
                                 <p:outputPanel style=" height: 200px !important;">
                                     <p:panelGrid id="panelgrid"  columns="2" >
                                         <p:outputLabel value ="New Term Name" />
@@ -95,7 +95,7 @@ and open the template in the editor.
 
                                      >
 
-                                <p:messages id="messages2"  showIcon="true" />
+                                <p:growl id="messages2"   />
 
                                 <h3><h:outputText   value="ADD-DROP IS CURRENTLY CLOSE" rendered="#{not schoolManageBean.addDropOpen}"/></h3>
                                 <h3><h:outputText   value="ADD-DROP IS CURRENTLY OPEN" rendered="#{schoolManageBean.addDropOpen}"/></h3>

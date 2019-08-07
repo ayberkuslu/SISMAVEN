@@ -43,7 +43,8 @@ public class LazySorterLogs implements Comparator<Logs> {
     @Override
     public int compare(Logs log1, Logs log2) {
         try {
-            int value = log1.getLogId() - log2.getLogId();
+//            int value = log1.getLogId() - log2.getLogId();
+                   int value = log1.getDate().compareTo(log2.getDate());
             return SortOrder.ASCENDING.equals(sortOrder) ? value : -1 * value;
         } catch (Exception e) {
             throw new RuntimeException("for Logs compare @");

@@ -61,12 +61,12 @@ and open the template in the editor.
                                      style="margin-bottom:20px;"
                                      >
 
-                                <h1>Avaliable classes for #{enrollCourseContoller.currentUserName}</h1>
+                                <h1>Avaliable classes for #{enrollCourseBean.currentUserName}</h1>
                                 <h4>Select the Course and press "Enroll" to enroll course.</h4>
                                 (Add-Drop must be open to enroll.)
-                                <p:dataTable value="#{enrollCourseContoller.openCourses}"
+                                <p:dataTable value="#{enrollCourseBean.openCourses}"
                                              var="course"
-                                             selection="#{enrollCourseContoller.selectedCourseForEnroll}"
+                                             selection="#{enrollCourseBean.selectedCourseForEnroll}"
                                              selectionMode="single"
                                              rowKey="#{course.courseId}"
                                              rows="5"
@@ -115,7 +115,7 @@ and open the template in the editor.
                                 </p:dataTable>
 
 
-                                <p:commandButton value="Enroll" action="#{enrollCourseContoller.enrollCourse}"
+                                <p:commandButton value="Enroll" action="#{enrollCourseBean.enrollCourse}"
                                                  update=":form:panel1 :form:panel2 messages1"
                                                  icon="fa fa-chevron-circle-right"
                                                  style="margin:30px; width: 100%;"
@@ -134,12 +134,12 @@ and open the template in the editor.
                                      toggleableHeader="true"
                                      style="margin-bottom:20px;"                                
                                      >
-                                <h1>Current taken classes for #{enrollCourseContoller.currentUserName}</h1>
+                                <h1>Current taken classes for #{enrollCourseBean.currentUserName}</h1>
                                 <h4>Select the Course and press "Deroll" to deroll course.</h4>
                                 (Add-Drop must be open to deroll.)
-                                <p:dataTable value="#{enrollCourseContoller.currentUserClasses}"
+                                <p:dataTable value="#{enrollCourseBean.currentUserClasses}"
                                              var="item"
-                                             selection="#{enrollCourseContoller.selectedClassesForDeroll}"
+                                             selection="#{enrollCourseBean.selectedClassesForDeroll}"
                                              selectionMode="single"
                                              rowKey="#{item.classesId}"
                                              rows="5"
@@ -178,7 +178,7 @@ and open the template in the editor.
                                         <h:outputText value="#{item.grade}"/>
                                     </p:column>
                                 </p:dataTable>
-                                <p:commandButton value="Deroll" action="#{enrollCourseContoller.derollCourse}"
+                                <p:commandButton value="Deroll" action="#{enrollCourseBean.derollCourse}"
                                                  update=":form:panel1 :form:panel2"
                                                  style="margin:30px; width: 100%;"
                                                  icon="fa fa-chevron-circle-left"

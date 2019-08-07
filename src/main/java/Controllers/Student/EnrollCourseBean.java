@@ -39,7 +39,7 @@ import org.hibernate.criterion.Restrictions;
  */
 @ManagedBean
 @ViewScoped
-public class EnrollCourseContoller extends Controller {
+public class EnrollCourseBean extends Controller {
 
     private Users currentUser;
     Transaction tx;
@@ -57,7 +57,7 @@ public class EnrollCourseContoller extends Controller {
     /**
      * Creates a new instance of EnrollCourseContoller
      */
-    public EnrollCourseContoller() {
+    public EnrollCourseBean() {
     }
 
     @PostConstruct

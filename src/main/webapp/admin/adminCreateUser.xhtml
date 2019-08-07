@@ -64,28 +64,43 @@ and open the template in the editor.
                                 <h4>Fill the blanks to add new user.</h4>
                                 <p:wizard id="wizard" flowListener="#{createUserBean.onFlowProcess}" widgetVar="wiz"  showNavBar="true">
                                     <p:tab id="personal" title="Personal Details">
-                                        <p:messages />
+                                        <p:growl />
                                         <p:panelGrid columns="2" style="padding-top: 40px;"  >
                                             <p:autoUpdate />
 
                                             <h:outputText value ="TCKN" />
-                                            <p:inputText  id="tckn" value="#{createUserBean.tckn}" title="User TCKN"
-                                                          placeholder="User TCKN" required="true"
+                                            <p:inputMask  id="tckn" value="#{createUserBean.tckn}" 
+                                                          title="User TCKN (11 digit)"
+                                                          placeholder="User TCKN (11 digit)" 
+                                                          required="true"
+                                                          maxlength="11"
+                                                          mask="999 999 999 99"
+                                                          requiredMessage="TCKN should be 11 digit"
                                                           />
 
                                             <h:outputText value ="Name"  />
-                                            <p:inputText id="name" value="#{createUserBean.name}" title="User Name"
-                                                         placeholder="User Name" required="true"
+                                            <p:inputText id="name" value="#{createUserBean.name}" 
+                                                         title="User Name"
+                                                         placeholder="User Name" 
+                                                         required="true"
+                                                         requiredMessage="Name can not be empty!"
                                                          />
 
                                             <h:outputText value ="Surname" />
-                                            <p:inputText  id="surname" value="#{createUserBean.surname}" title="User Surname"
-                                                          placeholder="User Surname" required="true"
+                                            <p:inputText  id="surname" value="#{createUserBean.surname}"
+                                                          title="User Surname"
+                                                          placeholder="User Surname"
+                                                          required="true"
+                                                          requiredMessage="Surname can not be empty!"
                                                           />
 
                                             <h:outputText value ="Password" />
-                                            <p:password id="password" value="#{createUserBean.password}" title="User Password"
-                                                        placeholder="User Password" required="true" 
+                                            <p:password id="password"
+                                                        value="#{createUserBean.password}"
+                                                        title="User Password"
+                                                        placeholder="User Password"
+                                                        required="true"
+                                                        requiredMessage="Password can not be empty!"
                                                         />
                                         </p:panelGrid>
                                         <br/>
@@ -99,24 +114,26 @@ and open the template in the editor.
 
 
                                             <h:outputText value ="Email" />
-                                            <p:inputText id="email" value="#{createUserBean.email}" 
-                                                         title="User Email" placeholder="User Email"
-                                                         required="true" requiredMessage="Not a valid Email." >
-
+                                            <p:inputText id="email"
+                                                         value="#{createUserBean.email}" 
+                                                         title="User Email"
+                                                         placeholder="User Email"
+                                                         required="true"
+                                                         requiredMessage="Not a valid Email." >
                                             </p:inputText>
 
                                             <h:outputText value ="Type" />
                                             <p:selectOneMenu id="type" value="#{createUserBean.type}"   autoWidth="true" placeholder="User Type"   >
-                                                <f:selectItem itemLabel="User Type" itemValue="" />
+                                                <f:selectItem itemLabel="User Type" itemValue="1" />
                                                 <f:selectItem itemLabel="ADMIN" itemValue="0" />
                                                 <f:selectItem itemLabel="STUDENT" itemValue="1" />
                                                 <f:selectItem itemLabel="TEACHER" itemValue="2" />
                                             </p:selectOneMenu>
-
                                             <h:outputText value ="Phone " />
-                                            <p:inputText id="phone" value="#{createUserBean.phone}"
-                                                         title="User Phone" placeholder="(5**)-***-****" 
+                                            <p:inputMask id="phone" value="#{createUserBean.phone}"
+                                                         title="User Phone"
                                                          required="false"
+                                                         mask="(999)999-99-99"
                                                          />
 
                                             <h:outputText value ="Adress" />
@@ -208,6 +225,7 @@ and open the template in the editor.
                             </p:panel>
                             <p:keyFilter for="phone" mask="num"/>
                             <p:keyFilter for="acilTelf" mask="num"/>
+                            <p:keyFilter for="tckn" mask="num" />
                         </div>
 
 

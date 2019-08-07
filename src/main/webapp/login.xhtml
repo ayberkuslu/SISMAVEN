@@ -16,18 +16,18 @@
 
             <div>
                 <!--<i class="fa fa-user icon"></i>-->
-                <p:inputText type="text" id="studentid" value="#{loginController.userId}"  placeholder="User ID"   />
+                <p:inputText type="text" id="studentid" value="#{loginBean.userId}"  placeholder="User ID"   />
 
             </div>
             <!--<br/>-->
             <div>
 
                 <!--<i class="fa fa-key icon" ></i>-->
-                <p:password id="password" value="#{loginController.userPassword}" placeholder="Password"   />
+                <p:password id="password" value="#{loginBean.userPassword}" placeholder="Password"   />
             </div> 
             <div >
 
-            <p:commandButton  value="Login" action="#{loginController.tryLogin()}" icon="fa fa-lock" styleClass="loginButton" />
+            <p:commandButton  value="Login" action="#{loginBean.tryLogin()}" icon="fa fa-lock" styleClass="loginButton" />
             
             </div> 
                 <!--<i class="fa fa-key icon" ></i>-->

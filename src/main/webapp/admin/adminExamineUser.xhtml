@@ -35,6 +35,12 @@ and open the template in the editor.
 
         </style>
 
+        <script type="text/javascript">
+            function ScrollPage(location) {
+                window.location.hash = location;
+            }
+        </script>
+
 
 
     </h:head>
@@ -63,9 +69,9 @@ and open the template in the editor.
                 </div>
 
                 <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
-                    <p:messages showIcon="false"  >
+                    <p:growl life="3000"  >
                         <p:autoUpdate/>
-                    </p:messages>
+                    </p:growl>
 
                     <p:panel 
                         id="panel1" header="Users" toggleable="true" closable="true" closeTitle="Kapat" toggleableHeader="true"
@@ -94,7 +100,8 @@ and open the template in the editor.
                             <p:ajax event="rowSelect"  
                                     update=":form:panel2 @parent "
                                     process="@parent"
-                                    listener="#{examineUserBean.onRowSelect}" 
+                                    listener="#{examineUserBean.onRowSelect}"
+                                    oncomplete="ScrollPage(':form:panel1')"
                                     />
                             <f:facet name="header">
                                 User List
@@ -185,6 +192,10 @@ and open the template in the editor.
                                     value="#{examineUserBean.selectedUserClassesList}"
                                     var="abc"
                                     emptyMessage="There is no such class!"
+                                    rows="10"
+                                    paginator="true"  paginatorPosition="bottom"
+                                    lazy="true" 
+                                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                     rendered="#{not empty examineUserBean.selectedUserClassesList}" >
 
                                     <p:column>
@@ -232,7 +243,9 @@ and open the template in the editor.
                                              var="course"
                                              widgetVar="verilenDersler"
                                              emptyMessage="There is no such course!"
-
+                                             rows="10"
+                                             paginator="true"  paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                              rendered="#{not empty examineUserBean.selectedUserCoursesList}"
                                              >
                                     <p:column>
@@ -312,7 +325,6 @@ and open the template in the editor.
 
                         </p:accordionPanel>
                     </p:outputPanel>
-
 
                 </div>
 

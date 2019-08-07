@@ -33,12 +33,12 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @RequestScoped
-public class ErrorPageController extends Controller {
+public class AccessDeniedBean extends Controller {
 
     /**
      * Creates a new instance of ErrorPageController
      */
-    public ErrorPageController() {
+    public AccessDeniedBean() {
     }
     
     public void goHomePage(){

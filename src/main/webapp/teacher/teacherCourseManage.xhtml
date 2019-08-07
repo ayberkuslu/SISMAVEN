@@ -14,7 +14,7 @@ and open the template in the editor.
 
 
     <h:head>
-        <title>Donem Yonetim Islemleri</title>
+        <title>Term Manage Page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <h:outputStylesheet library="css" name="columns.css"/>
@@ -47,7 +47,7 @@ and open the template in the editor.
                 </div>
 
                 <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
-                    <p:messages id="messages1"  showIcon="false" />
+                    <p:growl id="messages1"  life="3000" />
 
                     <div class="ui-g"  >
 
@@ -63,6 +63,10 @@ and open the template in the editor.
 
                                 <h1 ><h:outputText value="Open Courses" rendered="#{not empty courseManageBean.activeCoursesList}" /></h1>  
                                 <h1 ><h:outputText value="There is no active course" rendered="#{empty courseManageBean.activeCoursesList}" /></h1>  
+                                Click course to bring student list.
+                                <br/>
+                                <br/>
+
                                 <p:dataTable value="#{courseManageBean.activeCoursesList}"
                                              var="item"
                                              rendered="#{not empty courseManageBean.activeCoursesList}"
@@ -125,6 +129,9 @@ and open the template in the editor.
                                           >
 
                                     <h1><h:outputText value="#{courseManageBean.selectedCourse.courseName} Students List" rendered="#{not empty courseManageBean.selectedCourse}"/></h1>
+                                    Click student to change grades.
+                                    <br/>
+                                    <br/>
                                     <p:dataTable value="#{courseManageBean.selectedClassesList}"
                                                  var="classes"
                                                  selectionMode="single"

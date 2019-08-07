@@ -104,6 +104,11 @@ public class CreateUserBean extends Controller {
 
             return;
         }
+        if (!isValidTCKN(tckn)) {
+            System.out.println("not valid e mail");
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "TCKN should be 11 digit.\nUser is not added.!.", ""));
+            return;
+        }
 
         Users user = new Users();
 
@@ -167,6 +172,10 @@ public class CreateUserBean extends Controller {
             return false;
         }
         return pat.matcher(email).matches();
+    }
+    
+    public static boolean isValidTCKN(String tckn){
+        return tckn.length() == 11;    
     }
 
     public String onFlowProcess(FlowEvent event) {

@@ -67,21 +67,20 @@ and open the template in the editor.
                                 <p:panelGrid id="courseInfos" columns="2" style="padding-top: 40px;"  >
 
                                     <h:outputText value ="Course Name" />
-                                    <p:inputText  id="name" value="#{coursePageController.newCourseName}" title="Course Name"
+                                    <p:inputText  id="name" value="#{createCourseBean.newCourseName}" title="Course Name"
                                                   placeholder="Course Name" required="true"
                                                   />
 
                                     <h:outputText value ="Max Size"  />
-                                    <p:inputNumber id="maxSize" value="#{coursePageController.maxCourseSize}" title="Max Size"
+                                    <p:inputNumber id="maxSize" value="#{createCourseBean.maxCourseSize}" title="Max Size"
                                                    required="true"
                                                    />
-
 
                                 </p:panelGrid>
 
 
                                 <p:commandButton value="Create New Course"
-                                                 action="#{coursePageController.createNewCourse()}" 
+                                                 action="#{createCourseBean.createNewCourse()}" 
                                                  update="panel1" 
                                                  style="margin:40px; width: 95%;"/>
 
