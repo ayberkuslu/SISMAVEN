@@ -14,30 +14,34 @@ and open the template in the editor.
     <h:head>
         <title>Dashboard</title>
         <h:outputStylesheet library="css" name="columns.css"/>
-        
-         <style type="text/css">
+
+        <style type="text/css">
 
             .ui-inputfield, .ui-widget-content .ui-inputfield {
 
                 border : none;
             }
-            
+
             body .homeButton{
                 background: transparent !important ;
                 color: black !important;
                 border: 2px solid black !important;
                 height: 80px !important;
-                
+
             }
             body .homeButton:hover{
                 background: blue !important ;
+            }
+
+            body .ui-panel{
+                margin: 10px;
             }
 
         </style>
 
     </h:head>
     <h:body>
-               <h:form id="form">
+        <h:form id="form">
 
             <div class="ui-g">
                 <div class="ui-g-3" >
@@ -62,9 +66,74 @@ and open the template in the editor.
 
                 <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
 
+                    <p:outputPanel rendered="#{homePageBean.renderedModelAdmin}" style="margin:20px; width: 100%;">
+                        <h2>Admin Pages</h2>
 
-                    <p:commandButton value="Test" styleClass="homeButton" />
+                        <p:dashboard id="board1" model="#{homePageBean.modelAdmin}">
+                            <p:panel id="CreateUser" header="Create User">
+                                Go to User Management >
+                                <p:commandLink value="User Create" action="#{homePageBean.goCreateUser()}" />
+                                to create new User.
 
+                            </p:panel>
+
+                            <p:panel id="ExamineUser" header="Examine User">
+                                Go to User Management >
+                                <p:commandLink value="User Examine" action="#{homePageBean.goExamineUser()}" />
+                                to examine User.                       
+                            </p:panel>
+
+                            <p:panel id="SchoolManage" header="Term Manage">
+                                Go to User Management >
+                                <p:commandLink value="Term Management" action="#{homePageBean.goSchoolManage()}" />
+                                to  manage Term settings.
+                            </p:panel>
+
+                            <p:panel id="ExamineLog" header="Examine Log">
+                                Go to 
+                                <p:commandLink value="Log Examine" action="#{homePageBean.goExamineLog()}" />
+                                to examine Logs.
+                            </p:panel>
+                        </p:dashboard>
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{homePageBean.renderedModelTeacher}" style="margin:20px;width: 100% !important;">
+                        <h2>Teacher Pages</h2>
+
+                        <p:dashboard id="board2" model="#{homePageBean.modelTeacher}">
+                            <p:panel id="courseManage" header="Course Manage">
+                                Go to
+                                <p:commandLink value="Course Manage" action="#{homePageBean.goCourseManage()}" />
+                                to manage courses.
+
+                            </p:panel>
+
+                            <p:panel id="createCourse" header="Create New Course">
+                                Go to 
+                                <p:commandLink value="Create Course" action="#{homePageBean.goCreateCourse()}" />
+                                to create Course.                       
+                            </p:panel>
+
+
+                        </p:dashboard>
+
+
+                    </p:outputPanel>
+                    <p:outputPanel rendered="#{homePageBean.renderedModelStudent}" style="margin:20px; width: 100%;">
+                        <h2>Student Pages</h2>
+                        <p:dashboard id="board3" model="#{homePageBean.modelStudent}">
+                            <p:panel id="enrollCourse" header="Enroll Course" >
+                                Go to
+                                <p:commandLink value="Enroll" action="#{homePageBean.goEnroll()}" />
+                                to enroll/deroll courses.
+
+                            </p:panel>
+
+
+
+                        </p:dashboard>
+
+
+                    </p:outputPanel>
 
                 </div>
 

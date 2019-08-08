@@ -87,7 +87,7 @@ public class CreateUserBean extends Controller {
         getSession().close();
     }
 
-    public void insertNewUser() { 
+    public void insertNewUser() {
         System.out.println("insertNewUser()");
         FacesContext context = FacesContext.getCurrentInstance();
 
@@ -104,8 +104,10 @@ public class CreateUserBean extends Controller {
 
             return;
         }
+        tckn = tckn.replaceAll(" ", "");
         if (!isValidTCKN(tckn)) {
-            System.out.println("not valid e mail");
+            System.out.println(">" + tckn + "<");
+            System.out.println("not valid tckn");
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "TCKN should be 11 digit.\nUser is not added.!.", ""));
             return;
         }
@@ -129,7 +131,6 @@ public class CreateUserBean extends Controller {
         }
 
 //        System.out.println(phone + "||" + adress + "||" + gender + master + "||" + emergencyPhone + "||" + secretAnswer);
-
         userDetail.setPhone(phone);
         userDetail.setAdress(adress.replaceAll("i", "I").toUpperCase());
         userDetail.setBirthday(birthday);
@@ -173,9 +174,9 @@ public class CreateUserBean extends Controller {
         }
         return pat.matcher(email).matches();
     }
-    
-    public static boolean isValidTCKN(String tckn){
-        return tckn.length() == 11;    
+
+    public static boolean isValidTCKN(String tckn) {
+        return tckn.length() == 11;
     }
 
     public String onFlowProcess(FlowEvent event) {

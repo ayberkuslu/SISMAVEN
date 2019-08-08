@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.hibernate.Transaction;
 
@@ -125,7 +126,7 @@ public class TopMenuBean extends Controller {
 
         renderedAdmin = false;
         renderedTeacher = true;
-        renderedStudent = true;
+        renderedStudent = false;
 
     }
 

@@ -12,11 +12,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -41,9 +38,7 @@ public class Controller implements Serializable {
     private final String CONTEXT_PATH = "edu/";
     
     private final String PROJECT_PATH = DOMAIN_TAG + CONTEXT_PATH;
-    
-    
-    
+
 
     public final String PAGE_LOGIN =  PROJECT_PATH +  "login.xhtml";
     public final String PAGE_FORGET_PASSWORD = PROJECT_PATH + "forgetPassword.xhtml";
@@ -168,16 +163,16 @@ public class Controller implements Serializable {
         }
     }
 
-    public void insertObject(Object o) {
-        try {
-            getSession().beginTransaction();
-            getSession().save(o);
-            getSession().getTransaction().commit();
-        } catch (Exception e) {
-            getSession().getTransaction().rollback();
-            System.out.println(e + "\n InsertObjectException while inserting :" + o.toString());
-        }
-    }
+//    public void insertObject(Object o) {
+//        try {
+//            getSession().beginTransaction();
+//            getSession().save(o);
+//            getSession().getTransaction().commit();
+//        } catch (Exception e) {
+//            getSession().getTransaction().rollback();
+//            System.out.println(e + "\n InsertObjectException while inserting :" + o.toString());
+//        }
+//    }
 
     public Users getCurrentUser() {
         return currentUser;
