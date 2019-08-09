@@ -40,11 +40,12 @@ made subject to such option by the copyright holder.
 Contributor(s):
 -->
 <hibernate-reverse-engineering>
-  <schema-selection match-catalog="sisdata"/>
-  <table-filter match-name="classes"/>
-  <table-filter match-name="courses"/>
-  <table-filter match-name="users"/>
-  <table-filter match-name="logs"/>
-  <table-filter match-name="terms"/>
-  <table-filter match-name="user_details"/>
+    <schema-selection match-catalog="sisdata"/>
+    <table-filter match-name="runtime_properties"/>
+    <table-filter match-name="classes"/>
+    <table-filter match-name="courses"/>
+    <table-filter match-name="users"/>
+    <table-filter match-name="logs"/>
+    <table-filter match-name="terms"/>
+    <table-filter match-name="user_details"/>
 </hibernate-reverse-engineering>

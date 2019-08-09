@@ -52,5 +52,6 @@ Contributor(s):
     <mapping class="Models.Logs"/>
     <mapping class="Models.Courses"/>
     <mapping class="Models.Classes"/>
+    <mapping class="Models.RuntimeProperties"/>
   </session-factory>
 </hibernate-configuration>
