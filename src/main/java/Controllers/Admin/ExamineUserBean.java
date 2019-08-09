@@ -48,8 +48,7 @@ public class ExamineUserBean extends Controller {
     private Users selectedUser;
     private UserDetails selectedUserDetails;
 
-    private String isRenderedClasses = "true";
-    private String isRenderedCourses = "true";
+    private boolean collapsedPanel1 = false;
 
     /**
      * Creates a new instance of KullaniciGetirController
@@ -87,7 +86,7 @@ public class ExamineUserBean extends Controller {
 
     public void onRowSelect(SelectEvent event) {
 
-        System.out.println("Kullanici Name " + ((Users) event.getObject()).getName());
+        System.out.println("User Name " + ((Users) event.getObject()).getName());
 
         selectedUser = (Users) event.getObject();
         setSelectedUserDetails(getUserDetailsById(selectedUser.getUserId()));
@@ -101,26 +100,16 @@ public class ExamineUserBean extends Controller {
 
         FacesMessage msg = new FacesMessage("User Selected " + selectedUser.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
+        
+//        RequestContext.getCurrentInstance().scrollTo("componentClientId");
 
-        switch (selectedUser.getType()) {
-            case Users.TYPE_STUDENT:
-                isRenderedClasses = "true";
-                isRenderedCourses = "false";
-                break;
-            case Users.TYPE_TEACHER:
-                isRenderedClasses = "false";
-                isRenderedCourses = "true";
 
-                break;
-            default:
-                isRenderedClasses = "false";
-                isRenderedCourses = "false";
-
-                break;
-        }
-        PrimeFaces instance = PrimeFaces.current();
-        instance.scrollTo("panel2");
-        System.out.println("IsRendered : " + isRenderedClasses + "  " + isRenderedCourses);
+        /*
+         *OPEN IF YOU WANT TO COLLAPSE USER LIST PANEL ON ROW SELECT
+         *
+         */
+        
+//        collapsedPanel1 = true; 
     }
 
     public void deleteSelectedUser() {
@@ -141,6 +130,8 @@ public class ExamineUserBean extends Controller {
             selectedUser.setStatus(false);
             getSession().save(new Logs(Logs.USER_DELETE, "user made passive", selectedUser, new Date()));
             getSession().update(selectedUser);
+            collapsedPanel1 = false;
+
             getSession().getTransaction().commit();
 
         } catch (HibernateException e) {
@@ -173,6 +164,8 @@ public class ExamineUserBean extends Controller {
             selectedUser.setStatus(true);
             getSession().save(new Logs(Logs.USER_ACTIVATE, "user made active", selectedUser, new Date()));
             getSession().update(selectedUser);
+            collapsedPanel1 = false;
+
             getSession().getTransaction().commit();
 
         } catch (HibernateException e) {
@@ -251,20 +244,8 @@ public class ExamineUserBean extends Controller {
         this.selectedUserCoursesList = selectedUserCoursesList;
     }
 
-    public String getIsRenderedClasses() {
-        return isRenderedClasses;
-    }
-
-    public void setIsRenderedClasses(String isRenderedClasses) {
-        this.isRenderedClasses = isRenderedClasses;
-    }
-
-    public String getIsRenderedCourses() {
-        return isRenderedCourses;
-    }
-
-    public void setIsRenderedCourses(String isRenderedCourses) {
-        this.isRenderedCourses = isRenderedCourses;
+    public boolean isCollapsedPanel1() {
+        return collapsedPanel1;
     }
 
 }

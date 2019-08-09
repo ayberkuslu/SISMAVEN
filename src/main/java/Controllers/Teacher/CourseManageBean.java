@@ -65,12 +65,12 @@ public class CourseManageBean extends Controller implements Serializable {
 
         RuntimeProperties properties = (RuntimeProperties) getSession().get(RuntimeProperties.class, RUN_TIME_PROPERTY);
 
-        System.out.println("Add Drop : "+ properties.getIsOpenAddDrop());
+        System.out.println("Add Drop : " + properties.getIsOpenAddDrop());
         currentTerm = properties.getCurrentTerm();
 
         currentUser = (Users) sessionMap.get(CURRENT_USER);
-        
-        if(hasPermission(currentUser, Users.TYPE_TEACHER) == false){
+
+        if (hasPermission(currentUser, Users.TYPE_TEACHER) == false) {
             return;
         }
 
@@ -99,20 +99,30 @@ public class CourseManageBean extends Controller implements Serializable {
 
         getSession().close();
     }
+
     public void updateStudentGrades() {
         try {
             tx = getSession().beginTransaction();
             System.out.println("updateStudentGrades()");
-            int midTermExam = 0 ;
-            if(selectedCourseTakerAsClasses.getVizeNot() != null)
-            midTermExam= selectedCourseTakerAsClasses.getVizeNot();
-            int finalExam = 0 ;
-            if(selectedCourseTakerAsClasses.getFinalNot() !=null)
-            finalExam= selectedCourseTakerAsClasses.getFinalNot();
-            
-            String grade = letterGrade(midTermExam,finalExam);
+            int midTermExam = 0;
+
+            if (selectedCourseTakerAsClasses == null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Fail!No Student selected !"));
+                return;
+            }
+            if (selectedCourseTakerAsClasses.getVizeNot() != null) {
+                midTermExam = selectedCourseTakerAsClasses.getVizeNot();
+            }
+            int finalExam = 0;
+            if (selectedCourseTakerAsClasses.getFinalNot() != null) {
+                finalExam = selectedCourseTakerAsClasses.getFinalNot();
+            }
+
+            String grade = letterGrade(midTermExam, finalExam);
             selectedCourseTakerAsClasses.setGrade(grade);
             getSession().update(selectedCourseTakerAsClasses);
+            selectedCourseTakerAsClasses = null;
+            renderedGradeUpdate = false;
 
             tx.commit();
         } catch (Exception e) {
@@ -125,6 +135,7 @@ public class CourseManageBean extends Controller implements Serializable {
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Student grades updated!"));
     }
+
     public void onCourseRowSelect(SelectEvent event) {
 
         tx = getSession().beginTransaction();
@@ -185,7 +196,7 @@ public class CourseManageBean extends Controller implements Serializable {
 
     }
 
-    public String letterGrade(int midTerm , int finalExam ) {
+    public String letterGrade(int midTerm, int finalExam) {
         double termGrade = (0.4 * midTerm + 0.6 * finalExam);
         if (termGrade >= 89.5) {
             return "AA";
@@ -198,7 +209,7 @@ public class CourseManageBean extends Controller implements Serializable {
         } else if (termGrade >= 69.5) {
             return "CC";
         } else if (termGrade >= 64.5) {
-            return "DC"; 
+            return "DC";
         } else if (termGrade >= 59.5) {
             return "DD";
         }

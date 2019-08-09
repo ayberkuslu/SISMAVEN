@@ -146,7 +146,12 @@ and open the template in the editor.
                                                  >
                                         <p:ajax event="rowSelect"  
                                                 update=":form:panel2 :form:panel3 :form:messages1"
-                                                listener="#{courseManageBean.onCourseTakerRowSelect}" 
+                                                listener="#{courseManageBean.onCourseTakerRowSelect}"
+                                                oncomplete="window.scrollTo({
+                                                top: document.body.scrollHeight,
+                                                left: 0,
+                                                behavior: 'smooth'
+                                                });"
                                                 />
 
                                         <p:column filterable="true" filterBy="#{classes.userId.name}">

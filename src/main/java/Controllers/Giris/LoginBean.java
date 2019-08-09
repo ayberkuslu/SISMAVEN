@@ -33,7 +33,7 @@ public class LoginBean extends Controller {
     private Integer userId;
     private String userPassword;
     private boolean authorized = false;
-    Transaction tx ;
+    Transaction tx;
 
     @PreDestroy
     @Override
@@ -66,12 +66,16 @@ public class LoginBean extends Controller {
         try {
 
             tx = getSession().beginTransaction();
-            Users targetUser = (Users) getSession().get(Users.class , userId);
-            
-            FacesContext context = FacesContext.getCurrentInstance();
+            Users targetUser = (Users) getSession().get(Users.class, userId);
 
+            FacesContext context = FacesContext.getCurrentInstance();
+            if (targetUser == null) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "User could not find.\nPlease contact with the School Admin.", ""));
+                return false;
+
+            }
             if (targetUser.getStatus() == false) {
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"User is not an active user.\nPlease contact with the School Admin.",""));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "User is not an active user.\nPlease contact with the School Admin.", ""));
                 return false;
             }
 
@@ -80,8 +84,8 @@ public class LoginBean extends Controller {
                         getExternalContext().getSessionMap();
 
                 sessionMap.put(CURRENT_USER, targetUser);
-                if(targetUser.getType() == Users.TYPE_ADMIN){
-                    
+                if (targetUser.getType() == Users.TYPE_ADMIN) {
+
                 }
 
                 setCurrentUser(targetUser);
@@ -109,7 +113,7 @@ public class LoginBean extends Controller {
 //
 //        String falsePage = "index";
         if (authorized == true) {
-            System.out.println("Giris Basarili. Kullanici : " + userId + "\n");                      
+            System.out.println("Giris Basarili. Kullanici : " + userId + "\n");
             context.getExternalContext().redirect(PAGE_HOME);
 
             return;

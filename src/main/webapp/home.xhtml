@@ -66,7 +66,7 @@ and open the template in the editor.
 
                 <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
 
-                    <p:outputPanel rendered="#{homePageBean.renderedModelAdmin}" style="margin:20px; width: 100%;">
+                    <p:outputPanel rendered="#{homePageBean.renderedModelAdmin}" style="margin:20px; width: 90%;">
                         <h2>Admin Pages</h2>
 
                         <p:dashboard id="board1" model="#{homePageBean.modelAdmin}">
@@ -96,7 +96,7 @@ and open the template in the editor.
                             </p:panel>
                         </p:dashboard>
                     </p:outputPanel>
-                    <p:outputPanel rendered="#{homePageBean.renderedModelTeacher}" style="margin:20px;width: 100% !important;">
+                    <p:outputPanel rendered="#{homePageBean.renderedModelTeacher}" style="margin:20px;width: 90% !important;">
                         <h2>Teacher Pages</h2>
 
                         <p:dashboard id="board2" model="#{homePageBean.modelTeacher}">
@@ -118,7 +118,7 @@ and open the template in the editor.
 
 
                     </p:outputPanel>
-                    <p:outputPanel rendered="#{homePageBean.renderedModelStudent}" style="margin:20px; width: 100%;">
+                    <p:outputPanel rendered="#{homePageBean.renderedModelStudent}" style="margin:20px; width: 90%;">
                         <h2>Student Pages</h2>
                         <p:dashboard id="board3" model="#{homePageBean.modelStudent}">
                             <p:panel id="enrollCourse" header="Enroll Course" >

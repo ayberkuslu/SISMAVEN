@@ -39,6 +39,9 @@ and open the template in the editor.
             function ScrollPage(location) {
                 window.location.hash = location;
             }
+
+
+
         </script>
 
 
@@ -74,8 +77,16 @@ and open the template in the editor.
                     </p:growl>
 
                     <p:panel 
-                        id="panel1" header="Users" toggleable="true" closable="true" closeTitle="Kapat" toggleableHeader="true"
-                        toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px; margin-top: 20px; margin-right: 3%; margin-left: 3%;" 
+                        id="panel1" header="Users" 
+                        toggleable="true"
+                        closable="true"
+                        closeTitle="Kapat"
+                        toggleableHeader="true"
+                        toggleSpeed="100"
+                        closeSpeed="500"
+                        widgetVar="panel" style="margin-bottom:20px; margin-top: 20px; margin-right: 3%; margin-left: 3%;" 
+                        collapsed="#{examineUserBean.collapsedPanel1}"
+
                         >
                         Click the user to show Course Information and Personal Detail
                         <br/>
@@ -96,12 +107,14 @@ and open the template in the editor.
                             emptyMessage="There is no such User!"
 
                             >
-
                             <p:ajax event="rowSelect"  
-                                    update=":form:panel2 @parent "
-                                    process="@parent"
+                                    update=":form:panel2 @parent :form:panel1"
                                     listener="#{examineUserBean.onRowSelect}"
-                                    oncomplete="ScrollPage(':form:panel1')"
+                                    oncomplete="window.scrollTo({
+                                    top: document.body.scrollHeight,
+                                    left: 0,
+                                    behavior: 'smooth'
+                                    });"
                                     />
                             <f:facet name="header">
                                 User List
@@ -152,24 +165,7 @@ and open the template in the editor.
                         </p:dataTable>
 
 
-                        <div class="ui-g">
-                            <div class="ui-g-4">
-                                <p:commandButton value="Active" 
-                                                 action="#{examineUserBean.activateSelectedUser()}"
-                                                 update="panel1"
-                                                 styleClass="insertButton buttonInherit" style="margin-left: 30px !important;"
-                                                 />
-                            </div>
-                            <div class="ui-g-4"></div>
-                            <div class="ui-g-4">
-                                <p:commandButton value="Passive" 
-                                                 action="#{examineUserBean.deleteSelectedUser()}"
-                                                 update="panel1"
-                                                 styleClass="insertButton declineButton buttonInherit" style="margin-left: 30px !important;"
 
-                                                 />
-                            </div>
-                        </div>
                     </p:panel>
                     <br/>
 
@@ -233,6 +229,12 @@ and open the template in the editor.
                                             <h:outputText value="Grade"/>
                                         </f:facet>
                                         <h:outputText value="#{abc.grade}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Term"/>
+                                        </f:facet>
+                                        <h:outputText value="#{abc.courseId.termId}"/>
                                     </p:column>
                                 </p:dataTable>
 
@@ -317,7 +319,24 @@ and open the template in the editor.
                                     </p:repeat>
                                 </p:panelGrid>
 
+                                <div class="ui-g">
+                                    <div class="ui-g-4">
+                                        <p:commandButton value="Active" 
+                                                         action="#{examineUserBean.activateSelectedUser()}"
+                                                         update=":form:panel1"
+                                                         styleClass="insertButton buttonInherit" style="margin-left: 30px !important;"
+                                                         />
+                                    </div>
+                                    <div class="ui-g-4"></div>
+                                    <div class="ui-g-4">
+                                        <p:commandButton value="Passive" 
+                                                         action="#{examineUserBean.deleteSelectedUser()}"
+                                                         update=":form:panel1"
+                                                         styleClass="insertButton declineButton buttonInherit" style="margin-left: 30px !important;"
 
+                                                         />
+                                    </div>
+                                </div>
 
 
                             </p:tab>

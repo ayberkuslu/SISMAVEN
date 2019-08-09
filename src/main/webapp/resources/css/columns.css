@@ -242,14 +242,20 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight 
 
 .red{
     background-color: lightcoral !important;
+    filter: brightness(120%) !important;
+
 }
 
 .green{
     background-color: lightgreen !important;
+    filter: brightness(120%) !important;
+
 }
 
 .yellow{
     background-color: lightpink !important;
+    filter: brightness(120%) !important;
+
 
 }
 
