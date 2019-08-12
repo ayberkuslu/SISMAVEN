@@ -43,7 +43,7 @@ Contributor(s):
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sisdata?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sisdata?serverTimezone=UTC</property>
     <property name="hibernate.connection.username">root</property>
     <mapping package="Models"/>
     <mapping class="Models.Users"/>
@@ -52,5 +52,6 @@ Contributor(s):
     <mapping class="Models.Logs"/>
     <mapping class="Models.Courses"/>
     <mapping class="Models.Classes"/>
+    <mapping class="Models.RuntimeProperties"/>
   </session-factory>
 </hibernate-configuration>
