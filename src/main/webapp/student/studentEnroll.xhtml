@@ -21,7 +21,7 @@ and open the template in the editor.
 
 
 
-       
+
 
     </h:head>
 
@@ -61,12 +61,12 @@ and open the template in the editor.
                                      style="margin-bottom:20px;"
                                      >
 
-                                <h1>Avaliable classes for #{enrollCourseContoller.currentUserName}</h1>
+                                <h1>Avaliable classes for #{enrollCourseBean.currentUserName}</h1>
                                 <h4>Select the Course and press "Enroll" to enroll course.</h4>
                                 (Add-Drop must be open to enroll.)
-                                <p:dataTable value="#{enrollCourseContoller.openCourses}"
+                                <p:dataTable value="#{enrollCourseBean.openCourses}"
                                              var="course"
-                                             selection="#{enrollCourseContoller.selectedCourseForEnroll}"
+                                             selection="#{enrollCourseBean.selectedCourseForEnroll}"
                                              selectionMode="single"
                                              rowKey="#{course.courseId}"
                                              rows="5"
@@ -76,50 +76,46 @@ and open the template in the editor.
                                              >
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="CourseId"/>
+                                            <h:outputText value="CourseName"/>
                                         </f:facet>
-                                        <h:outputText value="#{course.courseId}"/>
+                                        <h:outputText value="#{course.courseName}"/>
                                     </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Course Teacher"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.userId}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Current Size"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.currentSize}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Max Size"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.maxSize}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Term Name"/>
+                                        </f:facet>
+                                        <h:outputText value="#{course.termId}"/>
+                                    </p:column>
+
+
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="Status"/>
                                         </f:facet>
                                         <h:outputText value="#{course.status == 1 ? 'ACTIVE' : 'PASSIVE'}"/>
                                     </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="CurrentSize"/>
-                                        </f:facet>
-                                        <h:outputText value="#{course.currentSize}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="MaxSize"/>
-                                        </f:facet>
-                                        <h:outputText value="#{course.maxSize}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="UserId"/>
-                                        </f:facet>
-                                        <h:outputText value="#{course.userId}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="TermId"/>
-                                        </f:facet>
-                                        <h:outputText value="#{course.termId}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="CourseName"/>
-                                        </f:facet>
-                                        <h:outputText value="#{course.courseName}"/>
-                                    </p:column>
                                 </p:dataTable>
 
 
-                                <p:commandButton value="Enroll" action="#{enrollCourseContoller.enrollCourse}"
+                                <p:commandButton value="Enroll" action="#{enrollCourseBean.enrollCourse}"
                                                  update=":form:panel1 :form:panel2 messages1"
                                                  icon="fa fa-chevron-circle-right"
                                                  style="margin:30px; width: 100%;"
@@ -138,12 +134,12 @@ and open the template in the editor.
                                      toggleableHeader="true"
                                      style="margin-bottom:20px;"                                
                                      >
-                                <h1>Current taken classes for #{enrollCourseContoller.currentUserName}</h1>
+                                <h1>Current taken classes for #{enrollCourseBean.currentUserName}</h1>
                                 <h4>Select the Course and press "Deroll" to deroll course.</h4>
                                 (Add-Drop must be open to deroll.)
-                                <p:dataTable value="#{enrollCourseContoller.currentUserClasses}"
+                                <p:dataTable value="#{enrollCourseBean.currentUserClasses}"
                                              var="item"
-                                             selection="#{enrollCourseContoller.selectedClassesForDeroll}"
+                                             selection="#{enrollCourseBean.selectedClassesForDeroll}"
                                              selectionMode="single"
                                              rowKey="#{item.classesId}"
                                              rows="5"
@@ -162,12 +158,7 @@ and open the template in the editor.
                                         </f:facet>
                                         <h:outputText value="#{item.userId.name}"/>
                                     </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Grade"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.grade}"/>
-                                    </p:column>
+
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="Mid-Term Exam"/>
@@ -180,8 +171,14 @@ and open the template in the editor.
                                         </f:facet>
                                         <h:outputText value="#{item.finalNot}"/>
                                     </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Grade"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.grade}"/>
+                                    </p:column>
                                 </p:dataTable>
-                                <p:commandButton value="Deroll" action="#{enrollCourseContoller.derollCourse}"
+                                <p:commandButton value="Deroll" action="#{enrollCourseBean.derollCourse}"
                                                  update=":form:panel1 :form:panel2"
                                                  style="margin:30px; width: 100%;"
                                                  icon="fa fa-chevron-circle-left"

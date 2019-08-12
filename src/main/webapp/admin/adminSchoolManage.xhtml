@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">   
+    <h:head>
+        <title>Term Management</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet library="css" name="columns.css"/>
+
+        <style type="text/css">
+
+            .ui-inputfield, .ui-widget-content .ui-inputfield {
+
+                border : none ;
+            }
+
+        </style>
+
+
+    </h:head>
+    <h:body>
+        <h:form id="form" >
+
+            <div class="ui-g">
+                <div class="ui-g-3" >
+                    <div class="topLeftBar" >
+                        <ui:include src="../default/defaultTopLeftBar.xhtml"   />
+                    </div>                   
+                </div>
+                <div class="ui-g-9"   >
+                    <div styleClass="topmenu" >
+                        <ui:include src="../default/defaultTopBar.xhtml"   />
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-g"  >
+                <div class="ui-g-3">
+                    <div class="sidenav" >
+                        <ui:include src="../default/defaultMenu.xhtml"   />
+                    </div>
+                </div>
+
+                <div class="ui-g-9" style="margin-left: 25%; margin-top: 91px;">
+
+                    <div class="ui-g"  >
+                        <div class="ui-g-6" >
+
+                            <p:panel id="panel1" 
+                                     header="TERM"
+                                     toggleable="true" 
+                                     closable="true" 
+                                     toggleableHeader="true"
+                                     style="margin-bottom:20px;"
+                                     >
+
+                                <h3><h:outputText id="out" rendered="#{schoolManageBean.currentTermName != null}"  value="Current Term : #{schoolManageBean.currentTermName}" /></h3>
+                                <h3><h:outputText id="out2" rendered="#{schoolManageBean.currentTermName == null}"  value="There is no active term!" /></h3>
+                                <p:growl id="messages1"  life="3000" />
+                                <p:outputPanel style=" height: 200px !important;">
+                                    <p:panelGrid id="panelgrid"  columns="2" >
+                                        <p:outputLabel value ="New Term Name" />
+                                        <p:inputText id="termName" value="#{schoolManageBean.newTermName}" title="New Term Name" placeholder="Name"  />
+                                    </p:panelGrid>
+                                    <p:commandButton id="openTerm" value="Start New Term"
+                                                     action="#{schoolManageBean.startNewTerm}" 
+                                                     update="panel1"
+                                                     style="margin:30px; width: 45%;"
+                                                     />
+                                    <p:commandButton id="closeTerm" value="End Current Term"
+                                                     action="#{schoolManageBean.endCurrentTerm()}"
+                                                     update="panel1"
+                                                     style=" width: 45%;"
+
+                                                     />
+                                </p:outputPanel>
+
+                            </p:panel>
+
+                        </div>
+
+                        <div class="ui-g-6" >
+                            <p:panel id="panel2" header="ADD-DROP"
+                                     toggleable="true" closable="true" toggleableHeader="true"
+                                     style="margin-bottom:20px;height: 400px;"
+
+
+                                     >
+
+                                <p:growl id="messages2"   />
+
+                                <h3><h:outputText   value="ADD-DROP IS CURRENTLY CLOSE" rendered="#{not schoolManageBean.addDropOpen}"/></h3>
+                                <h3><h:outputText   value="ADD-DROP IS CURRENTLY OPEN" rendered="#{schoolManageBean.addDropOpen}"/></h3>
+                                <p:outputPanel style=" height: 200px !important;">
+                                    <br/><br/>
+                                    <p:commandButton value="Start Add Drop"
+                                                     action="#{schoolManageBean.startAddDrop()}" update="panel2"
+                                                     style="margin: 20px;width: 45%;" 
+                                                     />
+
+                                    <p:commandButton value="End Add Drop"
+                                                     action="#{schoolManageBean.endAddDrop()}"
+                                                     update="panel2" 
+                                                     style="width: 45%;"
+                                                     />
+                                </p:outputPanel>
+
+                            </p:panel>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+        </h:form>
+
+
+
+    </h:body>
+</html>

@@ -45,9 +45,7 @@ public class Logs implements Serializable {
     public static final int TERM_END = 8;
     public static final int ADD_DROP_START = 9;
     public static final int ADD_DROP_END = 10;
-
     public static final int NEW_COURSE = 11;
-
     public static final int COURSE_ENROLL = 12;
     public static final int COURSE_DEROLL = 13;
 
@@ -95,6 +93,44 @@ public class Logs implements Serializable {
         this.detail = detail;
         this.userId = userId;
         this.date = date;
+    }
+    
+    public String getEvent(){
+        switch (this.eventCode) {
+            case USER_NEW:
+                return "USER_NEW";
+            case USER_LOGIN:
+                return "USER_LOGIN";
+            case USER_LOGOUT:
+                return "USER_LOGOUT";
+            case USER_CHANGE_PASSWORD:
+                return "USER_CHANGE_PASSWORD";
+            case USER_RESET_PASSWORD:
+                return "USER_RESET_PASSWORD";
+            case USER_DELETE:
+                return "USER_DELETE";
+            case USER_ACTIVATE:
+                return "USER_ACTIVATE";
+            case NEW_TERM_START:
+                return "NEW_TERM_START";
+            case TERM_END:
+                return "TERM_END";
+            case ADD_DROP_START:
+                return "ADD_DROP_START";
+            case ADD_DROP_END:
+                return "ADD_DROP_END";
+            case NEW_COURSE:
+                return "NEW_COURSE";
+            case COURSE_ENROLL:
+                return "COURSE_ENROLL";
+            case COURSE_DEROLL:
+                return "COURSE_DEROLL";
+            default:
+                break;
+        }
+
+        
+        return null;
     }
 
     public Integer getLogId() {

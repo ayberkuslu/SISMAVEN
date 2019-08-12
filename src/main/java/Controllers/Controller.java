@@ -12,11 +12,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -38,24 +35,22 @@ public class Controller implements Serializable {
     public static final boolean CLOSED_ADD_DROP = false;
     
     private final String DOMAIN_TAG = "http://localhost:8080/";
-    private final String CONTEXT_PATH = "mavenproject1/";
+    private final String CONTEXT_PATH = "edu/";
     
     private final String PROJECT_PATH = DOMAIN_TAG + CONTEXT_PATH;
-    
-    
-    
 
-    public final String PAGE_LOGIN =  PROJECT_PATH;
+
+    public final String PAGE_LOGIN =  PROJECT_PATH +  "login.xhtml";
     public final String PAGE_FORGET_PASSWORD = PROJECT_PATH + "forgetPassword.xhtml";
-    public final String PAGE_HOME = PROJECT_PATH + "homePage.xhtml";
+    public final String PAGE_HOME = PROJECT_PATH + "home.xhtml";
     
-    public final String PAGE_ADMIN_EXAMINE_USER = PROJECT_PATH + "admin/adminKullaniciGetir.xhtml";
-    public final String PAGE_ADMIN_INSERT = PROJECT_PATH + "admin/adminKullaniciEkle.xhtml";
-    public final String PAGE_ADMIN_YONETIM = PROJECT_PATH + "admin/adminYonetimIslemleri.xhtml";
+    public final String PAGE_ADMIN_EXAMINE_USER = PROJECT_PATH + "admin/adminExamineUser.xhtml";
+    public final String PAGE_ADMIN_CREATE_USER = PROJECT_PATH + "admin/adminCreateUser.xhtml";
+    public final String PAGE_ADMIN_SCHOOL_MANAGE = PROJECT_PATH + "admin/adminSchoolManage.xhtml";
     public final String PAGE_ADMIN_EXAMINE_LOG = PROJECT_PATH + "admin/adminExamineLog.xhtml";
 
     public final String PAGE_TEACHER_COURSE_MANAGE = PROJECT_PATH + "teacher/teacherCourseManage.xhtml";
-    public final String PAGE_TEACHER_COURSES = PROJECT_PATH + "teacher/teacherCourses.xhtml";
+    public final String PAGE_TEACHER_CREATE_COURSE = PROJECT_PATH + "teacher/teacherCreateCourse.xhtml";
    
     public final String PAGE_STUDENT_ENROLL = PROJECT_PATH + "student/studentEnroll.xhtml";
     
@@ -168,16 +163,16 @@ public class Controller implements Serializable {
         }
     }
 
-    public void insertObject(Object o) {
-        try {
-            getSession().beginTransaction();
-            getSession().save(o);
-            getSession().getTransaction().commit();
-        } catch (Exception e) {
-            getSession().getTransaction().rollback();
-            System.out.println(e + "\n InsertObjectException while inserting :" + o.toString());
-        }
-    }
+//    public void insertObject(Object o) {
+//        try {
+//            getSession().beginTransaction();
+//            getSession().save(o);
+//            getSession().getTransaction().commit();
+//        } catch (Exception e) {
+//            getSession().getTransaction().rollback();
+//            System.out.println(e + "\n InsertObjectException while inserting :" + o.toString());
+//        }
+//    }
 
     public Users getCurrentUser() {
         return currentUser;
@@ -224,12 +219,12 @@ public class Controller implements Serializable {
         return PAGE_ADMIN_EXAMINE_USER;
     }
 
-    public String getPAGE_ADMIN_INSERT() {
-        return PAGE_ADMIN_INSERT;
+    public String getPAGE_ADMIN_CREATE_USER() {
+        return PAGE_ADMIN_CREATE_USER;
     }
 
-    public String getPAGE_ADMIN_YONETIM() {
-        return PAGE_ADMIN_YONETIM;
+    public String getPAGE_ADMIN_SCHOOL_MANAGE() {
+        return PAGE_ADMIN_SCHOOL_MANAGE;
     }
 
     public String getPAGE_ADMIN_EXAMINE_LOG() {
@@ -240,8 +235,8 @@ public class Controller implements Serializable {
         return PAGE_TEACHER_COURSE_MANAGE;
     }
 
-    public String getPAGE_TEACHER_COURSES() {
-        return PAGE_TEACHER_COURSES;
+    public String getPAGE_TEACHER_CREATE_COURSE() {
+        return PAGE_TEACHER_CREATE_COURSE;
     }
 
     public String getPAGE_STUDENT_ENROLL() {

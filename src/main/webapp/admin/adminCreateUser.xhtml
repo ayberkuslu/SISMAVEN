@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <title>  Insert New User </title>
+        <h:outputStylesheet library="css" name="columns.css"/>
+        <h:outputStylesheet library="css" name="menuStyle.css" />
+        <style type="text/css">
+
+            .ui-inputfield, .ui-widget-content .ui-inputfield {
+
+                border : none;
+            }
+
+        </style>
+
+
+    </h:head>
+
+    <h:body >
+        <h:form id="form">
+            <!--<p:autoUpdate />-->
+            <div class="ui-g">
+                <div class="ui-g-3" >
+                    <div class="topLeftBar" >
+                        <ui:include src="../default/defaultTopLeftBar.xhtml"   />
+
+                    </div>                   
+                </div>
+                <div class="ui-g-9"   >
+                    <div styleClass="topmenu" >
+                        <ui:include src="../default/defaultTopBar.xhtml"   />
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g"  >
+                <div class="ui-g-3">
+                    <div class="sidenav" >
+                        <ui:include src="../default/defaultMenu.xhtml"   />
+                    </div>
+                </div>
+                <div class="ui-g-9" style="margin-left: 25%; margin-top: 51px;">
+
+
+                    <div class="ui-g" id="content"   >
+                        <div class="ui-g-6" > 
+
+                            <p:growl id="growl" sticky="true" showDetail="true"  />
+
+                            <!--<h1> Create New User </h1>-->
+                            <br/>
+                            <br/>
+                            <p:panel header="Create New User">
+                                <h4>Fill the blanks to add new user.</h4>
+                                <p:wizard id="wizard" flowListener="#{createUserBean.onFlowProcess}" widgetVar="wiz"  showNavBar="true">
+                                    <p:tab id="personal" title="Personal Details">
+                                        <p:growl />
+                                        <p:panelGrid columns="2" style="padding-top: 40px;"  >
+                                            <p:autoUpdate />
+
+                                            <h:outputText value ="TCKN" />
+                                            <p:inputMask  id="tckn" value="#{createUserBean.tckn}" 
+                                                          title="User TCKN (11 digit)"
+                                                          placeholder="User TCKN (11 digit)" 
+                                                          required="true"
+                                                          maxlength="11"
+                                                          mask="999 999 999 99"
+                                                          requiredMessage="TCKN should be 11 digit"
+                                                          />
+
+                                            <h:outputText value ="Name"  />
+                                            <p:inputText id="name" value="#{createUserBean.name}" 
+                                                         title="User Name"
+                                                         placeholder="User Name" 
+                                                         required="true"
+                                                         requiredMessage="Name can not be empty!"
+                                                         />
+
+                                            <h:outputText value ="Surname" />
+                                            <p:inputText  id="surname" value="#{createUserBean.surname}"
+                                                          title="User Surname"
+                                                          placeholder="User Surname"
+                                                          required="true"
+                                                          requiredMessage="Surname can not be empty!"
+                                                          />
+
+                                            <h:outputText value ="Password" />
+                                            <p:password id="password"
+                                                        value="#{createUserBean.password}"
+                                                        title="User Password"
+                                                        placeholder="User Password"
+                                                        required="true"
+                                                        requiredMessage="Password can not be empty!"
+                                                        />
+                                        </p:panelGrid>
+                                        <br/>
+                                        <h:outputText value="Skip to confirmation: " />
+                                        <h:selectBooleanCheckbox value="#{createUserBean.skip}" />
+                                    </p:tab>
+                                    <p:tab id="address" title="1">
+                                        <p:messages />
+                                        <p:panelGrid columns="2" >
+                                            <p:autoUpdate />
+
+
+                                            <h:outputText value ="Email" />
+                                            <p:inputText id="email"
+                                                         value="#{createUserBean.email}" 
+                                                         title="User Email"
+                                                         placeholder="User Email"
+                                                         required="true"
+                                                         requiredMessage="Not a valid Email." >
+                                            </p:inputText>
+
+                                            <h:outputText value ="Type" />
+                                            <p:selectOneMenu id="type" value="#{createUserBean.type}"   autoWidth="true" placeholder="User Type"   >
+                                                <f:selectItem itemLabel="User Type" itemValue="1" />
+                                                <f:selectItem itemLabel="ADMIN" itemValue="0" />
+                                                <f:selectItem itemLabel="STUDENT" itemValue="1" />
+                                                <f:selectItem itemLabel="TEACHER" itemValue="2" />
+                                            </p:selectOneMenu>
+                                            <h:outputText value ="Phone " />
+                                            <p:inputMask id="phone" value="#{createUserBean.phone}"
+                                                         title="User Phone"
+                                                         required="false"
+                                                         mask="(999)999-99-99"
+                                                         />
+
+                                            <h:outputText value ="Adress" />
+                                            <p:inputText id="adress" value="#{createUserBean.adress}" title="User Adress"
+                                                         placeholder="User Adress" required="false" />
+
+                                        </p:panelGrid>
+                                        <br/>
+                                        <h:outputText value="Skip to confirmation: " />
+                                        <h:selectBooleanCheckbox value="#{createUserBean.skip}" />
+                                    </p:tab>
+
+                                    <p:tab id="contact" title="2">
+                                        <p:messages />
+                                        <p:panelGrid columns="2" >
+                                            <p:autoUpdate />
+
+                                            <h:outputText value ="Birthday" />
+                                            <p:datePicker id="button" value="#{createUserBean.birthday}" placeholder="Birthday"    />
+
+                                            <h:outputText value ="Graduate" />
+                                            <p:inputText id="graduate" value="#{createUserBean.graduate}" title="User Graduate" placeholder="User Graduate" required="false"  />
+
+                                            <h:outputText value ="Master" />
+                                            <p:inputText id="master" value="#{createUserBean.master}" title="User Master" placeholder="User Master" required="false" />
+
+                                        </p:panelGrid>
+                                        <br/>
+                                        <h:outputText value="Skip to confirmation: " />
+                                        <h:selectBooleanCheckbox value="#{createUserBean.skip}" />
+                                    </p:tab>
+                                    <p:tab id="contact2" title="3">
+                                        <p:messages />
+                                        <p:panelGrid columns="2" columnClasses="label, value">
+                                            <p:autoUpdate />
+                                            <h:outputText value ="Emergency Phone" />
+                                            <p:inputText id="acilTelf" value="#{createUserBean.emergencyPhone}" title="User Emergency Phone" placeholder="(5**)-***-****" required="false" />
+
+                                            <h:outputText value ="Secret Question" />
+                                            <p:inputText id="secretQuestion" value="#{createUserBean.secretQuestion}"
+                                                         title="User Secret Question" placeholder="User Secret Question"
+                                                         required="true" requiredMessage="Required secret question."  >
+                                            </p:inputText>
+
+                                            <h:outputText value ="Secret Answer" />
+                                            <p:inputText id="secretAnswer" value="#{createUserBean.secretAnswer}"
+                                                         title="User Secret Answer" placeholder="User Secret Answer"
+                                                         required="true" requiredMessage="Required answer for secret question">
+                                            </p:inputText>
+
+                                            <h:outputText value ="Gender" />
+                                            <p:selectOneRadio id="gender" value="#{createUserBean.gender}" unselectable="true">
+                                                <f:selectItem itemLabel="MALE" itemValue="MALE" />
+                                                <f:selectItem itemLabel="FEMALE" itemValue="FEMALE" />
+                                            </p:selectOneRadio>
+                                        </p:panelGrid>
+                                    </p:tab>
+
+                                    <p:tab id="confirm" title="Confirmation">
+                                        <p:panel header="Confirmation">
+                                            Confirm user will be added.
+                                            <h:panelGrid columns="2" columnClasses="label, value" style="padding-top: 40px;"  >
+                                                <h:outputText  value="#{createUserBean.name}" title="Kullanici Adi"  />
+                                                <h:outputText   value="#{createUserBean.surname}" title="Kullanici soyadi"   />
+
+                                                <p:autoUpdate />
+                                                <br/>
+                                            </h:panelGrid>
+
+                                            <p:commandButton value="Create" action="#{createUserBean.insertNewUser()}"
+                                                             update="growl" process="@this"
+                                                             icon="fa fa-check-circle" styleClass="insertButton"  
+                                                             />
+                                            <p:commandButton value="Cancel" action="#{createUserBean.cancelCreate()}" 
+                                                             update="@parent , confirm" oncomplete="PF('wiz').loadStep('personal', false)" 
+                                                             icon="fa fa-times-circle" styleClass="insertButton declineButton"
+                                                             immediate="true" ajax="false" resetValues="true" 
+                                                             >
+                                            </p:commandButton>
+
+
+
+                                        </p:panel>
+                                    </p:tab>
+
+
+
+                                </p:wizard>
+                            </p:panel>
+                            <p:keyFilter for="phone" mask="num"/>
+                            <p:keyFilter for="acilTelf" mask="num"/>
+                            <p:keyFilter for="tckn" mask="num" />
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </h:form>
+
+    </h:body>
+</html>

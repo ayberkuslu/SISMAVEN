@@ -24,14 +24,18 @@ import Controllers.HibernateUtil;
 import Models.Logs;
 import Models.Users;
 import Util.LogsLazyDataModel;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
+import org.hibernate.Criteria;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.primefaces.model.LazyDataModel;
 
 /**
@@ -44,6 +48,9 @@ public class ExamineLogBean extends Controller {
 
     Users currentUser;
     private LazyDataModel<Logs> logs;
+
+    private Date firstDate;
+    private Date lastDate;
 
     /**
      * Creates a new instance of ExamineLogBean
@@ -80,10 +87,42 @@ public class ExamineLogBean extends Controller {
     public void loadData() {
         System.out.println("loadData()");
         Transaction tx = getSession().beginTransaction();
-        List<Logs> list = getSession().createCriteria(Logs.class).list();
+        Criteria criteria = getSession().createCriteria(Logs.class);
+        System.out.println(firstDate);
+        if (firstDate != null) {
+            System.out.println("firstDate != null");
+
+            if (lastDate == null) {
+                System.out.println("lastDate == null");
+                criteria.add(Restrictions.between("date", firstDate, new Date()));
+
+            } else {
+                lastDate.setHours(23);
+                lastDate.setMinutes(59);
+                lastDate.setSeconds(59);
+
+                System.out.println("lastDate:" + lastDate);
+
+                criteria.add(Restrictions.between("date", firstDate, lastDate));
+                System.out.println("lastDate != null");
+
+            }
+        } else if (firstDate == null && lastDate != null) {
+                            System.out.println("firstDate == null && lastDate != null");
+
+            lastDate.setHours(23);
+            lastDate.setMinutes(59);
+            lastDate.setSeconds(59);
+            criteria.add(Restrictions.le("date", lastDate));
+
+        }
+
+        List<Logs> list = criteria.list();
         logs = new LogsLazyDataModel(list);
+        System.out.println("row Count" + logs.getRowCount());
         tx.commit();
     }
+
 
     public LazyDataModel<Logs> getLogs() {
         return logs;
@@ -93,9 +132,20 @@ public class ExamineLogBean extends Controller {
         this.logs = logs;
     }
 
+    public Date getFirstDate() {
+        return firstDate;
+    }
 
-    
-    
-    
+    public void setFirstDate(Date firstDate) {
+        this.firstDate = firstDate;
+    }
+
+    public Date getLastDate() {
+        return lastDate;
+    }
+
+    public void setLastDate(Date lastDate) {
+        this.lastDate = lastDate;
+    }
 
 }

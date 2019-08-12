@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 hp_user.
+ * Copyright (C) 2019 Ayberk.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,37 +18,33 @@
  */
 package Util;
 
-import Models.Logs;
 import java.util.Comparator;
 import org.primefaces.model.SortOrder;
 
 /**
  *
- * @author hp_user
+ * @author Ayberk
  */
-public class LazySorterLogs implements Comparator<Logs> {
-    
-    
-    
-    
+public class LazySorterObject implements Comparator<Object> {
+
     private final String sortField;
 
     private final SortOrder sortOrder;
 
-    public LazySorterLogs(String sortField, SortOrder sortOrder) {
+    public LazySorterObject(String sortField, SortOrder sortOrder) {
         this.sortField = sortField;
         this.sortOrder = sortOrder;
     }
 
     @Override
-    public int compare(Logs log1, Logs log2) {
+    public int compare(Object object1, Object object2) {
         try {
-//            int value = log1.getLogId() - log2.getLogId();
-                   int value = log1.getDate().compareTo(log2.getDate());
+            // SHOULD BE CHANGED ! 
+            int value = object1.hashCode() - object2.hashCode();
             return SortOrder.ASCENDING.equals(sortOrder) ? value : -1 * value;
         } catch (Exception e) {
-            throw new RuntimeException("for Logs compare @");
+            throw new RuntimeException("for object compare @");
         }
     }
-    
+
 }
