@@ -212,6 +212,11 @@ and open the template in the editor.
                                 <p:commandButton value="Change Grades"
                                                  action="#{courseManageBean.updateStudentGrades}"
                                                  update=":form:panel2 :form:panel3 "
+                                                 oncomplete="window.scrollTo({
+                                                 top: 0,
+                                                 left: 0,
+                                                 behavior: 'smooth'
+                                                 });"
                                                  style="margin: 20px; width: 95%;"
                                                  />
 

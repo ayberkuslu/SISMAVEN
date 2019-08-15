@@ -116,7 +116,15 @@ MA 02110-1301  USA
                             <div class="ui-g-6">
 
                             </div>
-                            <p:commandButton value="Filter" update="logTable" action="#{examineLogBean.loadData()}" styleClass="buttonInherit" style="width: 12%; margin-left: 37% !important;" />
+                            <p:commandButton value="Filter"
+                                             update="logTable"
+                                             action="#{examineLogBean.loadData()}"
+                                             oncomplete="window.scrollTo({
+                                             top: document.body.scrollHeight,
+                                             left: 0,
+                                             behavior: 'smooth'
+                                             });"
+                                             styleClass="buttonInherit" style="width: 12%; margin-left: 37% !important;" />
                         </div>
 
 
