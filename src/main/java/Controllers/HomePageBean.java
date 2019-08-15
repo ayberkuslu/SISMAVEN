@@ -21,6 +21,7 @@ package Controllers;
 import static Controllers.Controller.CURRENT_USER;
 import Models.Users;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -32,6 +33,10 @@ import org.primefaces.model.DashboardColumn;
 import org.primefaces.model.DashboardModel;
 import org.primefaces.model.DefaultDashboardColumn;
 import org.primefaces.model.DefaultDashboardModel;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.ScheduleEvent;
+import org.primefaces.model.ScheduleModel;
 
 /**
  *
@@ -55,6 +60,11 @@ public class HomePageBean extends Controller {
     private boolean renderedModelTeacher = false;
     private DashboardModel modelStudent;
     private boolean renderedModelStudent = false;
+    
+    
+    
+    private ScheduleModel eventModel;
+      
 
     /**
      * Creates a new instance of HomePageBean
@@ -109,6 +119,10 @@ public class HomePageBean extends Controller {
                 renderedModelStudent = true;
                 break;
         }
+        
+                eventModel = new DefaultScheduleModel();
+        eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", new Date(), new Date()));
+
 
     }
 
@@ -231,6 +245,14 @@ public class HomePageBean extends Controller {
 
     public boolean isRenderedModelStudent() {
         return renderedModelStudent;
+    }
+
+    public ScheduleModel getEventModel() {
+        return eventModel;
+    }
+
+    public void setEventModel(ScheduleModel eventModel) {
+        this.eventModel = eventModel;
     }
     
     

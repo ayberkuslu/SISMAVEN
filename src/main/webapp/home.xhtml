@@ -14,6 +14,30 @@ and open the template in the editor.
     <h:head>
         <title>Dashboard</title>
         <h:outputStylesheet library="css" name="columns.css"/>
+        <script type="text/javascript">
+            PrimeFaces.locales['tr'] = {
+                closeText: 'kapat',
+                prevText: 'geri',
+                nextText: 'ileri',
+                currentText: 'bugün',
+                monthNames: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+                    'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
+                monthNamesShort: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz',
+                    'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'],
+                dayNames: ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'],
+                dayNamesShort: ['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct'],
+                dayNamesMin: ['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct'],
+                weekHeader: 'Hf',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                month: 'Ay',
+                week: 'Hafta',
+                day: 'Gün',
+                allDayText: 'Tüm Gün'
+            };
+        </script>
 
         <style type="text/css">
 
@@ -32,11 +56,24 @@ and open the template in the editor.
             body .homeButton:hover{
                 background: blue !important ;
             }
+            .fc-toolbar button {
+                position: inherit !important;
+            }
 
             body .ui-panel{
                 margin: 10px;
             }
+            .fc th, .fc td {
+                border-style: solid !important;
+                border-width: 1px !important;
+                /*border-color: #2D353C!important*/
+                padding: 0 !important;
+                vertical-align: top !important;
+            }
+            .fc th {
+                border-color: #6c76af !important
 
+            }
         </style>
 
     </h:head>
@@ -135,6 +172,12 @@ and open the template in the editor.
 
                     </p:outputPanel>
 
+                    <div class="ui-g-12">
+                        <p:panel style="width: 80%; margin:20px;">
+                            <p:schedule id="scheduleLocale" value="#{homePageBean.eventModel}" locale="tr" />
+                        </p:panel>                        
+
+                    </div>
                 </div>
 
 
