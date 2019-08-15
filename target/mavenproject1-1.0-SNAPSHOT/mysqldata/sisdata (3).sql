@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 08 Ağu 2019, 17:00:21
+-- Üretim Zamanı: 15 Ağu 2019, 16:55:05
 -- Sunucu sürümü: 10.1.40-MariaDB
 -- PHP Sürümü: 7.3.5
 
@@ -50,27 +50,50 @@ INSERT INTO `classes` (`CLASSES_ID`, `USER_ID`, `COURSE_ID`, `VIZE_NOT`, `FINAL_
 (8, 6, 7, 40, 40, 'FF'),
 (9, 7, 7, 59, 60, 'DD'),
 (10, 4, 7, NULL, NULL, NULL),
-(62, 23, 11, 90, 100, 'AA'),
-(63, 23, 10, 40, 90, 'CC'),
-(64, 23, 10, NULL, NULL, NULL),
-(65, 23, 8, NULL, NULL, NULL),
-(66, 23, 13, NULL, NULL, NULL),
-(67, 23, 12, NULL, NULL, NULL),
-(68, 23, 15, NULL, NULL, NULL),
-(69, 23, 1, NULL, NULL, NULL),
-(70, 23, 14, NULL, NULL, NULL),
-(71, 23, 10, NULL, NULL, NULL),
-(72, 23, 11, NULL, NULL, NULL),
-(73, 23, 12, NULL, NULL, NULL),
-(74, 23, 9, NULL, NULL, NULL),
-(75, 23, 14, NULL, NULL, NULL),
 (76, 23, 1, NULL, NULL, NULL),
-(77, 23, 2, NULL, NULL, NULL),
 (78, 23, 3, NULL, NULL, NULL),
-(80, 23, 18, NULL, NULL, NULL),
 (84, 1, 20, NULL, NULL, NULL),
 (86, 1, 18, NULL, NULL, NULL),
-(87, 1, 19, NULL, NULL, NULL);
+(87, 1, 19, NULL, NULL, NULL),
+(88, 23, 23, 80, 85, 'BB'),
+(89, 23, 24, 100, 85, 'AA'),
+(90, 23, 25, 70, 85, 'CB'),
+(91, 23, 26, 75, 85, 'BB'),
+(92, 24, 23, 90, 95, 'AA'),
+(93, 24, 25, 90, 85, 'BA'),
+(94, 24, 27, 45, 55, 'FF'),
+(95, 24, 26, 90, 75, 'BB'),
+(96, 24, 24, 75, 75, 'CB'),
+(97, 25, 23, 65, 75, 'CC'),
+(98, 25, 25, 75, 65, 'DC'),
+(99, 25, 24, 90, 80, 'BB'),
+(100, 25, 27, 70, 85, 'CB'),
+(101, 25, 26, 80, 75, 'CB'),
+(102, 27, 23, 50, 35, 'FF'),
+(103, 27, 25, 45, 40, 'FF'),
+(104, 27, 27, 90, 90, 'AA'),
+(105, 27, 24, 65, 60, 'DD'),
+(106, 27, 28, 90, 90, 'AA'),
+(107, 27, 26, 96, 85, 'BA'),
+(108, 28, 23, 80, 75, 'CB'),
+(109, 28, 24, 70, 70, 'CC'),
+(110, 28, 26, 75, 70, 'CC'),
+(111, 28, 28, 85, 80, 'BB'),
+(112, 28, 25, 35, NULL, 'FF'),
+(113, 28, 27, 90, 85, 'BA'),
+(114, 34, 23, NULL, NULL, NULL),
+(115, 34, 24, NULL, NULL, NULL),
+(116, 34, 27, 55, 45, 'FF'),
+(117, 34, 26, NULL, NULL, NULL),
+(118, 34, 25, NULL, NULL, NULL),
+(119, 34, 28, NULL, NULL, NULL),
+(120, 35, 23, NULL, NULL, NULL),
+(121, 35, 24, NULL, NULL, NULL),
+(122, 35, 28, NULL, NULL, NULL),
+(123, 35, 26, NULL, NULL, NULL),
+(124, 35, 27, NULL, NULL, NULL),
+(125, 35, 25, NULL, NULL, NULL),
+(126, 36, 29, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -101,13 +124,7 @@ INSERT INTO `courses` (`COURSE_ID`, `USER_ID`, `TERM_ID`, `COURSE_NAME`, `STATUS
 (6, 1, 11, 'testcourseaktif', 0, 0, 50),
 (7, 7, 11, 'testteacherteacher', 0, 50, 50),
 (8, 7, 11, 'testEmptyCourse', 0, 50, 50),
-(9, 23, 11, 'courseRollDeneme', 0, 4, 6),
-(10, 23, 11, 'test123', 0, 24, 50),
-(11, 23, 11, 'test345', 0, 2, 50),
-(12, 23, 11, 'test789', 0, 2, 50),
-(13, 23, 11, 'test111', 0, 1, 1),
 (14, 1, 11, 'deneme', 0, 2, 50),
-(15, 23, 11, 'DASA', 0, 1, 50),
 (16, 1, 12, 'ders1', 0, 0, 50),
 (17, 1, 12, 'ders2', 0, 0, 50),
 (18, 1, 12, 'ders3', 0, 2, 50),
@@ -115,10 +132,14 @@ INSERT INTO `courses` (`COURSE_ID`, `USER_ID`, `TERM_ID`, `COURSE_NAME`, `STATUS
 (20, 1, 12, 'testDers', 0, 1, 50),
 (21, 1, 12, 'BIL841', 0, 0, 50),
 (22, 22, 12, 'BIL481', 0, 0, 50),
-(23, 36, 13, 'BIL481', 1, 0, 20),
-(24, 36, 13, 'BIL361', 1, 0, 25),
-(25, 37, 13, 'BIL395', 1, 0, 20),
-(26, 37, 13, 'BIL331', 1, 0, 30);
+(23, 36, 13, 'BIL481', 1, 7, 20),
+(24, 36, 13, 'BIL361', 1, 7, 25),
+(25, 37, 13, 'BIL395', 1, 7, 20),
+(26, 37, 13, 'BIL331', 1, 7, 30),
+(27, 22, 13, 'BIL141', 1, 6, 50),
+(28, 26, 13, 'AIT201', 1, 4, 10),
+(29, 36, 13, 'BIL113', 1, 1, 10),
+(30, 22, 13, 'BIL511', 1, 0, 5);
 
 -- --------------------------------------------------------
 
@@ -1298,7 +1319,195 @@ INSERT INTO `logs` (`LOG_ID`, `USER_ID`, `EVENT_CODE`, `DETAIL`, `DATE`) VALUES
 (1215, 37, 1, 'succesfully logined', '2019-08-08 17:51:26'),
 (1216, 37, 11, 'new course created', '2019-08-08 17:51:41'),
 (1217, 37, 11, 'new course created', '2019-08-08 17:51:52'),
-(1218, 37, 2, 'logined out', '2019-08-08 17:55:59');
+(1218, 37, 2, 'logined out', '2019-08-08 17:55:59'),
+(1219, 1, 1, 'succesfully logined', '2019-08-09 09:09:29'),
+(1220, 1, 0, 'new user created', '2019-08-09 09:10:51'),
+(1221, 1, 2, 'logined out', '2019-08-09 09:18:43'),
+(1222, 23, 1, 'succesfully logined', '2019-08-09 09:18:45'),
+(1223, 23, 2, 'logined out', '2019-08-09 09:18:52'),
+(1224, 1, 1, 'succesfully logined', '2019-08-09 09:18:55'),
+(1225, 1, 9, 'add drop started', '2019-08-09 09:19:02'),
+(1226, 1, 2, 'logined out', '2019-08-09 09:19:09'),
+(1227, 23, 1, 'succesfully logined', '2019-08-09 09:19:11'),
+(1228, 23, 12, 'enrolled course', '2019-08-09 09:19:16'),
+(1229, 23, 12, 'enrolled course', '2019-08-09 09:19:18'),
+(1230, 23, 12, 'enrolled course', '2019-08-09 09:19:19'),
+(1231, 23, 12, 'enrolled course', '2019-08-09 09:19:21'),
+(1232, 23, 2, 'logined out', '2019-08-09 09:19:33'),
+(1233, 22, 1, 'succesfully logined', '2019-08-09 09:19:37'),
+(1234, 22, 11, 'new course created', '2019-08-09 09:19:51'),
+(1235, 22, 2, 'logined out', '2019-08-09 09:19:59'),
+(1236, 1, 1, 'succesfully logined', '2019-08-09 09:20:02'),
+(1237, 1, 2, 'logined out', '2019-08-09 09:23:49'),
+(1238, 23, 1, 'succesfully logined', '2019-08-09 09:23:52'),
+(1239, 1, 1, 'succesfully logined', '2019-08-09 10:31:10'),
+(1240, 1, 2, 'logined out', '2019-08-09 10:35:43'),
+(1241, 24, 1, 'succesfully logined', '2019-08-09 10:36:02'),
+(1242, 24, 12, 'enrolled course', '2019-08-09 10:36:06'),
+(1243, 24, 12, 'enrolled course', '2019-08-09 10:36:07'),
+(1244, 24, 12, 'enrolled course', '2019-08-09 10:36:09'),
+(1245, 24, 12, 'enrolled course', '2019-08-09 10:36:10'),
+(1246, 24, 12, 'enrolled course', '2019-08-09 10:36:11'),
+(1247, 24, 2, 'logined out', '2019-08-09 10:36:13'),
+(1248, 25, 1, 'succesfully logined', '2019-08-09 10:36:16'),
+(1249, 25, 12, 'enrolled course', '2019-08-09 10:36:20'),
+(1250, 25, 12, 'enrolled course', '2019-08-09 10:36:21'),
+(1251, 25, 12, 'enrolled course', '2019-08-09 10:36:23'),
+(1252, 25, 12, 'enrolled course', '2019-08-09 10:36:24'),
+(1253, 25, 12, 'enrolled course', '2019-08-09 10:36:25'),
+(1254, 25, 2, 'logined out', '2019-08-09 10:37:26'),
+(1255, 25, 1, 'succesfully logined', '2019-08-09 10:37:29'),
+(1256, 25, 2, 'logined out', '2019-08-09 10:37:34'),
+(1257, 26, 1, 'succesfully logined', '2019-08-09 10:37:36'),
+(1258, 26, 11, 'new course created', '2019-08-09 10:37:58'),
+(1259, 26, 2, 'logined out', '2019-08-09 10:38:08'),
+(1260, 27, 1, 'succesfully logined', '2019-08-09 10:38:12'),
+(1261, 27, 12, 'enrolled course', '2019-08-09 10:38:16'),
+(1262, 27, 12, 'enrolled course', '2019-08-09 10:38:17'),
+(1263, 27, 12, 'enrolled course', '2019-08-09 10:38:18'),
+(1264, 27, 12, 'enrolled course', '2019-08-09 10:38:19'),
+(1265, 27, 12, 'enrolled course', '2019-08-09 10:38:20'),
+(1266, 27, 12, 'enrolled course', '2019-08-09 10:38:23'),
+(1267, 27, 2, 'logined out', '2019-08-09 10:38:30'),
+(1268, 28, 1, 'succesfully logined', '2019-08-09 10:38:32'),
+(1269, 28, 12, 'enrolled course', '2019-08-09 10:38:36'),
+(1270, 28, 12, 'enrolled course', '2019-08-09 10:38:38'),
+(1271, 28, 12, 'enrolled course', '2019-08-09 10:38:39'),
+(1272, 28, 12, 'enrolled course', '2019-08-09 10:38:40'),
+(1273, 28, 12, 'enrolled course', '2019-08-09 10:38:41'),
+(1274, 28, 12, 'enrolled course', '2019-08-09 10:38:42'),
+(1275, 28, 2, 'logined out', '2019-08-09 10:38:44'),
+(1276, 34, 1, 'succesfully logined', '2019-08-09 10:50:46'),
+(1277, 34, 12, 'enrolled course', '2019-08-09 10:50:52'),
+(1278, 34, 12, 'enrolled course', '2019-08-09 10:50:53'),
+(1279, 34, 12, 'enrolled course', '2019-08-09 10:50:55'),
+(1280, 34, 12, 'enrolled course', '2019-08-09 10:50:56'),
+(1281, 34, 12, 'enrolled course', '2019-08-09 10:50:57'),
+(1282, 34, 12, 'enrolled course', '2019-08-09 10:50:59'),
+(1283, 34, 2, 'logined out', '2019-08-09 10:51:02'),
+(1284, 35, 1, 'succesfully logined', '2019-08-09 10:51:06'),
+(1285, 35, 12, 'enrolled course', '2019-08-09 10:51:10'),
+(1286, 35, 12, 'enrolled course', '2019-08-09 10:51:11'),
+(1287, 35, 12, 'enrolled course', '2019-08-09 10:51:13'),
+(1288, 35, 12, 'enrolled course', '2019-08-09 10:51:18'),
+(1289, 35, 12, 'enrolled course', '2019-08-09 10:51:20'),
+(1290, 35, 12, 'enrolled course', '2019-08-09 10:51:21'),
+(1291, 35, 2, 'logined out', '2019-08-09 10:51:27'),
+(1292, 36, 1, 'succesfully logined', '2019-08-09 10:51:40'),
+(1293, 36, 11, 'new course created', '2019-08-09 10:52:44'),
+(1294, 36, 2, 'logined out', '2019-08-09 10:53:52'),
+(1295, 37, 1, 'succesfully logined', '2019-08-09 10:53:58'),
+(1296, 37, 2, 'logined out', '2019-08-09 10:54:10'),
+(1297, 40, 1, 'succesfully logined', '2019-08-09 10:54:21'),
+(1298, 1, 1, 'succesfully logined', '2019-08-09 11:36:19'),
+(1299, 1, 10, 'add drop ended', '2019-08-09 11:39:26'),
+(1300, 1, 9, 'add drop started', '2019-08-09 11:39:27'),
+(1301, 1, 10, 'add drop ended', '2019-08-09 11:39:37'),
+(1302, 1, 9, 'add drop started', '2019-08-09 11:39:43'),
+(1303, 1, 12, 'enrolled course', '2019-08-09 11:40:54'),
+(1304, 1, 13, 'derolled course', '2019-08-09 11:40:56'),
+(1305, 1, 2, 'logined out', '2019-08-09 11:41:09'),
+(1306, 36, 1, 'succesfully logined', '2019-08-09 11:41:11'),
+(1307, 36, 2, 'logined out', '2019-08-09 11:42:02'),
+(1308, 27, 1, 'succesfully logined', '2019-08-09 11:42:09'),
+(1309, 27, 2, 'logined out', '2019-08-09 11:42:34'),
+(1310, 1, 1, 'succesfully logined', '2019-08-09 11:42:36'),
+(1311, 1, 2, 'logined out', '2019-08-09 11:43:50'),
+(1312, 37, 1, 'succesfully logined', '2019-08-09 11:43:54'),
+(1313, 37, 2, 'logined out', '2019-08-09 11:44:33'),
+(1314, 1, 4, 'password changed', '2019-08-09 11:44:47'),
+(1315, 1, 1, 'succesfully logined', '2019-08-09 13:38:48'),
+(1316, 1, 1, 'succesfully logined', '2019-08-09 13:44:51'),
+(1317, 1, 1, 'succesfully logined', '2019-08-09 13:52:59'),
+(1318, 1, 1, 'succesfully logined', '2019-08-09 14:02:12'),
+(1319, 1, 1, 'succesfully logined', '2019-08-09 14:04:22'),
+(1320, 1, 1, 'succesfully logined', '2019-08-09 14:04:52'),
+(1321, 9, 5, 'user made passive', '2019-08-09 14:05:14'),
+(1322, 9, 6, 'user made active', '2019-08-09 14:05:16'),
+(1323, 6, 6, 'user made active', '2019-08-09 14:10:23'),
+(1324, 1, 1, 'succesfully logined', '2019-08-09 14:12:40'),
+(1325, 1, 1, 'succesfully logined', '2019-08-09 14:23:48'),
+(1326, 1, 1, 'succesfully logined', '2019-08-09 15:24:23'),
+(1327, 1, 2, 'logined out', '2019-08-09 15:30:29'),
+(1328, 22, 1, 'succesfully logined', '2019-08-09 15:30:35'),
+(1329, 22, 1, 'succesfully logined', '2019-08-09 15:56:30'),
+(1330, 22, 11, 'new course created', '2019-08-09 15:58:54'),
+(1331, 22, 2, 'logined out', '2019-08-09 16:00:06'),
+(1332, 23, 1, 'succesfully logined', '2019-08-09 16:00:09'),
+(1333, 23, 2, 'logined out', '2019-08-09 16:00:32'),
+(1334, 26, 1, 'succesfully logined', '2019-08-09 16:00:34'),
+(1335, 22, 1, 'succesfully logined', '2019-08-09 16:09:20'),
+(1336, 1, 1, 'succesfully logined', '2019-08-09 18:01:44'),
+(1337, 1, 1, 'succesfully logined', '2019-08-15 09:26:50'),
+(1338, 1, 2, 'logined out', '2019-08-15 09:27:57'),
+(1339, 34, 1, 'succesfully logined', '2019-08-15 09:29:40'),
+(1340, 34, 2, 'logined out', '2019-08-15 09:29:50'),
+(1341, 35, 1, 'succesfully logined', '2019-08-15 09:29:52'),
+(1342, 35, 2, 'logined out', '2019-08-15 09:32:49'),
+(1343, 36, 1, 'succesfully logined', '2019-08-15 09:33:01'),
+(1344, 36, 2, 'logined out', '2019-08-15 09:35:02'),
+(1345, 37, 1, 'succesfully logined', '2019-08-15 09:35:07'),
+(1346, 37, 2, 'logined out', '2019-08-15 09:36:50'),
+(1347, 40, 1, 'succesfully logined', '2019-08-15 09:36:53'),
+(1348, 40, 2, 'logined out', '2019-08-15 09:37:07'),
+(1349, 41, 1, 'succesfully logined', '2019-08-15 09:37:11'),
+(1350, 41, 2, 'logined out', '2019-08-15 09:37:24'),
+(1351, 1, 1, 'succesfully logined', '2019-08-15 09:37:29'),
+(1352, 1, 2, 'logined out', '2019-08-15 09:47:00'),
+(1353, 23, 1, 'succesfully logined', '2019-08-15 09:47:07'),
+(1354, 23, 2, 'logined out', '2019-08-15 10:03:44'),
+(1355, 1, 1, 'succesfully logined', '2019-08-15 10:05:58'),
+(1356, 1, 2, 'logined out', '2019-08-15 10:08:17'),
+(1357, 36, 1, 'succesfully logined', '2019-08-15 10:08:20'),
+(1358, 1, 1, 'succesfully logined', '2019-08-15 11:07:00'),
+(1359, 1, 1, 'succesfully logined', '2019-08-15 15:10:28'),
+(1360, 1, 2, 'logined out', '2019-08-15 15:40:01'),
+(1361, 1, 1, 'succesfully logined', '2019-08-15 15:40:03'),
+(1362, 1, 2, 'logined out', '2019-08-15 15:40:38'),
+(1363, 34, 1, 'succesfully logined', '2019-08-15 15:40:45'),
+(1364, 34, 2, 'logined out', '2019-08-15 15:40:55'),
+(1365, 36, 1, 'succesfully logined', '2019-08-15 15:41:15'),
+(1366, 36, 12, 'enrolled course', '2019-08-15 15:42:18'),
+(1367, 36, 2, 'logined out', '2019-08-15 15:42:48'),
+(1368, 1, 1, 'succesfully logined', '2019-08-15 15:42:54'),
+(1369, 1, 10, 'add drop ended', '2019-08-15 15:43:39'),
+(1370, 1, 9, 'add drop started', '2019-08-15 15:43:39'),
+(1371, 1, 1, 'succesfully logined', '2019-08-15 12:54:01'),
+(1372, 1, 1, 'succesfully logined', '2019-08-15 12:55:42'),
+(1373, 1, 2, 'logined out', '2019-08-15 13:09:07'),
+(1374, 23, 1, 'succesfully logined', '2019-08-15 13:09:10'),
+(1375, 1, 1, 'succesfully logined', '2019-08-15 13:11:14'),
+(1376, 1, 2, 'logined out', '2019-08-15 13:11:18'),
+(1377, 23, 1, 'succesfully logined', '2019-08-15 13:11:21'),
+(1378, 1, 1, 'succesfully logined', '2019-08-15 14:28:41'),
+(1379, 1, 1, 'succesfully logined', '2019-08-15 14:35:51'),
+(1380, 1, 10, 'add drop ended', '2019-08-15 14:36:38'),
+(1381, 1, 9, 'add drop started', '2019-08-15 14:36:39'),
+(1382, 1, 2, 'logined out', '2019-08-15 14:48:53'),
+(1383, 23, 1, 'succesfully logined', '2019-08-15 14:48:55'),
+(1384, 23, 2, 'logined out', '2019-08-15 14:50:47'),
+(1385, 35, 1, 'succesfully logined', '2019-08-15 14:50:51'),
+(1386, 35, 2, 'logined out', '2019-08-15 14:51:39'),
+(1387, 1, 1, 'succesfully logined', '2019-08-15 14:51:42');
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `runtime_properties`
+--
+
+CREATE TABLE `runtime_properties` (
+  `RUN_TIME_ID` int(11) NOT NULL,
+  `CURRENT_TERM` int(11) DEFAULT NULL,
+  `IS_OPEN_ADD_DROP` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Tablo döküm verisi `runtime_properties`
+--
+
+INSERT INTO `runtime_properties` (`RUN_TIME_ID`, `CURRENT_TERM`, `IS_OPEN_ADD_DROP`) VALUES
+(1, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -1363,20 +1572,21 @@ INSERT INTO `users` (`USER_ID`, `TCKN`, `NAME`, `SURNAME`, `PASSWORD`, `EMAIL`, 
 (7, '11111', 'teacher', 'teacher', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'teacher', 1, 2),
 (9, '111211', 'student', 'student', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'student', 1, 1),
 (11, '121111', 'testOgrenci2', 'test', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'test', 1, 1),
-(12, '1112211', 'testTeacher2', 'testTeacher2', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'testTeacher2', 1, 2),
-(22, '132121', 'HAKKI', 'DOGANER', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'hakkidoganer@gmail.com', 1, 2),
-(23, '121212111', 'BASAK', 'YILDIRIM', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'basakyildirim@gmail.com', 1, 1),
-(24, '213123123', 'AAAA', '123123', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'a@gmail.com', 1, 1),
-(25, '123321', 'ALI', 'AYDIN', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'ali@gmail.com', 1, 1),
-(26, '12344321', 'MEHMET', 'TEKIR', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'mehmet@gmail.com', 1, 2),
-(27, '741', 'ERHAN', 'KALEM', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'kalem@gmaik.com', 1, 1),
-(28, '1852', 'HAKAN', 'TA?', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'hakan@gmail.com', 1, 1),
-(34, '22131', 'YESIL', 'MAVI', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'yesikl@gmail.com', 1, 1),
+(12, '11122115465', 'testTeacher2', 'testTeacher2', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'testTeacher2', 1, 2),
+(22, '20140660789', 'HAKKI', 'DOGANER', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'hakkidoganer@gmail.com', 1, 2),
+(23, '33746237468', 'BASAK', 'YILDIRIM', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'basakyildirim@gmail.com', 1, 1),
+(24, '10360478065', 'CETIN', 'MUTLU', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'a@gmail.com', 1, 1),
+(25, '21003578501', 'ALI', 'AYDIN', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'ali@gmail.com', 1, 1),
+(26, '12475469824', 'MEHMET', 'TEKIR', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'mehmet@gmail.com', 1, 2),
+(27, '75314732385', 'ERHAN', 'KALEM', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'kalem@gmaik.com', 1, 1),
+(28, '75178732451', 'HAKAN', 'TAS', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'hakan@gmail.com', 1, 1),
+(34, '75314732451', 'YESIL', 'MAVI', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'yesikl@gmail.com', 1, 1),
 (35, '12345678901', 'MUSTAFA', 'USLU', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'uslu@gmail.com', 1, 1),
 (36, '12131321321', 'MAHMUT', 'SEZIN', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'mahmut@gmail.com', 1, 2),
 (37, '12121212121', 'OSMAN', 'TEK', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'osman@gmail.com', 1, 2),
 (40, '12233213212', 'KEREM', 'TUNC', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'kerem@gmail.com', 1, 1),
-(41, '12313212332', 'HAKKI', 'MUTLU', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'hakki@gmail.com', 1, 2);
+(41, '12313212332', 'HAKKI', 'MUTLU', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'hakki@gmail.com', 1, 2),
+(42, '12322345656', 'MUSTAFA', 'KEMAL', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'mustafakemal@gmail.com', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1426,7 +1636,8 @@ INSERT INTO `user_details` (`DETAIL_ID`, `USER_ID`, `PHONE`, `ADRESS`, `BIRTHDAY
 (28, 36, '(555)555-55-55', 'ANKARA', '2019-08-01', 'MALE', NULL, 'TOBB ETU', '', '5555555555', '1+1', 'd4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35', '2019-08-08 17:41:44'),
 (29, 37, '(545)555-55-55', 'ANKARA', '2019-08-02', 'MALE', NULL, '', '', '555555555', '1+1', 'd4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35', '2019-08-08 17:42:48'),
 (31, 40, '(555)555-55-55', 'ANKARA', '2019-08-02', 'MALE', NULL, '', '', '', '1+1', 'd4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35', '2019-08-08 17:45:29'),
-(32, 41, '(555)555-55-55', 'ANKARA', '2019-08-02', 'MALE', NULL, '', '', '5555555', '1+1', 'd4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35', '2019-08-08 17:46:15');
+(32, 41, '(555)555-55-55', 'ANKARA', '2019-08-02', 'MALE', NULL, '', '', '5555555', '1+1', 'd4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35', '2019-08-08 17:46:15'),
+(33, 42, '', 'ANKARA', '2019-08-01', 'MALE', NULL, '', '', '555555555', '1+1', 'd4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35', '2019-08-09 09:10:51');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -1456,6 +1667,13 @@ ALTER TABLE `logs`
   ADD KEY `AS` (`USER_ID`);
 
 --
+-- Tablo için indeksler `runtime_properties`
+--
+ALTER TABLE `runtime_properties`
+  ADD PRIMARY KEY (`RUN_TIME_ID`),
+  ADD KEY `TERM` (`CURRENT_TERM`);
+
+--
 -- Tablo için indeksler `terms`
 --
 ALTER TABLE `terms`
@@ -1483,19 +1701,25 @@ ALTER TABLE `user_details`
 -- Tablo için AUTO_INCREMENT değeri `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `CLASSES_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `CLASSES_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `COURSE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `COURSE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `LOG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1219;
+  MODIFY `LOG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1388;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `runtime_properties`
+--
+ALTER TABLE `runtime_properties`
+  MODIFY `RUN_TIME_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `terms`
@@ -1507,13 +1731,13 @@ ALTER TABLE `terms`
 -- Tablo için AUTO_INCREMENT değeri `users`
 --
 ALTER TABLE `users`
-  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `DETAIL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `DETAIL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar
@@ -1538,6 +1762,12 @@ ALTER TABLE `courses`
 --
 ALTER TABLE `logs`
   ADD CONSTRAINT `AS` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`USER_ID`);
+
+--
+-- Tablo kısıtlamaları `runtime_properties`
+--
+ALTER TABLE `runtime_properties`
+  ADD CONSTRAINT `TERM` FOREIGN KEY (`CURRENT_TERM`) REFERENCES `terms` (`TERM_ID`);
 
 --
 -- Tablo kısıtlamaları `user_details`

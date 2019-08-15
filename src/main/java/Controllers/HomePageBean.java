@@ -121,7 +121,7 @@ public class HomePageBean extends Controller {
         }
         
                 eventModel = new DefaultScheduleModel();
-        eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", new Date(), new Date()));
+        eventModel.addEvent(new DefaultScheduleEvent("New Term started", new Date(), new Date()));
 
 
     }
