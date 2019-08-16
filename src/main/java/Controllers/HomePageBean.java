@@ -104,11 +104,6 @@ public class HomePageBean extends Controller {
                 setDashboardAdmin();
                 renderedModelAdmin = true;
 
-//                setDashboardTeacher();
-//                renderedModelTeacher = true;
-//
-//                setDashboardStudent();
-//                renderedModelStudent = true;
                 break;
             case Users.TYPE_TEACHER:
                 setDashboardTeacher();
@@ -121,8 +116,6 @@ public class HomePageBean extends Controller {
         }
         
                 eventModel = new DefaultScheduleModel();
-        eventModel.addEvent(new DefaultScheduleEvent("New Term started", new Date(), new Date()));
-
 
     }
 

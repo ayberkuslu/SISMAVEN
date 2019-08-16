@@ -101,8 +101,6 @@ public class ExamineUserBean extends Controller {
         FacesMessage msg = new FacesMessage("User Selected " + selectedUser.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
         
-//        RequestContext.getCurrentInstance().scrollTo("componentClientId");
-
 
         /*
          *OPEN IF YOU WANT TO COLLAPSE USER LIST PANEL ON ROW SELECT
@@ -122,7 +120,7 @@ public class ExamineUserBean extends Controller {
 
         if (getSelectedUser() == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "User not selected!", ""));
-//            return;
+            return;
         }
         getSession().beginTransaction();
 

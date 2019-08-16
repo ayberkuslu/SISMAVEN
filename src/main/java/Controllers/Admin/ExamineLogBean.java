@@ -108,7 +108,7 @@ public class ExamineLogBean extends Controller {
 
             }
         } else if (firstDate == null && lastDate != null) {
-                            System.out.println("firstDate == null && lastDate != null");
+            System.out.println("firstDate == null && lastDate != null");
 
             lastDate.setHours(23);
             lastDate.setMinutes(59);
@@ -119,10 +119,8 @@ public class ExamineLogBean extends Controller {
 
         List<Logs> list = criteria.list();
         logs = new LogsLazyDataModel(list);
-        System.out.println("row Count" + logs.getRowCount());
         tx.commit();
     }
-
 
     public LazyDataModel<Logs> getLogs() {
         return logs;
