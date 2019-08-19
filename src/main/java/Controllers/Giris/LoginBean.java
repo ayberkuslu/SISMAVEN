@@ -32,7 +32,6 @@ public class LoginBean extends Controller {
 
     private Integer userId;
     private String userPassword;
-    private boolean authorized = false;
     Transaction tx;
 
     @PreDestroy
@@ -51,10 +50,14 @@ public class LoginBean extends Controller {
     }
 
     public void tryLogin() {
-
         try {
-            this.authorized = isCorrectUser();
-            goNextPage();
+            boolean authorized = isCorrectUser();
+            if (authorized == true) {
+                goNextPage();
+            } else {
+                System.out.println("Giris Basarisiz. Kullanici : " + userId + "\n");
+            }
+
         } catch (IOException ex) {
             Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -72,17 +75,12 @@ public class LoginBean extends Controller {
             if (targetUser == null) {
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "User could not find.\nPlease contact with the School Admin.", ""));
                 return false;
-
-            }
-            if (targetUser.getStatus() == false) {
+            } else if (targetUser.getStatus() == false) {
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "User is not an active user.\nPlease contact with the School Admin.", ""));
                 return false;
-            }
-
-            if (targetUser.getPassword().equals(sha256(userPassword))) {
+            } else if (targetUser.getPassword().equals(sha256(userPassword))) {
                 Map<String, Object> sessionMap = FacesContext.getCurrentInstance().
                         getExternalContext().getSessionMap();
-
                 sessionMap.put(CURRENT_USER, targetUser);
                 if (targetUser.getType() == Users.TYPE_ADMIN) {
 
@@ -108,19 +106,8 @@ public class LoginBean extends Controller {
 
     private void goNextPage() throws IOException {
         FacesContext context = FacesContext.getCurrentInstance();
-//
-//        String truePage = "faces/homePage.xhtml";
-//
-//        String falsePage = "index";
-        if (authorized == true) {
-            System.out.println("Giris Basarili. Kullanici : " + userId + "\n");
-            context.getExternalContext().redirect(PAGE_HOME);
-
-            return;
-        }
-
-        System.out.println("Giris Basarisiz. Kullanici : " + userId + "\n");
-
+        System.out.println("Giris Basarili. Kullanici : " + userId + "\n");
+        context.getExternalContext().redirect(PAGE_HOME);
     }
 
     public Integer getUserId() {
@@ -138,14 +125,6 @@ public class LoginBean extends Controller {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
-    }
-
-    public boolean isAuthorized() {
-        return authorized;
-    }
-
-    public void setAuthorized(boolean authorized) {
-        this.authorized = authorized;
     }
 
 }
