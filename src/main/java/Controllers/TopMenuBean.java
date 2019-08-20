@@ -52,11 +52,11 @@ public class TopMenuBean extends Controller {
     public void init() {
         System.out.println("Controllers.MenuController.init()");
         setSession(HibernateUtil.getSessionFactory().openSession());
-        currentUser= whoAmI();
+        currentUser= loginedUser();
     }
 
-    public Users whoAmI() {
-        Map<String, Object> sessionMap = null;
+    public Users loginedUser() {
+        Map<String, Object> sessionMap ;
         Users temp = null;
         try{
         sessionMap = FacesContext.getCurrentInstance().
