@@ -45,13 +45,6 @@ public class HibernateUtil {
         HibernateUtil.registry = registry;
     }
     
-//     public static void closeSession() throws HibernateException {
-//    Session session = (Session) threadLocal.get();
-//    threadLocal.set(null);
-//
-//    if (session != null) {
-//      session.close();
-//    }
-//  }
+
 
 }
